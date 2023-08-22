@@ -5,10 +5,16 @@ import {getProductDetail} from '../../redux/Controllers/productController';
 
 export const DetailPage = () => {
   const {id} = useParams ();
+
   const dispatch = useDispatch ();
-  useEffect (() => {
-    dispatch (getProductDetail (id));
-  }, [id,dispatch]);
+
+  useEffect (
+    () => {
+      dispatch (getProductDetail (id));
+    },
+    [id, dispatch]
+  );
+
   const detail = useSelector (state => state.product.productDetail.product);
   return (
     <div>
