@@ -1,13 +1,5 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { getProduct } from "../../redux/Controllers/productController";
+const Home = () => {
 
-export const Home = () => {
-  const dispatch = useDispatch();
-  
-useEffect(()=>{
-  dispatch(getProduct());
-},[dispatch])
 
   return (
     <div>
