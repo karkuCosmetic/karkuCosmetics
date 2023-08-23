@@ -14,8 +14,8 @@ export const DetailPage = () => {
     },
     [id, dispatch]
   );
-
   const detail = useSelector (state => state.product.productDetail.product);
+  console.log(detail);
   return (
     <div>
 
