@@ -1,0 +1,131 @@
+.navbar {
+  background-color: #f38f82;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 150px;
+  height: 100px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+}
+
+.nav-links li {
+  margin-right: 20px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #ffffff;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #941cf6;
+}
+
+.menu-button {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.menu-icon {
+  display: block;
+  width: 30px;
+  height: 2px;
+  background-color: #ffffff;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.menu-icon::before,
+.menu-icon::after {
+  content: "";
+  width: 30px;
+  height: 2px;
+  background-color: #ffffff;
+  position: absolute;
+  left: 0;
+  transition: transform 0.3s ease;
+}
+
+.menu-icon::before {
+  top: -8px;
+}
+
+.menu-icon::after {
+  top: 8px;
+}
+
+.menu-button.open .menu-icon {
+  background-color: transparent;
+}
+
+.menu-button.open .menu-icon::before {
+  transform: rotate(45deg);
+  top: 0;
+}
+
+.menu-button.open .menu-icon::after {
+  transform: rotate(-45deg);
+  top: 0;
+}
+
+/* menu responsive */
+@media (max-width: 768px) {
+  .menu-button {
+    display: block;
+    transition: background-color 0.3s ease;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 115px;
+    left: 0;
+    background-color: #f38f82fb;
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  .nav-links.open {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .nav-links li {
+    margin: 10px 0;
+  }
+}

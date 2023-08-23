@@ -1,0 +1,184 @@
+// FALTA ESTABLECER LA PALETA AUN
+
+$primary: #e25a00;
+$light-primary: #ffe8e8;
+$dark: #2e2e2e;
+$medium-dark: #4a4a4a;
+$light: #d4d4d4;
+$light-gray: #f9f9f9;
+$light-gray-2: #f0f0f0;
+$light-gray-3: #b3b3b3;
+
+$small: 500px;
+$medium: 800px;
+$large: 1200px;
+$extralarge: 1600px;
+
+@mixin ease-in-out($speed) {
+  transition: all $speed ease-in-out;
+}
+
+@mixin ease-out($speed) {
+  transition: all $speed ease-out;
+}
+
+@mixin bezier($speed) {
+  transition: all $speed cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@mixin width {
+  @media (min-width: $medium) {
+    width: 80%;
+  }
+  @media (max-width: $medium) {
+    width: 85%;
+  }
+  @media (max-width: $small) {
+    width: 90%;
+  }
+}
+
+@mixin hover-bar($bottom, $width) {
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: $bottom;
+    left: 50%;
+    width: 0%;
+    transform: translateX(-50%);
+    height: 3px;
+    background-color: $primary;
+    @include ease-in-out(120ms);
+  }
+  &:hover::after {
+    width: $width;
+  }
+  &.active::after {
+    background-color: $primary;
+  }
+}
+
+@mixin padding-top($isCard) {
+  @if $isCard {
+    padding-top: 15vh;
+    @media (max-width: $large) {
+      padding-top: 17%;
+    }
+    @media (max-width: $medium) {
+      padding-top: 15%;
+    }
+    @media (max-width: $small) {
+      padding-top: calc(15% + 60px);
+    }
+  } @else {
+    padding-top: 9vh;
+    @media (max-width: $large) {
+      padding-top: 9%;
+    }
+    @media (max-width: $medium) {
+      padding-top: 10%;
+    }
+    @media (max-width: $small) {
+      padding-top: calc(10% + 30px);
+    }
+  }
+}
+
+@mixin margin-bottom($isCard) {
+  @if $isCard {
+    margin-bottom: 10%;
+    @media (max-width: $large) {
+      margin-bottom: 17%;
+    }
+    @media (max-width: $medium) {
+      margin-bottom: 15%;
+    }
+    @media (max-width: $small) {
+      margin-bottom: calc(10% + 50px);
+    }
+  } @else {
+    margin-bottom: 6%;
+    @media (max-width: $large) {
+      margin-bottom: 8%;
+    }
+    @media (max-width: $medium) {
+      margin-bottom: 10%;
+    }
+    @media (max-width: $small) {
+      margin-bottom: calc(8% + 30px);
+    }
+  }
+}
+
+@mixin margin-bottom-about {
+  margin-bottom: 7%;
+  @media (max-width: $large) {
+    margin-bottom: 8%;
+  }
+  @media (max-width: $medium) {
+    margin-bottom: 10%;
+  }
+  @media (max-width: $small) {
+    margin-bottom: calc(4% + 30px);
+  }
+}
+
+@mixin headerPseudoText($content, $isLeft) {
+  content: $content;
+  position: absolute;
+  font-family: "Domine";
+  font-weight: lighter;
+  font-size: 1.7em;
+  @if ($isLeft) {
+    top: -0.7em;
+    left: -0.5em;
+    @media (max-width: $small) {
+      top: -0.8em;
+    }
+  } @else {
+    top: -0.7em;
+    right: -0.4em;
+    @media (max-width: $small) {
+      top: -0.8em;
+    }
+  }
+  z-index: -1;
+  opacity: 0.2;
+  -webkit-text-stroke: 3px $primary;
+  -webkit-text-fill-color: transparent;
+}
+
+@mixin inputFocusEffect {
+  box-shadow: 0 0 0 0 transparent;
+  &:focus {
+    box-shadow: 0 0 0 2px $primary;
+    &::placeholder {
+      color: $medium-dark;
+    }
+  }
+  &::placeholder {
+    color: $light-gray-3;
+    @include ease-in-out(200ms);
+  }
+}
+
+@mixin bar($bottom, $width) {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: $bottom;
+    left: 50%;
+    width: 0%;
+    transform: translateX(-50%);
+    height: 3px;
+    @include ease-in-out(100ms);
+    background-color: $dark;
+  }
+  &:hover::after {
+    width: $width;
+  }
+  &.active::after {
+    background-color: $primary;
+  }
+}
