@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {postlogin} from '../../redux/Controllers/Auth';
 import {useNavigate} from 'react-router-dom';
+import Navbar from '../../components/NavBar/navbar';
 
 export const Login = () => {
   const {status} = useSelector (state => state.auth);
@@ -26,10 +27,10 @@ export const Login = () => {
   if (status === 200) {
     navigate ('/');
   } //si se logueo ingresa
-  
+
   return (
     <div>
-
+      <Navbar />
       <form action="" onSubmit={handleSubmit}>
         <input
           type="text"
