@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import './navbar.css';
 import logo from '../../assets/logo.png';
 import {useState} from 'react';
-import {useSelector} from 'react-redux';
+import {getCookie} from '../../utils/DecodedCookie';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState (false);
@@ -12,8 +12,14 @@ const Navbar = () => {
     setMenuOpen (!menuOpen);
   };
 
-  const auth = useSelector (state => state.auth.session);
-//si es true mapear opciones de session logeada else las no iniciada , abrazo crackk!!
+  useEffect (
+    () => {
+      const token = getCookie ('cookieToken');
+      console.log (token);
+    },
+    []
+  );
+ //si hay token estoy logeado, entonces condiciono la navbar
   return (
     <nav className="navbar">
       <div className="container">

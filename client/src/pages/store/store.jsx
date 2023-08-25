@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { getProduct } from "../../redux/Controllers/productController";
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "./store.css";
 import Navbar from "../../components/NavBar/navbar";
+import {getProduct} from "../../utils/fetching";
 
 const Store = () => {
-  const dispatch = useDispatch();
 
+const [dataProducts,SetDataProducts]=useState([])
+  
   useEffect(() => {
-    dispatch(getProduct());
-  }, [dispatch]);
-
-  const dataProducts = useSelector((state) => state.product.products);
-  console.log(dataProducts);
+    CallProducts();
+     }, []);
+   
+     const CallProducts = async () => {
+       const data =await getProduct();
+       SetDataProducts(data);
+     };
 
   // Estado para el filtro
   const [selectedCategory, setSelectedCategory] = useState("Todos");

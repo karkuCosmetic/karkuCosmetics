@@ -1,35 +1,34 @@
-import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import React, {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
-import {getProductDetail} from '../../redux/Controllers/productController';
+import {getProductDetail} from '../../utils/fetching';
 
 export const DetailPage = () => {
+  const [detailProduct, SetDetailProduct] = useState ({});
   const {id} = useParams ();
 
-  const dispatch = useDispatch ();
+  useEffect (() => {
+    CallProductsDetail ();
+  }, [id]);
 
-  useEffect (
-    () => {
-      dispatch (getProductDetail (id));
-    },
-    [id, dispatch]
-  );
-  const detail = useSelector (state => state.product.productDetail.product);
-  console.log(detail);
+  const CallProductsDetail = async () => {
+    const data = await getProductDetail (id);
+    SetDetailProduct (data.product);
+  };
+
   return (
     <div>
 
       <p>
-        {detail.title}
+        {detailProduct.title}
       </p>
       <p>
-        {detail.description}
+        {detailProduct.description}
       </p>
       <p>
-        {detail.dimensions}
+        {detailProduct.dimensions}
       </p>
       <p>
-        ${detail.price}
+        ${detailProduct.price}
       </p>
 
     </div>

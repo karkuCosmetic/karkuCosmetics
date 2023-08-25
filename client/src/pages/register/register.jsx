@@ -1,23 +1,24 @@
-import React from "react";
+import React from 'react';
 import {useState} from 'react';
-import {useDispatch} from 'react-redux';
-import { postRegister } from '../../redux/Controllers/Auth';
+import {postRegister} from '../../functions/Auth';
 
 export const Register = () => {
-  const dispatch = useDispatch ();
   const [formInput, setFormInput] = useState ({
     email: '',
     password: '',
   });
+
   const handleChange = event => {
     const property = event.target.name;
     const value = event.target.value;
     setFormInput ({...formInput, [property]: value});
   };
+
   const handleSubmit = e => {
     e.preventDefault ();
-    dispatch (postRegister(formInput));
+    postRegister (formInput);
   };
+  
   return (
     <div>
       <form action="" onSubmit={handleSubmit}>

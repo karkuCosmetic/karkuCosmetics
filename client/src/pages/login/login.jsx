@@ -1,12 +1,10 @@
 import React, {useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {postlogin} from '../../redux/Controllers/Auth';
 import {useNavigate} from 'react-router-dom';
 import Navbar from '../../components/NavBar/navbar';
+import {postlogin} from '../../functions/Auth';
 
 export const Login = () => {
-  const {status} = useSelector (state => state.auth);
-  const dispatch = useDispatch ();
+  const [status, setStatus] = useState ('');
   const [formInput, setFormInput] = useState ({
     email: '',
     password: '',
@@ -18,9 +16,10 @@ export const Login = () => {
     setFormInput ({...formInput, [property]: value});
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault ();
-    dispatch (postlogin (formInput));
+    const credential = await postlogin (formInput);
+    setStatus (credential.status);
   };
 
   const navigate = useNavigate ();
