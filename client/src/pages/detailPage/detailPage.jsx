@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
-import {getProductDetail} from '../../utils/fetching';
+import {getProductDetail} from '../../functions/fetching';
 
 export const DetailPage = () => {
   const [detailProduct, SetDetailProduct] = useState ({});
