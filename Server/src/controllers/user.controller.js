@@ -14,7 +14,7 @@ export const getUserById = async (req, res) => {
   const { id } = req.params;
   try {
     let user = await User.findById(id).select("-password");
-    res.status(200).json({ user });
+    res.status(200).json(user);
   } catch (error) {
     res.status(400).json(formatError(error.message));
   }

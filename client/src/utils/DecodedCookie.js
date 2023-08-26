@@ -1,4 +1,4 @@
-export function getCookie(name) {
+export function GetDecodedCookie(name) {
     let matches = document.cookie.match(new RegExp(
       "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
     ));

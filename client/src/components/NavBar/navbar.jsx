@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import './navbar.css';
 import logo from '../../assets/logo.png';
 import {useState} from 'react';
-import {getCookie} from '../../utils/DecodedCookie';
+import {GetDecodedCookie} from '../../utils/DecodedCookie';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState (false);
@@ -12,14 +12,10 @@ const Navbar = () => {
     setMenuOpen (!menuOpen);
   };
 
-  useEffect (
-    () => {
-      const token = getCookie ('cookieToken');
-      console.log (token);
-    },
-    []
-  );
- //si hay token estoy logeado, entonces condiciono la navbar
+  useEffect (() => {
+    const token = GetDecodedCookie ('cookieToken');
+  }, []);
+  //si hay token estoy logeado, entonces condiciono la navbar
   return (
     <nav className="navbar">
       <div className="container">

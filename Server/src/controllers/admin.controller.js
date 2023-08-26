@@ -36,7 +36,7 @@ export const getAdminById = async (req, res) => {
     const { id } = req.params
     try {
         let admin = await Admin.findById(id)
-        res.status(200).json({ admin })
+        res.status(200).json( admin )
     } catch (error) {
         res.status(400).json(formatError(error.message))
     }

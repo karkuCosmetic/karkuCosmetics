@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./store.css";
 import Navbar from "../../components/NavBar/navbar";
-import {getProduct} from "../../functions/fetching";
+import {getProduct} from "../../functions/fetchingProducts";
 
 const Store = () => {
 
