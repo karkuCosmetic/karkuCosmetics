@@ -7,6 +7,7 @@ import {GetDecodedCookie} from '../../utils/DecodedCookie';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState (false);
+  const [login, setLogin] = useState (false);
 
   const toggleMenu = () => {
     setMenuOpen (!menuOpen);
@@ -14,8 +15,14 @@ const Navbar = () => {
 
   useEffect (() => {
     const token = GetDecodedCookie ('cookieToken');
+    if (token) {
+      setLogin (true);
+    } else {
+      setLogin (false);
+    }
   }, []);
   //si hay token estoy logeado, entonces condiciono la navbar
+  
   return (
     <nav className="navbar">
       <div className="container">
@@ -35,7 +42,9 @@ const Navbar = () => {
           <li><a href="#gallery">Galería</a></li>
           <li><a href="/contact">Contacto</a></li>
           <li><a href="/store">Tienda</a></li>
-          <li><a href="/profile">Perfil</a></li>
+          {login === true
+            ? <li><a href="/profile">Perfil</a></li>
+            : <li><a href="/login">ingresar</a></li>}
         </ul>
       </div>
     </nav>

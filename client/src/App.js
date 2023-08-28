@@ -28,7 +28,7 @@ function App() {
 
       const CallUsers = async (uid) => {
         const info = await getUserDetail(uid); //info hay que revisarla ahora porque se cambio y devuelve un obj condicionado o user: o admin:
-        SetRol(info);
+        SetRol(info.Rol);
       };
 
       if (uid) {
@@ -36,7 +36,7 @@ function App() {
       }
     }
   }, []);
-
+  console.log(rol);
   return (
     <>
       <Routes>
@@ -56,7 +56,7 @@ function App() {
         <Route
           element={
             <ProtectedRouteAdmin
-              isAllowed={true}//permite ingresa a esa ruta 
+              isAllowed={true} //permite ingresa a esa ruta
             />
           }
         >
