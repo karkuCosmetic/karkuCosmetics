@@ -2,20 +2,34 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./store.css";
 import Navbar from "../../components/NavBar/navbar";
-import {getProduct} from "../../functions/fetchingProducts";
+import { getProduct } from "../../functions/fetchingProducts";
 
 const Store = () => {
+  const [dataProducts, SetDataProducts] = useState([]);
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
 
-const [dataProducts,SetDataProducts]=useState([])
-  
   useEffect(() => {
     CallProducts();
-     }, []);
-   
-     const CallProducts = async () => {
-       const data =await getProduct();
-       SetDataProducts(data);
-     };
+  }, []);
+
+  const CallProducts = async () => {
+    const data = await getProduct();
+    SetDataProducts(data);
+  };
+
+  // Filtro por precio
+  const handlePriceFilter = () => {
+    const filteredByPrice = dataProducts.filter((product) => {
+      const productPrice = product.price;
+      return (
+        (minPrice === "" || productPrice >= parseFloat(minPrice)) &&
+        (maxPrice === "" || productPrice <= parseFloat(maxPrice))
+      );
+    });
+
+    return filteredByPrice;
+  };
 
   // Estado para el filtro
   const [selectedCategory, setSelectedCategory] = useState("Todos");
@@ -51,15 +65,21 @@ const [dataProducts,SetDataProducts]=useState([])
               </li>
             ))}
           </ul>
-          <div className="filters-box hidden-large">
-            <select onChange={(e) => setSelectedCategory(e.target.value)}>
-              {" "}
-              {TodosCategories.map((category, index) => (
-                <option key={index} value={category}>
-                  {category}
-                </option>
-              ))}
-            </select>
+          <div className="price-filter">
+            <h3>Rango de Precios</h3>
+            <input
+              type="number"
+              placeholder="Precio Mínimo"
+              value={minPrice}
+              onChange={(e) => setMinPrice(e.target.value)}
+            />
+            <input
+              type="number"
+              placeholder="Precio Máximo"
+              value={maxPrice}
+              onChange={(e) => setMaxPrice(e.target.value)}
+            />
+            <button onClick={handlePriceFilter}>Filtrar</button>
           </div>
         </div>
         <div className="product-container">
@@ -70,7 +90,7 @@ const [dataProducts,SetDataProducts]=useState([])
               className="product-card"
             >
               <div className="product-image">
-                <img src={product.imageUrl} alt={product.title} />
+                <img src={product.image} alt={product.title} />
               </div>
               <div className="product-info">
                 <h3 className="product-title">{product.title}</h3>
