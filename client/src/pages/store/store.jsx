@@ -8,6 +8,7 @@ const Store = () => {
   const [dataProducts, SetDataProducts] = useState([]);
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
+  const [filteredProducts, setFilteredProducts] = useState([]); // Estado para productos filtrados
 
   useEffect(() => {
     CallProducts();
@@ -28,17 +29,22 @@ const Store = () => {
       );
     });
 
-    return filteredByPrice;
+    setFilteredProducts(filteredByPrice); // Actualizar productos filtrados aquí
   };
 
   // Estado para el filtro
   const [selectedCategory, setSelectedCategory] = useState("Todos");
 
   // Filtrar los productos según la categoría seleccionada
-  const filteredProducts =
+  const filteredProductsByCategory =
     selectedCategory === "Todos"
       ? dataProducts
       : dataProducts.filter((product) => product.category === selectedCategory);
+
+  useEffect(() => {
+    // Actualizar productos filtrados también cuando cambie la categoría
+    setFilteredProducts(filteredProductsByCategory);
+  }, [filteredProductsByCategory, selectedCategory]);
 
   // Obtener todas las categorías únicas de los productos
   const TodosCategories = [
