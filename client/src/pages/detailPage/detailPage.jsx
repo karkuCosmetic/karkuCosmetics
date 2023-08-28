@@ -8,7 +8,7 @@ export const DetailPage = () => {
 
   useEffect(() => {
     CallProductsDetail();
-  }, [id]);
+  }, [CallProductsDetail, id]);
 
   const CallProductsDetail = async () => {
     const data = await getProductDetail(id);

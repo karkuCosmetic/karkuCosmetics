@@ -7,11 +7,11 @@
   display: flex;
   flex-wrap: wrap;
   overflow: hidden;
-  bottom: 0;
   background-image: url(../../assets/bgKarkuStore.png);
   background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat; 
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  padding-bottom: 5%;
 }
 
 @media (max-width: 762px) {
@@ -164,4 +164,60 @@
   .sidebar ul li.active {
     display: none;
   }
+}
+
+/* Paginado */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  border: none;
+  background-color: #fff;
+  color: #333;
+  font-size: 16px;
+  padding: 5px 10px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+}
+
+.pagination button:hover {
+  background-color: #f0f0f0;
+}
+
+.pagination button.active {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* Estilos para las flechas */
+.pagination .arrow-button {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination .arrow-button:hover {
+  background-color: #f0f0f0;
+}
+
+.pagination .arrow-button:disabled {
+  background-color: #ccc;
+  color: #888;
+  cursor: not-allowed;
 }

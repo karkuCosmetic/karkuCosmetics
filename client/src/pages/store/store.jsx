@@ -9,6 +9,8 @@ const Store = () => {
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [filteredProducts, setFilteredProducts] = useState([]); // Estado para productos filtrados
+  const [currentPage, setCurrentPage] = useState(1); // Página actual
+  const [productsPerPage] = useState([5]);
 
   useEffect(() => {
     CallProducts();
@@ -29,7 +31,8 @@ const Store = () => {
       );
     });
 
-    setFilteredProducts(filteredByPrice); // Actualizar productos filtrados aquí
+    setFilteredProducts(filteredByPrice);
+    setCurrentPage(1); // Actualizar productos filtrados aquí
   };
 
   // Estado para el filtro
@@ -44,6 +47,7 @@ const Store = () => {
   useEffect(() => {
     // Actualizar productos filtrados también cuando cambie la categoría
     setFilteredProducts(filteredProductsByCategory);
+    setCurrentPage(1);
   }, [filteredProductsByCategory, selectedCategory]);
 
   // Obtener todas las categorías únicas de los productos
@@ -51,6 +55,18 @@ const Store = () => {
     "Todos",
     ...new Set(dataProducts.map((product) => product.category)),
   ];
+
+  // Obtener índices de los productos a mostrar en la página actual
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = filteredProducts.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+
+  // Cambiar de página
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
 
   return (
     <>
@@ -88,6 +104,7 @@ const Store = () => {
             <button onClick={handlePriceFilter}>Filtrar</button>
           </div>
         </div>
+
         <div className="product-container">
           {filteredProducts.map((product, index) => (
             <Link
@@ -106,6 +123,39 @@ const Store = () => {
             </Link>
           ))}
         </div>
+      </div>
+      <div className="pagination">
+        <button
+          className="arrow-button"
+          onClick={() => paginate(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          {"<"}
+        </button>
+        {filteredProducts.length > productsPerPage &&
+          Array.from(
+            { length: Math.ceil(filteredProducts.length / productsPerPage) },
+            (_, index) => (
+              <button
+                key={index}
+                className={`pagination-button ${
+                  currentPage === index + 1 ? "active" : ""
+                }`}
+                onClick={() => paginate(index + 1)}
+              >
+                {index + 1}
+              </button>
+            )
+          )}
+        <button
+          className="arrow-button"
+          onClick={() => paginate(currentPage + 1)}
+          disabled={
+            currentPage >= Math.ceil(filteredProducts.length / productsPerPage)
+          }
+        >
+          {">"}
+        </button>
       </div>
     </>
   );
