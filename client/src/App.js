@@ -17,7 +17,7 @@ import { getUserDetail } from "./functions/fetchingUsers";
 import { useEffect, useState } from "react";
 import { ProtectedRouteUser } from "./pages/protectedRoutes/ProtectedRouteUser";
 import { Contact } from "./pages/Contact/contact";
-import DetailPage from "./pages/detailPage/detailPage";
+import DetailPage from "./pages/DetailPage/detailPage";
 
 function App() {
   const [rol, SetRol] = useState();
