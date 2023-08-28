@@ -1,22 +1,24 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/home";
-import Store from "./pages/store/store";
-import Profile from "./pages/profile/profile";
-import Login from "./pages/login/login";
-import Register from "./pages/register/register";
-import Cart from "./pages/cart/cart";
-import Buys from "./pages/buys/buys";
-import DetailPage from "./pages/detailPage/detailPage";
+import Profile from "./pages/Profile/profile";
+import Login from "./pages/Login/login";
+import Register from "./pages/Register/register";
+import Cart from "./pages/Cart/cart";
+import Buys from "./pages/Buys/buys";
 
 import HomeAdmin from "./pages/HomeAdmin/homeAdmin";
 import PageConfirm from "./pages/PageConfirm/pageconfirm";
-import { ProtectedRouteAdmin } from "./pages/protectedRoutes/ProtectedRouteAdmin";
+import { ProtectedRouteAdmin } from "./pages/ProtectedRoutes/ProtectedRouteAdmin";
 import { GetDecodedCookie } from "./utils/DecodedCookie";
 import { DecodedToken } from "./utils/DecodedToken";
 import { getUserDetail } from "./functions/fetchingUsers";
 import { useEffect, useState } from "react";
-import { ProtectedRouteUser } from "./pages/protectedRoutes/ProtectedRouteUser";
+import { ProtectedRouteUser } from "./pages/ProtectedRoutes/ProtectedRouteUser";
+import { Contact } from "./pages/Contact/contact";
+import DetailPage from "./pages/DetailPage/detailPage";
+import Store from "./pages/Store/store";
+
 
 function App() {
   const [rol, SetRol] = useState();
@@ -36,7 +38,7 @@ function App() {
       }
     }
   }, []);
-  console.log(rol);
+
   return (
     <>
       <Routes>
@@ -46,6 +48,7 @@ function App() {
         <Route path="/login" Component={Login} />
         <Route path="/register" Component={Register} />
         <Route path="/confirm/:id" Component={PageConfirm} />
+        <Route path="/contact" Component={Contact} />
 
         <Route element={<ProtectedRouteUser isAllowed={true} />}>
           <Route path="/profile" Component={Profile} />

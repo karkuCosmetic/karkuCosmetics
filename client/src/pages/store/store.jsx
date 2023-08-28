@@ -120,6 +120,8 @@ const Store = () => {
                 <p className="product-price">${product.price}</p>
                 <p className="product-description">{product.description}</p>
               </div>
+
+
             </Link>
           ))}
         </div>
