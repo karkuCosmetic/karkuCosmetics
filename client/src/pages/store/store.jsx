@@ -10,7 +10,7 @@ const Store = () => {
   const [maxPrice, setMaxPrice] = useState("");
   const [filteredProducts, setFilteredProducts] = useState([]); // Estado para productos filtrados
   const [currentPage, setCurrentPage] = useState(1); // Página actual
-  const [productsPerPage] = useState(5);
+  const [productsPerPage] = useState(10);
 
   useEffect(() => {
     CallProducts();
@@ -19,7 +19,6 @@ const Store = () => {
   const CallProducts = async () => {
     const data = await getProduct();
     SetDataProducts(data);
-    
   };
 
   // Filtro por precio
@@ -119,7 +118,6 @@ const Store = () => {
               <div className="product-info">
                 <h3 className="product-title">{product.title}</h3>
                 <p className="product-price">${product.price}</p>
-                <p className="product-description">{product.description}</p>
               </div>
             </Link>
           ))}
