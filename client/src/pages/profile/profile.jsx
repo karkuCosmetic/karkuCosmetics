@@ -45,7 +45,7 @@ export const Profile = () => {
         type="file"
         name=""
         id=""
-        onChange={e => handleImageUpload (e)}
+        onChange={e => handleImageUpload (e)} //input y button se usarian en el admin 
         multiple
       />
       <button onClick={handlerSubmitImage} disabled={images ? false : true}>
