@@ -6,7 +6,7 @@ import Navbar from "../../components/NavBar/navbar";
 
 export const DetailPage = () => {
   const [detailProduct, setDetailProduct] = useState({});
-  const [quantity, setQuantity] = useState(1); // Estado para la cantidad
+  const [quantity, setQuantity] = useState(1);
   const { id } = useParams();
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export const DetailPage = () => {
   };
 
   const addToCart = () => {
-    // Agregar la lógica para agregar al carrito
+    // Lógica para agregar al carrito
     console.log(`Agregado al carrito: ${quantity} x ${detailProduct.title}`);
   };
 
@@ -63,11 +63,13 @@ export const DetailPage = () => {
         </div>
         <p className="detail-description">{detailProduct.description}</p>
         <p className="detail-dimensions">{detailProduct.dimensions}</p>
+        <div className="image-grid">
+          <img src={detailProduct.image} alt={detailProduct.title} />
+          <img src={detailProduct.image} alt={detailProduct.title} />
+          <img src={detailProduct.image} alt={detailProduct.title} />
+          <img src={detailProduct.image} alt={detailProduct.title} />
+        </div>
       </div>
-      <img src={detailProduct.image} alt={detailProduct.title} />
-      <img src={detailProduct.image} alt={detailProduct.title} />
-      <img src={detailProduct.image} alt={detailProduct.title} />
-      <img src={detailProduct.image} alt={detailProduct.title} />
     </>
   );
 };

@@ -1,14 +1,15 @@
-.detailProduct{
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    overflow: hidden;
-    background-image: url(../../assets/bgKarkuStore.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-    padding-bottom: 5%;
-    min-height: 100vh;
-    align-items: center;
+.detailProduct {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  overflow: hidden;
+  background-image: url(../../assets/bgKarkuStore.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-bottom: 5%;
+  padding-top: 5%;
+  min-height: 100vh;
+  align-items: center;
 }
 
 .detail-container {
@@ -18,7 +19,7 @@
   margin: 20px;
   padding: 20px;
   background-color: #fff;
-  border-radius: 5px;
+  border-radius: 15px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -71,7 +72,6 @@
   cursor: pointer;
 }
 
-
 .detail-quantity {
   display: flex;
   align-items: center;
@@ -106,4 +106,21 @@
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
+}
+
+.image-grid {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.image-grid img {
+  width: 20%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
