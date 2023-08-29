@@ -19,6 +19,7 @@ const Store = () => {
   const CallProducts = async () => {
     const data = await getProduct();
     SetDataProducts(data);
+    
   };
 
   // Filtro por precio
