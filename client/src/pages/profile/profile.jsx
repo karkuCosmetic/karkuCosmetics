@@ -2,10 +2,13 @@ import React, {useEffect, useState} from 'react';
 import {GetDecodedCookie} from '../../utils/DecodedCookie';
 import {DecodedToken} from '../../utils/DecodedToken';
 import {getUserDetail} from '../../functions/fetchingUsers';
-import { fileUpload } from '../../utils/fileUpload';
+import {fileUpload} from '../../utils/fileUpload';
+import {updateProduct} from '../../functions/fetchingProducts';
+
 export const Profile = () => {
   const [profile, SetProfile] = useState ({});
-  const [image, setImage] = useState(null);
+  const [images, setImages] = useState ([]); // buffer de images
+  const [imageurls, setImageurls] = useState (null); //array de urls de cloudinary
 
   useEffect (() => {
     const token = GetDecodedCookie ('cookieToken');
@@ -20,22 +23,32 @@ export const Profile = () => {
     SetProfile (info);
   };
 
-  console.log (profile);
-
-  const handleFileChange = event => {
-    const file = event.target.files[0];
-    setImage (file);
+  const handleImageUpload = event => {
+    const selectedFiles = event.target.files;
+    setImages (prevImages => [...prevImages, ...selectedFiles]);
   };
-  const handlerSubmitImage=async ()=>{
-   const url=await fileUpload(image,"profiles")//la sube a cloudinary y devuelve la url que debe ser enviada a la base y actualizada 
-   console.log(url);
-  }
 
-  //Mapear profile
+  const handlerSubmitImage = async () => {
+    await fileUpload (images, 'profiles').then (res => {
+      setImageurls (res);
+      updateProduct (res);
+      console.log (res);
+    });
+  };
+
+  //Maapear profile 
+
+  //las funciones hay que corregirlas por que el componente esta creado en prueba para products/admin
   return (
     <div>
-      <input type="file" name="" id="" onChange={e => handleFileChange (e)} />
-      <button onClick={handlerSubmitImage } disabled={image ? false : true}>
+      <input
+        type="file"
+        name=""
+        id=""
+        onChange={e => handleImageUpload (e)}
+        multiple
+      />
+      <button onClick={handlerSubmitImage} disabled={images ? false : true}>
         Subir foto
       </button>
 

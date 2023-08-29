@@ -26,7 +26,11 @@ const adminSchema = new mongoose.Schema({
     verify: {
         type: Boolean,
         default: false
-    }
+    },
+    Notifications:{
+        type:Array,
+        default:[]
+    },
 });
 
 

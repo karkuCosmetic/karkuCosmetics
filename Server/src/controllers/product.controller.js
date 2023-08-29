@@ -40,7 +40,8 @@ export const GetProductById = async (req, res) => {
 
 export const UpdateProductById = async (req, res) => {
     const { id } = req.params
-    const { title, dimensions,description, price, amount,category } = req.body;
+    const { title, dimensions,description, price, amount,category ,image} = req.body;
+    console.log(image);
     try {
         let product = await Product.findByIdAndUpdate(id, {
             title,
@@ -49,6 +50,7 @@ export const UpdateProductById = async (req, res) => {
             price,
             dimensions,
             amount,
+            image:image
         }, { new: true })
         return res.status(200).json({ product });
     } catch (error) {

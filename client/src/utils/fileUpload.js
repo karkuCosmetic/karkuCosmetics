@@ -1,20 +1,28 @@
 import axios from "axios";
 
-export const fileUpload = async (image, path )=> {
+export const fileUpload = async (images, path) => {
   try {
-    const formData = new FormData();
+    let arrayUrls = [];
 
-    formData.append("file", image);
-    // formData.append('upload_preset', `upload-${path}`)
-    formData.append("upload_preset", `karku_${path}`);
+    await Promise.all(
+      images.map(async (el) => {
+        const formData = new FormData();
+        formData.append("file", el);
+        formData.append("upload_preset", `karku_${path}`);
 
-
-    const res = await axios.post(
-      "https://api.cloudinary.com/v1_1/dqai9sgfs/upload",
-      formData
+        const res = await axios.post(
+          "https://api.cloudinary.com/v1_1/dqai9sgfs/upload",
+          formData
+        );
+        arrayUrls.push(res.data.secure_url);
+      })
     );
-    return res.data.secure_url;
+
+    return arrayUrls;
   } catch (error) {
     throw error;
   }
 };
+
+
+

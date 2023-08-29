@@ -20,12 +20,13 @@ const productSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  amount: {
+  stock: {
     type: Number,
     default: 0,
   },
   image: {
-    type: String,
+    type: Array,
+    default:[]
   },
 });
 
