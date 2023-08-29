@@ -1,21 +1,22 @@
 import React, {useRef} from 'react';
 import emailjs from '@emailjs/browser';
-// import 'dotenv/config';
+
+
 export const Contact = () => {
   const form = useRef ();
   const sendEmail = e => {
     e.preventDefault ();
-
+    
     emailjs
-      .sendForm (
-        // process.env.SERVICE_ID,
-        // process.env.TEMPLATE_ID,
-        // form.current,
-        // process.env.PUBLIC_KEY
-        "service_s836qxd",
-        "template_wqs3znu",
-        form.current,
-        "-0s9Tt65BXxLivqvY"
+    .sendForm (
+      // process.env.SERVICE_ID,
+      // process.env.TEMPLATE_ID,
+      // form.current,
+      // process.env.PUBLIC_KEY
+      "service_s836qxd",
+      "template_wqs3znu",
+      form.current,
+      "-0s9Tt65BXxLivqvY"
       )
       .then (
         result => {
@@ -24,10 +25,11 @@ export const Contact = () => {
         error => {
           console.log (error.text);
         }
-      );
-  };
-  return (
-    <div>
+        );
+      };
+     
+      return (
+        <div>
 
       <form ref={form} onSubmit={sendEmail}>
         <label>Name</label>

@@ -11,7 +11,6 @@ const Store = () => {
   const [filteredProducts, setFilteredProducts] = useState([]); // Estado para productos filtrados
   const [currentPage, setCurrentPage] = useState(1); // Página actual
   const [productsPerPage] = useState(5);
-  
 
   useEffect(() => {
     CallProducts();
@@ -61,16 +60,14 @@ const Store = () => {
   // Obtener índices de los productos a mostrar en la página actual
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+
   const currentProducts = filteredProducts.slice(
     indexOfFirstProduct,
     indexOfLastProduct
   );
 
   // Cambiar de página
-  const paginate = (pageNumber) => {setCurrentPage(pageNumber);
-
-  }
-
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <>
@@ -110,7 +107,7 @@ const Store = () => {
         </div>
 
         <div className="product-container">
-          {filteredProducts.map((product, index) => (
+          {currentProducts.map((product, index) => (
             <Link
               to={`/product/${product._id}`}
               key={index}
@@ -124,8 +121,6 @@ const Store = () => {
                 <p className="product-price">${product.price}</p>
                 <p className="product-description">{product.description}</p>
               </div>
-
-
             </Link>
           ))}
         </div>
