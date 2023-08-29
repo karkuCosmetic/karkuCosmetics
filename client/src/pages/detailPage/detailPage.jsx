@@ -6,18 +6,15 @@ export const DetailPage = () => {
   const [detailProduct, SetDetailProduct] = useState({});
   const { id } = useParams();
 
-  useEffect (
-    () => {
-      CallProductsDetail ();
-    },
-    [CallProductsDetail, id]
-  );
-
+  useEffect(() => {
+    CallProductsDetail();
+  }, [id]);
 
   const CallProductsDetail = async () => {
     const data = await getProductDetail(id);
     SetDetailProduct(data.product);
   };
+
   return (
     <div>
       <img src={detailProduct.image}/>

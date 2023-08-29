@@ -10,7 +10,8 @@ const Store = () => {
   const [maxPrice, setMaxPrice] = useState("");
   const [filteredProducts, setFilteredProducts] = useState([]); // Estado para productos filtrados
   const [currentPage, setCurrentPage] = useState(1); // Página actual
-  const [productsPerPage] = useState([5]);
+  const [productsPerPage] = useState(5);
+  
 
   useEffect(() => {
     CallProducts();
@@ -19,6 +20,7 @@ const Store = () => {
   const CallProducts = async () => {
     const data = await getProduct();
     SetDataProducts(data);
+    
   };
 
   // Filtro por precio
@@ -65,7 +67,9 @@ const Store = () => {
   );
 
   // Cambiar de página
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber) => {setCurrentPage(pageNumber);
+
+  }
 
 
   return (
