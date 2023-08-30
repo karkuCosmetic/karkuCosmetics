@@ -11,7 +11,7 @@ const Store = () => {
   const [filteredProducts, setFilteredProducts] = useState([]); // Estado para productos filtrados
   const [currentPage, setCurrentPage] = useState(1); // Página actual
   const [productsPerPage] = useState(10);
-
+console.log(dataProducts);
   useEffect(() => {
     CallProducts();
   }, []);
@@ -113,7 +113,7 @@ const Store = () => {
               className="product-card"
             >
               <div className="product-image">
-                <img src={product.image} alt={product.title} />
+                <img src={product.image[0]} alt={product.title} />
               </div>
               <div className="product-info">
                 <h3 className="product-title">{product.title}</h3>

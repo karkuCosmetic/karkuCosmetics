@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { getProductDetail } from "../../functions/fetchingProducts";
 import "./detailPage.css";
 import Navbar from "../../components/NavBar/navbar";
+import { AddCart } from "../../utils/addCart";
 
 export const DetailPage = () => {
   const [detailProduct, setDetailProduct] = useState({});
@@ -16,7 +17,6 @@ export const DetailPage = () => {
 
   const callProductDetail = async (id) => {
     const data = await getProductDetail(id);
-    console.log(data.product.image);
     setDetailProduct(data.product);
   };
 
@@ -28,7 +28,9 @@ export const DetailPage = () => {
 
   const addToCart = () => {
     // Lógica para agregar al carrito
-    console.log(`Agregado al carrito: ${quantity} x ${detailProduct.title}`);
+    AddCart(quantity,detailProduct)
+    // localStorage.setItem("cart",JSON.stringify([]))
+    // console.log(`Agregado al carrito: ${quantity} x ${detailProduct.title}`);
   };
 
   const openImageModal = (image) => {
@@ -39,12 +41,6 @@ export const DetailPage = () => {
     setSelectedImage(null);
   };
 
-  const imageList = [
-    detailProduct.image,
-    detailProduct.image,
-    detailProduct.image,
-    detailProduct.image,
-  ];
 
   return (
     <>
@@ -52,7 +48,7 @@ export const DetailPage = () => {
       <div className="detailProduct">
         <div className="detail-container">
           <div className="detail-image">
-            <img src={detailProduct.image} alt={detailProduct.title} />
+            <img src={detailProduct.image && detailProduct.image[0]} alt={detailProduct.title} />
           </div>
           <div className="detail-info">
             <p className="detail-title">
@@ -93,8 +89,7 @@ export const DetailPage = () => {
           </p>
 
           <div className="image-grid">
-            {imageList &&
-              imageList.map((image, index) => (
+            {detailProduct.image && detailProduct.image.slice(1).map((image, index) => (
                 <img
                   key={index}
                   src={image}
