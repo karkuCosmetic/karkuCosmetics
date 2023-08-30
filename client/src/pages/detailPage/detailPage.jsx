@@ -7,6 +7,7 @@ import Navbar from "../../components/NavBar/navbar";
 export const DetailPage = () => {
   const [detailProduct, setDetailProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
+  const [selectedImage, setSelectedImage] = useState(undefined);
   const { id } = useParams();
 
   useEffect(() => {
@@ -15,6 +16,7 @@ export const DetailPage = () => {
 
   const callProductDetail = async (id) => {
     const data = await getProductDetail(id);
+    console.log(data.product.image);
     setDetailProduct(data.product);
   };
 
@@ -28,6 +30,21 @@ export const DetailPage = () => {
     // Lógica para agregar al carrito
     console.log(`Agregado al carrito: ${quantity} x ${detailProduct.title}`);
   };
+
+  const openImageModal = (image) => {
+    setSelectedImage(image);
+  };
+
+  const closeImageModal = () => {
+    setSelectedImage(null);
+  };
+
+  const imageList = [
+    detailProduct.image,
+    detailProduct.image,
+    detailProduct.image,
+    detailProduct.image,
+  ];
 
   return (
     <>
@@ -69,18 +86,36 @@ export const DetailPage = () => {
               Agregar al carrito
             </button>
           </div>
-        </div>
-        <p className="detail-description">
-          {detailProduct.description &&
-            detailProduct.description.charAt(0).toUpperCase() +
-              detailProduct.description.slice(1)}
-        </p>
+          <p className="detail-description">
+            {detailProduct.description &&
+              detailProduct.description.charAt(0).toUpperCase() +
+                detailProduct.description.slice(1)}
+          </p>
 
-        <div className="image-grid">
-          <img src={detailProduct.image} alt={detailProduct.title} />
-          <img src={detailProduct.image} alt={detailProduct.title} />
-          <img src={detailProduct.image} alt={detailProduct.title} />
-          <img src={detailProduct.image} alt={detailProduct.title} />
+          <div className="image-grid">
+            {imageList &&
+              imageList.map((image, index) => (
+                <img
+                  key={index}
+                  src={image}
+                  alt=""
+                  onClick={() => openImageModal(image)}
+                />
+              ))}
+          </div>
+          {selectedImage && (
+            <div className="image-modal-overlay">
+              <div className="image-modal">
+                <img src={selectedImage} alt="Expanded" />
+                <button
+                  className="close-modal-button"
+                  onClick={closeImageModal}
+                >
+                  Cerrar
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </>
