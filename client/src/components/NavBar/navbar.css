@@ -105,16 +105,20 @@
 
   .nav-links {
     display: none;
+    align-items: center;
     flex-direction: column;
     position: absolute;
-    top: 115px;
-    left: 0;
-    background-color: #f38f82fb;
-    width: 100%;
-    padding: 10px 0;
+    top: 100px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background-color: #f38f82;
+    width: 90%;
+    padding: 1rem;
     text-align: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: transform 0.1s ease;
     opacity: 0;
     transform: translateY(-20px);
   }
@@ -123,10 +127,11 @@
     display: flex;
     opacity: 1;
     transform: translateY(0);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    transition: opacity 1s ease, transform 1s ease;
   }
 
   .nav-links li {
     margin: 10px 0;
   }
 }
+
