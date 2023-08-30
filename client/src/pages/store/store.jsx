@@ -11,7 +11,7 @@ const Store = () => {
   const [filteredProducts, setFilteredProducts] = useState([]); // Estado para productos filtrados
   const [currentPage, setCurrentPage] = useState(1); // Página actual
   const [productsPerPage] = useState(10);
-console.log(dataProducts);
+
   useEffect(() => {
     CallProducts();
   }, []);

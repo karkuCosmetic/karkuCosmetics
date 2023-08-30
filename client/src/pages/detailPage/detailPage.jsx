@@ -27,10 +27,7 @@ export const DetailPage = () => {
   };
 
   const addToCart = () => {
-    // Lógica para agregar al carrito
-    AddCart(quantity,detailProduct)
-    // localStorage.setItem("cart",JSON.stringify([]))
-    // console.log(`Agregado al carrito: ${quantity} x ${detailProduct.title}`);
+    AddCart(quantity,detailProduct) 
   };
 
   const openImageModal = (image) => {
