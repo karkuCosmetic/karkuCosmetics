@@ -50,8 +50,7 @@ export const DetailPage = () => {
           <div className="detail-info">
             <p className="detail-title">
               {detailProduct.title &&
-                detailProduct.title.charAt(0).toUpperCase() +
-                  detailProduct.title.slice(1)}
+                detailProduct.title}
             </p>
             <p className="detail-dimensions">
               {detailProduct.dimensions &&

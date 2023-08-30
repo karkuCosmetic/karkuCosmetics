@@ -30,6 +30,10 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  state:{
+    type:Boolean,
+    default:true
+  },
   cellphone: {
     type: String,
     default: "",

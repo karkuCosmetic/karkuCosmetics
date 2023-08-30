@@ -2,15 +2,15 @@ import { Product } from "../models/product.js";
 import { formatError } from "../utils/formatError.js";
 
 export const createProduct = async (req, res) => {
-  const { title, dimensions,description, price, amount,category } = req.body;
+  const { title, dimensions,description, price, stock,category } = req.body;
   try {
     let product = new Product({
-      title,
+      title:title[0].toUpperCase() + title.slice(1),
       category,
-      description,
+      description:description[0].toUpperCase() + description.slice(1),
       price,
       dimensions,
-      amount,
+      stock,
     });
     await product.save();
     return res.status(200).json({ msg: "producto creado" });
@@ -40,16 +40,16 @@ export const GetProductById = async (req, res) => {
 
 export const UpdateProductById = async (req, res) => {
     const { id } = req.params
-    const { title, dimensions,description, price, amount,category ,image} = req.body;
-    console.log(image);
+    const { title, dimensions,description, price, stock,category ,image} = req.body;
+
     try {
         let product = await Product.findByIdAndUpdate(id, {
-            title,
+            title:title[0].toUpperCase() + title.slice(1),
             category,
-            description,
+            description:description[0].toUpperCase() + description.slice(1),
             price,
             dimensions,
-            amount,
+            stock,
             image:image
         }, { new: true })
         return res.status(200).json({ product });
