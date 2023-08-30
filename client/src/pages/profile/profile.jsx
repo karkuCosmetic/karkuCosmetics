@@ -2,9 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {GetDecodedCookie} from '../../utils/DecodedCookie';
 import {DecodedToken} from '../../utils/DecodedToken';
 import {getUserDetail} from '../../functions/fetchingUsers';
-import {fileUpload} from '../../utils/fileUpload';
-import {updateProduct} from '../../functions/fetchingProducts';
-import ProductUpload from '../../components/UserAdmin/ProductUpload/productUpload';
+
 
 export const Profile = () => {
   const [profile, SetProfile] = useState ({});
