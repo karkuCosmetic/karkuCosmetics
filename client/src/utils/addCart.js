@@ -1,10 +1,10 @@
 export const AddCart = (quantity, product) => {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  console.log("cart", cart);
+  // console.log("cart", cart[0].quantity);
 
   let pos = cart.findIndex((el) => el.product.title == product.title);
   if (pos > -1) {
-    cart[pos] = { quantity: quantity, product: product };
+    cart[pos] = { quantity: cart[pos].quantity+quantity, product: product };
     localStorage.setItem("cart", JSON.stringify(cart));
 
 } else {
