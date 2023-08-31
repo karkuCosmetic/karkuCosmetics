@@ -29,6 +29,8 @@
 .nav-links {
   list-style: none;
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .nav-links li {
@@ -135,3 +137,42 @@
   }
 }
 
+.profile-link {
+  color: white;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.my-icon svg {
+  font-size: 1.5rem;
+  margin-right: 6px;
+}
+
+/* Estilos para la animación del menú desplegable */
+.profile-dropdown {
+  background-color: red;
+  margin-top: 2rem;
+  padding: 1rem;
+  margin-right: 3rem;
+  width: 100%;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    transform: translateY(-20px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.profile-dropdown.open {
+  display: block;
+  transform: translateY(-20px);
+  animation: fadeIn 0.3s ease;
+}
