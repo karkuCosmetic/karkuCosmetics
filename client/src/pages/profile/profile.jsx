@@ -71,7 +71,7 @@ const Profile = () => {
             <div className="info-user">
               <h2>
               {/* este <h2>Pepito Perez</h2> es solo para tener una vista del name */}
-                <h2>Pepito Perez</h2>
+                {/* <h2>Pepito Perez</h2> */}
                 {profile.name} {profile.lastName}
               </h2>
               <p>Teléfono: {profile.phone}</p>

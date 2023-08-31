@@ -14,6 +14,6 @@ export const AddCart = (quantity, product) => {
 };
 //
 
-// llega un product con la cantidad, si esta actualiza su cantidad sino lo agrega al carrito 
+// llega un product con la cantidad, si está... actualiza su cantidad sino lo agrega al carrito 
 
 // falta el metodo para eliminarlo 
