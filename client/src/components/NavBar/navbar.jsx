@@ -48,6 +48,9 @@ const Navbar = () => {
             <a href="/contact">Contacto</a>
           </li>
           <li>
+            <a href="/store">Tienda</a>
+          </li>
+          <li>
             <a href="/cart">Carrito</a>
           </li>
           {login === true ? (
