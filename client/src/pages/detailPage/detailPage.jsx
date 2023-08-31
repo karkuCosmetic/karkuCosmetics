@@ -4,12 +4,14 @@ import { getProductDetail } from "../../functions/fetchingProducts";
 import "./detailPage.css";
 import Navbar from "../../components/NavBar/navbar";
 import { AddCart } from "../../utils/addCart";
+import { GetDecodedCookie } from "../../utils/DecodedCookie";
 
 export const DetailPage = () => {
   const [detailProduct, setDetailProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(undefined);
   const { id } = useParams();
+  const token = GetDecodedCookie("cookieToken");
 
   useEffect(() => {
     callProductDetail(id);
@@ -27,7 +29,12 @@ export const DetailPage = () => {
   };
 
   const addToCart = () => {
-    AddCart(quantity,detailProduct) 
+    if(token){
+      AddCart(quantity,detailProduct) 
+    }else{
+      console.log("necesitas loguearte");
+      //lanzar alerta de que se loguee
+    }
   };
 
   const openImageModal = (image) => {
