@@ -4,7 +4,7 @@ export const AddCart = (quantity, product) => {
 
   let pos = cart.findIndex((el) => el.product.title == product.title);
   if (pos > -1) {
-    cart[pos] = { cant: quantity, product: product };
+    cart[pos] = { quantity: quantity, product: product };
     localStorage.setItem("cart", JSON.stringify(cart));
 
 } else {
