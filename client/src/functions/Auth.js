@@ -6,7 +6,7 @@ export const postlogin = async (values) => {
     let token = resp.data.token;
     document.cookie =
       encodeURIComponent("cookieToken") + "=" + encodeURIComponent(token);
-    localStorage.setItem("token", token);
+    // localStorage.setItem("token", token);
     return { token, status: resp.status, session: true };
   } catch (err) {
     console.log(err);

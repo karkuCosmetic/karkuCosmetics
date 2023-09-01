@@ -29,7 +29,11 @@ const Navbar = () => {
     }
   }, []);
   //si hay token estoy logeado, entonces condiciono la navbar
-  const handleLogout = () => {};
+  const handleLogout = () => {
+    document.cookie =
+    encodeURIComponent("cookieToken") + "=" + "";
+    window.location.reload ();
+  };
 
   return (
     <nav className="navbar">
