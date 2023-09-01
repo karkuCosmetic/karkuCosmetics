@@ -1,24 +1,62 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "./store.css";
 import Navbar from "../../components/NavBar/navbar";
 import { getProduct } from "../../functions/fetchingProducts";
+import { AddCart } from "../../utils/addCart";
+import { getProductDetail } from "../../functions/fetchingProducts";
+import { GetDecodedCookie } from "../../utils/DecodedCookie";
 
 const Store = () => {
   const [dataProducts, SetDataProducts] = useState([]);
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
-  const [filteredProducts, setFilteredProducts] = useState([]); // Estado para productos filtrados
-  const [currentPage, setCurrentPage] = useState(1); // Página actual
-  const [productsPerPage] = useState(10);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage] = useState(9);
+  const [detailProduct, setDetailProduct] = useState({});
+  const [quantity, setQuantity] = useState(1);
+  const { id } = useParams();
+  const token = GetDecodedCookie("cookieToken");
 
   useEffect(() => {
     CallProducts();
-  }, []);
+    callProductDetail(id);
+  }, [id]);
+
+  const callProductDetail = async (id) => {
+    const data = await getProductDetail(id);
+    setDetailProduct(data.product);
+  };
+
+  const handleQuantityChange = (product, amount) => {
+    const updatedProducts = dataProducts.map((p) => {
+      if (p._id === product._id) {
+        const newQuantity = p.quantity + amount;
+        return { ...p, quantity: newQuantity };
+      }
+      return p;
+    });
+    SetDataProducts(updatedProducts);
+  };
+
+  const addToCart = (product) => {
+    if (token) {
+      AddCart(product.quantity, product);
+      setQuantity(1); // Se reinicia la cantidad a 1
+    } else {
+      console.log("necesitas loguearte");
+    }
+  };
 
   const CallProducts = async () => {
     const data = await getProduct();
-    SetDataProducts(data);
+    // Configuro la propiedad 'quantity' para cada producto
+    const productsWithQuantity = data.map((product) => ({
+      ...product,
+      quantity: 1, // se establece la cantidad inicial
+    }));
+    SetDataProducts(productsWithQuantity);
   };
 
   // Filtro por precio
@@ -32,31 +70,30 @@ const Store = () => {
     });
 
     setFilteredProducts(filteredByPrice);
-    setCurrentPage(1); // Actualizar productos filtrados aquí
+    setCurrentPage(1); // Actualizar productos filtrados
   };
 
   // Estado para el filtro
   const [selectedCategory, setSelectedCategory] = useState("Todos");
 
-  // Filtrar los productos según la categoría seleccionada
+  // Filtro los productos según categoría seleccionada
   const filteredProductsByCategory =
     selectedCategory === "Todos"
       ? dataProducts
       : dataProducts.filter((product) => product.category === selectedCategory);
 
   useEffect(() => {
-    // Actualizar productos filtrados también cuando cambie la categoría
+    // Se actualizan productos filtrados también cuando cambie la categoría
     setFilteredProducts(filteredProductsByCategory);
     setCurrentPage(1);
   }, [filteredProductsByCategory, selectedCategory]);
 
-  // Obtener todas las categorías únicas de los productos
+  // Obtengo todas las categorías únicas de los productos
   const TodosCategories = [
     "Todos",
     ...new Set(dataProducts.map((product) => product.category)),
   ];
 
-  // Obtener índices de los productos a mostrar en la página actual
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
 
@@ -65,7 +102,6 @@ const Store = () => {
     indexOfLastProduct
   );
 
-  // Cambiar de página
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
@@ -107,19 +143,40 @@ const Store = () => {
 
         <div className="product-container">
           {currentProducts.map((product, index) => (
-            <Link
-              to={`/product/${product._id}`}
-              key={index}
-              className="product-card"
-            >
+            <div key={index} className="product-card">
               <div className="product-image">
                 <img src={product.image[0]} alt={product.title} />
               </div>
-              <div className="product-info">
-                <h3 className="product-title">{product.title}</h3>
-                <p className="product-price">${product.price}</p>
+              <div className="detail-info">
+                <p className="detail-title">{product.title}</p>
+                <p className="detail-dimensions">
+                  {product.dimensions.charAt(0).toUpperCase() +
+                    product.dimensions.slice(1)}
+                </p>
+                <p className="detail-price">${product.price}</p>
+                <div className="detail-quantity">
+                  <button
+                    className="quantity-button"
+                    onClick={() => handleQuantityChange(product, -1)}
+                  >
+                    -
+                  </button>
+                  <span className="quantity">{product.quantity}</span>
+                  <button
+                    className="quantity-button"
+                    onClick={() => handleQuantityChange(product, 1)}
+                  >
+                    +
+                  </button>
+                </div>
+                <button
+                  className="add-to-cart-button"
+                  onClick={() => addToCart(product)}
+                >
+                  Agregar al carrito
+                </button>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       </div>
