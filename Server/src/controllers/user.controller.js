@@ -22,8 +22,17 @@ export const getUserById = async (req, res) => {
 
 export const updateUser = async (req, res) => {
   const { id } = req.params;
-  const { name, lastName, country, email, carrito, adress, image, dni } =
-    req.body;
+  const {
+    name,
+    lastName,
+    country,
+    email,
+    carrito,
+    adress,
+    image,
+    dni,
+    cellphone,
+  } = req.body;
   let Name;
   let LastName;
   if (name || lastName) {
@@ -43,6 +52,7 @@ export const updateUser = async (req, res) => {
         carrito: carrito,
         adress: adress,
         dni: dni,
+        cellphone: cellphone,
       },
       { new: true }
     ).select("-password");

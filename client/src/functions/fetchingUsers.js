@@ -13,3 +13,17 @@ export const getUserDetail = async (uid) => {
     return [];
   }
 };
+
+export const PutUser = async (uid,value,token) => {
+  console.log(value);
+  try {
+    let response;
+    response = await axios.put(`http://localhost:3001/user/${uid}`,value,{
+      headers: { 'user-token': token },
+  });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+};
