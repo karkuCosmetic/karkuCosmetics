@@ -6,12 +6,14 @@
 .store-container {
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
   overflow: hidden;
   background-image: url(../../assets/bgKarkuStore.png);
   background-size: cover;
   background-repeat: no-repeat;
   min-height: 100vh;
   padding-bottom: 5%;
+  text-transform: capitalize;
 }
 
 @media (max-width: 762px) {
@@ -51,11 +53,10 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 2rem;
-  margin-left: 16rem;
+  margin-left: 15rem;
   padding-top: 10rem;
   padding-bottom: 5rem;
   box-sizing: border-box;
-  overflow-y: scroll;
   flex: 1;
 }
 
@@ -65,23 +66,30 @@
     flex-direction: row;
     flex-wrap: wrap;
     overflow-y: auto;
-    align-items: center;
     margin-left: 0;
-    margin-top: 50px;
+    padding-top: 0;
   }
 }
 
 .product-card {
   display: flex;
   flex-direction: column;
-  width: 19rem;
+  width: 21rem;
+  height: 35rem;
   border-radius: 10px;
   background-color: #ffffff;
-  border: 1px solid #dddddd;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   text-decoration: none;
   color: #333333;
   padding: 20px;
   transition: transform 0.2s, box-shadow 0.2s;
+  border-radius: 15px;
+}
+
+.link {
+  text-decoration: none;
+  margin-top: 1rem;
+  padding: 0.5rem;
   border-radius: 15px;
 }
 
@@ -90,29 +98,77 @@
 }
 
 .product-image img {
- width: 100%;
+  width: 100%;
   height: 15rem;
   border-radius: 15px;
+}
+
+.product-image img:hover {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .product-info {
   margin-left: 15px;
 }
 
-.product-title {
-  margin: 0;
-  font-size: 1.1rem;
+.detail-title {
+  margin-top: 1rem;
+  font-size: 1.5rem;
 }
 
-.product-price {
-  margin: 0;
+.detail-price {
   font-weight: bold;
-  color: #e74c3c;
+  color: #7b60c8;
 }
 
-.product-description {
-  margin: 10px 0;
-  font-size: 0.9rem;
+.buttons-quantity {
+  display: flex;
+  flex-direction: row;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  gap: 10px;
+  align-items: center;
+}
+
+/* CSS */
+.add-to-cart-button-store {
+  background: linear-gradient(to bottom right, #7511b8a6, #a143f8b6);
+  border: 0;
+  border-radius: 10px;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+  font-weight: 500;
+  outline: transparent;
+  padding: 0 1rem;
+  text-align: center;
+  text-decoration: none;
+  transition: box-shadow 0.2s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  height: 2rem;
+}
+
+.add-to-cart-button-store:not([disabled]):focus {
+  box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
+    -0.125rem -0.125rem 1rem rgba(91, 27, 175, 0.5),
+    0.125rem 0.125rem 1rem rgba(32, 106, 156, 0.5);
+}
+
+.add-to-cart-button-store:not([disabled]):hover {
+  box-shadow: 0 0 0.25rem rgba(146, 35, 211, 0.5),
+  -0.125rem -0.125rem 1rem rgba(91, 27, 175, 0.5),
+  0.125rem 0.125rem 1rem rgba(91, 13, 218, 0.5);
+}
+
+.detail-dimensions {
+  font-weight: bold;
+  color: #7b60c8;
+  padding: 1rem;
 }
 
 .filters-box {
@@ -166,17 +222,21 @@
   }
 }
 
+.link {
+  color: #7b60c8;
+}
+
 /* Paginado */
 
 .pagination {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  background-color: transparent;
+  margin-left: 15rem;
 }
 
 .pagination button {
   border: none;
-  background-color: #fff;
   color: #333;
   font-size: 16px;
   padding: 5px 10px;
@@ -193,12 +253,13 @@
 }
 
 .pagination button.active {
-  background-color: #007bff;
+  background-color: #d3599f;
   color: #fff;
 }
 
 /* Estilos para las flechas */
 .pagination .arrow-button {
+  color: #d3599f;
   font-size: 20px;
   font-weight: bold;
   padding: 0;
@@ -207,17 +268,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
-  border: 1px solid #ccc;
   transition: background-color 0.3s, color 0.3s;
 }
 
 .pagination .arrow-button:hover {
-  background-color: #f0f0f0;
+  background-color: #7b60c8;
+  color: wheat;
 }
 
 .pagination .arrow-button:disabled {
-  background-color: #ccc;
   color: #888;
   cursor: not-allowed;
 }

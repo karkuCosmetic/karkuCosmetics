@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./store.css";
+import { Link } from "react-router-dom";
 import Navbar from "../../components/NavBar/navbar";
 import { getProduct } from "../../functions/fetchingProducts";
 import { AddCart } from "../../utils/addCart";
 import { getProductDetail } from "../../functions/fetchingProducts";
 import { GetDecodedCookie } from "../../utils/DecodedCookie";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 const Store = () => {
   const [dataProducts, SetDataProducts] = useState([]);
@@ -110,108 +113,118 @@ const Store = () => {
         <Navbar />
       </div>
       <div className="store-container">
-        <div className="sidebar">
-          <h2>Productos</h2>
-          <ul>
-            {TodosCategories.map((category, index) => (
-              <li
-                key={index}
-                className={selectedCategory === category ? "active" : ""}
-                onClick={() => setSelectedCategory(category)}
-              >
-                {category}
-              </li>
-            ))}
-          </ul>
-          <div className="price-filter">
-            <h3>Rango de Precios</h3>
-            <input
-              type="number"
-              placeholder="Precio Mínimo"
-              value={minPrice}
-              onChange={(e) => setMinPrice(e.target.value)}
-            />
-            <input
-              type="number"
-              placeholder="Precio Máximo"
-              value={maxPrice}
-              onChange={(e) => setMaxPrice(e.target.value)}
-            />
-            <button onClick={handlePriceFilter}>Filtrar</button>
-          </div>
-        </div>
-
         <div className="product-container">
+          <div className="sidebar">
+            <h2>Productos</h2>
+            <ul>
+              {TodosCategories.map((category, index) => (
+                <li
+                  key={index}
+                  className={selectedCategory === category ? "active" : ""}
+                  onClick={() => setSelectedCategory(category)}
+                >
+                  {category}
+                </li>
+              ))}
+            </ul>
+            <div className="price-filter">
+              <h3>Rango de Precios</h3>
+              <input
+                type="number"
+                placeholder="Precio Mínimo"
+                value={minPrice}
+                onChange={(e) => setMinPrice(e.target.value)}
+              />
+              <input
+                type="number"
+                placeholder="Precio Máximo"
+                value={maxPrice}
+                onChange={(e) => setMaxPrice(e.target.value)}
+              />
+              <button onClick={handlePriceFilter}>Filtrar</button>
+            </div>
+          </div>
           {currentProducts.map((product, index) => (
             <div key={index} className="product-card">
               <div className="product-image">
-                <img src={product.image[0]} alt={product.title} />
+                <Link to={`/product/${product._id}`} key={index}>
+                  <img src={product.image[0]} alt={product.title} />
+                </Link>
               </div>
               <div className="detail-info">
                 <p className="detail-title">{product.title}</p>
-                <p className="detail-dimensions">
-                  {product.dimensions.charAt(0).toUpperCase() +
-                    product.dimensions.slice(1)}
-                </p>
+                <p className="detail-dimensions">{product.dimensions}</p>
                 <p className="detail-price">${product.price}</p>
-                <div className="detail-quantity">
+                <div className="buttons-quantity">
+                  <div className="detail-quantity">
+                    <button
+                      className="quantity-button"
+                      onClick={() => handleQuantityChange(product, -1)}
+                    >
+                      -
+                    </button>
+                    <span className="quantity">{product.quantity}</span>
+                    <button
+                      className="quantity-button"
+                      onClick={() => handleQuantityChange(product, 1)}
+                    >
+                      +
+                    </button>
+                  </div>
                   <button
-                    className="quantity-button"
-                    onClick={() => handleQuantityChange(product, -1)}
+                    className="add-to-cart-button-store"
+                    onClick={() => addToCart(product)}
                   >
-                    -
-                  </button>
-                  <span className="quantity">{product.quantity}</span>
-                  <button
-                    className="quantity-button"
-                    onClick={() => handleQuantityChange(product, 1)}
-                  >
-                    +
+                    Agregar al carrito
                   </button>
                 </div>
-                <button
-                  className="add-to-cart-button"
-                  onClick={() => addToCart(product)}
+                {/* <Link
+                  to={`/product/${product._id}`}
+                  key={index}
+                  className="link"
                 >
-                  Agregar al carrito
-                </button>
+                  {" "}
+                  Más info
+                </Link> */}
               </div>
             </div>
           ))}
         </div>
-      </div>
-      <div className="pagination">
-        <button
-          className="arrow-button"
-          onClick={() => paginate(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          {"<"}
-        </button>
-        {filteredProducts.length > productsPerPage &&
-          Array.from(
-            { length: Math.ceil(filteredProducts.length / productsPerPage) },
-            (_, index) => (
-              <button
-                key={index}
-                className={`pagination-button ${
-                  currentPage === index + 1 ? "active" : ""
-                }`}
-                onClick={() => paginate(index + 1)}
-              >
-                {index + 1}
-              </button>
-            )
-          )}
-        <button
-          className="arrow-button"
-          onClick={() => paginate(currentPage + 1)}
-          disabled={
-            currentPage >= Math.ceil(filteredProducts.length / productsPerPage)
-          }
-        >
-          {">"}
-        </button>
+
+        <div className="pagination">
+          <button
+            className="arrow-button"
+            onClick={() => paginate(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            <FontAwesomeIcon icon={faArrowLeft} />
+          </button>
+          {filteredProducts.length > productsPerPage &&
+            Array.from(
+              { length: Math.ceil(filteredProducts.length / productsPerPage) },
+              (_, index) => (
+                <button
+                  key={index}
+                  className={`pagination-button ${
+                    currentPage === index + 1 ? "active" : ""
+                  }`}
+                  onClick={() => paginate(index + 1)}
+                >
+                  {index + 1}
+                </button>
+              )
+            )}
+          <button
+            className="arrow-button"
+            onClick={() => paginate(currentPage + 1)}
+            disabled={
+              currentPage >=
+              Math.ceil(filteredProducts.length / productsPerPage)
+            }
+          >
+            <FontAwesomeIcon icon={faArrowRight} />
+          </button>
+        </div>
       </div>
     </>
   );
