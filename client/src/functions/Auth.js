@@ -16,6 +16,7 @@ export const postlogin = async (values) => {
 export const postRegister = async (values) => {
   try {
     await axios.post("http://localhost:3001/register", values);
+    return "Usuario Creado"
   } catch (error) {
     console.log(error);
   }

@@ -1,9 +1,11 @@
-import React from "react";
+import React from 'react';
+import ProductUpload
+  from '../../components/UserAdmin/ProductUpload/productUpload';
 
 const HomeAdmin = () => {
   return (
     <div>
-      <p>homeadmin</p>
+      <ProductUpload />
     </div>
   );
 };

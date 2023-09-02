@@ -1,5 +1,5 @@
 import express from "express";
-import { createAdmin, deleteAdminById, getAdminById, getAllAdmin, updateAdminById } from "../controllers/admin.controller.js";
+import { createAdmin, deleteAdminById, getAdminById, getAllAdmin, updateAdminById, updateAdminsEmail } from "../controllers/admin.controller.js";
 
 
 
@@ -7,6 +7,7 @@ import { createAdmin, deleteAdminById, getAdminById, getAllAdmin, updateAdminByI
 const router = express.Router();
 
 router.post('/', createAdmin)
+router.put('/email/', updateAdminsEmail);//edita a todos los admins cuando llega un email
 router.get('/', getAllAdmin);
 router.get('/:id', getAdminById);
 router.put('/:id', updateAdminById);
