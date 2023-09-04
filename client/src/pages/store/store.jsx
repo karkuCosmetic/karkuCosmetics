@@ -160,6 +160,7 @@ const Store = () => {
                     <button
                       className="quantity-button"
                       onClick={() => handleQuantityChange(product, -1)}
+                      disabled={product.quantity <= 1}
                     >
                       -
                     </button>
@@ -178,14 +179,6 @@ const Store = () => {
                     Agregar al carrito
                   </button>
                 </div>
-                {/* <Link
-                  to={`/product/${product._id}`}
-                  key={index}
-                  className="link"
-                >
-                  {" "}
-                  Más info
-                </Link> */}
               </div>
             </div>
           ))}
