@@ -12,7 +12,7 @@ export const Contact = () => {
     user_name: "Nombre",
     user_email: "Apellido",
     user_phone: "Telefono",
-    user_mesagge: "",
+    user_message: "",
   });
 
   const form = useRef();
