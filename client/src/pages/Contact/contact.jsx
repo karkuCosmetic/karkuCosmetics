@@ -65,6 +65,7 @@ export const Contact = () => {
               name="user_name"
               onChange={handlerChange}
               placeholder="Nombre"
+              required
             />
             <label>Email</label>
             <input
@@ -72,6 +73,7 @@ export const Contact = () => {
               name="user_email"
               onChange={handlerChange}
               placeholder="Email"
+              required
             />
             <label>Numero</label>
             <input
@@ -79,12 +81,14 @@ export const Contact = () => {
               name="user_phone"
               onChange={handlerChange}
               placeholder="Numero telefonico"
+              required
             />
             <label>Mensaje</label>
             <textarea
               name="user_mesagge"
               onChange={handlerChange}
               placeholder="Mensaje"
+              required
             />
             <input type="submit" value="Enviar" />
           </form>
