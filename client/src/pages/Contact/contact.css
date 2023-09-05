@@ -31,7 +31,7 @@
     }
   }
 
-form {
+.contact-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -55,6 +55,7 @@ label {
 
 input[type="text"],
 input[type="email"],
+input[type="password"],
 input[type="number"],
 textarea {
   width: 100%;

@@ -58,7 +58,7 @@ export const Contact = () => {
         </h3>
 
         <div>
-          <form ref={form} onSubmit={sendEmail}>
+          <form className="contact-form" ref={form} onSubmit={sendEmail}>
             <label>Nombre</label>
             <input
               type="text"

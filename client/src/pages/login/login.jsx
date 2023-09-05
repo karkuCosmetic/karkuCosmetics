@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/NavBar/navbar";
 import { postlogin } from "../../functions/Auth";
 import "./login.css";
+import Register from "../Register/register";
 
 export const Login = () => {
   const [status, setStatus] = useState("");
@@ -74,8 +75,8 @@ export const Login = () => {
       <Navbar />
       <div className="login-container">
         <div className="login-hello">
-          <h2>HOLA!</h2>
-          <p>Completa el formulario para ingresar</p>
+          <h1>HOLA!</h1>
+          <h3>Completa el formulario para ingresar</h3>
         </div>
         <form className="login-form" onSubmit={handleSubmit}>
           <input
@@ -84,6 +85,7 @@ export const Login = () => {
             placeholder="Escribe tu email"
             onChange={handleChange}
             value={formInput.email}
+            required
           />
           {errors.email && <h3 className="error-message">{errors.email}</h3>}
 
@@ -93,6 +95,7 @@ export const Login = () => {
             placeholder="Escribe tu contraseña"
             onChange={handleChange}
             value={formInput.password}
+            required
           />
           {errors.password && (
             <h3 className="error-message">{errors.password}</h3>
@@ -102,6 +105,13 @@ export const Login = () => {
             Ingresar
           </button>
         </form>
+        <div className="text-register">
+        <h3>
+          Si aún no tenés cuenta, completá el formulario con tus datos y
+          registrate para continuar!{" "}
+        </h3>
+        </div>
+        <Register />
       </div>
     </>
   );

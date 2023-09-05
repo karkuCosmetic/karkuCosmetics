@@ -30,9 +30,8 @@ const Navbar = () => {
   }, []);
   //si hay token estoy logeado, entonces condiciono la navbar
   const handleLogout = () => {
-    document.cookie =
-    encodeURIComponent("cookieToken") + "=" + "";
-    window.location.reload ();
+    document.cookie = encodeURIComponent("cookieToken") + "=" + "";
+    window.location.reload();
   };
 
   return (
@@ -72,11 +71,11 @@ const Navbar = () => {
               </button>
               {profileMenuOpen && (
                 <ul className="profile-dropdown">
-                  <li>
+                  <li className="profile-links-dropdown">
                     <Link to="/profile">Ir a Perfil</Link>
                   </li>
                   <li>
-                    <a href="#" onClick={handleLogout}>
+                    <a href="#" onClick={handleLogout} >
                       Cerrar Sesión
                     </a>
                   </li>
