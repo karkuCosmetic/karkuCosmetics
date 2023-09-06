@@ -18,6 +18,7 @@ import { ProtectedRouteUser } from "./pages/ProtectedRoutes/ProtectedRouteUser";
 import { Contact } from "./pages/Contact/contact";
 import DetailPage from "./pages/DetailPage/detailPage";
 import Store from "./pages/Store/store";
+import FailurePage from "./pages/paymentPages/failurePage";
 
 
 function App() {
@@ -49,6 +50,12 @@ function App() {
         <Route path="/register" Component={Register} />
         <Route path="/confirm/:id" Component={PageConfirm} />
         <Route path="/contact" Component={Contact} />
+        
+        
+        <Route path="/payment/failure" Component={FailurePage} />
+
+
+
 
         <Route element={<ProtectedRouteUser isAllowed={true} />}>
           <Route path="/profile" Component={Profile} />

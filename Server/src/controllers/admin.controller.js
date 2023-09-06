@@ -61,9 +61,9 @@ export const updateAdminById = async (req, res) => {
     res.status(400).json(formatError(error.message));
   }
 };
+
 export const updateAdminsEmail = async (req, res) => {
   try {
-
     let admin = await Admin.updateMany(
       {},
       { $push: { Notifications: req.body } }

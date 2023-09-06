@@ -30,9 +30,9 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  state:{
-    type:Boolean,
-    default:true
+  state: {
+    type: Boolean,
+    default: true,
   },
   cellphone: {
     type: String,
@@ -57,7 +57,11 @@ const userSchema = new mongoose.Schema({
   },
   admission: {
     type: Date,
-},
+  },
+  buys: {
+    type: Array,
+    default: [],
+  },
 });
 
 userSchema.pre("save", async function (next) {

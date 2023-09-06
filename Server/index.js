@@ -6,6 +6,7 @@ import userRouter from "./src/routes/user.routes.js";
 import authRouter from "./src/routes/auth.routes.js";
 import AdminRouter from "./src/routes/admin.routes.js";
 import emailRouter from "./src/routes/mail.routes.js";
+import paymentRoute from "./src/routes/payment.routes.js";
 import cors from "cors";
 
 import "./src/dataBase/connectDB.js";
@@ -36,6 +37,7 @@ app.use("/admin", AdminRouter);
 
 app.use("/products",productRoute)
 
+app.use("/payment", paymentRoute)
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

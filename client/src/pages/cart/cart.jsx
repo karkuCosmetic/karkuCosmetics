@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Navbar from "../../components/NavBar/navbar";
 import "./cart.css";
+import { Payment } from "../../functions/payment";
 
 export const Cart = () => {
   const [cart, SetCart] = useState(
@@ -31,9 +32,15 @@ export const Cart = () => {
     return total;
   };
 
+const handlePayment=()=>{
+    Payment(cart)
+}
+
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
+
+
 
   return (
     <>
@@ -45,7 +52,7 @@ export const Cart = () => {
             {cart.map((item, index) => (
               <div key={index} className="cart-item">
                 <div className="product-info">
-                  <img src={item.product.image} alt={item.product.title} />
+                  <img src={item.product.image[0]} alt={item.product.title} />
                   <div>
                     <p>{item.product.title}</p>
                     <button
@@ -84,7 +91,7 @@ export const Cart = () => {
           <p className="total-amount">${calculateTotal().toFixed(2)}</p>
           <button
             className="checkout-button"
-            onClick={() => (window.location.href = "URL_DE_MERCADO-PAGO")}
+            onClick={handlePayment}
           >
             Ir a Pagar
           </button>
