@@ -9,6 +9,7 @@ import { getProductDetail } from "../../functions/fetchingProducts";
 import { GetDecodedCookie } from "../../utils/DecodedCookie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import Footer from "../../components/Footer/footer";
 
 const Store = () => {
   const [dataProducts, SetDataProducts] = useState([]);
@@ -219,6 +220,7 @@ const Store = () => {
           </button>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

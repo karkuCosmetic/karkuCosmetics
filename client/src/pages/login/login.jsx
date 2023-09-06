@@ -104,6 +104,7 @@ export const Login = () => {
           <button type="submit" disabled={!canSubmit}>
             Ingresar
           </button>
+          <p>Olvidé mi contraseña</p>
         </form>
         <div className="text-register">
         <h3>
