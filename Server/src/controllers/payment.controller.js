@@ -8,28 +8,29 @@ import { Admin } from "../models/admin.js";
 export const createOrder = async (req, res) => {
   try {
     const data = req.body.carrito;
+    
     mercadopago.configure({
       access_token: process.env.ACCESS_TOKEN,
     });
     const items = data.map((producto) => {
       return {
-        title: producto.title,
-        quantity:producto.quantity,
+        title: producto.product.title,
+        quantity: producto.quantity,
         currency_id: "ARS",
         unit_price: producto.product.price,
-        description: producto.description,
-       picture_url: producto.image,
+        description: producto.product.description,
+        picture_url: producto.product.image[0],
       };
     });
-
+  
     var preference = {
       items: items,
       back_urls: {
-        success: "http://localhost:3000/",
-        failure: "http://localhost:3000/payment/failure",
-        pending: "http://localhost:3000/payment/pending",
+        success: "http://localhost:3000/store",
+        failure: "http://localhost:3000/cart",
+        pending: "http://localhost:3000/store",
       },
-      notification_url: "https://24a5-190-19-114-39.ngrok.io/payment/webhook",
+      notification_url: "https://c74e-190-19-114-39.ngrok.io/payment/webhook",
     };
 
     const result = await mercadopago.preferences.create(preference);
@@ -88,7 +89,6 @@ export const reciveWebhook = async (req, res) => {
         entrega: "pendiente",
         fecha: currentDate,
       };
- 
 
       if (data) {
         const query = { email: informationPayment.payer.email };
@@ -96,14 +96,15 @@ export const reciveWebhook = async (req, res) => {
         await User.findOneAndUpdate(
           query,
           {
-            $push: { buys: informationPayment },
+            $push: { buys: informationPayment }, //Agrega la compra al user
           },
           { new: true }
         );
 
-        for (const item of informationPayment.itemsComprados) {
+        for (const item of informationPayment.itemsComprados) { //Baja el stock de los productos comprados
+
           await Product.findOneAndUpdate(
-            { name: item.title },
+            { title: item.title },
             {
               $inc: { stock: -Number(item.quantity) },
             },
@@ -111,14 +112,8 @@ export const reciveWebhook = async (req, res) => {
           );
         }
 
-        let admin = await Admin.updateMany(
-          {},
-          { $push: { buys: req.body } }
-        );
-        res.status(200).json({ admin });
-
+        await Admin.updateMany({}, { $push: { orders: informationPayment } }); // A todos los admins se le agrega la compra
       }
-
 
       res.sendStatus(200);
     }
