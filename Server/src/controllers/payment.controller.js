@@ -8,7 +8,7 @@ import { Admin } from "../models/admin.js";
 export const createOrder = async (req, res) => {
   try {
     const data = req.body.carrito;
-    
+
     mercadopago.configure({
       access_token: process.env.ACCESS_TOKEN,
     });
@@ -18,11 +18,10 @@ export const createOrder = async (req, res) => {
         quantity: producto.quantity,
         currency_id: "ARS",
         unit_price: producto.product.price,
-        description: producto.product.description,
         picture_url: producto.product.image[0],
       };
     });
-  
+
     var preference = {
       items: items,
       back_urls: {
@@ -30,7 +29,7 @@ export const createOrder = async (req, res) => {
         failure: "http://localhost:3000/cart",
         pending: "http://localhost:3000/store",
       },
-      notification_url: "https://c74e-190-19-114-39.ngrok.io/payment/webhook",
+      notification_url: "https://7a31-190-19-114-39.ngrok.io/payment/webhook",
     };
 
     const result = await mercadopago.preferences.create(preference);
@@ -92,7 +91,7 @@ export const reciveWebhook = async (req, res) => {
 
       if (data) {
         const query = { email: informationPayment.payer.email };
-        console.log(informationPayment);
+       
         await User.findOneAndUpdate(
           query,
           {
@@ -101,7 +100,8 @@ export const reciveWebhook = async (req, res) => {
           { new: true }
         );
 
-        for (const item of informationPayment.itemsComprados) { //Baja el stock de los productos comprados
+        for (const item of informationPayment.itemsComprados) {
+          //Baja el stock de los productos comprados
 
           await Product.findOneAndUpdate(
             { title: item.title },
@@ -113,8 +113,8 @@ export const reciveWebhook = async (req, res) => {
         }
 
         await Admin.updateMany({}, { $push: { orders: informationPayment } }); // A todos los admins se le agrega la compra
+        Storage.clear();
       }
-
       res.sendStatus(200);
     }
   } catch (error) {

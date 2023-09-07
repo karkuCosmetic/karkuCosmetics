@@ -61,13 +61,18 @@ export const Login = () => {
 
     if (validateForm()) {
       const credential = await postlogin(formInput);
-      setStatus(credential.status);
+      if(credential){
+        setStatus(credential.status);
+      }
     }
   };
 
   const navigate = useNavigate();
   if (status === 200) {
+
     navigate("/");
+  }else{
+    console.log("error de session");
   } // Si se logueó, ingresa
 
   return (
