@@ -47,7 +47,6 @@ function App() {
         <Route path="/login" Component={Login} />
         <Route path="/confirm/:id" Component={PageConfirm} />
         <Route path="/contact" Component={Contact} />
-        <Route path="/payment/failure" Component={FailurePage} />
 
         <Route element={<ProtectedRouteUser isAllowed={true} />}>
           <Route path="/profile" Component={Profile} />
