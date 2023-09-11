@@ -4,7 +4,7 @@ import { postlogin } from "../../functions/Auth";
 import "./login.css";
 import { Link } from "react-router-dom";
 
-const Login = () => {
+const Login = ({ formPassword, setFormPassword }) => {
   const [status, setStatus] = useState("");
   const [formInput, setFormInput] = useState({
     email: "",
@@ -107,9 +107,9 @@ const Login = () => {
             Ingresar
           </button>
           <p>
-            Si olvidaste tu contraseña 
-            <Link to="/forgot-password">haz click aquí</Link>
+            Si olvidaste tu contraseña{" "}
           </p>
+            <p onClick={() => setFormPassword(!formPassword)}>Ház click aquí</p>
         </form>
         <div className="text-register">
           <h3>

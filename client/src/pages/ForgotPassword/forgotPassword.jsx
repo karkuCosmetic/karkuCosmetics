@@ -20,7 +20,7 @@ export const Register = () => {
       <div className="forgot-container">
         <div className="forgot-text">
           <h3>
-            Ingresa el mail con el que te registraste para generar tu nueva
+            Ingresa el mail con el que te registraste para establecer tu nueva
             contraseña
           </h3>
         </div>
