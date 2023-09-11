@@ -3,7 +3,10 @@ import "./home.css";
 import Navbar from "../../components/NavBar/navbar";
 import Footer from "../../components/Footer/footer";
 
+
 const Home = () => {
+
+
   return (
     <div className="home">
       <Navbar />
