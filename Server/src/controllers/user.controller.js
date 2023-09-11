@@ -62,6 +62,24 @@ export const updateUser = async (req, res) => {
     res.status(400).json(formatError(error.message));
   }
 };
+export const confirmEmail = async (req, res) => {
+  const { id } = req.params;
+  const { value } = req.body;
+
+  try {
+    let user = await User.findByIdAndUpdate(
+      id,
+      {
+        verify: value,
+      },
+      { new: true }
+    ).select("-password");
+
+    return res.status(200).json({ user });
+  } catch (error) {
+    res.status(400).json(formatError(error.message));
+  }
+};
 
 export const deleteUser = async (req, res) => {
   try {
