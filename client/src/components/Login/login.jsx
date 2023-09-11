@@ -109,7 +109,7 @@ const Login = ({setFormPassword}) => {
           </button>
           <p>
             Si olvidaste tu contraseña{' '}
-            <span onClick={() => setFormPassword (true)}>Ház click aquí</span>
+            <span onClick={() => setFormPassword (true)}>ház click aquí</span>
           </p>
         </form>
         <div className="text-register">

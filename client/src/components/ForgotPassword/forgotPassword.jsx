@@ -1,16 +1,18 @@
-import React from 'react';
-import {useState} from 'react';
-import {postRegister} from '../../functions/Auth';
-import './forgotPassword.css';
+import React from "react";
+import { useState } from "react";
+import { postRegister } from "../../functions/Auth";
+import "./forgotPassword.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
-export const ForgotPassword = ({setFormPassword}) => {
-  const [formInput, setFormInput] = useState ({
-    email: '',
+export const ForgotPassword = ({ setFormPassword }) => {
+  const [formInput, setFormInput] = useState({
+    email: "",
   });
 
-  const handleSubmit = e => {
-    e.preventDefault ();
-    postRegister (formInput);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    postRegister(formInput);
   };
 
   return (
@@ -29,11 +31,15 @@ export const ForgotPassword = ({setFormPassword}) => {
             placeholder="Escribe tu email"
             value={formInput.email}
             required
-            onChange={e => setFormInput ({email: e.target.value})}
+            onChange={(e) => setFormInput({ email: e.target.value })}
           />
 
           <button type="submit">Enviar</button>
-          <p onClick={() => setFormPassword (false)}>iniciar sesion</p>
+          <div className="go-back-login">
+            <p onClick={() => setFormPassword(false)}>
+              <FontAwesomeIcon icon={faArrowLeft} /> Atrás
+            </p>
+          </div>
         </form>
       </div>
     </div>
