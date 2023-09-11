@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { postlogin } from "../../functions/Auth";
 import "./login.css";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [status, setStatus] = useState("");
@@ -105,7 +106,10 @@ const Login = () => {
           <button type="submit" disabled={!canSubmit}>
             Ingresar
           </button>
-          <p>Olvidé mi contraseña</p>
+          <p>
+            Si olvidaste tu contraseña 
+            <Link to="/forgot-password">haz click aquí</Link>
+          </p>
         </form>
         <div className="text-register">
           <h3>
