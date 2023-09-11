@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../../components/NavBar/navbar";
 import { postlogin } from "../../functions/Auth";
 import "./login.css";
-import Register from "../Register/register";
 
 const Login = () => {
   const [status, setStatus] = useState("");
@@ -76,7 +74,6 @@ const Login = () => {
 
   return (
     <>
-      <Navbar />
       <div className="login-container">
         <div className="login-hello">
           <h1>HOLA!</h1>
@@ -116,7 +113,6 @@ const Login = () => {
             registrate para continuar!{" "}
           </h3>
         </div>
-        <Register />
       </div>
     </>
   );

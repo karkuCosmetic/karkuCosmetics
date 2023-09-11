@@ -12,7 +12,6 @@ const PageConfirm = () => {
               Confirma haciendo click en el siguiente botón
             </h2>
           </div>
-
           <button className="confirm-button">Continuar</button>
         </div>
       </div>
