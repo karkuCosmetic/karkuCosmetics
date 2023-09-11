@@ -37,3 +37,11 @@ export const ConfirmEmail = async (uid, value) => {
     return [];
   }
 };
+
+export const UpdatePassword=async(value)=>{//value puede recibir un email o password
+  try {
+    await axios.post(`http://localhost:3001/user/updatepassword`,value)
+  } catch (error) {
+    
+  }
+}

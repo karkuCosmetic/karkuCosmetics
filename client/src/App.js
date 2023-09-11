@@ -46,7 +46,7 @@ function App() {
         <Route path="/login" Component={LoginPage} />
         <Route path="/confirm/:id" Component={PageConfirm} />
         <Route path="/contact" Component={Contact} />
-        <Route path="/new-password" Component={NewPasswordPage} />
+        <Route path="/new-password/:token" Component={NewPasswordPage} />
 
         <Route element={<ProtectedRouteUser isAllowed={true} />}>
           <Route path="/profile" Component={Profile} />

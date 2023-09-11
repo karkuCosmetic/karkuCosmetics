@@ -1,44 +1,53 @@
-import React, { useState } from "react";
-import { postRegister } from "../../functions/Auth";
-import "./newPassword.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import React, {useState} from 'react';
+import {postRegister} from '../../functions/Auth';
+import './newPassword.css';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
+import {useNavigate, useParams} from 'react-router-dom';
+import {UpdatePassword} from '../../functions/fetchingUsers';
 
 export const NewPassword = () => {
-  const [formInput, setFormInput] = useState({
-    password: "",
-    confirmPassword: "",
+  let {token} = useParams ();
+  const navigate = useNavigate ();
+  const [formInput, setFormInput] = useState ({
+    password: '',
+    confirmPassword: '',
   });
 
-  const [passwordMatch, setPasswordMatch] = useState(true);
-  const [showPassword, setShowPassword] = useState({
+  const [passwordMatch, setPasswordMatch] = useState (true);
+  const [showPassword, setShowPassword] = useState ({
     password: false,
     confirmPassword: false,
   });
 
-  const handleChange = (event) => {
+  const handleChange = event => {
     const property = event.target.name;
     const value = event.target.value;
-    setFormInput({ ...formInput, [property]: value });
+    setFormInput ({...formInput, [property]: value});
   };
 
-  const togglePasswordVisibility = (field) => {
-    setShowPassword({
+  const togglePasswordVisibility = field => {
+    setShowPassword ({
       ...showPassword,
       [field]: !showPassword[field],
     });
   };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
+ 
+  const handleSubmit = e => {
+    e.preventDefault ();
 
     if (
       formInput.password.length >= 8 &&
       formInput.password === formInput.confirmPassword
     ) {
-      postRegister(formInput);
+      let value = {
+        password: formInput.password,
+        token,
+      };
+      UpdatePassword (value);
+      navigate ('/login');
     } else {
-      setPasswordMatch(false);
+      setPasswordMatch (false);
     }
   };
 
@@ -49,11 +58,9 @@ export const NewPassword = () => {
         <div className="password-input">
           <div className="password-field-container">
             <input
-              type={showPassword.password ? "text" : "password"}
+              type={showPassword.password ? 'text' : 'password'}
               name="password"
-              placeholder={`Escribe una contraseña (mínimo 8 caracteres) ${
-                showPassword.password ? "(visible)" : ""
-              }`}
+              placeholder={`Escribe una contraseña (mínimo 8 caracteres) ${showPassword.password ? '(visible)' : ''}`}
               onChange={handleChange}
               value={formInput.password}
               required
@@ -61,11 +68,11 @@ export const NewPassword = () => {
             />
             <span
               className="password-toggle-icon"
-              onClick={() => togglePasswordVisibility("password")}
+              onClick={() => togglePasswordVisibility ('password')}
             >
               <FontAwesomeIcon
                 icon={showPassword.password ? faEyeSlash : faEye}
-                className={`eye-icon ${showPassword.password ? "slash" : ""}`}
+                className={`eye-icon ${showPassword.password ? 'slash' : ''}`}
               />
             </span>
           </div>
@@ -73,11 +80,9 @@ export const NewPassword = () => {
         <div className="password-input">
           <div className="password-field-container">
             <input
-              type={showPassword.confirmPassword ? "text" : "password"}
+              type={showPassword.confirmPassword ? 'text' : 'password'}
               name="confirmPassword"
-              placeholder={`Confirma la contraseña ${
-                showPassword.confirmPassword ? "(visible)" : ""
-              }`}
+              placeholder={`Confirma la contraseña ${showPassword.confirmPassword ? '(visible)' : ''}`}
               onChange={handleChange}
               value={formInput.confirmPassword}
               required
@@ -85,23 +90,20 @@ export const NewPassword = () => {
             />
             <span
               className="password-toggle-icon"
-              onClick={() => togglePasswordVisibility("confirmPassword")}
+              onClick={() => togglePasswordVisibility ('confirmPassword')}
             >
               <FontAwesomeIcon
                 icon={showPassword.confirmPassword ? faEyeSlash : faEye}
-                className={`eye-icon ${
-                  showPassword.confirmPassword ? "slash" : ""
-                }`}
+                className={`eye-icon ${showPassword.confirmPassword ? 'slash' : ''}`}
               />
             </span>
           </div>
         </div>
-        {!passwordMatch && (
+        {!passwordMatch &&
           <p className="error-message-forgot">
             Las contraseñas no coinciden o no cumplen con el requisito mínimo de
             8 caracteres.
-          </p>
-        )}
+          </p>}
         <button type="submit">Confirmar</button>
       </form>
     </div>

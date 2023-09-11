@@ -1,5 +1,8 @@
 import { formatError } from "../utils/formatError.js";
 import { User } from "../models/user.js";
+import { sendNewPassword } from "../helpers/sendNewPassword.js";
+import bcryptjs from "bcryptjs";
+import { DecodedToken } from "../utils/DecodedToken.js";
 
 export const getAllUser = async (req, res) => {
   try {
@@ -62,6 +65,23 @@ export const updateUser = async (req, res) => {
     res.status(400).json(formatError(error.message));
   }
 };
+
+export const deleteUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const user = await User.findByIdAndUpdate(
+      id,
+      { state: false },
+      { new: true }
+    ).select("-password");
+
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(400).json(formatError(error.message));
+  }
+};
+
 export const confirmEmail = async (req, res) => {
   const { id } = req.params;
   const { value } = req.body;
@@ -81,17 +101,29 @@ export const confirmEmail = async (req, res) => {
   }
 };
 
-export const deleteUser = async (req, res) => {
+export const UpdatePassword = async (req, res) => {
+  const { email, password, token } = req.body;
+
   try {
-    const { id } = req.params;
+    if (email) {
+      let user = await User.findOne({ email });
+      if (user) {
+        sendNewPassword(email);
+      }
+    } else if (password && token) {
+      const { value } = DecodedToken(token);//devolveria un email
 
-    const user = await User.findByIdAndUpdate(
-      id,
-      { state: false },
-      { new: true }
-    ).select("-password");
+      if (value) {
+        const salt = await bcryptjs.genSalt(10);
+        let passwordHash = await bcryptjs.hash(password.toString(), salt);//hashea la password enviada
 
-    res.status(200).json(user);
+        await User.findOneAndUpdate(
+          { email: value },
+          { $set: { password: passwordHash } } //la actualiza en la base
+        );
+      }
+    }
+    return res.status(200).json("password update");
   } catch (error) {
     res.status(400).json(formatError(error.message));
   }
