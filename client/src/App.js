@@ -2,8 +2,7 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/home";
 import Profile from "./pages/Profile/profile";
-import Login from "./pages/Login/login";
-import Register from "./pages/Register/register";
+import Login from "../src/components/Login/login";
 import Cart from "./pages/Cart/cart";
 import Buys from "./pages/Buys/buys";
 
@@ -18,7 +17,6 @@ import { ProtectedRouteUser } from "./pages/ProtectedRoutes/ProtectedRouteUser";
 import { Contact } from "./pages/Contact/contact";
 import DetailPage from "./pages/DetailPage/detailPage";
 import Store from "./pages/Store/store";
-
 
 
 function App() {
@@ -47,15 +45,9 @@ function App() {
         <Route path="/store" Component={Store} />
         <Route path="/product/:id" Component={DetailPage} />
         <Route path="/login" Component={Login} />
-        <Route path="/register" Component={Register} />
         <Route path="/confirm/:id" Component={PageConfirm} />
         <Route path="/contact" Component={Contact} />
-        
-        
         <Route path="/payment/failure" Component={FailurePage} />
-
-
-
 
         <Route element={<ProtectedRouteUser isAllowed={true} />}>
           <Route path="/profile" Component={Profile} />
