@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom';
 import {postlogin} from '../../functions/Auth';
 import './login.css';
 
-const Login = ({setFormPassword}) => {
+const Login = ({formPassword, setFormPassword}) => {
   const [status, setStatus] = useState ('');
   const [formInput, setFormInput] = useState ({
     email: '',
@@ -69,11 +69,16 @@ const Login = ({setFormPassword}) => {
   };
 
   const navigate = useNavigate ();
-  if (status === 200) {
-    navigate ('/');
-  } else {
-    console.log ('error de session');
-  } // Si se logueó, ingresa
+  useEffect (
+    () => {
+      if (status === 200) {
+        navigate ('/');
+      } else {
+        console.log ('error de session');
+      } // Si se logueó, ingresa
+    },
+    [status]
+  );
 
   return (
     <div>
@@ -109,7 +114,9 @@ const Login = ({setFormPassword}) => {
           </button>
           <p>
             Si olvidaste tu contraseña{' '}
-            <span onClick={() => setFormPassword (true)}>ház click aquí</span>
+            <span onClick={() => setFormPassword (!formPassword)}>
+              ház click aquí
+            </span>
           </p>
         </form>
         <div className="text-register">

@@ -26,10 +26,11 @@ const Profile = () => {
   ];
 
   const token = GetDecodedCookie ('cookieToken');
+
   useEffect (() => {
     if (token) {
-      let {uid} = DecodedToken (token);
-      callUserDetail (uid);     
+      let {value} = DecodedToken (token);
+      callUserDetail (value);     
     }
   }, [token]);
 
@@ -53,7 +54,7 @@ const Profile = () => {
   const handleSave = () => {
     setEditing (false);
     PutUser (profile.uid, dataUpdate, token);
-    window.location.reload ();
+    // window.location.reload ();
   };
   const handleChangeImage = el => {
     setDataUpdate ({...dataUpdate, image: el});

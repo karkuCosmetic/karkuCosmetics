@@ -25,7 +25,7 @@ const _path = path.join(__dirname, "..", "emails");
 
 export const sendConfirmationEmail = async (token) => {
   const decoded = verify(token, process.env.TOKEN_SECRET); //extrae del token
-  let id = decoded.uid;
+  let id = decoded.value;
 
   let user = await User.findById(id, { password: 0 });
 

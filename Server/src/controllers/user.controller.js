@@ -24,6 +24,7 @@ export const getUserById = async (req, res) => {
 };
 
 export const updateUser = async (req, res) => {
+  console.log(req.body);
   const { id } = req.params;
   const {
     name,

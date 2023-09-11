@@ -15,6 +15,7 @@ export const getUserDetail = async (uid) => {
 };
 
 export const PutUser = async (uid, value, token) => {
+  console.log(value);
   try {
     let response;
     response = await axios.put(`http://localhost:3001/user/${uid}`, value, {
@@ -30,7 +31,7 @@ export const PutUser = async (uid, value, token) => {
 export const ConfirmEmail = async (uid, value) => {
   try {
     let response;
-    response = await axios.put(`http://localhost:3001/user/${uid}`, {value});
+    response = await axios.put(`http://localhost:3001/user/confirmemail/${uid}`, {value});
     return response.data;
   } catch (error) {
     console.log(error);

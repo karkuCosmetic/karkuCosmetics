@@ -44,7 +44,7 @@ function App() {
         <Route path="/store" Component={Store} />
         <Route path="/product/:id" Component={DetailPage} />
         <Route path="/login" Component={LoginPage} />
-        <Route path="/confirm/:id" Component={PageConfirm} />
+        <Route path="/confirm/:token" Component={PageConfirm} />
         <Route path="/contact" Component={Contact} />
         <Route path="/new-password/:token" Component={NewPasswordPage} />
 

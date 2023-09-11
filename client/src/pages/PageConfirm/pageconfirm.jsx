@@ -2,24 +2,27 @@ import React, {useEffect, useState} from 'react';
 import './pageconfirm.css';
 import Footer from '../../components/Footer/footer';
 import {useParams} from 'react-router-dom';
-import { DecodedToken } from '../../utils/DecodedToken';
-import { ConfirmEmail } from '../../functions/fetchingUsers';
+import {DecodedToken} from '../../utils/DecodedToken';
+import {ConfirmEmail} from '../../functions/fetchingUsers';
 
 const PageConfirm = () => {
-  const {id} = useParams ();
-  let token = id;
-  
-const [uid,setUid]=useState("")
+  const {token} = useParams ();
 
-  useEffect (() => {
-    let {uid} = DecodedToken (token);
-   setUid(uid)
-  }, [id]);
-  
-  const handlerUpdate=()=>{
-    ConfirmEmail(uid,true,id)
+  const [uid, setUid] = useState ('');
+
+  useEffect (
+    () => {
+      let {value} = DecodedToken (token);
+      setUid (value);
+    },
+    [token]
+  );
+
+  const handlerUpdate = () => {
+    console.log (uid);
+    ConfirmEmail(uid,true)
     window.location.href="/login";
-  }
+  };
 
   return (
     <div>
@@ -30,7 +33,9 @@ const [uid,setUid]=useState("")
               Confirma haciendo click en el siguiente botón
             </h2>
           </div>
-          <button className="confirm-button" onClick={handlerUpdate}>Continuar</button>
+          <button className="confirm-button" onClick={handlerUpdate}>
+            Continuar
+          </button>
         </div>
       </div>
       <Footer />
