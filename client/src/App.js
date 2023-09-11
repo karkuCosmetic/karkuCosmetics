@@ -16,7 +16,6 @@ import { ProtectedRouteUser } from "./pages/ProtectedRoutes/ProtectedRouteUser";
 import { Contact } from "./pages/Contact/contact";
 import DetailPage from "./pages/DetailPage/detailPage";
 import Store from "./pages/Store/store";
-// import ForgotPassword from "./pages/ForgotPassword/forgotPassword";
 
 function App() {
   const [rol, SetRol] = useState();
@@ -46,7 +45,6 @@ function App() {
         <Route path="/login" Component={LoginPage} />
         <Route path="/confirm/:id" Component={PageConfirm} />
         <Route path="/contact" Component={Contact} />
-        {/* <Route path="/forgot-password" element={<ForgotPassword />} /> */}
 
         <Route element={<ProtectedRouteUser isAllowed={true} />}>
           <Route path="/profile" Component={Profile} />

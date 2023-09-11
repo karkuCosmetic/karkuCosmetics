@@ -1,21 +1,20 @@
-import React from "react";
-import { useState } from "react";
-import { postRegister } from "../../functions/Auth";
-import Navbar from "../NavBar/navbar";
-import "./forgotPassword.css";
+import React from 'react';
+import {useState} from 'react';
+import {postRegister} from '../../functions/Auth';
+import './forgotPassword.css';
 
-export const ForgotPassword = ({setFormPassword }) => {
-  const [formInput, setFormInput] = useState({
-    email: "",
+export const ForgotPassword = ({setFormPassword}) => {
+  const [formInput, setFormInput] = useState ({
+    email: '',
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    postRegister(formInput);
+  const handleSubmit = e => {
+    e.preventDefault ();
+    postRegister (formInput);
   };
 
   return (
-    <>
+    <div>
       <div className="forgot-container">
         <div className="forgot-text">
           <h3>
@@ -30,14 +29,13 @@ export const ForgotPassword = ({setFormPassword }) => {
             placeholder="Escribe tu email"
             value={formInput.email}
             required
-            onChange={(e) => setFormInput({ email: e.target.value })}
+            onChange={e => setFormInput ({email: e.target.value})}
           />
 
           <button type="submit">Enviar</button>
-          <p onClick={()=>setFormPassword(false)}>iniciar sesion</p>
+          <p onClick={() => setFormPassword (false)}>iniciar sesion</p>
         </form>
       </div>
-    </>
+    </div>
   );
 };
-
