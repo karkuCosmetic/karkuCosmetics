@@ -1,10 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import { postRegister } from "../../functions/Auth";
-import Navbar from "../../components/NavBar/navbar";
+import Navbar from "../NavBar/navbar";
 import "./forgotPassword.css";
 
-export const Register = () => {
+export const ForgotPassword = ({setFormPassword }) => {
   const [formInput, setFormInput] = useState({
     email: "",
   });
@@ -16,7 +16,6 @@ export const Register = () => {
 
   return (
     <>
-      <Navbar />
       <div className="forgot-container">
         <div className="forgot-text">
           <h3>
@@ -35,10 +34,10 @@ export const Register = () => {
           />
 
           <button type="submit">Enviar</button>
+          <p onClick={()=>setFormPassword(false)}>iniciar sesion</p>
         </form>
       </div>
     </>
   );
 };
 
-export default Register;
