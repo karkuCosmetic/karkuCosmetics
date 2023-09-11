@@ -2,12 +2,11 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/home";
 import Profile from "./pages/Profile/profile";
-import Login from "../src/components/Login/login";
 import Cart from "./pages/Cart/cart";
 import Buys from "./pages/Buys/buys";
-
 import HomeAdmin from "./pages/HomeAdmin/homeAdmin";
 import PageConfirm from "./pages/PageConfirm/pageconfirm";
+import LoginPage from "./pages/LoginPage/loginPage";
 import { ProtectedRouteAdmin } from "./pages/ProtectedRoutes/ProtectedRouteAdmin";
 import { GetDecodedCookie } from "./utils/DecodedCookie";
 import { DecodedToken } from "./utils/DecodedToken";
@@ -17,7 +16,6 @@ import { ProtectedRouteUser } from "./pages/ProtectedRoutes/ProtectedRouteUser";
 import { Contact } from "./pages/Contact/contact";
 import DetailPage from "./pages/DetailPage/detailPage";
 import Store from "./pages/Store/store";
-import FailurePage from "./pages/paymentPages/failurePage";
 
 function App() {
   const [rol, SetRol] = useState();
@@ -44,7 +42,7 @@ function App() {
         <Route path="/" Component={Home} />
         <Route path="/store" Component={Store} />
         <Route path="/product/:id" Component={DetailPage} />
-        <Route path="/login" Component={Login} />
+        <Route path="/login" Component={LoginPage} />
         <Route path="/confirm/:id" Component={PageConfirm} />
         <Route path="/contact" Component={Contact} />
 
