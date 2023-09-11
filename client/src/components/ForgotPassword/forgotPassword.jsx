@@ -1,6 +1,5 @@
 import React from 'react';
 import {useState} from 'react';
-
 import './forgotPassword.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faArrowLeft} from '@fortawesome/free-solid-svg-icons';
