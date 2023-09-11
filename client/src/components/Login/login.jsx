@@ -5,7 +5,7 @@ import { postlogin } from "../../functions/Auth";
 import "./login.css";
 import Register from "../Register/register";
 
-export const Login = () => {
+const Login = () => {
   const [status, setStatus] = useState("");
   const [formInput, setFormInput] = useState({
     email: "",
@@ -61,7 +61,7 @@ export const Login = () => {
 
     if (validateForm()) {
       const credential = await postlogin(formInput);
-      if(credential){
+      if (credential) {
         setStatus(credential.status);
       }
     }
@@ -69,9 +69,8 @@ export const Login = () => {
 
   const navigate = useNavigate();
   if (status === 200) {
-
     navigate("/");
-  }else{
+  } else {
     console.log("error de session");
   } // Si se logueó, ingresa
 
@@ -112,10 +111,10 @@ export const Login = () => {
           <p>Olvidé mi contraseña</p>
         </form>
         <div className="text-register">
-        <h3>
-          Si aún no tenés cuenta, completá el formulario con tus datos y
-          registrate para continuar!{" "}
-        </h3>
+          <h3>
+            Si aún no tenés cuenta, completá el formulario con tus datos y
+            registrate para continuar!{" "}
+          </h3>
         </div>
         <Register />
       </div>
