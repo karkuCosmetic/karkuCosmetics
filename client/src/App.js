@@ -18,7 +18,7 @@ import { ProtectedRouteUser } from "./pages/ProtectedRoutes/ProtectedRouteUser";
 import { Contact } from "./pages/Contact/contact";
 import DetailPage from "./pages/DetailPage/detailPage";
 import Store from "./pages/Store/store";
-import FailurePage from "./pages/paymentPages/failurePage";
+
 
 
 function App() {
