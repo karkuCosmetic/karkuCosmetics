@@ -162,11 +162,6 @@
   border-radius: 10px;
 }
 
-/* @media (max-width: 400) {
-  .profile-card input[type="text"] {
-    width: 80%;
-  }
-} */
 
 .input-edit input {
   display: flex;

@@ -63,70 +63,14 @@ const PageConfirm = () => {
   return (
     <>
       <div>
-    
-        <div className="profile-container">
+        <div className="login-container">
           <div className="confirm-hello">
             <h2 className="text-hello">
-              Ahora completa tu perfil con tus datos para poder continuar
+              Confirma haciendo click en el siguiente botón
             </h2>
           </div>
-          <div className="profile-card">
-            {editing === false ? (
-              <div>
-                <img src={profile.image} alt="Avatar" />
-              </div>
-            ) : (
-              <div className="edit-avatar">
-                {imageProfile.map((el, index) => (
-                  <img
-                    key={index}
-                    src={el}
-                    alt="Avatar"
-                    onClick={() => handleChangeImage(el)}
-                    className={el === dataUpdate.image ? "selected-avatar" : ""}
-                  />
-                ))}
-              </div>
-            )}
 
-            {editing ? (
-              <div className="input-edit">
-                <input
-                  type="text"
-                  placeholder="Escribe aquí tu nombre"
-                  value={dataUpdate.name}
-                  name={"name"}
-                  onChange={handleChange}
-                />
-                <input
-                  type="text"
-                  placeholder="Escribe aquí tu apellido"
-                  value={dataUpdate.lastName}
-                  name={"lastName"}
-                  onChange={handleChange}
-                />
-                <input
-                  type="text"
-                  placeholder="Nuevo Número"
-                  value={dataUpdate.cellphone}
-                  name={"cellphone"}
-                  onChange={handleChange}
-                />
-              </div>
-            ) : (
-              <div className="info-user">
-                <h2>
-                  {profile.name} {profile.lastName}
-                </h2>
-                <p>Teléfono: {profile.cellphone}</p>
-                <p>{profile.email}</p>
-              </div>
-            )}
-            <button onClick={() => setEditing(!editing)}>
-              {editing ? "Cancelar" : "Editar"}
-            </button>
-            {editing && <button onClick={handleSave}>Guardar</button>}
-          </div>
+          <button className="confirm-button">Continuar</button>
         </div>
       </div>
       <Footer />
