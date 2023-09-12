@@ -29,8 +29,8 @@ const Profile = () => {
 
   useEffect(() => {
     if (token) {
-      let { uid } = DecodedToken(token);
-      callUserDetail(uid);
+      let {value}  = DecodedToken(token);
+      callUserDetail(value);
     }
   }, [token]);
 
@@ -54,12 +54,12 @@ const Profile = () => {
   const handleSave = () => {
     setEditing(false);
     PutUser(profile.uid, dataUpdate, token);
-    // window.location.reload ();
+    window.location.reload ();
   };
   const handleChangeImage = (el) => {
     setDataUpdate({ ...dataUpdate, image: el });
   };
-  console.log(profile);
+
   return (
     <div>
       <Navbar />
@@ -125,6 +125,7 @@ const Profile = () => {
         <div className="purchase-history-card">
           <h3>Historial de Compras</h3>
         </div>
+        {profile.buys.itemsComprados?
         <ul>
           {profile.buys?.map((el) =>
             el.itemsComprados?.map((item, index) => (
@@ -132,8 +133,10 @@ const Profile = () => {
                 {item.title} - ${item.unit_price} x{item.quantity}
               </li>
             ))
-          )}
+            )}
         </ul>
+        :"loading..."
+          }
       </div>
     </div>
   );

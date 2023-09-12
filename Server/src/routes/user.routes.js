@@ -15,9 +15,9 @@ router.post("/updatepassword", UpdatePassword);
 
 router.get("/", getAllUser);
 router.get("/:id", getUserById);
-router.put("/:id", [verifyToken], updateUser);
 
 router.put("/confirmemail/:id", confirmEmail);
+router.put("/:id",[verifyToken], updateUser);
 
 
 router.delete("/:id", [verifyToken], deleteUser);
