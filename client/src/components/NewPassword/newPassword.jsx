@@ -52,7 +52,7 @@ export const NewPassword = () => {
 
   return (
     <div className="newPassword-container">
-      <h3>Crea tu nueva contraseña </h3>
+      <h3 className='new-password-text'>Crea tu nueva contraseña </h3>
       <form className="newPassword-form" onSubmit={handleSubmit}>
         <div className="password-input">
           <div className="password-field-container">

@@ -120,7 +120,7 @@ const Login = ({formPassword, setFormPassword}) => {
           </p>
         </form>
         <div className="text-register">
-          <h3>
+          <h3 className='text-register-h3'>
             Si aún no tenés cuenta, completá el formulario con tus datos y
             registrate para continuar!{' '}
           </h3>

@@ -3,9 +3,7 @@ import emailjs from "@emailjs/browser";
 import { UpdateAdmin } from "../../functions/FetchAdmin";
 import "./contact.css";
 import Navbar from "../../components/NavBar/navbar";
-
-//no hace falta estar logeado
-// name email phone message
+import Footer from "../../components/Footer/footer";
 
 export const Contact = () => {
   const [dataMensaje, setDataMensaje] = useState({
@@ -21,10 +19,6 @@ export const Contact = () => {
 
     emailjs
       .sendForm(
-        // process.env.SERVICE_ID,
-        // process.env.TEMPLATE_ID,
-        // form.current,
-        // process.env.PUBLIC_KEY
         "service_s836qxd",
         "template_wqs3znu",
         form.current,
@@ -94,6 +88,7 @@ export const Contact = () => {
           </form>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

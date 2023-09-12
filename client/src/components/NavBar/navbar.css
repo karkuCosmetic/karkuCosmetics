@@ -39,6 +39,8 @@
 }
 
 .nav-links a {
+  font-family: "quicksand";
+  font-weight: bold;
   text-decoration: none;
   color: #ffffff;
   transition: color 0.3s ease;
@@ -144,10 +146,6 @@
   .nav-links li {
     margin: 10px 0;
   }
-
-  .profile-dropdown {
-    background-color: red;
-  }
 }
 
 .profile-link {
@@ -187,5 +185,5 @@
 }
 
 .profile-dropdown a:hover {
-  color: #f38f82;
+  color: white;
 }

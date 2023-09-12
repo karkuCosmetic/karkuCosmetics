@@ -4,6 +4,7 @@ import { DecodedToken } from "../../utils/DecodedToken";
 import { PutUser, getUserDetail } from "../../functions/fetchingUsers";
 import "./profile.css";
 import Navbar from "../../components/NavBar/navbar";
+import Footer from "../../components/Footer/footer";
 
 const Profile = () => {
   const [profile, setProfile] = useState({});
@@ -29,7 +30,7 @@ const Profile = () => {
 
   useEffect(() => {
     if (token) {
-      let {value}  = DecodedToken(token);
+      let { value } = DecodedToken(token);
       callUserDetail(value);
     }
   }, [token]);
@@ -54,91 +55,97 @@ const Profile = () => {
   const handleSave = () => {
     setEditing(false);
     PutUser(profile.uid, dataUpdate, token);
-    window.location.reload ();
+    window.location.reload();
   };
   const handleChangeImage = (el) => {
     setDataUpdate({ ...dataUpdate, image: el });
   };
 
   return (
-    <div>
-      <Navbar />
-      <div className="profile-container">
-        <div className="profile-card">
-          {editing === false ? (
-            <div>
-              <img src={profile.image} alt="Avatar" />
-            </div>
-          ) : (
-            <div className="edit-avatar">
-              {imageProfile.map((el, index) => (
-                <img
-                  key={index}
-                  src={el}
-                  alt="Avatar"
-                  onClick={() => handleChangeImage(el)}
-                  className={el === dataUpdate.image ? "selected-avatar" : ""}
-                />
-              ))}
-            </div>
-          )}
-
-          {editing ? (
-            <div className="input-edit">
-              <input
-                type="text"
-                placeholder="Escribe aquí tu nombre"
-                value={dataUpdate.name}
-                name={"name"}
-                onChange={handleChange}
-              />
-              <input
-                type="text"
-                placeholder="Escribe aquí tu apellido"
-                value={dataUpdate.lastName}
-                name={"lastName"}
-                onChange={handleChange}
-              />
-              <input
-                type="text"
-                placeholder="Nuevo Número"
-                value={dataUpdate.cellphone}
-                name={"cellphone"}
-                onChange={handleChange}
-              />
-            </div>
-          ) : (
-            <div className="info-user">
-              <h2>
-                {profile.name} {profile.lastName}
-              </h2>
-              <p>Teléfono: {profile.cellphone}</p>
-              <p>E-mail: {profile.email}</p>
-            </div>
-          )}
-          <button onClick={() => setEditing(!editing)}>
-            {editing ? "Cancelar" : "Editar"}
-          </button>
-          {editing && <button onClick={handleSave}>Guardar</button>}
-        </div>
-
-        <div className="purchase-history-card">
-          <h3>Historial de Compras</h3>
-        </div>
-        {profile.buys.itemsComprados?
-        <ul>
-          {profile.buys?.map((el) =>
-            el.itemsComprados?.map((item, index) => (
-              <li key={index}>
-                {item.title} - ${item.unit_price} x{item.quantity}
-              </li>
-            ))
+    <>
+      <div>
+        <Navbar />
+        <div className="profile-container">
+          <div className="profile-card">
+            {editing === false ? (
+              <div>
+                <img src={profile.image} alt="Avatar" />
+              </div>
+            ) : (
+              <div className="edit-avatar">
+                {imageProfile.map((el, index) => (
+                  <img
+                    key={index}
+                    src={el}
+                    alt="Avatar"
+                    onClick={() => handleChangeImage(el)}
+                    className={el === dataUpdate.image ? "selected-avatar" : ""}
+                  />
+                ))}
+              </div>
             )}
-        </ul>
-        :"loading..."
-          }
+
+            {editing ? (
+              <div className="input-edit">
+                <input
+                  type="text"
+                  placeholder="Escribe aquí tu nombre"
+                  value={dataUpdate.name}
+                  name={"name"}
+                  onChange={handleChange}
+                />
+                <input
+                  type="text"
+                  placeholder="Escribe aquí tu apellido"
+                  value={dataUpdate.lastName}
+                  name={"lastName"}
+                  onChange={handleChange}
+                />
+                <input
+                  type="text"
+                  placeholder="Nuevo Número"
+                  value={dataUpdate.cellphone}
+                  name={"cellphone"}
+                  onChange={handleChange}
+                />
+              </div>
+            ) : (
+              <div className="info-user">
+                <h2>
+                  {profile.name} {profile.lastName}
+                </h2>
+                <p>Teléfono: {profile.cellphone}</p>
+                <p>E-mail: {profile.email}</p>
+              </div>
+            )}
+            <button onClick={() => setEditing(!editing)}>
+              {editing ? "Cancelar" : "Editar"}
+            </button>
+            {editing && <button onClick={handleSave}>Guardar</button>}
+          </div>
+
+          <div className="purchase-history-card">
+            <h3 className="store-buys-title">Historial de Compras</h3>
+          </div>
+          {profile.buys ? (
+            <ul>
+              {profile.buys.map((el) =>
+                el.itemsComprados
+                  ? el.itemsComprados.map((item, index) => (
+                      <li key={index}>
+                        {item.title} - ${item.unit_price} x{item.quantity}
+                      </li>
+                    ))
+                  : "No hay elementos comprados"
+              )}
+            </ul>
+          ) : (
+            "loading..."
+          )}
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 
