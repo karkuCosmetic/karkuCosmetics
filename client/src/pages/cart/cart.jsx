@@ -3,8 +3,12 @@ import Navbar from "../../components/NavBar/navbar";
 import "./cart.css";
 import { Payment } from "../../functions/payment";
 import Footer from "../../components/Footer/footer";
+import { GetDecodedCookie } from "../../utils/DecodedCookie";
 
 export const Cart = () => {
+  const token = GetDecodedCookie("cookieToken");
+
+
   const [cart, SetCart] = useState(
     JSON.parse(localStorage.getItem("cart")) || []
   );
@@ -33,7 +37,12 @@ export const Cart = () => {
   };
 
   const handlePayment = () => {
-    Payment(cart);
+    if(token){
+      Payment(cart);
+    }else{
+      console.log("debes loguearte");
+    }
+      
   };
 
   useEffect(() => {

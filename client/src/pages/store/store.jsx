@@ -6,7 +6,6 @@ import Navbar from "../../components/NavBar/navbar";
 import { getProduct } from "../../functions/fetchingProducts";
 import { AddCart } from "../../utils/addCart";
 import { getProductDetail } from "../../functions/fetchingProducts";
-import { GetDecodedCookie } from "../../utils/DecodedCookie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import Footer from "../../components/Footer/footer";
@@ -21,7 +20,6 @@ const Store = () => {
   const [detailProduct, setDetailProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
   const { id } = useParams();
-  const token = GetDecodedCookie("cookieToken");
 
   useEffect(() => {
     CallProducts();
@@ -45,12 +43,10 @@ const Store = () => {
   };
 
   const addToCart = (product) => {
-    if (token) {
+   
       AddCart(product.quantity, product);
       setQuantity(1); // Se reinicia la cantidad a 1
-    } else {
-      console.log("necesitas loguearte");
-    }
+    
   };
 
   const CallProducts = async () => {
