@@ -4,7 +4,7 @@ import Home from "./pages/Home/home";
 import Profile from "./pages/Profile/profile";
 import Cart from "./pages/Cart/cart";
 import Buys from "./pages/Buys/buys";
-import HomeAdmin from "./pages/HomeAdmin/homeAdmin";
+import HomeAdmin from "./pages/Admin/admin";
 import PageConfirm from "./pages/PageConfirm/pageconfirm";
 import LoginPage from "./pages/LoginPage/loginPage";
 import { ProtectedRouteAdmin } from "./pages/ProtectedRoutes/ProtectedRouteAdmin";

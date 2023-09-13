@@ -8,7 +8,6 @@ import { GetDecodedCookie } from "../../utils/DecodedCookie";
 export const Cart = () => {
   const token = GetDecodedCookie("cookieToken");
 
-
   const [cart, SetCart] = useState(
     JSON.parse(localStorage.getItem("cart")) || []
   );
@@ -37,12 +36,11 @@ export const Cart = () => {
   };
 
   const handlePayment = () => {
-    if(token){
+    if (token) {
       Payment(cart);
-    }else{
+    } else {
       console.log("debes loguearte");
     }
-      
   };
 
   useEffect(() => {
@@ -87,7 +85,6 @@ export const Cart = () => {
                   </button>
                 </div>
                 <div className="p-total-price">
-                  <p className="price">${item.product.price}</p>
                   <p className="total">
                     ${(item.product.price * item.quantity).toFixed(2)}
                   </p>
