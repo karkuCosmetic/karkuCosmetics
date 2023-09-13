@@ -55,6 +55,7 @@ export const Contact = () => {
           <form className="contact-form" ref={form} onSubmit={sendEmail}>
             <label>Nombre</label>
             <input
+              className="input-contact"
               type="text"
               name="user_name"
               onChange={handlerChange}
@@ -63,6 +64,7 @@ export const Contact = () => {
             />
             <label>Email</label>
             <input
+             className="input-contact"
               type="email"
               name="user_email"
               onChange={handlerChange}

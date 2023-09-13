@@ -14,6 +14,7 @@
   min-height: 100vh;
   padding-bottom: 5%;
   text-transform: capitalize;
+  font-family: "quicksand";
 }
 
 @media (max-width: 762px) {
@@ -25,8 +26,8 @@
 .sidebar {
   margin-top: 100px;
   width: 15rem;
-  background-color: #7e01d2d1;
-  color: white;
+  background-color: #f8f8f8;
+  color: #f38f82;
   padding: 20px;
   box-sizing: border-box;
   position: fixed;
@@ -43,7 +44,7 @@
 
 .sidebar ul li.active {
   font-weight: bold;
-  color: #e74c3c;
+  color: #7b60c8;
   list-style-type: none;
 }
 
@@ -77,7 +78,7 @@
   width: 21rem;
   height: 35rem;
   border-radius: 10px;
-  background-color: #ffffff;
+  background-color: #f8f8f8;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   text-decoration: none;
   color: #333333;
@@ -113,6 +114,7 @@
 
 .detail-title {
   margin-top: 1rem;
+  text-align: center;
   font-size: 1.5rem;
 }
 
@@ -130,7 +132,6 @@
   align-items: center;
 }
 
-/* CSS */
 .add-to-cart-button-store {
   background: linear-gradient(to bottom right, #7511b8a6, #a143f8b6);
   border: 0;
@@ -138,8 +139,7 @@
   color: #ffffff;
   cursor: pointer;
   display: inline-block;
-  font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial,
-    sans-serif;
+  font-family: "quicksand";
   font-weight: 500;
   outline: transparent;
   padding: 0 1rem;
@@ -161,8 +161,8 @@
 
 .add-to-cart-button-store:not([disabled]):hover {
   box-shadow: 0 0 0.25rem rgba(146, 35, 211, 0.5),
-  -0.125rem -0.125rem 1rem rgba(91, 27, 175, 0.5),
-  0.125rem 0.125rem 1rem rgba(91, 13, 218, 0.5);
+    -0.125rem -0.125rem 1rem rgba(91, 27, 175, 0.5),
+    0.125rem 0.125rem 1rem rgba(91, 13, 218, 0.5);
 }
 
 .detail-dimensions {
@@ -180,26 +180,73 @@
   padding: 10px;
 }
 
+.h3-store {
+  margin-bottom: 1rem;
+}
+
+.price-filter {
+  margin-top: 3rem;
+}
+
+.button-filtrar {
+  background: linear-gradient(to bottom right, #7511b8a6, #a143f8b6);
+  border: 0;
+  border-radius: 10px;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "quicksand";
+  font-weight: 500;
+  outline: transparent;
+  padding: 0 1rem;
+  text-align: center;
+  text-decoration: none;
+  transition: box-shadow 0.2s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  height: 2rem;
+}
+
+.button-filter-store {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button-filtrar:hover {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.render-select {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  font-family: "quicksand";
+}
+
+.hidden-select {
+  padding: 0.5rem;
+  border-radius: 5px;
+  font-family: "quicksand";
+}
+
+select ul li:hover {
+background-color:  #e71111;
+}
+
+
 @media (min-width: 769px) {
   .hidden-large {
     display: none;
   }
+
+  .render-select {
+    display: none;
+  }
 }
 
-.sidebar ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.sidebar ul li {
-  cursor: pointer;
-  margin: 10px;
-}
-
-.sidebar ul li.active {
-  font-weight: bold;
-  color: #0a0a0a;
-}
 
 @media (max-width: 768px) {
   .sidebar {
@@ -217,7 +264,11 @@
     display: none;
   }
 
-  .sidebar ul li.active {
+  .hidden-select {
+    display: block;
+  }
+
+  .product-list {
     display: none;
   }
 }
@@ -225,8 +276,6 @@
 .link {
   color: #7b60c8;
 }
-
-/* Paginado */
 
 .pagination {
   display: flex;
@@ -257,7 +306,6 @@
   color: #fff;
 }
 
-/* Estilos para las flechas */
 .pagination .arrow-button {
   color: #d3599f;
   font-size: 20px;

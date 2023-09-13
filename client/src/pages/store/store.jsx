@@ -8,7 +8,6 @@ import { AddCart } from "../../utils/addCart";
 import { getProductDetail } from "../../functions/fetchingProducts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import Footer from "../../components/Footer/footer";
 
 const Store = () => {
   const [dataProducts, SetDataProducts] = useState([]);
@@ -43,24 +42,28 @@ const Store = () => {
   };
 
   const addToCart = (product) => {
-   
-      AddCart(product.quantity, product);
-      setQuantity(1); // Se reinicia la cantidad a 1
-    
+    AddCart(product.quantity, product);
+    setQuantity(1);
   };
 
   const CallProducts = async () => {
     const data = await getProduct();
-    // Configuro la propiedad 'quantity' para cada producto
+
     const productsWithQuantity = data.map((product) => ({
       ...product,
-      quantity: 1, // se establece la cantidad inicial
+      quantity: 1,
     }));
     SetDataProducts(productsWithQuantity);
   };
 
-  // Filtro por precio
   const handlePriceFilter = () => {
+    const min = parseFloat(minPrice);
+    const max = parseFloat(maxPrice);
+
+    if (min > max) {
+      alert("El precio mínimo no puede ser mayor que el precio máximo");
+      return;
+    }
     const filteredByPrice = dataProducts.filter((product) => {
       const productPrice = product.price;
       return (
@@ -70,25 +73,21 @@ const Store = () => {
     });
 
     setFilteredProducts(filteredByPrice);
-    setCurrentPage(1); // Actualizar productos filtrados
+    setCurrentPage(1);
   };
 
-  // Estado para el filtro
   const [selectedCategory, setSelectedCategory] = useState("Todos");
 
-  // Filtro los productos según categoría seleccionada
   const filteredProductsByCategory =
     selectedCategory === "Todos"
       ? dataProducts
       : dataProducts.filter((product) => product.category === selectedCategory);
 
   useEffect(() => {
-    // Se actualizan productos filtrados también cuando cambie la categoría
     setFilteredProducts(filteredProductsByCategory);
     setCurrentPage(1);
   }, [filteredProductsByCategory, selectedCategory]);
 
-  // Obtengo todas las categorías únicas de los productos
   const TodosCategories = [
     "Todos",
     ...new Set(dataProducts.map((product) => product.category)),
@@ -104,6 +103,22 @@ const Store = () => {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  const renderSelect = () => {
+    return (
+      <select
+        id="product-select"
+        className="hidden-select custom-select"
+        onChange={(e) => setSelectedCategory(e.target.value)}
+      >
+        {TodosCategories.map((category, index) => (
+          <option key={index} value={category}>
+            {category}
+          </option>
+        ))}
+      </select>
+    );
+  };
+
   return (
     <>
       <div className="navbar-store">
@@ -113,6 +128,9 @@ const Store = () => {
         <div className="product-container">
           <div className="sidebar">
             <h2>Productos</h2>
+            <div className="render-select">
+            {renderSelect()}
+            </div>
             <ul>
               {TodosCategories.map((category, index) => (
                 <li
@@ -125,20 +143,26 @@ const Store = () => {
               ))}
             </ul>
             <div className="price-filter">
-              <h3>Rango de Precios</h3>
+              <h3 className="h3-store">Rango de Precios</h3>
               <input
+                className="input-price-store"
                 type="number"
                 placeholder="Precio Mínimo"
                 value={minPrice}
                 onChange={(e) => setMinPrice(e.target.value)}
               />
               <input
+                className="input-price-store"
                 type="number"
                 placeholder="Precio Máximo"
                 value={maxPrice}
                 onChange={(e) => setMaxPrice(e.target.value)}
               />
-              <button onClick={handlePriceFilter}>Filtrar</button>
+              <div className="button-filter-store">
+                <button className="button-filtrar" onClick={handlePriceFilter}>
+                  Filtrar
+                </button>
+              </div>
             </div>
           </div>
           {currentProducts.map((product, index) => (
@@ -216,7 +240,6 @@ const Store = () => {
           </button>
         </div>
       </div>
-      <Footer />
     </>
   );
 };
