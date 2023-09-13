@@ -48,17 +48,20 @@ export const Cart = () => {
           <div className="cart-items">
             {cart.map((item, index) => (
               <div key={index} className="cart-item">
-                <div className="product-info">
-                  <img src={item.product.image[0]} alt={item.product.title} />
-                  <p>{item.product.title}</p>
-
-                  <button
-                    className="remove-button"
-                    onClick={() => handleRemoveItem(index)}
-                  >
-                    Eliminar
-                  </button>
+                <img
+                  className="image-cart"
+                  src={item.product.image[0]}
+                  alt={item.product.title}
+                />
+                <div className="product-info-cart">
+                  <p className="title-cart">{item.product.title}</p>
                 </div>
+                <button
+                  className="remove-button"
+                  onClick={() => handleRemoveItem(index)}
+                >
+                  Eliminar
+                </button>
                 <div className="quantity-control">
                   <button
                     className="quantity-button"
@@ -74,10 +77,12 @@ export const Cart = () => {
                     +
                   </button>
                 </div>
-                <p className="price">${item.product.price}</p>
-                <p className="total">
-                  ${(item.product.price * item.quantity).toFixed(2)}
-                </p>
+                <div className="p-total-price">
+                  <p className="price">${item.product.price}</p>
+                  <p className="total">
+                    ${(item.product.price * item.quantity).toFixed(2)}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
@@ -90,7 +95,7 @@ export const Cart = () => {
           </button>
         </div>
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };

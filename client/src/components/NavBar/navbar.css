@@ -40,7 +40,7 @@
 
 .nav-links a {
   font-family: "quicksand";
-  font-weight: bold;
+  font-weight: 500;
   text-decoration: none;
   color: #ffffff;
   transition: color 0.3s ease;
