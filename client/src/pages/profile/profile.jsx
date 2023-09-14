@@ -5,6 +5,8 @@ import { PutUser, getUserDetail } from "../../functions/fetchingUsers";
 import "./profile.css";
 import Navbar from "../../components/NavBar/navbar";
 import Footer from "../../components/Footer/footer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
 const Profile = () => {
   const [profile, setProfile] = useState({});
@@ -16,6 +18,8 @@ const Profile = () => {
     cellphone: profile.cellphone ? profile.cellphone : "Telefono",
     image: profile.image ? profile.image : "",
   });
+
+  const [selectedItem, setSelectedItem] = useState(null);
 
   const imageProfile = [
     "https://res.cloudinary.com/dqai9sgfs/image/upload/v1693836416/karku/profiles/avatar5_pfvu9n.png",
@@ -59,6 +63,14 @@ const Profile = () => {
   };
   const handleChangeImage = (el) => {
     setDataUpdate({ ...dataUpdate, image: el });
+  };
+
+  const openItemDetail = (item) => {
+    setSelectedItem(item);
+  };
+
+  const closeItemDetail = () => {
+    setSelectedItem(null);
   };
 
   return (
@@ -127,23 +139,65 @@ const Profile = () => {
           <div className="purchase-history-card">
             <h3 className="store-buys-title">Historial de Compras</h3>
           </div>
-          {profile.buys ? (
-            <ul>
-              {profile.buys.map((el) =>
-                el.itemsComprados
-                  ? el.itemsComprados.map((item, index) => (
-                      <li key={index}>
-                        {item.title} - ${item.unit_price} x{item.quantity}
-                      </li>
+          <div className="buys-history">
+            {profile.buys ? (
+              <div>
+                {profile.buys.reverse().map((el) =>
+                  el.itemsComprados ? (
+                    el.itemsComprados.map((item, index) => (
+                      <div
+                        className="buys-items"
+                        key={index}
+                        onClick={() => openItemDetail(item)}
+                      >
+                        <div className="item-title-img" key={index}>
+                          <img
+                            src={item.picture_url}
+                            alt={item.title}
+                            className="item-image"
+                          />
+                          <div className="item-title">{item.title}</div>x
+                          {item.quantity}
+                        </div>
+                        ${item.unit_price}
+                        {item.id}
+                      </div>
                     ))
-                  : "No hay elementos comprados"
-              )}
-            </ul>
-          ) : (
-            "loading..."
-          )}
+                  ) : (
+                    <div key={el.id}>
+                      <div className="no-items-message">
+                        No hay elementos comprados
+                      </div>
+                    </div>
+                  )
+                )}
+              </div>
+            ) : (
+              "loading..."
+            )}
+          </div>
         </div>
       </div>
+      {selectedItem && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close-button" onClick={closeItemDetail}>
+              <FontAwesomeIcon icon={faCircleXmark} />
+            </span>
+            <div className="item-detail">
+              <img
+                src={selectedItem.picture_url}
+                alt={selectedItem.title}
+                className="item-image"
+              />
+              <div className="item-title">{selectedItem.title}</div>
+              <div className="item-info">
+                ${selectedItem.unit_price} x {selectedItem.quantity}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       <Footer />
     </>
   );
