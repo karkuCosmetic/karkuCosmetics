@@ -29,7 +29,7 @@ export const createOrder = async (req, res) => {
         failure: "http://localhost:3000/cart",
         pending: "http://localhost:3000/store",
       },
-      notification_url: "https://7a31-190-19-114-39.ngrok.io/payment/webhook",
+      notification_url: "https://69b0-190-19-78-141.ngrok.io/payment/webhook",
     };
 
     const result = await mercadopago.preferences.create(preference);
@@ -74,6 +74,14 @@ export const reciveWebhook = async (req, res) => {
       currentDate.setHours(currentDate.getHours() + timeZoneOffset);
       //ajustar fecha
 
+      //precio total
+      let precioFinal = 0;
+      for (const producto of data.response.additional_info.items) {
+        const precioProducto = producto.quantity * producto.unit_price;
+        precioFinal += precioProducto;
+      }
+      //precio total
+
       //store in base
       let informationPayment = {
         dataCard: {
@@ -87,11 +95,12 @@ export const reciveWebhook = async (req, res) => {
         itemsComprados: data.response.additional_info.items,
         entrega: "pendiente",
         fecha: currentDate,
+        TotalPagado: precioFinal,
       };
 
       if (data) {
         const query = { email: informationPayment.payer.email };
-       
+
         await User.findOneAndUpdate(
           query,
           {
