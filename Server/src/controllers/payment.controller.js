@@ -14,7 +14,7 @@ export const createOrder = async (req, res) => {
     });
     const items = data.map((producto) => {
       return {
-        title: producto.product.title,
+        title: producto.product.title[0].toUpperCase() + producto.product.title.slice(1),
         quantity: producto.quantity,
         currency_id: "ARS",
         unit_price: producto.product.price,
