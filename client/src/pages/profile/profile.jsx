@@ -7,10 +7,10 @@ import Navbar from "../../components/NavBar/navbar";
 import Footer from "../../components/Footer/footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import PurchaseHistoryItem from "../../components/PurchaseHistoryItem/purchaseHistoryItem";
 
 const Profile = () => {
   const [profile, setProfile] = useState({});
-
   const [editing, setEditing] = useState(false);
   const [dataUpdate, setDataUpdate] = useState({
     name: profile.name ? profile.name : "Nombre",
@@ -18,8 +18,7 @@ const Profile = () => {
     cellphone: profile.cellphone ? profile.cellphone : "Telefono",
     image: profile.image ? profile.image : "",
   });
-
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedPurchase, setSelectedPurchase] = useState(null);
 
   const imageProfile = [
     "https://res.cloudinary.com/dqai9sgfs/image/upload/v1693836416/karku/profiles/avatar5_pfvu9n.png",
@@ -61,16 +60,25 @@ const Profile = () => {
     PutUser(profile.uid, dataUpdate, token);
     window.location.reload();
   };
+
   const handleChangeImage = (el) => {
     setDataUpdate({ ...dataUpdate, image: el });
   };
 
-  const openItemDetail = (item) => {
-    setSelectedItem(item);
+  const openPurchaseDetail = (purchase) => {
+    setSelectedPurchase(purchase);
   };
 
-  const closeItemDetail = () => {
-    setSelectedItem(null);
+  const closePurchaseDetail = () => {
+    setSelectedPurchase(null);
+  };
+
+  const formatDateModal = (isoDate) => {
+    const date = new Date(isoDate);
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
   };
 
   return (
@@ -142,35 +150,15 @@ const Profile = () => {
           <div className="buys-history">
             {profile.buys ? (
               <div>
-                {profile.buys.reverse().map((el) =>
-                  el.itemsComprados ? (
-                    el.itemsComprados.map((item, index) => (
-                      <div
-                        className="buys-items"
-                        key={index}
-                        onClick={() => openItemDetail(item)}
-                      >
-                        <div className="item-title-img" key={index}>
-                          <img
-                            src={item.picture_url}
-                            alt={item.title}
-                            className="item-image"
-                          />
-                          <div className="item-title">{item.title}</div>x
-                          {item.quantity}
-                        </div>
-                        ${item.unit_price}
-                        {item.id}
-                      </div>
-                    ))
-                  ) : (
-                    <div key={el.id}>
-                      <div className="no-items-message">
-                        No hay elementos comprados
-                      </div>
-                    </div>
-                  )
-                )}
+                {profile.buys.reverse().map((purchase, index) => (
+                  <div
+                    key={index}
+                    className="purchase-history-item"
+                    onClick={() => openPurchaseDetail(purchase)}
+                  >
+                    <PurchaseHistoryItem purchase={purchase} />
+                  </div>
+                ))}
               </div>
             ) : (
               "loading..."
@@ -178,21 +166,31 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      {selectedItem && (
+      {selectedPurchase && (
         <div className="modal">
           <div className="modal-content">
-            <span className="close-button" onClick={closeItemDetail}>
+            <span className="close-button" onClick={closePurchaseDetail}>
               <FontAwesomeIcon icon={faCircleXmark} />
             </span>
             <div className="item-detail">
-              <img
-                src={selectedItem.picture_url}
-                alt={selectedItem.title}
-                className="item-image"
-              />
-              <div className="item-title">{selectedItem.title}</div>
-              <div className="item-info">
-                ${selectedItem.unit_price} x {selectedItem.quantity}
+              {selectedPurchase.itemsComprados.map((item, index) => (
+                <div className="item-full" key={index}>
+                  <img
+                    src={item.picture_url}
+                    alt={item.title}
+                    className="item-image-detail"
+                  />
+                  <div className="item-title-detail">{item.title}</div>
+                  <div> x{item.quantity}</div>
+                </div>
+              ))}
+              <div className="item-detail-container">
+                <div className="item-info-detail">
+                  Total: ${selectedPurchase.TotalPagado}
+                </div>
+                <div>Fecha: {formatDateModal(selectedPurchase.fecha)}</div>
+                <div>Método de pago: {selectedPurchase.metodoPago}</div>
+                <div>Estado de la compra: {selectedPurchase.entrega}</div>
               </div>
             </div>
           </div>
