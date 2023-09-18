@@ -17,7 +17,7 @@
   font-family: "quicksand";
 }
 
-@media (max-width: 762px) {
+@media (max-width: 870px) {
   .store-container {
     align-items: center;
   }
@@ -53,7 +53,8 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 2rem;
+  max-width: 1500px;
+  gap: 1rem;
   margin-left: 15rem;
   padding-top: 10rem;
   padding-bottom: 5rem;
@@ -61,7 +62,7 @@
   flex: 1;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 870px) {
   .product-container {
     display: flex;
     flex-direction: row;
@@ -69,29 +70,40 @@
     overflow-y: auto;
     margin-left: 0;
     padding-top: 0;
+    gap: 1rem;
   }
 }
 
 .product-card {
   display: flex;
   flex-direction: column;
-  width: 21rem;
-  height: 35rem;
+  align-items: center;
+  justify-content: space-between;
+  width: 17rem;
+  height: 22rem;
   border-radius: 10px;
   background-color: #f8f8f8;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   text-decoration: none;
   color: #333333;
-  padding: 20px;
   transition: transform 0.2s, box-shadow 0.2s;
-  border-radius: 15px;
+  padding: 1rem;
 }
 
-.link {
+@media (max-width: 570px) {
+  .product-card {
+    width: 90%;
+    height: 10rem;
+    display: flex;
+    flex-direction: row;
+    border-radius: 5px;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+a {
   text-decoration: none;
-  margin-top: 1rem;
-  padding: 0.5rem;
-  border-radius: 15px;
 }
 
 .product-card:hover {
@@ -99,28 +111,54 @@
 }
 
 .product-image img {
-  width: 100%;
-  height: 15rem;
-  border-radius: 15px;
+  width: 15rem;
+  height: 10rem;
+  border-radius: 10px;
+  object-fit: cover;
 }
 
-.product-image img:hover {
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+@media (max-width: 570px) {
+  .product-image img {
+    width: 5rem;
+    height: 8rem;
+    border-radius: 5px;
+  }
 }
 
-.product-info {
-  margin-left: 15px;
+.detail-info-store {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 }
 
 .detail-title {
-  margin-top: 1rem;
+  color: #7b60c8;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 870px) {
+  .detail-title {
+    margin-top: 0;
+  }
 }
 
 .detail-price {
   font-weight: bold;
   color: #7b60c8;
+}
+
+@media (max-width: 870px) {
+  .detail-price {
+    font-size: 1.5rem;
+  }
+}
+
+.detail-quantity-store {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .buttons-quantity {
@@ -132,17 +170,26 @@
   align-items: center;
 }
 
+.quantity-store {
+  margin: 0.5rem;
+  font-size: 18px;
+  font-weight: bold;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
 .add-to-cart-button-store {
   background: linear-gradient(to bottom right, #7511b8a6, #a143f8b6);
   border: 0;
-  border-radius: 10px;
+  border-radius: 25px;
   color: #ffffff;
   cursor: pointer;
   display: inline-block;
   font-family: "quicksand";
   font-weight: 500;
   outline: transparent;
-  padding: 0 1rem;
+  padding-inline: 1rem;
   text-align: center;
   text-decoration: none;
   transition: box-shadow 0.2s ease-in-out;
@@ -152,17 +199,20 @@
   white-space: nowrap;
   height: 2rem;
 }
+@media (max-width: 870px) {
+  .add-to-cart-button-store {
+    height: 1.5rem;
+  }
+}
 
 .add-to-cart-button-store:not([disabled]):focus {
-  box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
-    -0.125rem -0.125rem 1rem rgba(91, 27, 175, 0.5),
-    0.125rem 0.125rem 1rem rgba(32, 106, 156, 0.5);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
 .add-to-cart-button-store:not([disabled]):hover {
-  box-shadow: 0 0 0.25rem rgba(146, 35, 211, 0.5),
-    -0.125rem -0.125rem 1rem rgba(91, 27, 175, 0.5),
-    0.125rem 0.125rem 1rem rgba(91, 13, 218, 0.5);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
 .detail-dimensions {
@@ -198,6 +248,7 @@
   font-family: "quicksand";
   font-weight: 500;
   outline: transparent;
+  margin-top: 0.5rem;
   padding: 0 1rem;
   text-align: center;
   text-decoration: none;
@@ -211,7 +262,7 @@
 
 .button-filter-store {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
 }
 
 .button-filtrar:hover {
@@ -233,11 +284,10 @@
 }
 
 select ul li:hover {
-background-color:  #e71111;
+  background-color: #e71111;
 }
 
-
-@media (min-width: 769px) {
+@media (min-width: 870px) {
   .hidden-large {
     display: none;
   }
@@ -247,8 +297,7 @@ background-color:  #e71111;
   }
 }
 
-
-@media (max-width: 768px) {
+@media (max-width: 870px) {
   .sidebar {
     width: 100%;
     position: static;
@@ -277,11 +326,81 @@ background-color:  #e71111;
   color: #7b60c8;
 }
 
+@media screen and (max-width: 870px) {
+  .pagination {
+    margin-left: 0;
+  }
+}
+@media screen and (min-width: 870px) {
+  .pagination {
+    margin-left: 15rem;
+  }
+}
+
 .pagination {
   display: flex;
   justify-content: center;
   background-color: transparent;
-  margin-left: 15rem;
+  padding-bottom: 5rem;
+}
+
+.pagination-top {
+  display: flex;
+  justify-content: center;
+  background-color: transparent;
+  padding-bottom: 1.5rem;
+  padding-top: 1.5rem;
+}
+
+@media screen and (min-width: 570px) {
+  .pagination-top {
+    display: none;
+  }
+}
+
+.pagination-top button {
+  border: none;
+  color: #333;
+  font-size: 16px;
+  padding: 5px 10px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+}
+
+.pagination-top button:hover {
+  background-color: #f0f0f0;
+}
+
+.pagination-top button.active {
+  background-color: #d3599f;
+  color: #fff;
+}
+
+.pagination-top .arrow-button {
+  color: #d3599f;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination-top .arrow-button:hover {
+  background-color: #7b60c8;
+  color: wheat;
+}
+
+.pagination-rop .arrow-button:disabled {
+  color: #888;
+  cursor: not-allowed;
 }
 
 .pagination button {
@@ -327,4 +446,31 @@ background-color:  #e71111;
 .pagination .arrow-button:disabled {
   color: #888;
   cursor: not-allowed;
+}
+
+.input-price-store[type="number"] {
+  padding: 1rem;
+  border: 1px solid #ee0808;
+  border-radius: 5px;
+  font-size: 14px;
+  font-family: "figtree";
+  resize: none;
+  border: none;
+}
+
+.inputs-filter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+@media screen and (max-width:870px) {
+  .inputs-filter{
+    display: flex;
+    flex-direction: row;
+
+  }
 }

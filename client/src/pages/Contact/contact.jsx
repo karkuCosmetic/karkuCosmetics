@@ -73,6 +73,7 @@ export const Contact = () => {
             />
             <label>Numero</label>
             <input
+              className="input-contact-phone"
               type="number"
               name="user_phone"
               onChange={handlerChange}

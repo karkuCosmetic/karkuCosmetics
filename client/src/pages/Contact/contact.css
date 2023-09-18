@@ -57,7 +57,7 @@ label {
 input[type="text"],
 input[type="email"],
 input[type="password"],
-input[type="number"],
+.input-contact-phone,
 textarea {
   width: 100%;
   padding: 1rem;
