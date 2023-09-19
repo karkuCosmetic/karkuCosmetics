@@ -1,0 +1,61 @@
+.custom-select {
+  position: relative;
+  width: 12rem;
+  border: 1px solid #f38f82;
+  border-radius: 5px;
+  cursor: pointer;
+  user-select: none;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  font-size: 14px;
+}
+
+.selected-option {
+  display: flex;
+  text-align: left;
+  justify-content: left;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.selected-option span {
+  flex-grow: 1;
+  padding-right: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.selected-option svg {
+  color: #f38f82;
+  transition: transform 0.2s;
+}
+
+.options {
+  position: absolute;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #f38f82;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.options.open {
+  display: block;
+}
+
+.option {
+  padding: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.option:hover {
+  background-color: #f38f82;
+  color: #fff;
+}
+
+.option.selected {
+  background-color: #f38f82;
+  color: #fff;
+}

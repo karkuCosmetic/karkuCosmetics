@@ -8,7 +8,7 @@ import { AddCart } from "../../utils/addCart";
 import { getProductDetail } from "../../functions/fetchingProducts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
-
+import RenderSelect from "../../components/Select/select";
 const Store = () => {
   const [dataProducts, SetDataProducts] = useState([]);
   const [minPrice, setMinPrice] = useState("");
@@ -19,6 +19,7 @@ const Store = () => {
   const [detailProduct, setDetailProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
   const { id } = useParams();
+  const [isSelectOpen, setIsSelectOpen] = useState(false);
 
   useEffect(() => {
     CallProducts();
@@ -103,33 +104,24 @@ const Store = () => {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  const renderSelect = () => {
-    return (
-      <select
-        id="product-select"
-        className="hidden-select custom-select"
-        onChange={(e) => setSelectedCategory(e.target.value)}
-      >
-        {TodosCategories.map((category, index) => (
-          <option key={index} value={category}>
-            {category}
-          </option>
-        ))}
-      </select>
-    );
-  };
-
   return (
     <>
       <div className="page-container">
         <div className="navbar-store">
           <Navbar />
         </div>
-        <div className="store-container">
+        <div className={`store-container ${isSelectOpen ? "blur" : ""}`}>
           <div className="product-container">
             <div className="sidebar">
               <h2>Productos</h2>
-              <div className="render-select">{renderSelect()}</div>
+              <div className="render-select">
+                <RenderSelect
+                  TodosCategories={TodosCategories}
+                  selectedCategory={selectedCategory}
+                  setSelectedCategory={setSelectedCategory}
+                  setIsSelectOpen={setIsSelectOpen}
+                />
+              </div>
               <ul>
                 {TodosCategories.map((category, index) => (
                   <li
@@ -142,7 +134,7 @@ const Store = () => {
                 ))}
               </ul>
               <div className="price-filter">
-                <h3 className="h3-store">Rango de Precios</h3>
+                <h3 className="h3-store">Precio</h3>
                 <div className="inputs-filter">
                   <input
                     className="input-price-store"
@@ -159,15 +151,15 @@ const Store = () => {
                     value={maxPrice}
                     onChange={(e) => setMaxPrice(e.target.value)}
                   />
-                    </div>
-                  <div className="button-filter-store">
-                    <button
-                      className="button-filtrar"
-                      onClick={handlePriceFilter}
-                    >
-                      Filtrar
-                    </button>
-                  </div>
+                </div>
+                <div className="button-filter-store">
+                  <button
+                    className="button-filtrar"
+                    onClick={handlePriceFilter}
+                  >
+                    Filtrar
+                  </button>
+                </div>
               </div>
             </div>
             <div className="pagination-top">
@@ -208,6 +200,7 @@ const Store = () => {
                 <FontAwesomeIcon icon={faArrowRight} />
               </button>
             </div>
+
             {currentProducts.map((product, index) => (
               <div key={index} className="product-card">
                 <div className="product-image">
