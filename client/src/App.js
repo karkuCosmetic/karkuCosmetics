@@ -1,7 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/home";
-import Profile from "./pages/Profile/profile";
 import Cart from "./pages/Cart/cart";
 
 import HomeAdmin from "./pages/Admin/admin";
@@ -17,9 +16,11 @@ import { Contact } from "./pages/Contact/contact";
 import DetailPage from "./pages/DetailPage/detailPage";
 import Store from "./pages/Store/store";
 import NewPasswordPage from "./pages/NewPasswordPage/newPasswordPage";
+import Profile from "./pages/Profile/profile";
 
 function App() {
   const [rol, SetRol] = useState();
+
 
   // poner el loader
   useEffect(() => {
@@ -34,8 +35,8 @@ function App() {
 
       if (uid) {
         CallUsers(uid);
-        <Route path="/cart" Component={Cart} />;
       }
+      <Route path="/cart" Component={Cart} />
     }
   }, []);
 
@@ -52,6 +53,7 @@ function App() {
 
         <Route element={<ProtectedRouteUser isAllowed={true} />}>
           <Route path="/profile" Component={Profile} />
+         
         </Route>
 
         <Route
