@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../../components/NavBar/navbar";
-import "./cart.css";
+import "./Cart.css";
 import { Payment } from "../../functions/payment";
 import Footer from "../../components/Footer/footer";
 import { GetDecodedCookie } from "../../utils/DecodedCookie";
