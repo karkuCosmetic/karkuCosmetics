@@ -1,6 +1,6 @@
 import React from "react";
 import NewPassword from "../../components/NewPassword/newPassword";
-import "./newPasswordPage.css";
+import "./NewPasswordPage.css";
 
 const NewPasswordPage = () => {
   return (

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { UpdateAdmin } from "../../functions/FetchAdmin";
-import "./contact.css";
+import "./Contact.css";
 import Navbar from "../../components/NavBar/navbar";
 import Footer from "../../components/Footer/footer";
 

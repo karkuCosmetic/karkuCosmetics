@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import './pageconfirm.css';
+import './Pageconfirm.css';
 import Footer from '../../components/Footer/footer';
 import {useParams} from 'react-router-dom';
 import {DecodedToken} from '../../utils/DecodedToken';

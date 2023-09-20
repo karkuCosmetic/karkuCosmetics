@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import "./store.css";
+import "./Store.css";
 import { Link } from "react-router-dom";
 import Navbar from "../../components/NavBar/navbar";
 import { getProduct } from "../../functions/fetchingProducts";
