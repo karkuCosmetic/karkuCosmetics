@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const getProduct = async () => {
   try{ 
-    const response = await axios.get("http://localhost:3001/products");
+    const response = await axios.get("https://karku-cosmetics-4dsy.vercel.app/products");
     return response.data;
   } catch (error) {
     console.log(error);
