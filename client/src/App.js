@@ -21,7 +21,6 @@ import Profile from "./pages/Profile/Profile";
 function App() {
   const [rol, SetRol] = useState();
 
-
   // poner el loader
   useEffect(() => {
     const token = GetDecodedCookie("cookieToken");
@@ -36,7 +35,6 @@ function App() {
       if (uid) {
         CallUsers(uid);
       }
-      <Route path="/cart" Component={Cart} />
     }
   }, []);
 
@@ -50,10 +48,10 @@ function App() {
         <Route path="/confirm/:token" Component={PageConfirm} />
         <Route path="/contact" Component={Contact} />
         <Route path="/new-password/:token" Component={NewPasswordPage} />
+        <Route path="/cart" Component={Cart} />
 
         <Route element={<ProtectedRouteUser isAllowed={true} />}>
           <Route path="/profile" Component={Profile} />
-         
         </Route>
 
         <Route
