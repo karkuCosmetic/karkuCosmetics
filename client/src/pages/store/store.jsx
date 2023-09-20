@@ -113,7 +113,7 @@ const Store = () => {
         <div className={`store-container ${isSelectOpen ? "blur" : ""}`}>
           <div className="product-container">
             <div className="sidebar">
-              <h2>Productos</h2>
+              <h2>Categorías</h2>
               <div className="render-select">
                 <RenderSelect
                   TodosCategories={TodosCategories}

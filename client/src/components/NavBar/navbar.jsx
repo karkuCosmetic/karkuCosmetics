@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./navbar.css";
-import logo from "../../assets/logo.png";
+import logoKarkuCircular from "../../assets/logoKarkuCircular.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignOut } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
@@ -33,7 +33,7 @@ const Navbar = () => {
       <div className="container">
         <div className="navbar-left">
           <Link to="/">
-            <img src={logo} alt="Logo de Karku" className="logo" />
+            <img src={logoKarkuCircular} alt="Logo de Karku" className="logo" />
           </Link>
         </div>
         <button

@@ -20,10 +20,11 @@
 }
 
 .logo {
-  width: 150px;
-  height: 80px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 20px;
+  width:5rem;
+  height: 5rem;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .nav-links {

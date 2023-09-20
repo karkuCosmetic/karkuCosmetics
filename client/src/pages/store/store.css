@@ -268,13 +268,13 @@ a {
   height: 2rem;
 }
 
+.button-filtrar:hover {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  }
+
 .button-filter-store {
   display: flex;
   justify-content: left;
-}
-
-.button-filter-store:hover {
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
 .render-select {
@@ -453,7 +453,7 @@ a {
 }
 
 .input-price-store[type="number"] {
-  padding: 1rem;
+  padding: 0.5rem;
   border: 1px solid #f38f82;
   border-radius: 5px;
   font-size: 14px;
