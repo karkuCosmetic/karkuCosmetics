@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const postlogin = async (values) => {
   try {
-    const resp = await axios.post("http://localhost:3001/login", values);
+    const resp = await axios.post("https://karku-cosmetics-4dsy.vercel.app/login", values);
     let token = resp.data.token;
     document.cookie =
       encodeURIComponent("cookieToken") + "=" + encodeURIComponent(token);
