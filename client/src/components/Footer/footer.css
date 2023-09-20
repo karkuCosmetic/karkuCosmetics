@@ -1,0 +1,12 @@
+.container-footer {
+  padding: 2%;
+  background-color: #f38f82;
+  color: #fff;
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+}
+
+.footer-section p {
+  font-size: 1.2rem;
+}
