@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/home";
 import Profile from "./pages/Profile/profile";
 import Cart from "./pages/Cart/cart";
-import Buys from "./pages/Buys/buys";
+
 import HomeAdmin from "./pages/Admin/admin";
 import PageConfirm from "./pages/PageConfirm/pageconfirm";
 import LoginPage from "./pages/LoginPage/loginPage";
@@ -21,6 +21,7 @@ import NewPasswordPage from "./pages/NewPasswordPage/newPasswordPage";
 function App() {
   const [rol, SetRol] = useState();
 
+  // poner el loader
   useEffect(() => {
     const token = GetDecodedCookie("cookieToken");
     if (token) {
@@ -33,6 +34,7 @@ function App() {
 
       if (uid) {
         CallUsers(uid);
+        <Route path="/cart" Component={Cart} />;
       }
     }
   }, []);
@@ -50,8 +52,6 @@ function App() {
 
         <Route element={<ProtectedRouteUser isAllowed={true} />}>
           <Route path="/profile" Component={Profile} />
-          <Route path="/cart" Component={Cart} />
-          <Route path="/buys" Component={Buys} />
         </Route>
 
         <Route
