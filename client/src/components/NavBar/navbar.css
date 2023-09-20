@@ -28,11 +28,11 @@
 }
 
 .nav-links {
-  list-style: none;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
+  list-style: none;
 }
 
 .nav-links li {
