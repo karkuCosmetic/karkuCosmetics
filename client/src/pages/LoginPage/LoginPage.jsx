@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Login from "../../components/Login/login";
 import Register from "../../components/Register/register";
-import "./loginPage.css";
+import "./LoginPage.css";
 import Navbar from "../../components/NavBar/navbar";
 import Footer from "../../components/Footer/footer";
 import { ForgotPassword } from "../../components/ForgotPassword/forgotPassword";

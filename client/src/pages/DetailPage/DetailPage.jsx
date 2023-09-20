@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getProductDetail } from "../../functions/fetchingProducts";
-import "./detailPage.css";
+import "./DetailPage.css";
 import Navbar from "../../components/NavBar/navbar";
 import { AddCart } from "../../utils/addCart";
 import { GetDecodedCookie } from "../../utils/DecodedCookie";

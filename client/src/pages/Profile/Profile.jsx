@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { GetDecodedCookie } from "../../utils/DecodedCookie";
 import { DecodedToken } from "../../utils/DecodedToken";
 import { PutUser, getUserDetail } from "../../functions/fetchingUsers";
-import "./profile.css";
+import "./Profile.css";
 import Navbar from "../../components/NavBar/navbar";
 import Footer from "../../components/Footer/footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

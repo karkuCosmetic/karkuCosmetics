@@ -1,26 +1,27 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import Home from "./pages/Home/home";
-import Profile from "./pages/Profile/profile";
-import Cart from "./pages/Cart/cart";
-import Buys from "./pages/Buys/buys";
-import HomeAdmin from "./pages/Admin/admin";
-import PageConfirm from "./pages/PageConfirm/pageconfirm";
-import LoginPage from "./pages/LoginPage/loginPage";
+import Home from "./pages/Home/Home";
+import Cart from "./pages/Cart/Cart";
+
+import HomeAdmin from "./pages/Admin/Admin";
+import PageConfirm from "./pages/PageConfirm/Pageconfirm";
+import LoginPage from "./pages/LoginPage/LoginPage";
 import { ProtectedRouteAdmin } from "./pages/ProtectedRoutes/ProtectedRouteAdmin";
 import { GetDecodedCookie } from "./utils/DecodedCookie";
 import { DecodedToken } from "./utils/DecodedToken";
 import { getUserDetail } from "./functions/fetchingUsers";
 import { useEffect, useState } from "react";
 import { ProtectedRouteUser } from "./pages/ProtectedRoutes/ProtectedRouteUser";
-import { Contact } from "./pages/Contact/contact";
-import DetailPage from "./pages/DetailPage/detailPage";
-import Store from "./pages/Store/store";
-import NewPasswordPage from "./pages/NewPasswordPage/newPasswordPage";
+import { Contact } from "./pages/Contact/Contact";
+import DetailPage from "./pages/DetailPage/DetailPage";
+import Store from "./pages/Store/Store";
+import NewPasswordPage from "./pages/NewPasswordPage/NewPasswordPage";
+import Profile from "./pages/Profile/Profile";
 
 function App() {
   const [rol, SetRol] = useState();
 
+  // poner el loader
   useEffect(() => {
     const token = GetDecodedCookie("cookieToken");
     if (token) {
@@ -47,11 +48,10 @@ function App() {
         <Route path="/confirm/:token" Component={PageConfirm} />
         <Route path="/contact" Component={Contact} />
         <Route path="/new-password/:token" Component={NewPasswordPage} />
+        <Route path="/cart" Component={Cart} />
 
         <Route element={<ProtectedRouteUser isAllowed={true} />}>
           <Route path="/profile" Component={Profile} />
-          <Route path="/cart" Component={Cart} />
-          <Route path="/buys" Component={Buys} />
         </Route>
 
         <Route
