@@ -1,27 +1,24 @@
-import React, {useEffect, useState} from 'react';
-import './Pageconfirm.css';
-import Footer from '../../components/Footer/footer';
-import {useParams} from 'react-router-dom';
-import {DecodedToken} from '../../utils/DecodedToken';
-import {ConfirmEmail} from '../../functions/fetchingUsers';
+import React, { useEffect, useState } from "react";
+import "./Pageconfirm.css";
+import Footer from "../../components/Footer/footer";
+import { useParams } from "react-router-dom";
+import { DecodedToken } from "../../utils/DecodedToken";
+import { ConfirmEmail } from "../../functions/fetchingUsers";
 
 const PageConfirm = () => {
-  const {token} = useParams ();
+  const { token } = useParams();
 
-  const [uid, setUid] = useState ('');
+  const [uid, setUid] = useState("");
 
-  useEffect (
-    () => {
-      let {value} = DecodedToken (token);
-      setUid (value);
-    },
-    [token]
-  );
+  useEffect(() => {
+    let { value } = DecodedToken(token);
+    setUid(value);
+  }, [token]);
 
   const handlerUpdate = () => {
-    console.log (uid);
-    ConfirmEmail(uid,true)
-    window.location.href="/login";
+    console.log(uid);
+    ConfirmEmail(uid, true);
+    window.location.href = "/login";
   };
 
   return (

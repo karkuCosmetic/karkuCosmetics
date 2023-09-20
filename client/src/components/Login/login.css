@@ -11,11 +11,15 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
   background-color: #f38f82;
   color: white;
-  padding: 2rem;
+  padding: 1.5rem;
   border-radius: 15px;
   gap: 10px;
+  font-family: "quicksand";
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+  rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
 
 .login-form {
@@ -23,8 +27,8 @@
   flex-direction: column;
   justify-content: start;
   width: 35rem;
-  margin-top: 5rem;
-  padding: 2rem;
+  margin-top: 2rem;
+  padding: 1.5rem;
   border-radius: 10px;
   box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
     rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
@@ -39,7 +43,7 @@
 
 @media (max-width: 599px) {
   .login-form {
-    max-width: 25rem;
+width: 23rem;
   }
 }
 
@@ -49,10 +53,12 @@
   margin-bottom: 10px;
   border: 1px solid #ccc;
   background-color: #fff;
-  font-size: 16px;
+  font-size: 14px;
+  font-family: "quicksand";
 }
 
 .login-form input::placeholder {
+  font-family: "quicksand";
   font-style: italic;
   color: #999;
 }
@@ -63,6 +69,7 @@
   align-items: center;
   margin-top: 1.5rem;
   text-decoration: none;
+  font-family: "quicksand";
   color: #ffffff;
   gap: 5px;
 }
@@ -72,6 +79,7 @@
   justify-content: center;
   align-items: center;
   text-decoration: none;
+  font-family: "quicksand";
   color: #7b60c8;
   cursor: pointer;
 }
@@ -88,13 +96,14 @@
   display: flex;
   justify-content: left;
   text-decoration: none;
+  font-family: "quicksand";
   color: #ffffff;
   cursor: pointer;
   margin-top: 1rem;
   width: 4rem;
 }
 
-.login-form button {
+.button-login{
   background-color: #7b60c8;
   border-radius: 5px;
   padding: 1rem;
@@ -106,6 +115,7 @@
   text-decoration: none;
   transition: all 250ms;
   border: 0;
+  font-family: "quicksand";
   font-size: 16px;
   user-select: none;
   -webkit-user-select: none;
@@ -141,6 +151,7 @@ button .recover-password-btn {
   color: #7b60c8;
   font-size: 0.85rem;
   padding: 2rem;
+  font-family: "quicksand";
 }
 
 input:focus {
@@ -151,17 +162,21 @@ input:focus {
   display: flex;
   align-items: center;
   text-align: center;
+  font-family: "quicksand";
   color: white;
-  border-radius: 15px;
+  border-radius: 10px;
 }
 
 .text-register {
   display: flex;
   align-items: center;
   text-align: center;
-  margin-top: 5rem;
+  width: 23rem;
   background-color: #7b60c8;
+  font-family: "quicksand";
   color: white;
-  border-radius: 15px;
+  border-radius: 10px;
   padding: 1.5rem;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+  rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }

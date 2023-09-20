@@ -10,6 +10,7 @@ import { GetDecodedCookie } from "../../utils/DecodedCookie";
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [login, setLogin] = useState(false);
+
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
@@ -42,7 +43,11 @@ const Navbar = () => {
         >
           <span className="menu-icon" />
         </button>
+  
         <ul className={`nav-links ${menuOpen ? "open" : ""}`}>
+          <li>
+            <a href="/">Inicio</a>
+          </li>
           <li>
             <a href="/#about">Sobre Nosotros</a>
           </li>
@@ -75,7 +80,12 @@ const Navbar = () => {
             </li>
           )}
         </ul>
-      </div>
+        </div>
+        <div
+          className={`overlay ${menuOpen ? "active" : ""}`}
+          onClick={toggleMenu}
+        />
+ 
     </nav>
   );
 };
