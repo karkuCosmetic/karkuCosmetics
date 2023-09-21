@@ -115,6 +115,8 @@
     display: none;
     justify-content: center;
     align-items: center;
+    font-family: "quicksand";
+    font-size: 16px;
     gap: 20px;
     list-style: none;
     position: absolute;
@@ -140,6 +142,9 @@
     opacity: 1;
     transform: translateY(100px);
     transition: opacity 1s ease, transform 1s ease;
+    background-image: url(../../assets/bgMenuToggle.png);
+    background-size: cover;
+    background-repeat: no-repeat;
   }
   .profile-menu.open {
     display: flex;
@@ -149,6 +154,14 @@
 
   .nav-links li {
     margin: 10px 0;
+  }
+
+  .nav-links a {
+    font-family: "quicksand";
+    font-weight: 500;
+    text-decoration: none;
+    color: #000000;
+    transition: color 0.3s ease;
   }
 }
 
