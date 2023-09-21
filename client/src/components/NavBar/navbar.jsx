@@ -43,7 +43,7 @@ const Navbar = () => {
         >
           <span className="menu-icon" />
         </button>
-  
+
         <ul className={`nav-links ${menuOpen ? "open" : ""}`}>
           <li>
             <a href="/">Inicio</a>
@@ -80,12 +80,11 @@ const Navbar = () => {
             </li>
           )}
         </ul>
-        </div>
-        <div
-          className={`overlay ${menuOpen ? "active" : ""}`}
-          onClick={toggleMenu}
-        />
- 
+      </div>
+      <div
+        className={`overlay ${menuOpen ? "active" : ""}`}
+        onClick={toggleMenu}
+      />
     </nav>
   );
 };

@@ -109,10 +109,7 @@
   }
 
   .nav-links {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    display: none;
     position: absolute;
     top: 100px;
     border-radius: 10px;
