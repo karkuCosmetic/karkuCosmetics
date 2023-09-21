@@ -34,9 +34,10 @@
 
 .options {
   position: absolute;
-  width: 100%;
+  width:100%;
   background-color: #fff;
   border: 1px solid #f38f82;
+  border-radius: 0 0 5px 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -45,7 +46,7 @@
 }
 
 .option {
-  padding: 5px;
+  padding: 0.5rem;
   cursor: pointer;
   transition: background-color 0.2s;
 }

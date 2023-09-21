@@ -73,9 +73,9 @@ export const DetailPage = () => {
               >
                 -
               </button>
-              <span className="quantity">{quantity}</span>
+              <span className="quantity-detail">{quantity}</span>
               <button
-                className="quantity-button"
+                className="quantity-button-detail"
                 onClick={() => handleQuantityChange(1)}
               >
                 +
