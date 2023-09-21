@@ -407,7 +407,7 @@ a {
 }
 
 .pagination-top .arrow-button:disabled {
-  color: #888;
+  color: #ffffff;
   cursor: not-allowed;
 }
 

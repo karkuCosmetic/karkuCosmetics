@@ -2,13 +2,14 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
     overflow: hidden;
     background-image: url(../../assets/bgProfile.png);
     background-size: cover;
     background-repeat: no-repeat;
     min-height: 100vh;
-    padding: 1.5rem;
+    padding: 0.5rem;
     padding-top: 5rem;
   }
   
@@ -161,8 +162,8 @@
     display: flex;
     justify-content: center;
     max-width: 25rem;
-    padding: 0.8rem;
-    margin-top: 1rem;
+
+    margin-top: 0.1rem;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 14px;
@@ -181,12 +182,17 @@
       width: 80%;
     }
   }
+
+  .label-edit-profile{
+    font-family: "quicksand";
+    margin: 0;
+  }
   
   .profile-card button {
     background-color: #7b60c8;
-    border-radius: 25px;
+    border-radius: 15px;
     margin-top: 1rem;
-    padding: 1rem;
+    padding: 0.5rem;
     width: 5rem;
     color: white;
     cursor: pointer;
@@ -226,7 +232,8 @@
   }
   
   .buys-history {
-    display: flex;
+    justify-content: center;
+    width: 100%;
     margin-top: 3rem;
   }
   
@@ -234,6 +241,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
     font-family: "quicksand";
     padding: 0.5rem;
     margin-bottom: 0.5rem;
@@ -356,3 +364,5 @@
     margin-top: 1rem;
     border-top: 1px solid #7b60c8;
   }
+  
+  

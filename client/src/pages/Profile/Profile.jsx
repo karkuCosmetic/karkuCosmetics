@@ -107,25 +107,34 @@ const Profile = () => {
 
             {editing ? (
               <div className="input-edit">
+                <label className="label-edit-profile" htmlFor="name">
+                  Nombre:
+                </label>
                 <input
                   type="text"
                   placeholder="Escribe aquí tu nombre"
                   value={dataUpdate.name}
-                  name={"name"}
+                  name="name"
                   onChange={handleChange}
                 />
+                <label className="label-edit-profile" htmlFor="lastName">
+                  Apellido:
+                </label>
                 <input
                   type="text"
                   placeholder="Escribe aquí tu apellido"
                   value={dataUpdate.lastName}
-                  name={"lastName"}
+                  name="lastName"
                   onChange={handleChange}
                 />
+                <label className="label-edit-profile" htmlFor="cellphone">
+                  Nuevo Número:
+                </label>
                 <input
                   type="text"
                   placeholder="Nuevo Número"
                   value={dataUpdate.cellphone}
-                  name={"cellphone"}
+                  name="cellphone"
                   onChange={handleChange}
                 />
               </div>
@@ -135,7 +144,14 @@ const Profile = () => {
                   {profile.name} {profile.lastName}
                 </h2>
                 <p>Teléfono: {profile.cellphone}</p>
-                <p>E-mail: {profile.email}</p>
+                {profile.email && (
+                  <p>
+                    E-mail:{" "}
+                    {profile.email.length > 20
+                      ? profile.email.slice(0, 20) + "..."
+                      : profile.email}
+                  </p>
+                )}
               </div>
             )}
             <button onClick={() => setEditing(!editing)}>

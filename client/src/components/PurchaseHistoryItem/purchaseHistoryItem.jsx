@@ -26,10 +26,11 @@ const PurchaseHistoryItem = ({ purchase }) => {
       <h4 className="date-purchase">{formatDateModal(purchase.fecha)} - </h4>
         {purchase.TotalPagado && `Total: $${purchase.TotalPagado}`}
         {!purchase.TotalPagado && `Total: ${calculateTotal()}`}
+        <div>Estado: {purchase.entrega}</div>
       </div>
       {purchase.itemsComprados.map((item, index) => (
         <div className="purchase-item-details" key={index}>
-          <img src={item.picture_url} alt={item.title} className="item-image" />
+          {/* <img src={item.picture_url} alt={item.title} className="item-image" /> */}
           <div className="item-title">{item.title}</div>
           <div> x{item.quantity}</div>
           <div> ${item.unit_price}</div>
