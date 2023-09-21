@@ -19,10 +19,10 @@ export const Contact = () => {
 
     emailjs
       .sendForm(
-        "service_s836qxd",
-        "template_wqs3znu",
+        process.env.REACT_APP_SERVICE_ID,
+        process.env.REACT_APP_TEMPLATE_ID,
         form.current,
-        "-0s9Tt65BXxLivqvY"
+        process.env.REACT_APP_PUBLIC_KEY
       )
       .then(
         (result) => {
