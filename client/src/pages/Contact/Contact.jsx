@@ -36,9 +36,24 @@ export const Contact = () => {
     UpdateAdmin(dataMensaje);
   };
 
+  const handleKeyPress = (event) => {
+    const validCharacters = /^[0-9]*$/;
+    if (!validCharacters.test(event.key)) {
+      event.preventDefault();
+    }
+  };
+
   const handlerChange = (event) => {
     const property = event.target.name;
-    const value = event.target.value;
+    let value = event.target.value;
+
+    if (property === "user_name") {
+      value = value.replace(/[^A-Za-z]/g, "");
+    }
+    if (property === "user_phone") {
+      value = value.replace(/[^0-9]/g, "");
+    }
+
     setDataMensaje({ ...dataMensaje, [property]: value });
   };
 
@@ -64,7 +79,7 @@ export const Contact = () => {
             />
             <label>Email</label>
             <input
-             className="input-contact"
+              className="input-contact"
               type="email"
               name="user_email"
               onChange={handlerChange}
@@ -77,6 +92,7 @@ export const Contact = () => {
               type="number"
               name="user_phone"
               onChange={handlerChange}
+              onKeyPress={handleKeyPress}
               placeholder="Numero telefonico"
               required
             />

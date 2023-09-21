@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./navbar.css";
 import logoKarkuCircular from "../../assets/logoKarkuCircular.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,6 +10,7 @@ import { GetDecodedCookie } from "../../utils/DecodedCookie";
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [login, setLogin] = useState(false);
+
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
@@ -35,47 +36,52 @@ const Navbar = () => {
           <Link to="/">
             <img src={logoKarkuCircular} alt="Logo de Karku" className="logo" />
           </Link>
-        </div>
+         
+          </div>
         <button
           className={`menu-button ${menuOpen ? "open" : ""}`}
           onClick={toggleMenu}
-        >
+          >
           <span className="menu-icon" />
         </button>
-        <ul className={`nav-links ${menuOpen ? "open" : ""}`}>
-          <li>
-            <a href="/#about">Sobre Nosotros</a>
-          </li>
-          <li>
-            <a href="/#gallery">Galería</a>
-          </li>
-          <li>
-            <a href="/contact">Contacto</a>
-          </li>
-          <li>
-            <a href="/store">Tienda</a>
-          </li>
-          <li>
-            <a href="/cart">Carrito</a>
-          </li>
+       
+          <nav className={`nav-links ${menuOpen ? "open" : ""}`}>
+          <NavLink to="/" exact activeClassName="active">
+            Inicio
+          </NavLink>
+          <NavLink to="/about" activeClassName="active">
+            Sobre Nosotros
+          </NavLink>
+          <NavLink to="/gallery" activeClassName="active">
+            Galería
+          </NavLink>
+          <NavLink to="/contact" activeClassName="active">
+            Contacto
+          </NavLink>
+          <NavLink to="/store" activeClassName="active">
+            Tienda
+          </NavLink>
+          <NavLink to="/cart" activeClassName="active">
+            Carrito
+          </NavLink>
           {login === true ? (
             <>
-              <li>
-                <Link to="/profile">Ir a Perfil</Link>
-              </li>
-              <li>
-                <a href="#" onClick={handleLogout} alt="Cerrar Sesion">
-                  <FontAwesomeIcon icon={faSignOut} />
-                </a>
-              </li>
+              <NavLink to="/profile" activeClassName="active">
+                Ir a Perfil
+              </NavLink>
+              <a href="#" onClick={handleLogout} alt="Cerrar Sesion">
+                <FontAwesomeIcon icon={faSignOut} />
+              </a>
             </>
           ) : (
-            <li>
-              <a href="/login">Ingresar</a>
-            </li>
+            <a href="/login">Ingresar</a>
           )}
-        </ul>
+        </nav>
       </div>
+      <div
+        className={`overlay ${menuOpen ? "active" : ""}`}
+        onClick={toggleMenu}
+      />
     </nav>
   );
 };

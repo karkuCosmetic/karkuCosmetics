@@ -55,39 +55,46 @@ export const Cart = () => {
           <div className="cart-items">
             {cart.map((item, index) => (
               <div key={index} className="cart-item">
-                <img
-                  className="image-cart"
-                  src={item.product.image[0]}
-                  alt={item.product.title}
-                />
-                <div className="product-info-cart">
-                  <p className="title-cart">{item.product.title}</p>
+                <div className="img-title-container">
+                  <div className="item-image-title">
+                    <img
+                      className="image-cart"
+                      src={item.product.image[0]}
+                      alt={item.product.title}
+                    />
+                    <div className="product-info-cart">
+                      <p className="title-cart">{item.product.title}</p>
+                    </div>
+                  </div>
                 </div>
-                <button
-                  className="remove-button"
-                  onClick={() => handleRemoveItem(index)}
-                >
-                  Eliminar
-                </button>
-                <div className="quantity-control">
+                <div className="cart-item-body">
                   <button
-                    className="quantity-button"
-                    onClick={() => handleQuantityChange(index, -1)}
+                    className="remove-button"
+                    onClick={() => handleRemoveItem(index)}
                   >
-                    -
+                    Eliminar
                   </button>
-                  <span className="quantity">{item.quantity}</span>
-                  <button
-                    className="quantity-button"
-                    onClick={() => handleQuantityChange(index, 1)}
-                  >
-                    +
-                  </button>
-                </div>
-                <div className="p-total-price">
-                  <p className="total">
-                    ${(item.product.price * item.quantity).toFixed(2)}
-                  </p>
+                  <div className="quantity-control">
+                    <button
+                      className="quantity-button-less"
+                      onClick={() => handleQuantityChange(index, -1)}
+                    >
+                      -
+                    </button>
+                    <span className="quantity-cart">{item.quantity}</span>
+                    <button
+                      className="quantity-button"
+                      onClick={() => handleQuantityChange(index, 1)}
+                    >
+                      +
+                    </button>
+                  </div>
+
+                  <div className="p-total-price">
+                    <p className="total">
+                      ${(item.product.price * item.quantity).toFixed(2)}
+                    </p>
+                  </div>
                 </div>
               </div>
             ))}
