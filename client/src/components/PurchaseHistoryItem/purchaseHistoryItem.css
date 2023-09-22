@@ -42,9 +42,8 @@
 }
 
 .item-image {
-  width: 3rem;
-  height: 3rem;
-  margin-right: 10px;
+  width: 2rem;
+  height: 2rem;
 }
 
 .item-title {
@@ -66,4 +65,39 @@
   flex-direction: row;
   border-bottom: 1px solid #7b60c8;
   color: #7b60c8;
+  gap: 0.5rem;
+}
+
+.detail-total-buy {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding-inline: 1rem;
+  gap: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.detail-total-buy button {
+  display: flex;
+  flex-wrap: wrap;
+  background: linear-gradient(to bottom right, #7b60c8, #9f8cd4);
+  border: 0;
+  border-radius: 25px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: "quicksand";
+  font-weight: 500;
+  outline: transparent;
+  padding: 0.5rem;
+  text-align: center;
+  text-decoration: none;
+  transition: box-shadow 0.2s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }

@@ -11,6 +11,7 @@
     min-height: 100vh;
     padding: 0.5rem;
     padding-top: 5rem;
+    padding-bottom: 5rem;
   }
   
   .info-user {
@@ -365,4 +366,10 @@
     border-top: 1px solid #7b60c8;
   }
   
+
+  .purchase-history-item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   

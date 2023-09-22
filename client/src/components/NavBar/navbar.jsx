@@ -36,16 +36,15 @@ const Navbar = () => {
           <Link to="/">
             <img src={logoKarkuCircular} alt="Logo de Karku" className="logo" />
           </Link>
-         
-          </div>
+        </div>
         <button
           className={`menu-button ${menuOpen ? "open" : ""}`}
           onClick={toggleMenu}
-          >
+        >
           <span className="menu-icon" />
         </button>
-       
-          <nav className={`nav-links ${menuOpen ? "open" : ""}`}>
+
+        <nav className={`nav-links ${menuOpen ? "open" : ""}`}>
           <NavLink to="/" exact activeClassName="active">
             Inicio
           </NavLink>

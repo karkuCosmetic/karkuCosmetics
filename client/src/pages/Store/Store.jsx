@@ -8,7 +8,10 @@ import { AddCart } from "../../utils/addCart";
 import { getProductDetail } from "../../functions/fetchingProducts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 import RenderSelect from "../../components/Select/select";
+
 const Store = () => {
   const [dataProducts, SetDataProducts] = useState([]);
   const [minPrice, setMinPrice] = useState("");
@@ -45,6 +48,20 @@ const Store = () => {
   const addToCart = (product) => {
     AddCart(product.quantity, product);
     setQuantity(1);
+
+    Swal.fire({
+      position: "top-end",
+      title:"Producto agregado a carrito",
+      showConfirmButton: false,
+      timer: 1500,
+      width: 250,
+      background:"green",
+      customClass:{
+        title: "swal-title",
+        container:"swal-container",
+        content:"swal-content",
+      },
+    });
   };
 
   const CallProducts = async () => {
