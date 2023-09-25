@@ -6,7 +6,11 @@ import "./Profile.css";
 import Navbar from "../../components/NavBar/navbar";
 import Footer from "../../components/Footer/footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleXmark, faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleXmark,
+  faArrowLeft,
+  faArrowRight,
+} from "@fortawesome/free-solid-svg-icons";
 import PurchaseHistoryItem from "../../components/PurchaseHistoryItem/purchaseHistoryItem";
 
 const Profile = () => {
@@ -20,7 +24,7 @@ const Profile = () => {
   });
   const [selectedPurchase, setSelectedPurchase] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const purchasesPerPage = 2;
+  const purchasesPerPage = 5;
 
   const imageProfile = [
     "https://res.cloudinary.com/dqai9sgfs/image/upload/v1693836416/karku/profiles/avatar5_pfvu9n.png",
@@ -97,6 +101,7 @@ const Profile = () => {
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
+    console.log("currentPage:", pageNumber);
   };
 
   return (
@@ -198,7 +203,7 @@ const Profile = () => {
               "No hay compras disponibles."
             )}
           </div>
-          <div className="pagination-top">
+          <div className="pagination-history">
             <button
               className="arrow-button"
               onClick={() => paginate(currentPage - 1)}
@@ -208,7 +213,9 @@ const Profile = () => {
             </button>
             {profile.buys ? (
               <ul>
-                {Array.from({ length: Math.ceil(profile.buys.length / purchasesPerPage) }).map((_, index) => (
+                {Array.from({
+                  length: Math.ceil(profile.buys.length / purchasesPerPage),
+                }).map((_, index) => (
                   <button
                     key={index}
                     className={`pagination-button ${
@@ -228,7 +235,9 @@ const Profile = () => {
               onClick={() => paginate(currentPage + 1)}
               disabled={
                 currentPage >=
-                Math.ceil(profile.buys.length / purchasesPerPage)
+                (profile.buys
+                  ? Math.ceil(profile.buys.length / purchasesPerPage)
+                  : 0)
               }
             >
               <FontAwesomeIcon icon={faArrowRight} />

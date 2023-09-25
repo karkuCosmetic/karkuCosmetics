@@ -5,6 +5,7 @@ import { Payment } from "../../functions/payment";
 import Footer from "../../components/Footer/footer";
 import { GetDecodedCookie } from "../../utils/DecodedCookie";
 
+
 export const Cart = () => {
   const token = GetDecodedCookie("cookieToken");
 
@@ -72,7 +73,7 @@ export const Cart = () => {
                     className="remove-button"
                     onClick={() => handleRemoveItem(index)}
                   >
-                    Eliminar
+                    Borrar
                   </button>
                   <div className="quantity-control">
                     <button

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom"; // Importa useNavigate en lugar de useHistory
 import "./Store.css";
-import { Link } from "react-router-dom";
 import Navbar from "../../components/NavBar/navbar";
 import { getProduct } from "../../functions/fetchingProducts";
 import { AddCart } from "../../utils/addCart";
@@ -51,15 +50,15 @@ const Store = () => {
 
     Swal.fire({
       position: "top-end",
-      title:"Producto agregado a carrito",
+      title: "Producto agregado a carrito",
       showConfirmButton: false,
-      timer: 1500,
+      timer: 1000,
       width: 250,
-      background:"green",
-      customClass:{
+      background: "green",
+      customClass: {
         title: "swal-title",
-        container:"swal-container",
-        content:"swal-content",
+        container: "swal-container",
+        content: "swal-content",
       },
     });
   };
@@ -118,6 +117,12 @@ const Store = () => {
     indexOfFirstProduct,
     indexOfLastProduct
   );
+
+  const navigate = useNavigate(); // Utiliza useNavigate en lugar de useHistory
+
+  const redirectToProductDetail = (productId) => {
+    navigate(`/product/${productId}`); // Utiliza navigate en lugar de history.push
+  };
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -217,44 +222,49 @@ const Store = () => {
                 <FontAwesomeIcon icon={faArrowRight} />
               </button>
             </div>
-
+            <div className="cards-container">
             {currentProducts.map((product, index) => (
               <div key={index} className="product-card">
                 <div className="product-image">
-                  <Link to={`/product/${product._id}`} key={index}>
-                    <img src={product.image[0]} alt={product.title} />
-                  </Link>
+                  <img src={product.image[0]} alt={product.title} />
+                  <div className="detail-info-store">
+                    <p className="detail-title">{product.title}</p>
+                    <p className="price">${product.price}</p>
+                  </div>
                 </div>
-                <div className="detail-info-store">
-                  <p className="detail-title">{product.title}</p>
-                  <p className="detail-price">${product.price}</p>
-                  <div className="buttons-quantity">
-                    <div className="detail-quantity-store">
-                      <button
-                        className="quantity-button"
-                        onClick={() => handleQuantityChange(product, -1)}
-                        disabled={product.quantity <= 1}
-                      >
-                        -
-                      </button>
-                      <span className="quantity-store">{product.quantity}</span>
-                      <button
-                        className="quantity-button"
-                        onClick={() => handleQuantityChange(product, 1)}
-                      >
-                        +
-                      </button>
-                    </div>
+                <div className="buttons-quantity">
+                  <button
+                    className="btn-see-more"
+                    onClick={() => redirectToProductDetail(product._id)}
+                  >
+                    Ver más
+                  </button>
+                  <div className="detail-quantity-store">
                     <button
-                      className="add-to-cart-button-store"
-                      onClick={() => addToCart(product)}
+                      className="quantity-button"
+                      onClick={() => handleQuantityChange(product, -1)}
+                      disabled={product.quantity <= 1}
                     >
-                      Agregar al carrito
+                      -
+                    </button>
+                    <span className="quantity-store">{product.quantity}</span>
+                    <button
+                      className="quantity-button"
+                      onClick={() => handleQuantityChange(product, 1)}
+                    >
+                      +
                     </button>
                   </div>
+                  <button
+                    className="add-to-cart-button-store"
+                    onClick={() => addToCart(product)}
+                  >
+                    Agregar al carrito
+                  </button>
                 </div>
               </div>
             ))}
+            </div>
           </div>
 
           <div className="pagination">
