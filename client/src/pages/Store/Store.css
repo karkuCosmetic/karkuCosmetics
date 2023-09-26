@@ -15,7 +15,7 @@
   padding-bottom: 5%;
   text-transform: capitalize;
   font-family: "quicksand";
-  background-image: url(../../assets/bgStore.png);
+  background-image: url(../../assets/bgStore2.png);
 }
 
 @media (max-width: 870px) {
@@ -139,6 +139,7 @@ a {
   align-items: center;
   width: 100%;
   gap: 0.5rem;
+  cursor: pointer;
 }
 
 @media (max-width: 670px) {
@@ -173,13 +174,14 @@ a {
   gap: 1rem;
 }
 
-.detail-title {
+.title-store{
   text-align: center;
   font-size: 1rem;
+  font-weight: bold;
 }
 
 @media (max-width: 870px) {
-  .detail-title {
+  .title-store {
     margin-top: 0;
   }
 }
@@ -290,12 +292,6 @@ a {
 .add-to-cart-button-store:not([disabled]):hover {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-}
-
-.detail-dimensions {
-  font-weight: bold;
-  color: #7b60c8;
-  padding: 1rem;
 }
 
 .filters-box {

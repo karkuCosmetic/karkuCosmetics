@@ -223,47 +223,47 @@ const Store = () => {
               </button>
             </div>
             <div className="cards-container">
-            {currentProducts.map((product, index) => (
-              <div key={index} className="product-card">
-                <div className="product-image">
-                  <img src={product.image[0]} alt={product.title} />
-                  <div className="detail-info-store">
-                    <p className="detail-title">{product.title}</p>
-                    <p className="price">${product.price}</p>
+              {currentProducts.map((product, index) => (
+                <div key={index} className="product-card">
+                  <div className="product-image"   onClick={() => redirectToProductDetail(product._id)}>
+                    <img src={product.image[0]} alt={product.title} />
+                    <div className="detail-info-store">
+                      <p className="title-store">{product.title}</p>
+                      <p className="price">${product.price}</p>
+                    </div>
+                  </div>
+                  <div className="buttons-quantity">
+                    <button
+                      className="btn-see-more"
+                      onClick={() => redirectToProductDetail(product._id)}
+                    >
+                      Ver más
+                    </button>
+                    <div className="detail-quantity-store">
+                      <button
+                        className="quantity-button"
+                        onClick={() => handleQuantityChange(product, -1)}
+                        disabled={product.quantity <= 1}
+                      >
+                        -
+                      </button>
+                      <span className="quantity-store">{product.quantity}</span>
+                      <button
+                        className="quantity-button"
+                        onClick={() => handleQuantityChange(product, 1)}
+                      >
+                        +
+                      </button>
+                    </div>
+                    <button
+                      className="add-to-cart-button-store"
+                      onClick={() => addToCart(product)}
+                    >
+                      Agregar al carrito
+                    </button>
                   </div>
                 </div>
-                <div className="buttons-quantity">
-                  <button
-                    className="btn-see-more"
-                    onClick={() => redirectToProductDetail(product._id)}
-                  >
-                    Ver más
-                  </button>
-                  <div className="detail-quantity-store">
-                    <button
-                      className="quantity-button"
-                      onClick={() => handleQuantityChange(product, -1)}
-                      disabled={product.quantity <= 1}
-                    >
-                      -
-                    </button>
-                    <span className="quantity-store">{product.quantity}</span>
-                    <button
-                      className="quantity-button"
-                      onClick={() => handleQuantityChange(product, 1)}
-                    >
-                      +
-                    </button>
-                  </div>
-                  <button
-                    className="add-to-cart-button-store"
-                    onClick={() => addToCart(product)}
-                  >
-                    Agregar al carrito
-                  </button>
-                </div>
-              </div>
-            ))}
+              ))}
             </div>
           </div>
 
