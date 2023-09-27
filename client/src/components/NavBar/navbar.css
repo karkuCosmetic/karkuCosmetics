@@ -4,7 +4,7 @@
   position: sticky;
   top: 0;
   z-index: 999;
-  height: 100px;
+  height: 4.5rem;
   display: flex;
   justify-content: space-between;
 }
@@ -23,8 +23,8 @@
 }
 
 .logo {
-  width: 5rem;
-  height: 5rem;
+  width: 3.5rem;
+  height: 3.5rem;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 50%;
   cursor: pointer;

@@ -88,7 +88,6 @@
   justify-content: center;
   text-align: center;
   font-size: 1.5rem;
-  font-weight: bold;
   font-family: "quicksand";
   user-select: none;
   -webkit-user-select: none;
@@ -140,7 +139,7 @@
 
 @media (max-width: 670px) {
   .detail-quantity {
-    gap: 0.5rem;
+    gap: 2rem;
   }
 }
 
@@ -232,7 +231,7 @@
   -webkit-user-select: none;
   touch-action: manipulation;
   white-space: nowrap;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 6px;
 }
 
 .detail-buy-button:not([disabled]):focus {
@@ -390,10 +389,20 @@
     0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
 }
 
+@media (max-width: 626px) {
+  .btn-back-container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 1.5rem;
+  }
+}
+
 .go-back-btn-detail {
   background: linear-gradient(to bottom right, #ef4765, #ff9a5a);
   border: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   border-radius: 25px;
   color: #ffffff;
   cursor: pointer;
@@ -404,12 +413,14 @@
   outline: transparent;
   padding: 0.5rem;
   text-align: center;
+  align-items: center;
   text-decoration: none;
   transition: box-shadow 0.2s ease-in-out;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
   white-space: nowrap;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 6px;
 }
 
 .go-back-btn-detail:not([disabled]):focus {
@@ -426,6 +437,7 @@
 
 @media (max-width: 651px) {
   .go-back-btn-detail {
-    margin-top: 2rem;
+    margin-top: 1rem;
+    font-size: 12px;
   }
 }
