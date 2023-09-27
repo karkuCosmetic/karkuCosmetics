@@ -18,10 +18,9 @@
   flex-wrap: wrap;
   font-family: "Quicksand";
   background-color: #7b60c8;
-  margin-top: 5rem;
-  padding-left: 5rem;
-  padding-right: 5rem;
-  padding: 2rem;
+  max-width: 50rem;
+  margin-top: 2rem;
+  padding: 1.5rem;
   border-radius: 15px;
   color: white;
 }
@@ -37,9 +36,9 @@
   flex-direction: column;
   justify-content: center;
   text-align: left;
-  padding: 2rem;
-  margin-bottom: 5rem;
-  margin-top: 5rem;
+  padding: 1.5rem;
+  margin-bottom: 3rem;
+  margin-top: 2rem;
   background-color: #7b60c8;
   border-radius: 10px;
   box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,

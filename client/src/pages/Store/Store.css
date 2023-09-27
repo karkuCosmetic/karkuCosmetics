@@ -410,6 +410,7 @@ a {
 @media (max-width: 870px) {
   .sidebar {
     width: 100%;
+    max-height: 12rem;
     position: static;
     align-items: center;
     text-align: center;
