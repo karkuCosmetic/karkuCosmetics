@@ -49,12 +49,12 @@ const Store = () => {
     setQuantity(1);
 
     Swal.fire({
-      position: "top-end",
+      position: "top",
       title: "Producto agregado a carrito",
       showConfirmButton: false,
       timer: 1000,
       width: 250,
-      background: "green",
+      background: "#088046",
       customClass: {
         title: "swal-title",
         container: "swal-container",
@@ -135,7 +135,7 @@ const Store = () => {
         <div className={`store-container ${isSelectOpen ? "blur" : ""}`}>
           <div className="product-container">
             <div className="sidebar">
-              <h2>Categorías</h2>
+              <h2 className="sidebar-categories">Categorías</h2>
               <div className="render-select">
                 <RenderSelect
                   TodosCategories={TodosCategories}
@@ -255,6 +255,7 @@ const Store = () => {
                         +
                       </button>
                     </div>
+                    
                     <button
                       className="add-to-cart-button-store"
                       onClick={() => addToCart(product)}

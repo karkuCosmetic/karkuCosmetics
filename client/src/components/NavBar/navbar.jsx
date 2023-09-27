@@ -48,10 +48,10 @@ const Navbar = () => {
           <NavLink to="/" exact activeClassName="active">
             Inicio
           </NavLink>
-          <NavLink to="/about" activeClassName="active">
+          <NavLink to="#about" activeClassName="active">
             Sobre Nosotros
           </NavLink>
-          <NavLink to="/gallery" activeClassName="active">
+          <NavLink to="#gallery" activeClassName="active">
             Galería
           </NavLink>
           <NavLink to="/contact" activeClassName="active">
