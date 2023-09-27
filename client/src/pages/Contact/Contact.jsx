@@ -10,7 +10,7 @@ export const Contact = () => {
     user_name: "Nombre",
     user_email: "Apellido",
     user_phone: "Telefono",
-    user_message: "",
+    user_message: "Mensaje",
   });
 
   const form = useRef();
@@ -98,7 +98,7 @@ export const Contact = () => {
             />
             <label>Mensaje</label>
             <textarea
-              name="user_mesagge"
+              name="user_message"
               onChange={handlerChange}
               placeholder="Mensaje"
               required

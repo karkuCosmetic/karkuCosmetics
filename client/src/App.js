@@ -11,7 +11,7 @@ import { GetDecodedCookie } from "./utils/DecodedCookie";
 import { DecodedToken } from "./utils/DecodedToken";
 import { getUserDetail } from "./functions/fetchingUsers";
 import { useEffect, useState } from "react";
-import { ProtectedRouteUser } from "./pages/ProtectedRoutes/ProtectedRouteUser";
+import { ProtectedRoute } from "./pages/ProtectedRoutes/ProtectedRoute";
 import { Contact } from "./pages/Contact/Contact";
 import DetailPage from "./pages/DetailPage/DetailPage";
 import Store from "./pages/Store/Store";
@@ -19,7 +19,6 @@ import NewPasswordPage from "./pages/NewPasswordPage/NewPasswordPage";
 import Profile from "./pages/Profile/Profile";
 
 function App() {
-
   return (
     <>
       <Routes>
@@ -32,28 +31,22 @@ function App() {
         <Route path="/new-password/:token" Component={NewPasswordPage} />
         <Route path="/cart" Component={Cart} />
 
-        {/* <Route element={<ProtectedRouteUser isAllowed={true} />}>
-          <Route path="/profile" Component={Profile} />
-        </Route> */}
-
         <Route
           path="/profile"
           element={
-            <ProtectedRouteUser>
+            <ProtectedRoute>
               <Profile />
-            </ProtectedRouteUser>
+            </ProtectedRoute>
           }
         />
-
         <Route
+          path="/admin/home"
           element={
-            <ProtectedRouteAdmin
-              isAllowed={true} //permite ingresa a esa ruta
-            />
+            <ProtectedRoute>
+              <HomeAdmin />
+            </ProtectedRoute>
           }
-        >
-          <Route path="/admin" Component={HomeAdmin} />
-        </Route>
+        />
       </Routes>
     </>
   );
