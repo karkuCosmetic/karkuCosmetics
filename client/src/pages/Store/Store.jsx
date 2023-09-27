@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom"; // Importa useNavigate en lugar de useHistory
 import "./Store.css";
-import { Link } from "react-router-dom";
 import Navbar from "../../components/NavBar/navbar";
 import { getProduct } from "../../functions/fetchingProducts";
 import { AddCart } from "../../utils/addCart";
 import { getProductDetail } from "../../functions/fetchingProducts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 import RenderSelect from "../../components/Select/select";
+
 const Store = () => {
   const [dataProducts, SetDataProducts] = useState([]);
   const [minPrice, setMinPrice] = useState("");
@@ -45,6 +47,20 @@ const Store = () => {
   const addToCart = (product) => {
     AddCart(product.quantity, product);
     setQuantity(1);
+
+    Swal.fire({
+      position: "top-end",
+      title: "Producto agregado a carrito",
+      showConfirmButton: false,
+      timer: 1000,
+      width: 250,
+      background: "green",
+      customClass: {
+        title: "swal-title",
+        container: "swal-container",
+        content: "swal-content",
+      },
+    });
   };
 
   const CallProducts = async () => {
@@ -101,6 +117,12 @@ const Store = () => {
     indexOfFirstProduct,
     indexOfLastProduct
   );
+
+  const navigate = useNavigate(); // Utiliza useNavigate en lugar de useHistory
+
+  const redirectToProductDetail = (productId) => {
+    navigate(`/product/${productId}`); // Utiliza navigate en lugar de history.push
+  };
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -200,18 +222,23 @@ const Store = () => {
                 <FontAwesomeIcon icon={faArrowRight} />
               </button>
             </div>
-
-            {currentProducts.map((product, index) => (
-              <div key={index} className="product-card">
-                <div className="product-image">
-                  <Link to={`/product/${product._id}`} key={index}>
+            <div className="cards-container">
+              {currentProducts.map((product, index) => (
+                <div key={index} className="product-card">
+                  <div className="product-image"   onClick={() => redirectToProductDetail(product._id)}>
                     <img src={product.image[0]} alt={product.title} />
-                  </Link>
-                </div>
-                <div className="detail-info-store">
-                  <p className="detail-title">{product.title}</p>
-                  <p className="detail-price">${product.price}</p>
+                    <div className="detail-info-store">
+                      <p className="title-store">{product.title}</p>
+                      <p className="price">${product.price}</p>
+                    </div>
+                  </div>
                   <div className="buttons-quantity">
+                    <button
+                      className="btn-see-more"
+                      onClick={() => redirectToProductDetail(product._id)}
+                    >
+                      Ver más
+                    </button>
                     <div className="detail-quantity-store">
                       <button
                         className="quantity-button"
@@ -236,8 +263,8 @@ const Store = () => {
                     </button>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
 
           <div className="pagination">

@@ -23,9 +23,10 @@ const PurchaseHistoryItem = ({ purchase }) => {
   return (
     <div className="purchase-item">
       <div className="purchase-total">
-      <h4 className="date-purchase">{formatDateModal(purchase.fecha)} - </h4>
+        <h4 className="date-purchase">{formatDateModal(purchase.fecha)} -</h4>
         {purchase.TotalPagado && `Total: $${purchase.TotalPagado}`}
-        {!purchase.TotalPagado && `Total: ${calculateTotal()}`}
+        {!purchase.TotalPagado && `Total: ${calculateTotal()} `}
+        <div>- {purchase.entrega}</div>
       </div>
       {purchase.itemsComprados.map((item, index) => (
         <div className="purchase-item-details" key={index}>
@@ -36,7 +37,6 @@ const PurchaseHistoryItem = ({ purchase }) => {
         </div>
       ))}
     </div>
-    
   );
 };
 export default PurchaseHistoryItem;
