@@ -117,7 +117,7 @@ export const Contact = () => {
             placeholder="Email"
             required
           />
-          <label>Numero</label>
+          <label>Número</label>
           <input
             className="input-contact-phone"
             type="number"

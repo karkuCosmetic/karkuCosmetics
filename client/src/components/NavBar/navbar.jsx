@@ -60,27 +60,27 @@ const Navbar = () => {
         </button>
 
         <nav className={`nav-links ${menuOpen ? "open" : ""}`}>
-          <NavLink to="/" exact activeClassName="active">
+          <NavLink to="/" exact className="active">
             Inicio
           </NavLink>
-          <NavLink to="#about" activeClassName="active">
+          <NavLink to="#about" className="active">
             Sobre Nosotros
           </NavLink>
-          <NavLink to="#gallery" activeClassName="active">
+          <NavLink to="#gallery" className="active">
             Galería
           </NavLink>
-          <NavLink to="/contact" activeClassName="active">
+          <NavLink to="/contact" className="active">
             Contacto
           </NavLink>
-          <NavLink to="/store" activeClassName="active">
+          <NavLink to="/store" className="active">
             Tienda
           </NavLink>
-          <NavLink to="/cart" activeClassName="active">
+          <NavLink to="/cart" className="active">
             Carrito
           </NavLink>
           {login === true ? (
             <>
-              <NavLink to="/profile" activeClassName="active">
+              <NavLink to="/profile" className="active">
                 Ir a Perfil
               </NavLink>
               <a href="#" onClick={handleLogout} alt="Cerrar Sesion">
