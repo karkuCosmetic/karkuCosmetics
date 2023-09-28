@@ -6,14 +6,19 @@
   z-index: 999;
   height: 4.5rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .container {
   width: 100%;
+
   display: flex;
   justify-content: space-between;
-  padding: 0.5rem;
+  padding: 1rem;
+}
+
+@media (min-width:1630px){
+
 }
 
 .navbar-left {

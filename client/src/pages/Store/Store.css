@@ -8,6 +8,7 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
+  align-content: center;
   overflow: hidden;
   background-size: cover;
   background-repeat: no-repeat;
@@ -28,6 +29,7 @@
 .sidebar {
   margin-top: 4rem;
   width: 15rem;
+  height: 100%;
   background-color: #f8f8f8;
   padding: 1.5rem;
   box-sizing: border-box;
@@ -89,6 +91,7 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  max-width: 1400px;
   gap: 1rem;
   padding-inline: 2rem;
 }
@@ -97,6 +100,7 @@
   .cards-container {
     padding-inline: 0;
     gap: 1rem;
+    margin-top: 1rem;
   }
 }
 
@@ -459,65 +463,6 @@ a {
   padding-bottom: 1.5rem;
   padding-top: 1.5rem;
   padding-bottom: 5rem;
-}
-
-.pagination-top {
-  display: flex;
-  justify-content: center;
-  background-color: transparent;
-  padding-bottom: 1rem;
-  padding-top: 1rem;
-}
-
-@media screen and (min-width: 600px) {
-  .pagination-top {
-    display: none;
-  }
-}
-
-.pagination-top button {
-  font-family: "figtree";
-  border: none;
-  color: #333;
-  margin: 0 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  border-radius: 50%;
-  width: 1.5rem;
-  height: 1.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.pagination-top button:hover {
-  background-color: #f38f82;
-}
-
-.pagination-top button.active {
-  background-color: #f38f82;
-  color: #fff;
-}
-
-.pagination-top .arrow-button {
-  color: #f38f82;
-  font-size: 14px;
-  font-weight: bold;
-  padding: 0;
-  width: 1.5rem;
-  height: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.pagination-top .arrow-button:hover {
-  background-color: #f38f82;
-  color: wheat;
-}
-
-.pagination-top .arrow-button:disabled {
-  color: #ffffff;
-  cursor: not-allowed;
 }
 
 .pagination button {

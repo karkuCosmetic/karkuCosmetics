@@ -118,10 +118,10 @@ const Store = () => {
     indexOfLastProduct
   );
 
-  const navigate = useNavigate(); // Utiliza useNavigate en lugar de useHistory
+  const navigate = useNavigate(); 
 
   const redirectToProductDetail = (productId) => {
-    navigate(`/product/${productId}`); // Utiliza navigate en lugar de history.push
+    navigate(`/product/${productId}`); 
   };
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -183,44 +183,6 @@ const Store = () => {
                   </button>
                 </div>
               </div>
-            </div>
-            <div className="pagination-top">
-              <button
-                className="arrow-button"
-                onClick={() => paginate(currentPage - 1)}
-                disabled={currentPage === 1}
-              >
-                <FontAwesomeIcon icon={faArrowLeft} />
-              </button>
-              {filteredProducts.length > productsPerPage &&
-                Array.from(
-                  {
-                    length: Math.ceil(
-                      filteredProducts.length / productsPerPage
-                    ),
-                  },
-                  (_, index) => (
-                    <button
-                      key={index}
-                      className={`pagination-button ${
-                        currentPage === index + 1 ? "active" : ""
-                      }`}
-                      onClick={() => paginate(index + 1)}
-                    >
-                      {index + 1}
-                    </button>
-                  )
-                )}
-              <button
-                className="arrow-button"
-                onClick={() => paginate(currentPage + 1)}
-                disabled={
-                  currentPage >=
-                  Math.ceil(filteredProducts.length / productsPerPage)
-                }
-              >
-                <FontAwesomeIcon icon={faArrowRight} />
-              </button>
             </div>
             <div className="cards-container">
               {currentProducts.map((product, index) => (

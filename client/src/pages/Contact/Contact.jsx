@@ -1,5 +1,7 @@
 import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 import { UpdateAdmin } from "../../functions/FetchAdmin";
 import "./Contact.css";
 import Navbar from "../../components/NavBar/navbar";
@@ -7,13 +9,15 @@ import Footer from "../../components/Footer/footer";
 
 export const Contact = () => {
   const [dataMensaje, setDataMensaje] = useState({
-    user_name: "Nombre",
-    user_email: "Apellido",
-    user_phone: "Telefono",
+    user_name: "",
+    user_email: "",
+    user_phone: "",
     user_message: "",
   });
 
   const form = useRef();
+  const MySwal = withReactContent(Swal);
+
   const sendEmail = (e) => {
     e.preventDefault();
 
@@ -27,9 +31,32 @@ export const Contact = () => {
       .then(
         (result) => {
           console.log(result.text);
+          MySwal.fire({
+            icon: "success",
+            title: "Mensaje enviado. Te responderemos a la brevedad.",
+            iconColor: "#7b60c8",
+            background: "white",
+            confirmButtonColor: "#7b60c8",
+            customClass: {
+              title: "swal-title-contact",
+            },
+          });
+
+          setDataMensaje({
+            user_name: "",
+            user_email: "",
+            user_phone: "",
+            user_message: "",
+          });
         },
         (error) => {
           console.log(error.text);
+          MySwal.fire({
+            title: "Error al enviar el mensaje",
+            icon: "error",
+            text: error.text,
+            confirmButtonColor: "#FF0000",
+          });
         }
       );
 
@@ -66,47 +93,50 @@ export const Contact = () => {
           envianos tu mensaje y te responderemos al a brevedad.
         </h3>
 
-        <div>
-          <form className="contact-form" ref={form} onSubmit={sendEmail}>
-            <label>Nombre</label>
-            <input
-              className="input-contact"
-              type="text"
-              name="user_name"
-              onChange={handlerChange}
-              placeholder="Nombre"
-              required
-            />
-            <label>Email</label>
-            <input
-              className="input-contact"
-              type="email"
-              name="user_email"
-              onChange={handlerChange}
-              placeholder="Email"
-              required
-            />
-            <label>Numero</label>
-            <input
-              className="input-contact-phone"
-              type="number"
-              name="user_phone"
-              onChange={handlerChange}
-              onKeyPress={handleKeyPress}
-              placeholder="Numero telefonico"
-              required
-            />
-            <label>Mensaje</label>
-            <textarea
-              name="user_mesagge"
-              onChange={handlerChange}
-              placeholder="Mensaje"
-              required
-            />
-            <input type="submit" value="Enviar" />
-          </form>
-        </div>
+        <form className="contact-form" ref={form} onSubmit={sendEmail}>
+          <label>Nombre</label>
+          <input
+            className="input-contact"
+            type="text"
+            name="user_name"
+            value={dataMensaje.user_name}
+            onChange={handlerChange}
+            placeholder="Nombre"
+            required
+          />
+          <label>Email</label>
+          <input
+            className="input-contact"
+            type="email"
+            name="user_email"
+            value={dataMensaje.user_email}
+            onChange={handlerChange}
+            placeholder="Email"
+            required
+          />
+          <label>Numero</label>
+          <input
+            className="input-contact-phone"
+            type="number"
+            name="user_phone"
+            value={dataMensaje.user_phone}
+            onChange={handlerChange}
+            onKeyPress={handleKeyPress}
+            placeholder="Numero telefonico"
+            required
+          />
+          <label>Mensaje</label>
+          <textarea
+            name="user_message"
+            value={dataMensaje.user_message}
+            onChange={handlerChange}
+            placeholder="Mensaje"
+            required
+          />
+          <input type="submit" value="Enviar" />
+        </form>
       </div>
+
       <Footer />
     </>
   );

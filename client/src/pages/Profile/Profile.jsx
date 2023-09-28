@@ -187,9 +187,8 @@ const Profile = () => {
             <h3 className="store-buys-title">Historial de Compras</h3>
           </div>
           <div className="buys-history">
-            {currentPurchases.length > 0 ? (
-              <div>
-                {currentPurchases.reverse().map((purchase, index) => (
+            {currentPurchases.length > 0
+              ? currentPurchases.reverse().map((purchase, index) => (
                   <div
                     key={index}
                     className="purchase-history-item"
@@ -197,11 +196,8 @@ const Profile = () => {
                   >
                     <PurchaseHistoryItem purchase={purchase} />
                   </div>
-                ))}
-              </div>
-            ) : (
-              "No hay compras disponibles."
-            )}
+                ))
+              : "No hay compras disponibles."}
           </div>
           <div className="pagination-history">
             <button
