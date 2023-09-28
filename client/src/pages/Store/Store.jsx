@@ -24,6 +24,7 @@ const Store = () => {
 
   useEffect(() => {
     CallProducts();
+    window.scrollTo(0, 0);
   }, [id]);
 
   const handleQuantityChange = (product, amount) => {
@@ -111,10 +112,10 @@ const Store = () => {
     indexOfLastProduct
   );
 
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const redirectToProductDetail = (productId) => {
-    navigate(`/product/${productId}`); 
+    navigate(`/product/${productId}`);
   };
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -210,7 +211,7 @@ const Store = () => {
                         +
                       </button>
                     </div>
-                    
+
                     <button
                       className="add-to-cart-button-store"
                       onClick={() => addToCart(product)}

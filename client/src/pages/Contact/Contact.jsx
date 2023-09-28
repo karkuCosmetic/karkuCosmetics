@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -84,6 +84,12 @@ export const Contact = () => {
     setDataMensaje({ ...dataMensaje, [property]: value });
   };
 
+  const MAX_MESSAGE_LENGTH = 140; 
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <Navbar />
@@ -126,7 +132,8 @@ export const Contact = () => {
           <textarea
             name="user_message"
             onChange={handlerChange}
-            placeholder="Mensaje"
+            placeholder="Máximo 140 carácteres."
+            maxLength={MAX_MESSAGE_LENGTH}
             required
           />
           <input type="submit" value="Enviar" />

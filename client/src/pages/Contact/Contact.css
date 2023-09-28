@@ -19,7 +19,7 @@
   font-family: "Quicksand";
   background-color: #7b60c8;
   max-width: 50rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
   padding: 1.5rem;
   border-radius: 15px;
   color: white;
@@ -76,12 +76,13 @@ input[type="password"],
 .input-contact-phone,
 textarea {
   width: 100%;
-  padding: 1rem;
+  padding: 0.8rem;
   margin-bottom: 1rem;
   border: 1px solid #ccc;
   border-radius: 5px;
-  font-size: 14px;
+  font-size: 12px;
   font-family: "quicksand";
+  font-style: italic;
   resize: none;
   border: none;
 }
