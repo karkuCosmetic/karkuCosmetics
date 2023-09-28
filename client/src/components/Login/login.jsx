@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { postlogin } from "../../functions/Auth";
 import "./login.css";
+import Swal from "sweetalert2";
 
 const Login = ({ formPassword, setFormPassword }) => {
   const [status, setStatus] = useState("");
@@ -54,17 +55,6 @@ const Login = ({ formPassword, setFormPassword }) => {
     return isValid;
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (validateForm()) {
-      const credential = await postlogin(formInput);
-      if (credential) {
-        setStatus(credential.status);
-      }
-    }
-  };
-
   const navigate = useNavigate();
   useEffect(() => {
     if (status === 200) {
@@ -73,6 +63,36 @@ const Login = ({ formPassword, setFormPassword }) => {
       console.log("error de session");
     }
   }, [status]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (validateForm()) {
+      try {
+        const credential = await postlogin(formInput);
+        console.log(credential);
+
+        if (credential.status === 200) {
+          navigate("/");
+        } else {
+          Swal.fire({
+            title: "Error",
+            text: "El email o la contraseña son incorrectos. Por favor, inténtalo nuevamente.",
+            icon: "error",
+            confirmButtonColor: "#d33",
+          });
+        }
+      } catch (error) {
+        console.error("Error al realizar la solicitud:", error);
+        Swal.fire({
+          title: "Error",
+          text: "El correo o la contraseña son incorrectos. Por favor, inténtalo nuevamente.",
+          icon: "error",
+          confirmButtonColor: "#d33",
+        });
+      }
+    }
+  };
 
   return (
     <div>

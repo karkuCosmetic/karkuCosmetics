@@ -1,26 +1,29 @@
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
 .contact-container {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
+  justify-content: center;
   text-align: center;
   background-image: url(../../assets/bgContact.png);
   background-size: cover;
   background-repeat: no-repeat;
-  background-attachment: fixed;
-  min-height: 87vh;
   padding: 1.5rem;
+  height: 90vh;
 }
 
 .contact-container h3 {
   display: flex;
-  flex-direction: column;
   flex-wrap: wrap;
   font-family: "Quicksand";
   background-color: #7b60c8;
   max-width: 50rem;
   margin-top: 1rem;
-  padding: 1.5rem;
+  padding: 1rem;
   border-radius: 15px;
   color: white;
 }
@@ -28,6 +31,7 @@
 @media screen and (max-width: 400px) {
   .contact-container h3 {
     width: 100%;
+    justify-content: center;
   }
 }
 
@@ -53,7 +57,7 @@
     flex-direction: column;
     justify-content: center;
     text-align: left;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     margin-top: 2rem;
     background-color: #7b60c8;
     border-radius: 10px;
@@ -68,6 +72,11 @@ label {
   color: white;
   font-weight: bold;
   font-family: "quicksand";
+  border: none;
+}
+
+textarea:focus {
+  outline: none;
 }
 
 input[type="text"],

@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { postRegister } from "../../functions/Auth";
 import "./register.css";
+import Swal from "sweetalert2";
 
 export const Register = () => {
-  const [formInput, setFormInput] = useState({
+  const initialFormInput = {
     email: "",
     password: "",
     phone: "",
-  });
+  };
+
+  const [formInput, setFormInput] = useState(initialFormInput);
 
   const handleKeyPress = (event) => {
     const validCharacters = /^[0-9]*$/;
@@ -31,7 +34,31 @@ export const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    postRegister(formInput);
+
+    postRegister(formInput)
+      .then(() => {
+        Swal.fire({
+          title: "Genial",
+          text: "Ahora verifica tu cuenta a través del correo electrónico que hemos enviado al email que ingresaste.",
+          icon: "success",
+          iconColor: "#7b60c8",
+          background: "white",
+          confirmButtonColor: "#7b60c8",
+          customClass: {
+            title: "custom-title",
+          },
+        });
+        setFormInput(initialFormInput);
+      })
+      .catch((error) => {
+        console.error(error);
+        Swal.fire({
+          title: "Error",
+          text: "Hubo un error al registrarse. Por favor, inténtalo nuevamente.",
+          icon: "error",
+          confirmButtonColor: "#d33",
+        });
+      });
   };
 
   return (

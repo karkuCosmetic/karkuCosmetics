@@ -35,7 +35,6 @@ export const Contact = () => {
             icon: "success",
             title: "Mensaje enviado. Te responderemos a la brevedad.",
             iconColor: "#7b60c8",
-            background: "white",
             confirmButtonColor: "#7b60c8",
             customClass: {
               title: "swal-title-contact",

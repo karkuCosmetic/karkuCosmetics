@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignOut } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { GetDecodedCookie } from "../../utils/DecodedCookie";
+import Swal from "sweetalert2";
+
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -25,8 +27,21 @@ const Navbar = () => {
   }, []);
 
   const handleLogout = () => {
-    document.cookie = encodeURIComponent("cookieToken") + "=" + "";
-    window.location.reload();
+    Swal.fire({
+      title: "¿Estás seguro de que deseas cerrar sesión?",
+      text: "¡Tu sesión actual se cerrará!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, cerrar sesión",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        document.cookie = encodeURIComponent("cookieToken") + "=" + "";
+        window.location.href = "/login";
+      }
+    });
   };
 
   return (
