@@ -4,7 +4,6 @@ import "./Store.css";
 import Navbar from "../../components/NavBar/navbar";
 import { getProduct } from "../../functions/fetchingProducts";
 import { AddCart } from "../../utils/addCart";
-import { getProductDetail } from "../../functions/fetchingProducts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
@@ -25,13 +24,7 @@ const Store = () => {
 
   useEffect(() => {
     CallProducts();
-    callProductDetail(id);
   }, [id]);
-
-  const callProductDetail = async (id) => {
-    const data = await getProductDetail(id);
-    setDetailProduct(data.product);
-  };
 
   const handleQuantityChange = (product, amount) => {
     const updatedProducts = dataProducts.map((p) => {

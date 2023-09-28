@@ -12,7 +12,7 @@ export const Contact = () => {
     user_name: "",
     user_email: "",
     user_phone: "",
-    user_message: "",
+    user_message: "Mensaje",
   });
 
   const form = useRef();
@@ -23,10 +23,10 @@ export const Contact = () => {
 
     emailjs
       .sendForm(
-        "service_s836qxd",
-        "template_wqs3znu",
+        process.env.REACT_APP_SERVICE_ID,
+        process.env.REACT_APP_TEMPLATE_ID,
         form.current,
-        "-0s9Tt65BXxLivqvY"
+        process.env.REACT_APP_PUBLIC_KEY
       )
       .then(
         (result) => {
@@ -99,7 +99,6 @@ export const Contact = () => {
             className="input-contact"
             type="text"
             name="user_name"
-            value={dataMensaje.user_name}
             onChange={handlerChange}
             placeholder="Nombre"
             required
@@ -109,7 +108,6 @@ export const Contact = () => {
             className="input-contact"
             type="email"
             name="user_email"
-            value={dataMensaje.user_email}
             onChange={handlerChange}
             placeholder="Email"
             required
@@ -119,7 +117,6 @@ export const Contact = () => {
             className="input-contact-phone"
             type="number"
             name="user_phone"
-            value={dataMensaje.user_phone}
             onChange={handlerChange}
             onKeyPress={handleKeyPress}
             placeholder="Numero telefonico"
@@ -128,7 +125,6 @@ export const Contact = () => {
           <label>Mensaje</label>
           <textarea
             name="user_message"
-            value={dataMensaje.user_message}
             onChange={handlerChange}
             placeholder="Mensaje"
             required

@@ -11,7 +11,7 @@ import { GetDecodedCookie } from "./utils/DecodedCookie";
 import { DecodedToken } from "./utils/DecodedToken";
 import { getUserDetail } from "./functions/fetchingUsers";
 import { useEffect, useState } from "react";
-import { ProtectedRouteUser } from "./pages/ProtectedRoutes/ProtectedRouteUser";
+import { ProtectedRoute } from "./pages/ProtectedRoutes/ProtectedRoute";
 import { Contact } from "./pages/Contact/Contact";
 import DetailPage from "./pages/DetailPage/DetailPage";
 import Store from "./pages/Store/Store";
@@ -19,25 +19,6 @@ import NewPasswordPage from "./pages/NewPasswordPage/NewPasswordPage";
 import Profile from "./pages/Profile/Profile";
 
 function App() {
-  const [rol, SetRol] = useState();
-
-  // poner el loader
-  useEffect(() => {
-    const token = GetDecodedCookie("cookieToken");
-    if (token) {
-      let { uid } = DecodedToken(token);
-
-      const CallUsers = async (uid) => {
-        const info = await getUserDetail(uid); //info hay que revisarla ahora porque se cambio y devuelve un obj condicionado o user: o admin:
-        SetRol(info.Rol);
-      };
-
-      if (uid) {
-        CallUsers(uid);
-      }
-    }
-  }, []);
-
   return (
     <>
       <Routes>
@@ -50,19 +31,22 @@ function App() {
         <Route path="/new-password/:token" Component={NewPasswordPage} />
         <Route path="/cart" Component={Cart} />
 
-        <Route element={<ProtectedRouteUser isAllowed={true} />}>
-          <Route path="/profile" Component={Profile} />
-        </Route>
-
         <Route
+          path="/profile"
           element={
-            <ProtectedRouteAdmin
-              isAllowed={true} //permite ingresa a esa ruta
-            />
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
           }
-        >
-          <Route path="/admin" Component={HomeAdmin} />
-        </Route>
+        />
+        <Route
+          path="/admin/home"
+          element={
+            <ProtectedRoute>
+              <HomeAdmin />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </>
   );

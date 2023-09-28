@@ -29,7 +29,7 @@ export const createOrder = async (req, res) => {
         failure: "http://localhost:3000/cart",
         pending: "http://localhost:3000/store",
       },
-      notification_url: "https://69b0-190-19-78-141.ngrok.io/payment/webhook",
+      notification_url: "https://f13b-190-19-78-141.ngrok.io/payment/webhook",
     };
 
     const result = await mercadopago.preferences.create(preference);
