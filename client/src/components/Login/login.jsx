@@ -56,13 +56,6 @@ const Login = ({ formPassword, setFormPassword }) => {
   };
 
   const navigate = useNavigate();
-  useEffect(() => {
-    if (status === 200) {
-      navigate("/");
-    } else {
-      console.log("error de session");
-    }
-  }, [status]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

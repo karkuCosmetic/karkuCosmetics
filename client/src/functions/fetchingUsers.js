@@ -18,7 +18,7 @@ export const PutUser = async (uid, value, token) => {
   console.log(uid,value,token);
   try {
     let response;
-    response = await axios.put(`https://karku-cosmetics-4dsy.vercel.app/user/${uid}`, value, {
+    response = await axios.put(`http://localhost:3001/user/${uid}`, value, {
       headers: { "user-token": token },
     });
     return response.data;
