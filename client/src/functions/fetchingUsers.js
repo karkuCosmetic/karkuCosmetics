@@ -46,3 +46,13 @@ export const UpdatePassword=async(value)=>{//value puede recibir un email o pass
     
   }
 }
+export const resendConfirmationEmail=async(email)=>{//value puede recibir un email o password
+  try {
+    console.log(email);
+    await axios.post(`http://localhost:3001/user/reconfirmemail`,email)
+
+  } catch (error) {
+    
+  }
+}
+
