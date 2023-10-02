@@ -12,13 +12,6 @@ export const Register = () => {
 
   const [formInput, setFormInput] = useState(initialFormInput);
 
-  const handleKeyPress = (event) => {
-    const validCharacters = /^[0-9]*$/;
-    if (!validCharacters.test(event.key)) {
-      event.preventDefault();
-    }
-  };
-
   const handlerChange = (event) => {
     const property = event.target.name;
     let value = event.target.value;
@@ -81,10 +74,9 @@ export const Register = () => {
           required
         />
         <input
-          type="text"
+          type="number"
           name="phone"
           placeholder="Escribe un teléfono"
-          onKeyPress={handleKeyPress}
           onChange={handlerChange}
           value={formInput.phone}
           required

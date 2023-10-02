@@ -1,9 +1,11 @@
-.login-container {
+.confirm-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem;
-  padding-top: 15rem;
+  background-image: url(../../assets/bgContact.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
 }
 
 .confirm-hello {
@@ -13,11 +15,12 @@
   align-items: center;
   background-color: #f38f82;
   color: white;
-  padding: 2rem;
+  padding: 1rem;
   border-radius: 15px;
   gap: 10px;
-  margin-bottom: 5rem;
+  margin-top: 20rem;
 }
+
 .text-hello {
   margin-bottom: 0;
   text-align: center;

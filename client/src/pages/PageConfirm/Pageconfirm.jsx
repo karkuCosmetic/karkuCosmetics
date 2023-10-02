@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./Pageconfirm.css";
-import Footer from "../../components/Footer/footer";
 import { useParams } from "react-router-dom";
 import { DecodedToken } from "../../utils/DecodedToken";
 import { ConfirmEmail } from "../../functions/fetchingUsers";
@@ -24,7 +23,7 @@ const PageConfirm = () => {
   return (
     <div>
       <div>
-        <div className="login-container">
+        <div className="confirm-container">
           <div className="confirm-hello">
             <h2 className="text-hello">
               Confirma haciendo click en el siguiente botón
@@ -35,7 +34,6 @@ const PageConfirm = () => {
           </button>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };
