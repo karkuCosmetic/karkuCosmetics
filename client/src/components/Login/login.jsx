@@ -67,33 +67,22 @@ const Login = ({ formPassword, setFormPassword }) => {
 
         if (credential.verify === false) {
           Swal.fire({
-            title: "Debes verificar tu cuenta antes de iniciar sesión",
-            input: "text",
-            inputAttributes: {
-              autocapitalize: "off",
-            },
-            cancelButtonText: "Cancelar",
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
             showCancelButton: true,
-            confirmButtonText: "Reenviar correo",
-            showLoaderOnConfirm: true,
-            preConfirm: async (login) => {
-              try {
-                await resendConfirmationEmail(formInput.email);
-                // acá llama la funcion que te dije :)
-                Swal.fire({
-                  title: "Correo de confirmación reenviado",
-                  text: "Hemos reenviado el correo de confirmación a tu dirección de correo electrónico.",
-                  icon: "success",
-                  confirmButtonColor: "#d33",
-                });
-              } catch (error) {
-                Swal.showValidationMessage(
-                  `Error al reenviar el correo: ${error.message}`
-                );
-              }
-            },
-            allowOutsideClick: () => !Swal.isLoading(),
-          });
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              )
+            }
+          })
         } else if (credential.status === 200) {
           navigate("/");
         } else {
