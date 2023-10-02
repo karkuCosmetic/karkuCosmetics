@@ -69,7 +69,7 @@ const Login = ({ formPassword, setFormPassword }) => {
         if (credential.verify === false) {
           Swal.fire({
             title: "Cuenta no verificada",
-            text: "Por favor, verifica tu cuenta a través del correo electrónico antes de iniciar sesión. Debes confirmar la cuenta para poder acceder.",
+            text: `Por favor, verifica tu cuenta a través del correo electrónico (${formInput.email}) antes de iniciar sesión. Debes confirmar la cuenta para poder acceder.`,
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
