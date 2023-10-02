@@ -63,38 +63,9 @@ const Login = ({ formPassword, setFormPassword }) => {
     if (validateForm()) {
       try {
         const credential = await postlogin(formInput);
-        console.log(credential.verify === true ? "true" : "false");
+        console.log(credential.verify===true?"true":"false");
 
-        if (credential.verify === false) {
-          Swal.fire({
-            title: "Debes verificar tu cuenta antes de iniciar sesión",
-            input: "text",
-            inputAttributes: {
-              autocapitalize: "off",
-            },
-            cancelButtonText: "Cancelar",
-            showCancelButton: true,
-            confirmButtonText: "Reenviar correo",
-            showLoaderOnConfirm: true,
-            preConfirm: async (login) => {
-              try {
-                await resendConfirmationEmail(formInput.email);
-                // acá llama la funcion que te dije :)
-                Swal.fire({
-                  title: "Correo de confirmación reenviado",
-                  text: "Hemos reenviado el correo de confirmación a tu dirección de correo electrónico.",
-                  icon: "success",
-                  confirmButtonColor: "#d33",
-                });
-              } catch (error) {
-                Swal.showValidationMessage(
-                  `Error al reenviar el correo: ${error.message}`
-                );
-              }
-            },
-            allowOutsideClick: () => !Swal.isLoading(),
-          });
-        } else if (credential.status === 200) {
+        if (credential.status === 200) {
           navigate("/");
         } else {
           Swal.fire({
