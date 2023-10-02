@@ -187,17 +187,19 @@ const Profile = () => {
             <h3 className="store-buys-title">Historial de Compras</h3>
           </div>
           <div className="buys-history">
-            {currentPurchases.length > 0
-              ? currentPurchases.reverse().map((purchase, index) => (
-                  <div
-                    key={index}
-                    className="purchase-history-item"
-                    onClick={() => openPurchaseDetail(purchase)}
-                  >
-                    <PurchaseHistoryItem purchase={purchase} />
-                  </div>
-                ))
-              : "No hay compras disponibles."}
+            {currentPurchases.length > 0 ? (
+              currentPurchases.reverse().map((purchase, index) => (
+                <div
+                  key={index}
+                  className="purchase-history-item"
+                  onClick={() => openPurchaseDetail(purchase)}
+                >
+                  <PurchaseHistoryItem purchase={purchase} />
+                </div>
+              ))
+            ) : (
+              <div className="no-purchases">Aún no se realizaron compras.</div>
+            )}
           </div>
           <div className="pagination-history">
             <button

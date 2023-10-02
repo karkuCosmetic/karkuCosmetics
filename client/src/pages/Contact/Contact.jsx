@@ -93,10 +93,10 @@ export const Contact = () => {
     <>
       <Navbar />
       <div className="contact-container">
-        <h3>
+        <p>
           Si tenés alguna consulta o si necesitas hacer un pedido por mayor,
           envianos tu mensaje y te responderemos al a brevedad.
-        </h3>
+        </p>
 
         <form className="contact-form" ref={form} onSubmit={sendEmail}>
           <label>Nombre</label>

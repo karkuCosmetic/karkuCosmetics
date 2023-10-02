@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom"; // Importa useNavigate en lugar de useHistory
+import { useParams, useNavigate } from "react-router-dom";
 import "./Store.css";
 import Navbar from "../../components/NavBar/navbar";
 import { getProduct } from "../../functions/fetchingProducts";
@@ -46,13 +46,10 @@ const Store = () => {
       position: "top",
       title: "Producto agregado a carrito",
       showConfirmButton: false,
-      timer: 1000,
-      width: 250,
-      background: "#088046",
+      timer: 1500,
       customClass: {
-        title: "swal-title",
-        container: "swal-container",
-        content: "swal-content",
+        content: "content-add-to-cart",
+        title: "title-add-to-cart",
       },
     });
   };
@@ -181,7 +178,10 @@ const Store = () => {
             <div className="cards-container">
               {currentProducts.map((product, index) => (
                 <div key={index} className="product-card">
-                  <div className="product-image"   onClick={() => redirectToProductDetail(product._id)}>
+                  <div
+                    className="product-image"
+                    onClick={() => redirectToProductDetail(product._id)}
+                  >
                     <img src={product.image[0]} alt={product.title} />
                     <div className="detail-info-store">
                       <p className="title-store">{product.title}</p>

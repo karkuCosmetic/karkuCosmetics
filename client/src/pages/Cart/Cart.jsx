@@ -28,6 +28,10 @@ export const Cart = () => {
     SetCart(updatedCart);
   };
 
+  const handleEmptyCart = () => {
+    SetCart([]);
+  };
+
   const calculateTotal = () => {
     let total = 0;
     cart.forEach((item) => {
@@ -53,6 +57,9 @@ export const Cart = () => {
       <Navbar />
       <div className="cart-full">
         <div className="cart-container">
+        <button className="empty-cart-button" onClick={handleEmptyCart}>
+            Vaciar Carrito
+          </button>
           <div className="cart-items">
             {cart.map((item, index) => (
               <div key={index} className="cart-item">

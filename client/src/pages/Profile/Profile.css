@@ -188,6 +188,7 @@
 .label-edit-profile {
   font-family: "quicksand";
   margin: 0;
+  color: #7b60c8;
 }
 
 .profile-card button {
@@ -374,7 +375,7 @@ input:focus {
   display: flex;
   align-items: center;
   justify-content: center;
- width: 95%;
+  width: 95%;
 }
 
 .pagination-history {
@@ -428,4 +429,14 @@ input:focus {
 .pagination-history .arrow-button:disabled {
   color: #888;
   cursor: not-allowed;
+}
+
+.no-purchases {
+  font-family: "quicksand";
+  color: rgb(255, 255, 255);
+  font-size: 14px;
+  font-style: italic;
+  background-color: #7b60c8;
+  padding: 1rem;
+  border-radius: 10px;
 }

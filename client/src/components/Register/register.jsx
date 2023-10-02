@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { postRegister } from "../../functions/Auth";
 import "./register.css";
 import Swal from "sweetalert2";
+import { getUserDetail } from "../../functions/fetchingUsers";
 
 export const Register = () => {
   const initialFormInput = {
@@ -25,8 +26,20 @@ export const Register = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const emailExists = await getUserDetail(formInput.email);
+
+    if (emailExists) {
+      Swal.fire({
+        title: "Correo ya registrado!",
+        text: "El correo electrónico ingresado ya está registrado. Para ingresar, debes iniciar sesión.",
+        icon: "warning",
+        confirmButtonColor: "#7b60c8",
+      });
+      return;
+    }
 
     postRegister(formInput)
       .then(() => {

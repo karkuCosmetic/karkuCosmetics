@@ -8,7 +8,6 @@ import { useState } from "react";
 import { GetDecodedCookie } from "../../utils/DecodedCookie";
 import Swal from "sweetalert2";
 
-
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [login, setLogin] = useState(false);
@@ -28,7 +27,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     Swal.fire({
-      title: "¿Estás seguro de que deseas cerrar sesión?",
+      title: "¿Confirmar cierre de sesión?",
       text: "¡Tu sesión actual se cerrará!",
       icon: "warning",
       showCancelButton: true,

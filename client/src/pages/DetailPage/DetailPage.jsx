@@ -77,13 +77,10 @@ export const DetailPage = () => {
       position: "top",
       title: "Producto agregado a carrito",
       showConfirmButton: false,
-      timer: 1000,
-      width: 250,
-      background: "green",
+      timer: 1500,
       customClass: {
-        title: "swal-title",
-        container: "swal-container",
-        content: "swal-content",
+        content: "content-add-to-cart",
+        title: "title-add-to-cart",
       },
     });
   };

@@ -57,6 +57,17 @@
   font-size: 20px;
 }
 
+.input-searchItem-sidebar {
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 870px) {
+  .input-searchItem-sidebar {
+    width: 50%;
+    align-items: center;
+  }
+}
+
 .product-container {
   display: flex;
   flex-direction: row;
@@ -99,8 +110,14 @@
 @media (max-width: 870px) {
   .cards-container {
     padding-inline: 0;
-    gap: 1rem;
-    margin-top: 1rem;
+    gap: 1.5rem;
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .cards-container {
+    gap: 0;
   }
 }
 
@@ -123,13 +140,16 @@
 @media (max-width: 600px) {
   .product-card {
     width: 95%;
-    height: auto;
+    height: 9rem;
     display: flex;
     flex-direction: column;
     border-radius: 5px;
     align-items: center;
     justify-content: space-between;
-    padding: 0.5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    box-shadow: none;
+    border: 1px solid #e2e2e2;
   }
 }
 
@@ -413,11 +433,15 @@ a {
 
 @media (max-width: 870px) {
   .sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     width: 100%;
-    max-height: 12rem;
+    max-height: 14.5rem;
     position: static;
     align-items: center;
     text-align: center;
+    margin-top: 5rem;
     padding: 0.8rem;
     background-color: #f8f8f800;
     backdrop-filter: blur(2px);
@@ -519,12 +543,11 @@ a {
   resize: none;
 }
 
-@media (min-width: 870px){
-  .input-price-store[type="number"]{
+@media (min-width: 870px) {
+  .input-price-store[type="number"] {
     padding: 0.5rem;
   }
 }
-
 
 .inputs-filter {
   display: flex;
@@ -539,7 +562,6 @@ a {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-
   }
 
   .button-filter-store {
@@ -554,13 +576,12 @@ a {
   pointer-events: none;
 }
 
-.swal-title {
-  color: rgb(255, 255, 255) !important;
-  font-size: 16px;
-  font-family: "Figtree";
-}
-
 .swal-content {
   display: flex;
   align-items: center;
+}
+
+.title-add-to-cart {
+  font-size: 20px;
+  color: green;
 }
