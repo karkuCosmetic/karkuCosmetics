@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { postlogin } from "../../functions/Auth";
 import "./login.css";
 import Swal from "sweetalert2";
+import { resendConfirmationEmail } from "../../functions/fetchingUsers";
 
 const Login = ({ formPassword, setFormPassword }) => {
   const [status, setStatus] = useState("");
@@ -63,26 +64,23 @@ const Login = ({ formPassword, setFormPassword }) => {
     if (validateForm()) {
       try {
         const credential = await postlogin(formInput);
-        console.log(credential.verify===true?"true":"false");
+        console.log(credential.verify === true ? "true" : "false");
 
         if (credential.verify === false) {
           Swal.fire({
-            title: 'Are you sure?',
+            title: "Are you sure?",
             text: "You won't be able to revert this!",
-            icon: 'warning',
+            icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-          }).then((result) => {
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Reenviar confirmación",
+          }).then(async (result) => {
             if (result.isConfirmed) {
-              Swal.fire(
-                'Deleted!',
-                'Your file has been deleted.',
-                'success'
-              )
+              await resendConfirmationEmail(formInput.email);
+              Swal.fire("Deleted!", "Your file has been deleted.", "success");
             }
-          })
+          });
         } else if (credential.status === 200) {
           navigate("/");
         } else {
