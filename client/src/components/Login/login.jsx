@@ -63,7 +63,7 @@ const Login = ({ formPassword, setFormPassword }) => {
     if (validateForm()) {
       try {
         const credential = await postlogin(formInput);
-        console.log(credential);
+        console.log(credential.verify===true?"true":"false");
 
         if (credential.status === 200) {
           navigate("/");
