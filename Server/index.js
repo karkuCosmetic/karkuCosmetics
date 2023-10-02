@@ -30,7 +30,7 @@ app.use(express.json());
 
 
 app.use("/", authRouter);
-app.use("/confirm", emailRouter);
+app.use("/email", emailRouter);
 
 app.use("/user", userRouter);
 app.use("/admin", AdminRouter);

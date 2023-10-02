@@ -15,7 +15,6 @@ const PageConfirm = () => {
   }, [token]);
 
   const handlerUpdate = () => {
-    console.log(uid);
     ConfirmEmail(uid, true);
     window.location.href = "/login";
   };

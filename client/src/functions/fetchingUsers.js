@@ -3,9 +3,13 @@ import axios from "axios";
 export const getUserDetail = async (uid) => {
   try {
     let response;
-    response = await axios.get(`https://karku-cosmetics-4dsy.vercel.app/user/${uid}`);
+    response = await axios.get(
+      `https://karku-cosmetics-4dsy.vercel.app/user/${uid}`
+    );
     if (!response.data) {
-      response = await axios.get(`https://karku-cosmetics-4dsy.vercel.app/admin/${uid}`);
+      response = await axios.get(
+        `https://karku-cosmetics-4dsy.vercel.app/admin/${uid}`
+      );
     }
     return response.data;
   } catch (error) {
@@ -15,7 +19,7 @@ export const getUserDetail = async (uid) => {
 };
 
 export const PutUser = async (uid, value, token) => {
-  console.log(uid,value,token);
+  console.log(uid, value, token);
   try {
     let response;
     response = await axios.put(`http://localhost:3001/user/${uid}`, value, {
@@ -31,7 +35,10 @@ export const PutUser = async (uid, value, token) => {
 export const ConfirmEmail = async (uid, value) => {
   try {
     let response;
-    response = await axios.put(`http://localhost:3001/user/confirmemail/${uid}`, {value});
+    response = await axios.put(
+      `http://localhost:3001/user/confirmemail/${uid}`,
+      { value }
+    );
     return response.data;
   } catch (error) {
     console.log(error);
@@ -39,20 +46,18 @@ export const ConfirmEmail = async (uid, value) => {
   }
 };
 
-export const UpdatePassword=async(value)=>{//value puede recibir un email o password
+export const UpdatePassword = async (value) => {
+  //value puede recibir un email o password
   try {
-    await axios.post(`http://localhost:3001/user/updatepassword`,value)
+    await axios.post(`http://localhost:3001/user/updatepassword`, value);
   } catch (error) {
-    
+    console.log(error);
   }
-}
-export const resendConfirmationEmail=async(email)=>{//value puede recibir un email o password
+};
+export const resendConfirmationEmail = async (emailUser) => {
   try {
-    console.log(email);
-    await axios.post(`http://localhost:3001/user/reconfirmemail`,email)
-
+    await axios.post(`http://localhost:3001/email/reconfirmemail`, {emailUser});
   } catch (error) {
-    
+    console.log(error);
   }
-}
-
+};

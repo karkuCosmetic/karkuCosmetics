@@ -9,7 +9,7 @@ export const postlogin = async (values) => {
 
     return { token, status: resp.status, verify: resp.data.verify };
   } catch (err) {
-    console.log(err);
+    return  {error:err.response.data.errors[0].msg} 
   }
 };
 

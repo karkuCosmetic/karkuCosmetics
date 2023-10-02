@@ -2,7 +2,7 @@ import pkg from "jsonwebtoken";
 const { verify } = pkg;
 import { User } from "../models/user.js";
 import { formatError } from "../utils/formatError.js";
-import { sendConfirmationEmail } from "../helpers/sendConfirmationEmail.js";
+import { ResendConfirmationEmail } from "../helpers/sendConfirmationEmail.js";
 
 export const confirmEmail = async (req, res) => {
   try {
@@ -24,10 +24,8 @@ export const confirmEmail = async (req, res) => {
 
 export const reconfirmEmail = async (req, res) => {
   try {
-    const { token } = req.body;
-    console.log(req.body);
-    // const { email, rol } = verifyJwt(token);
-    // sendConfirmationEmail(token);
+    const { emailUser } = req.body;
+    ResendConfirmationEmail(emailUser);
     res.status(200).json("email enviado con exito");
   } catch (error) {
     res.status(500).json(formatError(error.message));

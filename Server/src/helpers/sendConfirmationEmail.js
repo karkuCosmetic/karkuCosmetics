@@ -7,6 +7,7 @@ import "dotenv/config";
 import { User } from "../models/user.js";
 import pkg from "jsonwebtoken";
 const { verify } = pkg;
+import {generateToken } from "../utils/tokenManager.js";
 
 export const transport = nodemailer.createTransport({
   host: process.env.HOST_EMAIL,
@@ -29,8 +30,42 @@ export const sendConfirmationEmail = async (token) => {
 
   let user = await User.findById(id, { password: 0 });
 
-  let url = `http://localhost:3000/confirm/${token}`;
+  let url = `http://localhost:3000/email/confirm/${token}`;
   let email = user.email;
+
+  ejs.renderFile(
+    _path + "/Confirmation.ejs",
+    { email, url },
+    async (error, data) => {
+      if (error) {
+        console.log(error);
+      } else {
+        try {
+          await transport.sendMail({
+            from: '"Karku cosmetica" karku.cosmeticanatural@gmail.com',
+            to: email,
+            subject: "Confirmacion de cuenta",
+            html: data,
+          });
+          console.log("Email Send");
+          return "Email Send";
+        } catch (error) {
+          console.log(error);
+          return "Email fail to sent";
+        }
+      }
+    }
+  );
+};
+
+export const ResendConfirmationEmail = async (emailUser) => {
+  let user = await User.findOne({ email: emailUser }, { password: 0 });
+  let email = user.email;
+  let id = user._id.toString();
+  
+  const {token} = generateToken(id);
+  console.log(token);
+  let url = `http://localhost:3000/confirm/${token}`;
 
   ejs.renderFile(
     _path + "/Confirmation.ejs",
