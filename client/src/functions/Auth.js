@@ -7,9 +7,14 @@ export const postlogin = async (values) => {
     document.cookie =
       encodeURIComponent("cookieToken") + "=" + encodeURIComponent(token);
 
-    return { token, status: resp.status, verify: resp.data.verify };
+    return {
+      token,
+      status: resp.status,
+      verify: resp.data.verify,
+      rol: resp.data.rol,
+    };
   } catch (err) {
-    return  {error:err.response.data.errors[0].msg} 
+    return { error: err.response.data.errors[0].msg };
   }
 };
 
@@ -21,4 +26,3 @@ export const postRegister = async (values) => {
     console.log(error);
   }
 };
-  
