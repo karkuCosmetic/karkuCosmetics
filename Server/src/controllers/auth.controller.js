@@ -47,7 +47,7 @@ export const login = async (req, res) => {
     }
     // compara que las contraseñas coincidan
     const respuestaPassword = await user.comparePassword(password);
-    if (!respuestaPassword){
+    if (!respuestaPassword) {
       return res.status(403).json({ error: "Contraseña incorrecta" });
     }
 
@@ -60,7 +60,9 @@ export const login = async (req, res) => {
     const { token, expiresIn } = generateToken(user.id);
     generateRefreshToken(user.id, res);
 
-    return res.status(200).json({ token, expiresIn, verify: user.verify });
+    return res
+      .status(200)
+      .json({ token, expiresIn, verify: user.verify, rol: user.Rol });
   } catch (error) {
     res.status(400).json(formatError(error.message));
   }
