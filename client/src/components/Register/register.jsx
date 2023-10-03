@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { postRegister } from "../../functions/Auth";
 import "./register.css";
 import Swal from "sweetalert2";
-import { getUserDetail } from "../../functions/fetchingUsers";
 
 export const Register = () => {
   const initialFormInput = {
@@ -29,7 +28,7 @@ export const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const emailExists = await getUserDetail(formInput.email);
+    const emailExists = await postRegister(formInput.email);
 
     if (emailExists) {
       Swal.fire({

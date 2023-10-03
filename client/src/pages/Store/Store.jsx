@@ -46,10 +46,11 @@ const Store = () => {
       position: "top",
       title: "Producto agregado a carrito",
       showConfirmButton: false,
-      timer: 1500,
+      timer: 150000000,
       customClass: {
         content: "content-add-to-cart",
         title: "title-add-to-cart",
+        container: "swal-container-store",
       },
     });
   };

@@ -1,0 +1,17 @@
+.home-admin {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-gap: 20px;
+}
+
+.product-upload {
+  grid-row: 1;
+}
+
+.product-management {
+  grid-row: 1;
+}
+
+.sales-management {
+  grid-row: 2;
+}

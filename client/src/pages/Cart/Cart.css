@@ -25,7 +25,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   gap: 1rem;
-  margin: 2rem;
+  margin: 1rem;
   width: 90%;
 }
 
@@ -406,4 +406,39 @@
   .title-cart {
     font-size: 1rem;
   }
+}
+
+.empty-cart-button {
+  background-color:#f3f3f3;
+  border: 0;
+  border-radius: 10px;
+  box-sizing: border-box;
+  margin-top: 1rem;
+  color: #111827;
+  font-family: "Quicksand";
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1rem;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  text-decoration: none #d1d5db solid;
+  text-decoration-thickness: auto;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.empty-cart-button:hover {
+  background-color: rgb(249, 250, 251);
+}
+
+.empty-cart-button:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.empty-cart-button:focus-visible {
+  box-shadow: none;
 }

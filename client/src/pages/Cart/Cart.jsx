@@ -5,7 +5,6 @@ import { Payment } from "../../functions/payment";
 import Footer from "../../components/Footer/footer";
 import { GetDecodedCookie } from "../../utils/DecodedCookie";
 
-
 export const Cart = () => {
   const token = GetDecodedCookie("cookieToken");
 
@@ -57,7 +56,7 @@ export const Cart = () => {
       <Navbar />
       <div className="cart-full">
         <div className="cart-container">
-        <button className="empty-cart-button" onClick={handleEmptyCart}>
+          <button className="empty-cart-button" onClick={handleEmptyCart}>
             Vaciar Carrito
           </button>
           <div className="cart-items">

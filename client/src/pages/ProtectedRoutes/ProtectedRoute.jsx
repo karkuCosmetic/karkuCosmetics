@@ -7,7 +7,7 @@ import {useEffect, useRef, useState} from 'react';
 export const ProtectedRoute = ({children}) => {
   const {pathname} = useLocation ();
   const UserRoutes = ['/profile'];
-  const AdminRoutes = ['/admin'];
+  const AdminRoutes = ['/admin/home'];
 
   const rolRef = useRef (null);
   const [isLoading, setIsLoading] = useState (true);

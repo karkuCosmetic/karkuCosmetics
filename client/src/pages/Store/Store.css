@@ -576,6 +576,14 @@ a {
   pointer-events: none;
 }
 
+.swal-container-store {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 28rem;
+  font-family: "quicksand";
+}
+
 .swal-content {
   display: flex;
   align-items: center;
