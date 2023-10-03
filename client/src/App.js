@@ -6,11 +6,6 @@ import Cart from "./pages/Cart/Cart";
 import HomeAdmin from "./pages/Admin/Admin";
 import PageConfirm from "./pages/PageConfirm/Pageconfirm";
 import LoginPage from "./pages/LoginPage/LoginPage";
-import { ProtectedRouteAdmin } from "./pages/ProtectedRoutes/ProtectedRouteAdmin";
-import { GetDecodedCookie } from "./utils/DecodedCookie";
-import { DecodedToken } from "./utils/DecodedToken";
-import { getUserDetail } from "./functions/fetchingUsers";
-import { useEffect, useState } from "react";
 import { ProtectedRoute } from "./pages/ProtectedRoutes/ProtectedRoute";
 import { Contact } from "./pages/Contact/Contact";
 import DetailPage from "./pages/DetailPage/DetailPage";
@@ -42,9 +37,9 @@ function App() {
         <Route
           path="/admin/home"
           element={
-            <ProtectedRoute>
-              <HomeAdmin />
-            </ProtectedRoute>
+            // <ProtectedRoute>
+            <HomeAdmin />
+            // </ProtectedRoute>
           }
         />
       </Routes>

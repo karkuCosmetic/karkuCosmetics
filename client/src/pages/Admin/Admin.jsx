@@ -8,11 +8,12 @@ import ProductUpload from "../../components/UserAdmin/ProductUpload/productUploa
 const HomeAdmin = () => {
   return (
     <div className="home-admin">
-      <div className="product-upload"> 
-        <ProductUpload />
-      </div>
       <div className="product-management">
         <ProductManagement />
+      </div>
+      <div className="product-upload"> 
+      <p>MENSAJES </p>
+        <ProductUpload />
       </div>
       <div className="sales-management"> 
         <SalesManagement />
