@@ -96,11 +96,9 @@ export const SendEmailAdmin = async (emailUser,userMsg,AdminMsg) => {
 
   let email = emailUser;
 
-  let url = `http://localhost:3000/confirm/`;
-
   ejs.renderFile(
     _path + "/mesaggeAdmin.ejs",
-    { email, url,userMsg,AdminMsg},
+    { email,userMsg,AdminMsg},
     async (error, data) => {
       if (error) {
         console.log(error);
