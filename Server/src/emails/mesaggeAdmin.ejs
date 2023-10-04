@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confirmación de Email</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Figtree:wght@300&family=Jost:wght@300&family=Quicksand:wght@300;500&family=Raleway:ital,wght@0,300;1,300&display=swap");
+
+      body {
+        background-color: #f5f8fa;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 750px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .header {
+        text-align: center;
+        font-family: "quicksand";
+        padding-top: 40px;
+      }
+
+      .header img {
+        width: 350px;
+      }
+
+      .title {
+        font-size: 32px;
+        font-weight: 800;
+        color: #1a1a1a;
+        margin-top: 30px;
+      }
+
+      .content {
+        font-size: 18px;
+        color: #1a1a1a;
+        margin-top: 20px;
+        font-family: "quicksand";
+        padding-inline: 3rem;
+      }
+
+      .name {
+        font-family: "quicksand";
+        font-weight: bold;
+      }
+
+      .btn-confirm {
+        display: flex;
+        justify-content: center;
+      }
+
+      .cta-button {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 15rem;
+        padding: 1rem;
+        background-color: #f38f82;
+        color: #ffffff;
+        font-family: "quicksand";
+        font-size: 16px;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 2rem;
+      }
+
+      .footer {
+        background-color: #f38f82;
+        width: 100%;
+        text-align: center;
+        font-family: "quicksand";
+        color: #ffffff;
+        margin-top: 3rem;
+      }
+
+      .footer-text {
+        font-size: 15px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">
+        <img
+          src="https://res.cloudinary.com/dqai9sgfs/image/upload/v1695842114/logoKarkuCircular_2_g6ypmw.png"
+          alt="Email"
+        />
+        <div class="title">Karku - Cosmética Natural</div>
+      </div>
+      <div class="content">
+        <p>Hola,</p>
+        <p>
+          Hemos recibido un mensaje a Karku con el correo
+          <b><%= email %></b>. El mensaje decia: <%= userMsg %>
+        </p>
+        <div class="btn-confirm">
+          <!-- <a href="<%= url %>" class="cta-button" target="_blank" id="button"
+            >Confirma tu correo</a
+          > -->
+
+          Respuesta del admin:<%= AdminMsg %>
+        </div>
+      </div>
+
+      <div class="footer">
+        <p>KARKU &copy;</p>
+      </div>
+    </div>
+  </body>
+</html>

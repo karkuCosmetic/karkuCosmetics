@@ -91,3 +91,34 @@ export const ResendConfirmationEmail = async (emailUser) => {
     }
   );
 };
+
+export const SendEmailAdmin = async (emailUser,userMsg,AdminMsg) => {
+
+  let email = emailUser;
+
+  let url = `http://localhost:3000/confirm/`;
+
+  ejs.renderFile(
+    _path + "/mesaggeAdmin.ejs",
+    { email, url,userMsg,AdminMsg},
+    async (error, data) => {
+      if (error) {
+        console.log(error);
+      } else {
+        try {
+          await transport.sendMail({
+            from: '"Karku cosmetica" karku.cosmeticanatural@gmail.com',
+            to: email,
+            subject: "Confirmacion de cuenta",
+            html: data,
+          });
+          console.log("Email Send");
+          return "Email Send";
+        } catch (error) {
+          console.log(error);
+          return "Email fail to sent";
+        }
+      }
+    }
+  );
+};

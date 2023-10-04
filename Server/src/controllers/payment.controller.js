@@ -4,6 +4,7 @@ import "dotenv/config";
 import { User } from "../models/user.js";
 import { Product } from "../models/product.js";
 import { Admin } from "../models/admin.js";
+import { generateUniqueID } from "../utils/GenerateId.js";
 
 export const createOrder = async (req, res) => {
   try {
@@ -14,7 +15,9 @@ export const createOrder = async (req, res) => {
     });
     const items = data.map((producto) => {
       return {
-        title: producto.product.title[0].toUpperCase() + producto.product.title.slice(1),
+        title:
+          producto.product.title[0].toUpperCase() +
+          producto.product.title.slice(1),
         quantity: producto.quantity,
         currency_id: "ARS",
         unit_price: producto.product.price,
@@ -83,7 +86,10 @@ export const reciveWebhook = async (req, res) => {
       //precio total
 
       //store in base
+      const id = generateUniqueID();
+
       let informationPayment = {
+        id: id,
         dataCard: {
           ultDigit: data.response.card.last_four_digits,
           dniComprador: data.response.card.cardholder.identification,
