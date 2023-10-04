@@ -37,3 +37,8 @@
 .product-details {
   flex-grow: 1;
 }
+
+.detail-product-modal-admin img{
+width: 5rem;
+height: 5rem;
+}

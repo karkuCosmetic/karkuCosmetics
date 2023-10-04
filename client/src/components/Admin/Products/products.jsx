@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { getProduct } from "../../../functions/fetchingProducts";
-import { Link } from "react-router-dom";
 import Modal from "react-modal";
 import "./products.css";
 
@@ -11,6 +10,8 @@ function ProductManagement() {
   const [showAllProducts, setShowAllProducts] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editedProduct, setEditedProduct] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isProductModalOpen, setIsProductModalOpen] = useState(false);
 
   useEffect(() => {
     getProduct()
@@ -34,13 +35,13 @@ function ProductManagement() {
 
   const deleteProduct = (productId) => {
     const updatedProducts = products.filter(
-      (product) => product.id !== productId
+      (product) => product._id !== productId 
     );
     setProducts(updatedProducts);
   };
 
   const editProduct = (productId) => {
-    const productToEdit = products.find((product) => product.id === productId);
+    const productToEdit = products.find((product) => product._id === productId);
     setEditedProduct(productToEdit);
     setIsModalOpen(true);
   };
@@ -66,6 +67,11 @@ function ProductManagement() {
       .catch((error) => console.error(error));
   };
 
+  const openProductModal = (product) => {
+    setSelectedProduct(product);
+    setIsProductModalOpen(true);
+  };
+
   return (
     <div>
       <h2>Gestión de Productos</h2>
@@ -83,9 +89,11 @@ function ProductManagement() {
             <div className="product-list-admin">
               <p className="">{product.title}</p>
               <p className="">${product.price}</p>
-              <Link to={`/product/${product._id}`}>Ver Producto</Link>
-              <button onClick={() => deleteProduct(product.id)}>Borrar</button>
-              <button onClick={() => editProduct(product.id)}>Editar</button>
+              <button onClick={() => openProductModal(product)}>
+                Ver Producto
+              </button>
+              <button onClick={() => deleteProduct(product._id)}>Borrar</button>
+              <button onClick={() => editProduct(product._id)}>Editar</button>
             </div>
           </div>
         ))}
@@ -106,7 +114,10 @@ function ProductManagement() {
               <div className="product-list-admin">
                 <p className="">{product.title}</p>
                 <p className="">${product.price}</p>
-                <Link to={`/product/${product._id}`}>Ver Producto</Link>
+
+                <button onClick={() => openProductModal(product)}>
+                  Ver Producto
+                </button>
                 <button onClick={() => deleteProduct(product._id)}>
                   Borrar
                 </button>
@@ -115,6 +126,21 @@ function ProductManagement() {
             </div>
           ))}
         </div>
+      </Modal>
+      <Modal
+        isOpen={isProductModalOpen}
+        onRequestClose={() => setIsProductModalOpen(false)}
+      >
+        <button onClick={() => setIsProductModalOpen(false)}>Cerrar</button>
+        {selectedProduct && (
+          <div className="detail-product-modal-admin">
+            <h2>Detalles del Producto</h2>
+            <img src={selectedProduct.image[0]} alt={selectedProduct.title} />
+            <p>{selectedProduct.title}</p>
+            <p>${selectedProduct.price}</p>
+            <p>{selectedProduct.description}</p>
+          </div>
+        )}
       </Modal>
     </div>
   );
