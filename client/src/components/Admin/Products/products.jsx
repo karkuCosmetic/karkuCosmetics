@@ -2,19 +2,22 @@ import React, { useState, useEffect } from "react";
 import { getProduct, updateProduct } from "../../../functions/fetchingProducts";
 import { fileUpload } from "../../../utils/fileUpload";
 import Modal from "react-modal";
+import EditProduct from "../Components/Products/EditProduct";
+
 import "./products.css";
 
 function ProductManagement() {
   const [products, setProducts] = useState([]);
-
   const [newProduct, setNewProduct] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [editedProduct, setEditedProduct] = useState();
+  const [editedProduct, setEditedProduct] = useState({});
   const [isProductModalOpen, setIsProductModalOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [uploadedImageUrls, setUploadedImageUrls] = useState([]);
+  const [showAllProducts, setShowAllProducts] = useState(false);
+  const [editModalOpen, setEditModalOpen] = useState(false);
 
   useEffect(() => {
     getProduct()
@@ -46,33 +49,7 @@ function ProductManagement() {
   const handleEditClick = (product) => {
     setEditedProduct(product);
     setIsEditing(true);
-    setIsModalOpen(true);
-  };
-
-  const handleSaveEditedProduct = () => {
-    updateProduct(editedProduct,editedProduct._id)
-      .then(() => {
-        setIsEditing(false);
-        setIsModalOpen(false);
-        return getProduct();
-      })
-      .then((data) => setProducts(data))
-      .catch((error) => console.error(error));
-  };
-
-  const handleImageUpload = async (e) => {
-    const files = e.target.files;
-    if (files.length > 5) {
-      alert("Solo se permiten hasta 5 imágenes.");
-      return;
-    }
-
-    try {
-      const uploadedUrls = await fileUpload(files, "product");
-      setUploadedImageUrls(uploadedUrls);
-    } catch (error) {
-      console.error("Error al cargar las imágenes:", error);
-    }
+    setEditModalOpen(true);
   };
 
   const handleAddProduct = () => {
@@ -95,6 +72,11 @@ function ProductManagement() {
   const openProductModal = (product) => {
     setSelectedProduct(product);
     setIsProductModalOpen(true);
+  };
+
+  const handleViewAllProducts = () => {
+    setShowAllProducts(true);
+    setIsModalOpen(true);
   };
 
   return (
@@ -126,115 +108,37 @@ function ProductManagement() {
         ))}
       </div>
 
-      <button onClick={() => setIsModalOpen(true)}>
-        Ver todos los productos
-      </button>
+      <button onClick={handleViewAllProducts}>Ver todos los productos</button>
       <button onClick={handleAddProduct}>Agregar Producto</button>
 
-      {isEditing && (
-        <Modal
-          isOpen={isModalOpen}
-          onRequestClose={() => setIsModalOpen(false)}
-        >
-          <button onClick={() => setIsModalOpen(false)}>Cerrar</button>
-          <h2>Editar Producto</h2>
-          <form>
-            <div className="form-group">
-              <label htmlFor="title">Título del Producto:</label>
-              <input
-                type="text"
-                id="title"
-                value={editedProduct.title}
-                onChange={(e) =>
-                  setEditedProduct({ ...editedProduct, title: e.target.value })
-                }
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="dimensions">Dimensiones:</label>
-              <input
-                type="text"
-                id="dimensions"
-                value={editedProduct.dimensions}
-                onChange={(e) =>
-                  setEditedProduct({
-                    ...editedProduct,
-                    dimensions: e.target.value,
-                  })
-                }
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="description">Descripción:</label>
-              <textarea
-                id="description"
-                value={editedProduct.description}
-                onChange={(e) =>
-                  setEditedProduct({
-                    ...editedProduct,
-                    description: e.target.value,
-                  })
-                }
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="price">Precio:</label>
-              <input
-                type="number"
-                id="price"
-                value={editedProduct.price}
-                onChange={(e) =>
-                  setEditedProduct({
-                    ...editedProduct,
-                    price: parseFloat(e.target.value),
-                  })
-                }
-              />
-            </div>
-
-            <div className="form-group">
-              <label>Cargar Imágenes:</label>
-              <input
-                type="file"
-                accept="image/*"
-                multiple
-                onChange={handleImageUpload}
-              />
-              <div className="image-preview">
-                {uploadedImageUrls.map((imageUrl, index) => (
-                  <img
-                    key={index}
-                    src={imageUrl}
-                    alt={`Preview ${index}`}
-                    className="image-thumbnail"
-                  />
-                ))}
-              </div>
-            </div>
-
-            <button onClick={handleSaveEditedProduct}>Guardar Cambios</button>
-          </form>
-        </Modal>
+      {isEditing && editModalOpen && (
+        <EditProduct match={{ params: { id: editedProduct._id } }} />
       )}
+
       <div className="modal-detail">
-        <Modal
-          isOpen={isProductModalOpen}
-          onRequestClose={() => setIsProductModalOpen(false)}
-        >
-          <button onClick={() => setIsProductModalOpen(false)}>Cerrar</button>
-          {selectedProduct && (
-            <div className="detail-product-modal-admin">
-              <h2>Detalles del Producto</h2>
-              <img src={selectedProduct.image[0]} alt={selectedProduct.title} />
-              <p>{selectedProduct.title}</p>
-              <p>${selectedProduct.price}</p>
-              <p>{selectedProduct.description}</p>
+        {showAllProducts && (
+          <Modal
+            isOpen={isModalOpen}
+            onRequestClose={() => {
+              setIsModalOpen(false);
+              setShowAllProducts(false);
+            }}
+          >
+            <button onClick={() => setIsModalOpen(false)}>Cerrar</button>
+            <h2>Todos los Productos</h2>
+            <div className="product-list">
+              {products.map((product) => (
+                <div className="product-image-admin" key={product._id}>
+                  <img src={product.image[0]} alt={product.title} />
+                  <div className="product-list-admin">
+                    <p className="">{product.title}</p>
+                    <p className="">${product.price}</p>
+                  </div>
+                </div>
+              ))}
             </div>
-          )}
-        </Modal>
+          </Modal>
+        )}
       </div>
     </div>
   );
