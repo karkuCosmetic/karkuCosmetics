@@ -4,7 +4,7 @@ import { rulesAuthRegister, rulesAuthLogin } from "../helpers/rulesAuth.js";
 
 const router = express.Router();
 
-router.post('/register', rulesAuthRegister, register);
+router.post('/register', register);
 router.post('/login', rulesAuthLogin, login)
 
 export default router;

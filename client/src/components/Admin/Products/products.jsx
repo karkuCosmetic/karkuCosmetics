@@ -6,11 +6,12 @@ import "./products.css";
 
 function ProductManagement() {
   const [products, setProducts] = useState([]);
+
   const [newProduct, setNewProduct] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editedProduct, setEditedProduct] = useState(null);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [editedProduct, setEditedProduct] = useState();
   const [isProductModalOpen, setIsProductModalOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [uploadedImageUrls, setUploadedImageUrls] = useState([]);
@@ -49,8 +50,7 @@ function ProductManagement() {
   };
 
   const handleSaveEditedProduct = () => {
-    console.log("Producto editado:", editedProduct);
-    updateProduct(editedProduct)
+    updateProduct(editedProduct,editedProduct._id)
       .then(() => {
         setIsEditing(false);
         setIsModalOpen(false);

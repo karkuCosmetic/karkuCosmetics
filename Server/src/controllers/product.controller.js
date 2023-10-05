@@ -2,15 +2,16 @@ import { Product } from "../models/product.js";
 import { formatError } from "../utils/formatError.js";
 
 export const createProduct = async (req, res) => {
-  const { title, dimensions,description, price, stock,category } = req.body;
+  const { title, dimensions, description, price, stock, category } = req.body;
   try {
     let product = new Product({
-      title:title[0].toUpperCase() + title.slice(1),
+      title: title[0].toUpperCase() + title.slice(1),
       category,
-      description:description[0].toUpperCase() + description.slice(1),
+      description: description[0].toUpperCase() + description.slice(1),
       price,
       dimensions,
       stock,
+      image,
     });
     await product.save();
     return res.status(200).json({ msg: "producto creado" });
@@ -20,52 +21,55 @@ export const createProduct = async (req, res) => {
 };
 
 export const GetAllProduct = async (req, res) => {
-    try {
-        let products = await Product.find()
-        return res.status(200).json( products);
-    } catch (error) {
-        res.status(400).json(formatError(error.message))
-    }
-}
+  try {
+    let products = await Product.find();
+    return res.status(200).json(products);
+  } catch (error) {
+    res.status(400).json(formatError(error.message));
+  }
+};
 
 export const GetProductById = async (req, res) => {
-    const { id } = req.params
-    try {
-        let product = await Product.findById(id)
-        return res.status(200).json({ product });
-    } catch (error) {
-        res.status(400).json(formatError(error.message))
-    }
-}
+  const { id } = req.params;
+  try {
+    let product = await Product.findById(id);
+    return res.status(200).json({ product });
+  } catch (error) {
+    res.status(400).json(formatError(error.message));
+  }
+};
 
 export const UpdateProductById = async (req, res) => {
-    const { id } = req.params
-    const { title, dimensions,description, price, stock,category ,image} = req.body;
-
-    try {
-        let product = await Product.findByIdAndUpdate(id, {
-            title:title[0].toUpperCase() + title.slice(1),
-            category,
-            description:description[0].toUpperCase() + description.slice(1),
-            price,
-            dimensions,
-            stock,
-            image:image
-        }, { new: true })
-        return res.status(200).json({ product });
-    } catch (error) {
-        res.status(400).json(formatError(error.message))
-    }
-}
+  const { id } = req.params;
+  const { title, dimensions, description, price, stock, category, image } =
+    req.body;
+  try {
+    let product = await Product.findByIdAndUpdate(
+      id,
+      {
+        title: title[0].toUpperCase() + title.slice(1),
+        category,
+        description: description[0].toUpperCase() + description.slice(1),
+        price,
+        dimensions,
+        stock,
+        image: image,
+      },
+      { new: true }
+    );
+    return res.status(200).json({ product });
+  } catch (error) {
+    res.status(400).json(formatError(error.message));
+  }
+};
 
 export const DeleteProductById = async (req, res) => {
-    const { id } = req.params
-    try {
-      await Product.findByIdAndRemove(id)
+  const { id } = req.params;
+  try {
+    await Product.findByIdAndRemove(id);
 
-        return res.status(200).json("producto eliminado");
-    } catch (error) {
-        res.status(400).json(formatError(error.message))
-    }
-}
-
+    return res.status(200).json("producto eliminado");
+  } catch (error) {
+    res.status(400).json(formatError(error.message));
+  }
+};

@@ -11,7 +11,7 @@ export const validationError = (req, res, next) => {
 
 export const validationUseOrpassRegister = [
   body("email", "Formato de email incorrecto").trim().isEmail(),
-  body("password", "minimo 6 caracteres").trim().isLength({ min: 6 }),
+  body("password", "minimo 6 caracteres").trim().isLength({ min: 5 }),
 
   validationError,
 ];
