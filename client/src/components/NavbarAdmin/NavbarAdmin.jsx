@@ -59,15 +59,13 @@ const NavbarAdmin = () => {
         </button>
 
         <nav className={`nav-links ${menuOpen ? "open" : ""}`}>
-          <NavLink to="/" exact className="active">
+          <NavLink to="/admin/home" exact className="active">
             Inicio
           </NavLink>
           <NavLink to="/store" className="active">
             Tienda
           </NavLink>
-          <NavLink to="/profile" className="active">
-            Ir a Perfil
-          </NavLink>
+      
           <a href="#" onClick={handleLogout} alt="Cerrar Sesion">
             <FontAwesomeIcon icon={faSignOut} />
           </a>

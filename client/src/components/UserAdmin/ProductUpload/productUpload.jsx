@@ -4,34 +4,34 @@ import { fileUpload } from "../../../utils/fileUpload";
 import { updateProduct } from "../../../functions/fetchingProducts";
 
 const ProductUpload = () => {
-    const [images, setImages] = useState ([]); // buffer de images
-    const [imageurls, setImageurls] = useState (null); //array de urls de cloudinary
+  const [images, setImages] = useState([]); // buffer de images
+  const [imageurls, setImageurls] = useState(null); //array de urls de cloudinary
 
-    const handleImageUpload = event => {
-        const selectedFiles = event.target.files;
-        setImages (prevImages => [...prevImages, ...selectedFiles]);
-      };
-    
-    const handlerSubmitImage = async () => {
-        await fileUpload (images, 'products').then (res => {
-          setImageurls (res);
-          updateProduct (res);
-       
-        });
-      };
-    
+  const handleImageUpload = (event) => {
+    const selectedFiles = event.target.files;
+    setImages((prevImages) => [...prevImages, ...selectedFiles]);
+  };
 
-  return <div>
-     <input
+  const handlerSubmitImage = async () => {
+    await fileUpload(images, "products").then((res) => {
+      setImageurls(res);
+      updateProduct(res);
+    });
+  };
+
+  return (
+    <div>
+      <input
         type="file"
         name=""
         id=""
-        onChange={e => handleImageUpload (e)} //input y button se usarian en el admin 
+        onChange={(e) => handleImageUpload(e)} //input y button se usarian en el admin
         multiple
       />
       <button onClick={handlerSubmitImage} disabled={images ? false : true}>
         Subir foto
       </button>
-  </div>;
+    </div>
+  );
 };
-export default ProductUpload
+export default ProductUpload;

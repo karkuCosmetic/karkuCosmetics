@@ -10,13 +10,13 @@
   width: 15rem;
 }
 
-.product-search-admin input{
-    font-family: "quicksand";
-    padding: 0.5rem;
-    border-radius: 5px;
-    border: none;
-    margin-bottom: 0.5rem;
-    margin-top: 0.5rem;
+.product-search-admin input {
+  font-family: "quicksand";
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
 }
 
 .product-image-admin {
@@ -38,7 +38,115 @@
   flex-grow: 1;
 }
 
-.detail-product-modal-admin img{
-width: 5rem;
-height: 5rem;
+.detail-product-modal-admin img {
+  width: 5rem;
+  height: 5rem;
+}
+
+.modal-overlay {
+  position: fixed;
+  margin-top: 5rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-detail{
+  margin-top: 5rem;
+}
+
+.modal-content {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  max-width: 400px;
+  width: 100%;
+  margin-top: 5rem;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: #333;
+  padding: 0;
+}
+
+.modal-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: black;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+}
+
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  height: 10rem;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+}
+
+.save-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.save-button:hover {
+  background-color: #0056b3;
+}
+
+.image-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  background-color: red;
+}
+
+.image-thumbnail {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border: 1px solid #ccc;
+}
+
+.ReactModal__Content{
+  margin-top: 5rem;
 }
