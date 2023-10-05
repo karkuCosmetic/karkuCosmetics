@@ -49,6 +49,7 @@ function ProductManagement() {
   };
 
   const handleSaveEditedProduct = () => {
+    console.log("Producto editado:", editedProduct);
     updateProduct(editedProduct)
       .then(() => {
         setIsEditing(false);
