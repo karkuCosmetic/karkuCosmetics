@@ -62,10 +62,10 @@ export const deleteEmail = async (req, res) => {
 
       return res
         .status(200)
-        .json({ message: "Elemento eliminado correctamente" });
+        .json({ message: "Email eliminado correctamente" });
     }
 
-    return res.status(404).json({ message: "Elemento no encontrado" });
+    return res.status(404).json({ message: "Email no encontrado" });
   } catch (error) {
     return res.status(400).json(formatError(error.message));
   }

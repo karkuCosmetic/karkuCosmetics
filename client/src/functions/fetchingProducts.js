@@ -1,5 +1,16 @@
 import axios from "axios";
 
+export const createProduct = async (data) => {
+  const res = await axios.post("http://localhost:3001/product", {
+    title: data.title,
+    dimensions: data.dimensions,
+    description: data.description,
+    price: data.price,
+    stock: data.stock,
+    category: data.category,
+  });
+};
+
 export const getProduct = async () => {
   try {
     const response = await axios.get(
@@ -27,8 +38,7 @@ export const getProductDetail = async (id) => {
 
 export const updateProduct = async (res, id) => {
   try {
-
-  await axios.put(`http://localhost:3001/products/${id}`, {
+    await axios.put(`http://localhost:3001/products/${id}`, {
       image: res.image,
       title: res.title,
       description: res.description,
@@ -43,13 +53,11 @@ export const updateProduct = async (res, id) => {
   }
 };
 
-export const createProduct = async (data) => {
-  const res = await axios.post("http://localhost:3001/product", {
-    title: data.title,
-    dimensions: data.dimensions,
-    description: data.description,
-    price: data.price,
-    stock: data.stock,
-    category: data.category,
-  });
+export const DeleteProductById = async (id) => {
+  try {
+    const res = await axios.delete(`http://localhost:3001/products/${id}`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
 };
