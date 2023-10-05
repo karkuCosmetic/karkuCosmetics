@@ -9,7 +9,7 @@ import NavbarAdmin from "../../components/NavbarAdmin/NavbarAdmin";
 const HomeAdmin = () => {
   return (
     <>
-      <NavbarAdmin />
+      {/* <NavbarAdmin /> */}
       <div className="home-admin">
         <div className="product-management">
           <ProductManagement />
