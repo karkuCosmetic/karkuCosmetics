@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { getProductDetail, updateProduct } from "../../../../functions/fetchingProducts";
+import {
+  getProductDetail,
+  updateProduct,
+} from "../../../../functions/fetchingProducts";
+import "./EditProduct.css";
 
 const EditProduct = ({ match }) => {
   const [product, setProduct] = useState({
@@ -12,11 +16,15 @@ const EditProduct = ({ match }) => {
   });
 
   useEffect(() => {
-
     const fetchProductDetail = async () => {
-      const id = match.params.id; 
-      const productData = await getProductDetail(id);
-      setProduct(productData);
+      try {
+        const id = match.params.id;
+        const productData = await getProductDetail(id);
+
+        setProduct(productData);
+      } catch (error) {
+        console.error("Error obteniendo detalles del producto:", error);
+      }
     };
 
     fetchProductDetail();
@@ -34,16 +42,13 @@ const EditProduct = ({ match }) => {
     e.preventDefault();
 
     try {
-      await updateProduct(product, product._id); 
-      
+      await updateProduct(product, product._id);
     } catch (error) {
-      console.error("Error updating product:", error);
-
+      console.error("Error al actualizar el producto:", error);
     }
   };
-
   return (
-    <div>
+    <div className="form-updateProduct">
       <h2>Editar Producto</h2>
       <form onSubmit={handleSubmit}>
         <div>

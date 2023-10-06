@@ -1,147 +1,153 @@
-import React, {useState, useEffect} from 'react';
-// import {fileUpload} from '../../../../../utils/fileUpload';
-import Modal from 'react-modal';
-import EditProduct from '../Products/EditProduct';
+import React, { useState, useEffect } from "react";
+import Modal from "react-modal";
+import EditProduct from "../Products/EditProduct";
+import "./ProductManagement.css";
+import {
+  getProduct,
+  getProductDetail,
+  createProduct,
+  DeleteProductById,
+  updateProduct,
+} from "../../../../functions/fetchingProducts";
 
-import './products.css';
-import { getProduct } from '../../../../functions/fetchingProducts';
+const ProductManagement = ({ setSection }) => {
+  const [products, setProducts] = useState([]);
+  const [newProduct, setNewProduct] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [editedProduct, setEditedProduct] = useState({});
+  const [isProductModalOpen, setIsProductModalOpen] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editModalOpen, setEditModalOpen] = useState(false);
 
-const ProductManagement = ({setSection}) => {
-  const [products, setProducts] = useState ([]);
-  const [newProduct, setNewProduct] = useState ('');
-  const [searchTerm, setSearchTerm] = useState ('');
-  const [isModalOpen, setIsModalOpen] = useState (false);
-  const [selectedProduct, setSelectedProduct] = useState (null);
-  const [editedProduct, setEditedProduct] = useState ({});
-  const [isProductModalOpen, setIsProductModalOpen] = useState (false);
-  const [isEditing, setIsEditing] = useState (false);
-  const [uploadedImageUrls, setUploadedImageUrls] = useState ([]);
-  const [showAllProducts, setShowAllProducts] = useState (false);
-  const [editModalOpen, setEditModalOpen] = useState (false);
-
-  useEffect (() => {
-    getProduct ()
-      .then (data => setProducts (data))
-      .catch (error => console.error (error));
-    window.scrollTo (0, 0);
+  useEffect(() => {
+    getProduct()
+      .then((data) => setProducts(data))
+      .catch((error) => console.error(error));
+    window.scrollTo(0, 0);
   }, []);
 
-  const filteredProducts = products
-    .filter (product => {
-      const productName = product.title.toLowerCase ();
-      const searchTermLower = searchTerm.toLowerCase ();
-      return productName.includes (searchTermLower);
-    })
-    .slice (0, 5);
-
-  const addProduct = newProductData => {
-    const updatedProducts = [...products, newProductData];
-    setProducts (updatedProducts);
+  const handleAddProduct = async () => {
+    try {
+      const newProductData = await createProduct(newProduct);
+      setNewProduct("");
+      setProducts([...products, newProductData]);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const deleteProduct = productId => {
-    const updatedProducts = products.filter (
-      product => product._id !== productId
-    );
-    setProducts (updatedProducts);
+  const handleDeleteProduct = async (productId) => {
+    try {
+      await DeleteProductById(productId);
+      const updatedProducts = products.filter((product) => product._id !== productId);
+      setProducts(updatedProducts);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const handleEditClick = product => {
-    setEditedProduct (product);
-    setIsEditing (true);
-    setEditModalOpen (true);
+  const handleEditClick = async (product) => {
+    try {
+      const productData = await getProductDetail(product._id);
+      setEditedProduct(productData);
+      setIsEditing(true);
+      setEditModalOpen(true);
+    } catch (error) {
+      console.error("Error al obtener detalles del producto:", error);
+    }
   };
 
-  const handleAddProduct = () => {
-    addProduct (newProduct)
-      .then (() => {
-        setNewProduct ('');
-        return getProduct ();
-      })
-      .then (data => setProducts (data))
-      .catch (error => console.error (error));
+  const openProductModal = (product) => {
+    setSelectedProduct(product);
+    setIsProductModalOpen(true);
   };
 
-  const handleDeleteProduct = productId => {
-    deleteProduct (productId)
-      .then (() => getProduct ())
-      .then (data => setProducts (data))
-      .catch (error => console.error (error));
+  const closeProductModal = () => {
+    setSelectedProduct(null);
+    setIsProductModalOpen(false);
   };
 
-  const openProductModal = product => {
-    setSelectedProduct (product);
-    setIsProductModalOpen (true);
-  };
-
-  const handleViewAllProducts = () => {
-    setShowAllProducts (true);
-    setIsModalOpen (true);
+  const closeEditModal = () => {
+    setEditedProduct({});
+    setIsEditing(false);
+    setEditModalOpen(false);
   };
 
   return (
-    <div>
-      <p>ProductManagement</p>
-      <button onClick={() => setSection ('Home')}>Home</button>
-      {/* <h2>Gestión de Productos</h2>
+    <div className="productManagement-container">
+      <h2>Gestión de Productos</h2>
+      <button onClick={() => setSection("Home")}>Volver</button>
+
       <div className="product-search-admin">
         <input
-          placeholder="Buscar producto"
+          placeholder="Buscar por nombre..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
       <div className="product-list">
-        {filteredProducts.map((product) => (
-          <div className="product-image-admin" key={product._id}>
-            <img src={product.image[0]} alt={product.title} />
-            <div className="product-list-admin">
-              <p className="">{product.title}</p>
-              <p className="">${product.price}</p>
-              <button onClick={() => openProductModal(product)}>
-                Ver Producto
-              </button>
-              <button onClick={() => handleDeleteProduct(product._id)}>
-                Borrar
-              </button>
-              <button onClick={() => handleEditClick(product)}>Editar</button>
+        {products
+          .filter((product) =>
+            product.title.toLowerCase().includes(searchTerm.toLowerCase())
+          )
+          .map((product) => (
+            <div className="product-image-admin" key={product._id}>
+              <img src={product.image[0]} alt={product.title} />
+              <div className="product-list-admin">
+                <p className="">{product.title}</p>
+                <p className="">${product.price}</p>
+                <button onClick={() => openProductModal(product)}>
+                  Ver Producto
+                </button>
+                <button onClick={() => handleDeleteProduct(product._id)}>
+                  Borrar
+                </button>
+                <button onClick={() => handleEditClick(product)}>Editar</button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
-
-      <button onClick={handleViewAllProducts}>Ver todos los productos</button>
       <button onClick={handleAddProduct}>Agregar Producto</button>
 
-      {isEditing && editModalOpen && (
-        <EditProduct match={{ params: { id: editedProduct._id } }} />
-      )}
-
-      <div className="modal-detail">
-        {showAllProducts && (
-          <Modal
-            isOpen={isModalOpen}
-            onRequestClose={() => {
-              setIsModalOpen(false);
-              setShowAllProducts(false);
-            }}
-          >
-            <button onClick={() => setIsModalOpen(false)}>Cerrar</button>
-            <h2>Todos los Productos</h2>
-            <div className="product-list">
-              {products.map((product) => (
-                <div className="product-image-admin" key={product._id}>
-                  <img src={product.image[0]} alt={product.title} />
-                  <div className="product-list-admin">
-                    <p className="">{product.title}</p>
-                    <p className="">${product.price}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Modal>
+      <Modal
+        isOpen={isProductModalOpen}
+        onRequestClose={closeProductModal}
+        contentLabel="Detalles del Producto"
+      >
+        {selectedProduct && (
+          <div>
+            <h2>Detalles del Producto</h2>
+            <p>Nombre: {selectedProduct.title}</p>
+            <p>Precio: ${selectedProduct.price}</p>
+            <p>Descripción: {selectedProduct.description}</p>
+            {selectedProduct.image.map((imageUrl, index) => (
+              <img
+                key={index}
+                src={imageUrl}
+                alt={`${selectedProduct.title} - Imagen ${index + 1}`}
+              />
+            ))}
+            <button onClick={closeProductModal}>Cerrar</button>
+          </div>
         )}
-      </div> */}
+      </Modal>
+
+      {isEditing && editModalOpen && (
+        <Modal
+          isOpen={editModalOpen}
+          onRequestClose={closeEditModal}
+          contentLabel="Editar Producto"
+        >
+          <div>
+            <EditProduct
+              match={{ params: { id: editedProduct._id } }}
+              product={editedProduct}
+            />
+            <button onClick={closeEditModal}>Cerrar</button>
+          </div>
+        </Modal>
+      )}
     </div>
   );
 };

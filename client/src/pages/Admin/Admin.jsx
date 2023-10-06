@@ -17,28 +17,34 @@ const HomeAdmin = () => {
     <div>
       {/* <NavbarAdmin /> */}
       <div className="home-admin">
-        {section === 'Home'
-          ? <div>
-              <div className="product-management">
-                {/* <ProductUpload /> */}
-                <PreviewProduct setSection={setSection} />
-              </div>
-              <div className="product-upload">
-                <PreviewMessage setSection={setSection} />
-              </div>
-              <div className="sales-management" />
+        {section === 'Home' ? (
+          <div className="product-sales-message-container">
+            <div className='product-sales-container'>
+            <div className="product-management">
+              {/* <ProductUpload /> */}
+              <PreviewProduct setSection={setSection} />
+            </div>
+            <div className="sales-management">
               <PreviewSales setSection={setSection} />
             </div>
-          : section === 'Product'
-              ? <ProductManagement setSection={setSection} />
-              : section === 'Message'
-                  ? <MessageManagement setSection={setSection} />
-                  : section === 'Sales'
-                      ? <SalesManagement setSection={setSection} />
-                      : ''}
+            </div>
+            <div className="messages-container">
+              <PreviewMessage setSection={setSection} />
+            </div>
+          </div>
+        ) : section === 'Product' ? (
+          <ProductManagement setSection={setSection} />
+        ) : section === 'Message' ? (
+          <MessageManagement setSection={setSection} />
+        ) : section === 'Sales' ? (
+          <SalesManagement setSection={setSection} />
+        ) : (
+          ''
+        )}
       </div>
     </div>
   );
 };
+
 
 export default HomeAdmin;

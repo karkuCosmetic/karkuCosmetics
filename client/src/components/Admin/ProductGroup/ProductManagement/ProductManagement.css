@@ -1,3 +1,7 @@
+.productManagement-container{
+  padding: 2rem;
+}
+
 .product-list {
   display: flex;
   flex-direction: column;
