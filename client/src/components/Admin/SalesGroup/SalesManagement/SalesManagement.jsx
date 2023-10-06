@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function SalesManagement() {
+function SalesManagement({setSection}) {
   const [sales, setSales] = useState([]);
 
   useEffect(() => {
@@ -10,6 +10,7 @@ function SalesManagement() {
   return (
     <div>
       <h2>Gestión de Ventas</h2>
+      <button onClick={()=>setSection("Home")}>Home</button>
       <ul>
         {sales.map((sale) => (
           <li key={sale.id}>

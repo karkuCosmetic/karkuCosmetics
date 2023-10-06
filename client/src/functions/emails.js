@@ -2,8 +2,8 @@ import axios from "axios";
 
 export const getEmails = async () => {
   try {
-    const emails = await axios.get("http://localhost:3001/admin/email");
-    return emails;
+    const res = await axios.get("http://localhost:3001/admin/email");
+    return res.data;
   } catch (error) {
     console.log(error);
   }

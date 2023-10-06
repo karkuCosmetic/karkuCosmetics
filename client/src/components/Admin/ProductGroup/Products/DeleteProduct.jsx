@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   DeleteProductById,
   getProductDetail,
-} from "../../../../functions/fetchingProducts";
+} from "../../../../../functions/fetchingProducts";
 
 const DeleteProduct = ({ match }) => {
   const [product, setProduct] = useState(null);

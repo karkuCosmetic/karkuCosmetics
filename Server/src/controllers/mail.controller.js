@@ -60,9 +60,7 @@ export const deleteEmail = async (req, res) => {
       admin.Notifications.splice(index, 1); //elimino el objeto
       await admin.save();
 
-      return res
-        .status(200)
-        .json({ message: "Email eliminado correctamente" });
+      return res.status(200).json({ message: "Email eliminado correctamente" });
     }
 
     return res.status(404).json({ message: "Email no encontrado" });

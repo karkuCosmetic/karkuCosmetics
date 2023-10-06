@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { createProduct } from "../../../../functions/fetchingProducts";
+import { createProduct } from "../../../../../functions/fetchingProducts";
 
 const AddProduct = () => {
   const [product, setProduct] = useState({

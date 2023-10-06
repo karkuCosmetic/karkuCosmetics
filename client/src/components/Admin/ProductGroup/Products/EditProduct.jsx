@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getProductDetail, updateProduct } from "../../../../functions/fetchingProducts"; 
+import { getProductDetail, updateProduct } from "../../../../functions/fetchingProducts";
 
 const EditProduct = ({ match }) => {
   const [product, setProduct] = useState({
