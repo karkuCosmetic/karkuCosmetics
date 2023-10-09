@@ -17,6 +17,7 @@ const EditProduct = ({ match, productDetails }) => {
 
   useEffect(() => {
     if (productDetails) {
+      console.log(productDetails);
       setProduct(productDetails);
     } else {
       const fetchProductDetail = async () => {
@@ -50,6 +51,7 @@ const EditProduct = ({ match, productDetails }) => {
       console.error("Error al actualizar el producto:", error);
     }
   };
+
   return (
     <div className="form-updateProduct">
       <h2>Editar Producto</h2>

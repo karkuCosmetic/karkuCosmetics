@@ -33,13 +33,12 @@ const PreviewProduct = ({ setSection }) => {
   );
 
   const handleDeleteProduct = async (productId) => {
-    setDeletingProductId(productId);
+    setSelectedProduct(productId);
   };
 
   const handleEditProduct = async (productId) => {
     setSelectedProduct(productId);
     setIsEditModalOpen(true);
-
     try {
       const productData = await getProductDetail(productId);
       setSelectedProductDetails(productData);
@@ -49,16 +48,16 @@ const PreviewProduct = ({ setSection }) => {
   };
 
   const handleDeleteConfirmation = async () => {
-    if (deletingProductId !== null) {
+    if (selectedProduct !== null) {
       try {
-        await DeleteProductById(deletingProductId);
+        await DeleteProductById(selectedProduct);
 
         const updatedProducts = products.filter(
-          (product) => product._id !== deletingProductId
+          (product) => product._id !== selectedProduct
         );
         setProducts(updatedProducts);
 
-        setDeletingProductId(null);
+        setSelectedProduct(null);
       } catch (error) {
         console.error("Error al eliminar producto:", error);
       }
@@ -97,7 +96,7 @@ const PreviewProduct = ({ setSection }) => {
         <button onClick={() => setSection("Product")}>Ver todos</button>
       )}
 
-      {deletingProductId !== null && (
+      {selectedProduct !== null && (
         <div>
           <p>Confirmar Borrado de producto?</p>
           <button onClick={handleDeleteConfirmation}>Confirmar</button>

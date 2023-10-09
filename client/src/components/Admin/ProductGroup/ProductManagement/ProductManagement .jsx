@@ -12,6 +12,7 @@ import {
 
 const ProductManagement = ({ setSection }) => {
   const [products, setProducts] = useState([]);
+
   const [newProduct, setNewProduct] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -23,7 +24,9 @@ const ProductManagement = ({ setSection }) => {
 
   useEffect(() => {
     getProduct()
-      .then((data) => setProducts(data))
+      .then((data) => {
+        setProducts(data.map((product) => ({ ...product, isDeleting: false })));
+      })
       .catch((error) => console.error(error));
     window.scrollTo(0, 0);
   }, []);
@@ -38,8 +41,12 @@ const ProductManagement = ({ setSection }) => {
     }
   };
 
-  const handleDeleteProduct = async (productId) => {
-    setDeletingProductId(productId);
+  const handleDeleteProduct = (productId) => {
+    setProducts((prevProducts) =>
+      prevProducts.map((product) =>
+        product._id === productId ? { ...product, isDeleting: true } : product
+      )
+    );
   };
 
   const handleEditClick = async (product) => {
@@ -69,20 +76,16 @@ const ProductManagement = ({ setSection }) => {
     setEditModalOpen(false);
   };
 
-  const handleDeleteConfirmation = async () => {
-    if (deletingProductId !== null) {
-      try {
-        await DeleteProductById(deletingProductId);
+  const handleDeleteConfirmation = async (productId) => {
+    try {
+      await DeleteProductById(productId);
 
-        const updatedProducts = products.filter(
-          (product) => product._id !== deletingProductId
-        );
-        setProducts(updatedProducts);
-
-        setDeletingProductId(null);
-      } catch (error) {
-        console.error("Error al eliminar producto:", error);
-      }
+      const updatedProducts = products.filter(
+        (product) => product._id !== productId
+      );
+      setProducts(updatedProducts);
+    } catch (error) {
+      console.error("Error al eliminar producto:", error);
     }
   };
 
@@ -115,10 +118,12 @@ const ProductManagement = ({ setSection }) => {
                 <button onClick={() => handleDeleteProduct(product._id)}>
                   Eliminar
                 </button>
-                {deletingProductId !== null && (
+                {product.isDeleting && (
                   <div>
                     <p>Confirmar Borrado de producto?</p>
-                    <button onClick={handleDeleteConfirmation}>
+                    <button
+                      onClick={() => handleDeleteConfirmation(product._id)}
+                    >
                       Confirmar
                     </button>
                   </div>
@@ -152,7 +157,6 @@ const ProductManagement = ({ setSection }) => {
           </div>
         )}
       </Modal>
-
       {isEditing && editModalOpen && (
         <Modal
           isOpen={editModalOpen}
@@ -161,7 +165,7 @@ const ProductManagement = ({ setSection }) => {
         >
           <div>
             <EditProduct
-              match={{ params: { id: editedProduct._id } }}
+              match={{ params: { _id: editedProduct._id } }}
               product={editedProduct}
             />
             <button onClick={closeEditModal}>Cerrar</button>
