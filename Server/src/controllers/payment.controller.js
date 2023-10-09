@@ -84,12 +84,18 @@ export const reciveWebhook = async (req, res) => {
         precioFinal += precioProducto;
       }
       //precio total
+      
+      //obtener el id de quien compro
+      let emailUser = data.body.payer.email;
+      const user = User.findOne({ emailUser });
+      //obtener el id de quien compro
 
       //store in base
       const id = generateUniqueID();
 
       let informationPayment = {
         id: id,
+        userId: user._id,
         dataCard: {
           ultDigit: data.response.card.last_four_digits,
           dniComprador: data.response.card.cardholder.identification,

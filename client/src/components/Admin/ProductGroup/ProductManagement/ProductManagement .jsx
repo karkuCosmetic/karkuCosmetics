@@ -51,8 +51,7 @@ const ProductManagement = ({ setSection }) => {
 
   const handleEditClick = async (product) => {
     try {
-      const productData = await getProductDetail(product._id);
-      setEditedProduct(productData);
+    await getProductDetail(product._id).then(data=>setEditedProduct(data.product));
       setIsEditing(true);
       setEditModalOpen(true);
     } catch (error) {
@@ -110,8 +109,8 @@ const ProductManagement = ({ setSection }) => {
             <div className="product-image-admin" key={product._id}>
               <img src={product.image[0]} alt={product.title} />
               <div className="product-list-admin">
-                <p className="">{product.title}</p>
-                <p className="">${product.price}</p>
+                <p className="">{product?.title}</p>
+                <p className="">${product?.price}</p>
                 <button onClick={() => openProductModal(product)}>
                   Ver Producto
                 </button>
@@ -143,9 +142,9 @@ const ProductManagement = ({ setSection }) => {
         {selectedProduct && (
           <div>
             <h2>Detalles del Producto</h2>
-            <p>Nombre: {selectedProduct.title}</p>
-            <p>Precio: ${selectedProduct.price}</p>
-            <p>Descripción: {selectedProduct.description}</p>
+            <p>Nombre: {selectedProduct?.title}</p>
+            <p>Precio: ${selectedProduct?.price}</p>
+            <p>Descripción: {selectedProduct?.description}</p>
             {selectedProduct.image.map((imageUrl, index) => (
               <img
                 key={index}
@@ -165,8 +164,8 @@ const ProductManagement = ({ setSection }) => {
         >
           <div>
             <EditProduct
-              match={{ params: { _id: editedProduct._id } }}
-              product={editedProduct}
+              match={{ params: { id: editedProduct._id } }}
+              // product={editedProduct}
             />
             <button onClick={closeEditModal}>Cerrar</button>
           </div>

@@ -1,54 +1,39 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from 'react';
 import {
   getProductDetail,
   updateProduct,
-} from "../../../../functions/fetchingProducts";
-import "./EditProduct.css";
+} from '../../../../functions/fetchingProducts';
+import './EditProduct.css';
 
-const EditProduct = ({ match, productDetails }) => {
-  const [product, setProduct] = useState({
-    title: "",
-    dimensions: "",
-    description: "",
-    price: 0,
-    stock: 0,
-    category: "",
-  });
+const EditProduct = ({match}) => {
+  const [product, setProduct] = useState ({});
 
-  useEffect(() => {
-    if (productDetails) {
-      console.log(productDetails);
-      setProduct(productDetails);
-    } else {
-      const fetchProductDetail = async () => {
-        try {
-          const id = match.params.id;
-          const productData = await getProductDetail(id);
-          setProduct(productData);
-        } catch (error) {
-          console.error("Error obteniendo detalles del producto:", error);
-        }
-      };
+  const id = match.params.id;
 
-      fetchProductDetail();
-    }
-  }, [match.params.id, productDetails]);
+  useEffect (() => {
+    fetchingdetail ().then (data => setProduct (data.product)).catch ('error');
+  }, []);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setProduct({
+  const fetchingdetail = async () => {
+    const data = await getProductDetail (id);
+    return data;
+  };
+
+  const handleInputChange = e => {
+    const {name, value} = e.target;
+    setProduct ({
       ...product,
       [name]: value,
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async e => {
+    e.preventDefault ();
 
     try {
-      await updateProduct(product, product._id);
+      await updateProduct (product, product._id);
     } catch (error) {
-      console.error("Error al actualizar el producto:", error);
+      console.error ('Error al actualizar el producto:', error);
     }
   };
 
