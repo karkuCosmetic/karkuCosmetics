@@ -5,7 +5,7 @@ import {
 } from "../../../../functions/fetchingProducts";
 import "./EditProduct.css";
 
-const EditProduct = ({ match }) => {
+const EditProduct = ({ match, productDetails }) => {
   const [product, setProduct] = useState({
     title: "",
     dimensions: "",
@@ -16,19 +16,22 @@ const EditProduct = ({ match }) => {
   });
 
   useEffect(() => {
-    const fetchProductDetail = async () => {
-      try {
-        const id = match.params.id;
-        const productData = await getProductDetail(id);
+    if (productDetails) {
+      setProduct(productDetails);
+    } else {
+      const fetchProductDetail = async () => {
+        try {
+          const id = match.params.id;
+          const productData = await getProductDetail(id);
+          setProduct(productData);
+        } catch (error) {
+          console.error("Error obteniendo detalles del producto:", error);
+        }
+      };
 
-        setProduct(productData);
-      } catch (error) {
-        console.error("Error obteniendo detalles del producto:", error);
-      }
-    };
-
-    fetchProductDetail();
-  }, [match.params.id]);
+      fetchProductDetail();
+    }
+  }, [match.params.id, productDetails]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

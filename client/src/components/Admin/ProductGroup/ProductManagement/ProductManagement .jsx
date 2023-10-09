@@ -19,6 +19,7 @@ const ProductManagement = ({ setSection }) => {
   const [isProductModalOpen, setIsProductModalOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
+  const [deletingProductId, setDeletingProductId] = useState(null);
 
   useEffect(() => {
     getProduct()
@@ -38,13 +39,7 @@ const ProductManagement = ({ setSection }) => {
   };
 
   const handleDeleteProduct = async (productId) => {
-    try {
-      await DeleteProductById(productId);
-      const updatedProducts = products.filter((product) => product._id !== productId);
-      setProducts(updatedProducts);
-    } catch (error) {
-      console.error(error);
-    }
+    setDeletingProductId(productId);
   };
 
   const handleEditClick = async (product) => {
@@ -74,6 +69,23 @@ const ProductManagement = ({ setSection }) => {
     setEditModalOpen(false);
   };
 
+  const handleDeleteConfirmation = async () => {
+    if (deletingProductId !== null) {
+      try {
+        await DeleteProductById(deletingProductId);
+
+        const updatedProducts = products.filter(
+          (product) => product._id !== deletingProductId
+        );
+        setProducts(updatedProducts);
+
+        setDeletingProductId(null);
+      } catch (error) {
+        console.error("Error al eliminar producto:", error);
+      }
+    }
+  };
+
   return (
     <div className="productManagement-container">
       <h2>Gestión de Productos</h2>
@@ -101,8 +113,16 @@ const ProductManagement = ({ setSection }) => {
                   Ver Producto
                 </button>
                 <button onClick={() => handleDeleteProduct(product._id)}>
-                  Borrar
+                  Eliminar
                 </button>
+                {deletingProductId !== null && (
+                  <div>
+                    <p>Confirmar Borrado de producto?</p>
+                    <button onClick={handleDeleteConfirmation}>
+                      Confirmar
+                    </button>
+                  </div>
+                )}
                 <button onClick={() => handleEditClick(product)}>Editar</button>
               </div>
             </div>
