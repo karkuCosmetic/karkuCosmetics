@@ -1,6 +1,7 @@
 import express from "express";
 import { createAdmin, deleteAdminById, getAdminById, getAllAdmin, updateAdminById, updateAdminsEmail } from "../controllers/admin.controller.js";
 import { deleteEmail, getEmails, getEmailsById, sendEmail } from "../controllers/mail.controller.js";
+import { getOrderById, getOrders, updateOrders } from "../controllers/orders.controllers.js";
 
 
 
@@ -12,6 +13,12 @@ router.delete('/email/:id', deleteEmail); //elimnina el mail guardado en base
 router.post("/email",sendEmail)
 router.get("/email",getEmails)
 router.get("/email/:id",getEmailsById)
+
+router.get("/orders",getOrders)
+router.get("/orders/:id",getOrderById)
+router.put("/orders/:id",updateOrders) //chequear por que en back funciona en la base no 
+
+
 
 
 router.post('/', createAdmin)

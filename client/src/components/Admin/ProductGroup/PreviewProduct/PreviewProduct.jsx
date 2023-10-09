@@ -32,8 +32,9 @@ const PreviewProduct = ({ setSection }) => {
     product.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleDeleteProduct = async (productId) => {
+  const handleDeleteProduct =(productId) => {
     setSelectedProduct(productId);
+    // DeleteProductById(productId)
   };
 
   const handleEditProduct = async (productId) => {
@@ -47,10 +48,10 @@ const PreviewProduct = ({ setSection }) => {
     }
   };
 
-  const handleDeleteConfirmation = async () => {
+  const handleDeleteConfirmation =  () => {
     if (selectedProduct !== null) {
       try {
-        await DeleteProductById(selectedProduct);
+     DeleteProductById(selectedProduct);
 
         const updatedProducts = products.filter(
           (product) => product._id !== selectedProduct
