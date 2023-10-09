@@ -7,9 +7,11 @@ const PreviewMessage = ({ setSection }) => {
 
   useEffect(() => {
     getEmails()
-      .then((data) => setNotifications(data))
+      .then((data) => setNotifications(data.emails))
       .catch((error) => console.error("Error fetching emails:", error));
   }, []);
+
+  const slicedNotifications = notifications.slice(0, 5);
 
   return (
     <div className="preview-message">
@@ -19,17 +21,18 @@ const PreviewMessage = ({ setSection }) => {
       <div className="email-list">
         <h2>Emails</h2>
         <ul>
-          {notifications && notifications.length > 0 ? (
-            notifications.map((notification, index) => (
+          {slicedNotifications && slicedNotifications.length > 0 ? (
+            slicedNotifications.map((notification, index) => (
               <li key={index}>
-                <strong>Nombre:</strong> {notification.dataMensaje.user_name}
+                <strong>Nombre:</strong> {notification.dataMensaje?.user_name}
                 <br />
-                <strong>Correo:</strong> {notification.dataMensaje.user_email}
+                <strong>Correo:</strong> {notification.dataMensaje?.user_email}
                 <br />
-                <strong>Teléfono:</strong> {notification.dataMensaje.user_phone}
+                <strong>Teléfono:</strong>{" "}
+                {notification.dataMensaje?.user_phone}
                 <br />
                 <strong>Mensaje:</strong>{" "}
-                {notification.dataMensaje.user_message}
+                {notification.dataMensaje?.user_message}
               </li>
             ))
           ) : (
