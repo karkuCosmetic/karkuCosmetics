@@ -1,34 +1,117 @@
-.productManagement-container{
-  padding: 2rem;
+.productManagement-container {
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  height: auto;
+  background-color: #fefeff;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+}
+
+.productManagement-container h2 {
+  font-family: "jost";
+  font-weight: bolder;
+}
+
+.back-product-btn-container {
+  width: 95%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.back-product-btn {
+  color: #fff;
+  background-color: #7d3c93;
+  border: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  width: 30px;
+  height: 30px;
+  font-family: "jost";
+  cursor: pointer;
+  transition: width 0.3s ease;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.back-product-btn:hover {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.add-product-btn {
+  color: #fff;
+  background-color: #d99692;
+  border: none;
+  width: 14rem;
+  border-radius: 4px;
+  padding: 0.3em;
+  margin: 1rem;
+  font-family: "jost";
+  font-size: 1rem;
+  cursor: pointer;
+  transition: width 0.3s ease;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.add-product-btn:hover {
+  width: calc(14rem + 15px);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .product-list {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
+  width: 90%;
+}
+
+.product-list-admin {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-family: "jost";
+  font-weight: bold;
+  width: 100%;
 }
 .product-search-admin {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 15rem;
+  width: 70%;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #7d3c935b;
 }
 
 .product-search-admin input {
   font-family: "quicksand";
+  font-style: italic;
   padding: 0.5rem;
   border-radius: 5px;
-  border: none;
   margin-bottom: 0.5rem;
   margin-top: 0.5rem;
+  width: 80%;
+  padding: 10px;
+  border: 1px solid #ccc;
 }
 
 .product-image-admin {
   display: flex;
-  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  gap: 10px;
-  border: 1px solid black;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #7d3c935b;
 }
 
 .product-image-admin img {
@@ -36,121 +119,234 @@
   height: 50px;
   object-fit: cover;
   border-radius: 5px;
+  margin-right: 1rem;
+}
+
+.buttons-productManagement,
+.product-details-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+
+.buttons-productManagement button {
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-family: "jost";
+  cursor: pointer;
+  transition: width 0.3s ease;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.product-details-buttons button {
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-family: "jost";
+  cursor: pointer;
+  transition: width 0.3s ease;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.product-details-buttons button:hover {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.show-product-btn:hover,
+.edit-product-btn:hover,
+.delete-product-btn:hover {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.show-product-btn {
+  background-color: #d99692;
+}
+
+.edit-product-btn {
+  background-color: #b4507d;
+}
+
+.delete-product-btn {
+  background-color: #7d3c93;
 }
 
 .product-details {
   flex-grow: 1;
 }
 
-.detail-product-modal-admin img {
-  width: 5rem;
-  height: 5rem;
+.ReactModal__Content {
+  background-color: #fff;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  width: 80%;
+  margin: 0 auto;
+  overflow-x: hidden;
 }
 
-.modal-overlay {
-  position: fixed;
-  margin-top: 5rem;
-  left: 0;
-  right: 0;
-  bottom: 0;
-
-  background-color: rgba(0, 0, 0, 0.5);
+.ReactModal__Overlay {
+  background-color: rgba(0, 0, 0, 0.753);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  backdrop-filter: blur(2px);
 }
 
-.modal-detail{
-  margin-top: 5rem;
+.ReactModal__Body--open {
+  overflow-x: hidden;
 }
 
-.modal-content {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  max-width: 400px;
-  width: 100%;
-  margin-top: 5rem;
+.ReactModal__Content,
+.ReactModal__Content--after-open {
+  background-color: rgba(255, 0, 0, 0) !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
-.modal-close-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
+.pagination-productManagement {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.pagination-productManagement button {
+  background-color: #b4507d;
+  color: #fff;
   border: none;
+  padding: 5px 20px;
+  margin: 0 5px;
   cursor: pointer;
-  font-size: 20px;
-  color: #333;
-  padding: 0;
+  border-radius: 5px;
+  font-family: "jost";
+  font-size: 14px;
+  transition: background-color 0.3s ease;
 }
 
-.modal-title {
+.pagination-productManagement button:hover {
+  background-color: #d99692;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.pagination-productManagement button[disabled] {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination-productManagement-info {
+  margin: 0 10px;
+  font-size: 16px;
+  font-family: "jost";
+  font-weight: bold;
+}
+
+.product-details-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f7f7f7;
+  padding: 10px;
+  padding-bottom: 2rem;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.details-product-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.product-details-container span {
+  font-size: 18px;
+  font-weight: bolder;
+}
+
+.product-details-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   font-size: 24px;
+  font-weight: bold;
+  font-family: "jost";
+  margin-bottom: 10px;
+  padding: 0.3rem;
+}
+
+.product-details-p {
+  font-size: 18px;
+  font-family: "jost";
+  font-weight: 500;
   margin-bottom: 10px;
 }
 
-.form-group {
-  margin-bottom: 15px;
+.product-details-image-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  margin: 2rem;
 }
 
-.form-group label {
-  display: block;
-  font-size: 16px;
-  margin-bottom: 5px;
-  color: black;
-}
-
-.form-group input[type="text"],
-.form-group input[type="number"] {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  outline: none;
-}
-
-.form-group textarea {
-  width: 100%;
-  padding: 10px;
+.product-details-image {
+  justify-content: center;
+  align-items: center;
+  width: 10rem;
   height: 10rem;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  outline: none;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  object-fit: cover;
 }
 
-.save-button {
-  background-color: #007bff;
+.product-details-close-button {
+  display: flex;
+  justify-content: center;
+  background-color: #7d3c93;
   color: #fff;
   border: none;
-  border-radius: 4px;
-  padding: 10px 20px;
-  font-size: 16px;
   cursor: pointer;
+  border-radius: 50%;
+  font-size: 16px;
+  width: 2rem;
+  height: 2rem;
+  align-items: center;
+  transition: background-color 0.3s ease;
 }
 
-.save-button:hover {
-  background-color: #0056b3;
+.product-details-close-button:hover {
+  background-color: #b4507d;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.image-preview {
+.close-modal-detail {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  background-color: red;
+  justify-content: flex-end;
 }
 
-.image-thumbnail {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border: 1px solid #ccc;
+/* COLORES ADMIN */
+.color1 {
+  color: #7d3c93;
 }
-
-.ReactModal__Content{
-  margin-top: 5rem;
+.color2 {
+  color: #b4507d;
+}
+.color3 {
+  color: #d99692;
+}
+.color4 {
+  color: #eedcd0;
+}
+.color5 {
+  color: #fefeff;
 }
