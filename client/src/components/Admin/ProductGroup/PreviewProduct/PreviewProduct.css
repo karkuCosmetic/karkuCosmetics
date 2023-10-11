@@ -1,44 +1,132 @@
-h2 {
-    font-family: "quicksand";
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-  }
-  
-  ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  li {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
-    font-size: 1rem;
-    font-family: "quicksand";
-  }
-  
-  img {
-    width: 3rem;
-    height: 3rem;
-    margin-right: 1rem;
-    object-fit: cover; 
-    border-radius: 5px;
-  }
-  
-  button {
-    font-family: "quicksand";
-    background-color:blueviolet;
-    color: #fff;
-    border: none;
-    padding: 0.5rem;
-    font-size: 12px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin: 0.5rem;
-  }
-  
+.previewProduct-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fefeff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  font-family: Arial, sans-serif;
+}
 
-  button:hover {
-    background-color: #0056b3;
-  }
-  
+.previewProduct-container-title {
+  width: 14rem;
+  font-family: "jost";
+  font-weight: bold;
+}
+.previewProduct-container-img-title {
+  display: flex;
+  align-items: center;
+}
+
+.previewProduct-container-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  font-family: "jost";
+}
+
+.previewProduct-container h2 {
+  font-size: 24px;
+  font-family: "jost";
+  padding-bottom: 0.5rem;
+}
+
+.previewProduct-container input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.previewProduct-container ul {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+.previewProduct-container li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #7d3c935b;
+}
+
+.previewProduct-container li img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.previewProduct-container li button {
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-family: "jost";
+  cursor: pointer;
+  transition: width 0.3s ease;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.previewProduct-container-buttons-delete {
+  background-color: #7d3c93;
+}
+
+.previewProduct-container-buttons-edit {
+  background-color:  #b4507d;
+}
+
+.previewProduct-container-buttons-delete:hover {
+  width: calc(40% + 15px);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.previewProduct-container-buttons-edit:hover {
+  width: calc(40% + 15px);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.button-showAll {
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem;
+  cursor: pointer;
+  font-family: "jost";
+  background-color: #d99692;
+  width: 40%;
+  transition: width 0.3s ease;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.button-showAll:hover {
+  width: calc(40% + 15px);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+
+/* COLORES ADMIN */
+.color1 {
+  color: #7d3c93;
+}
+.color2 {
+  color: #b4507d;
+}
+.color3 {
+  color: #d99692;
+}
+.color4 {
+  color: #eedcd0;
+}
+.color5 {
+  color: #fefeff;
+}

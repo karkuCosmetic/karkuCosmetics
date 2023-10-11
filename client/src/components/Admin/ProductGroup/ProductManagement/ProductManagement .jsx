@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import EditProduct from "../Products/EditProduct";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import "./ProductManagement.css";
 import {
   getProduct,
@@ -12,7 +14,6 @@ import {
 
 const ProductManagement = ({ setSection }) => {
   const [products, setProducts] = useState([]);
-
   const [newProduct, setNewProduct] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -21,6 +22,8 @@ const ProductManagement = ({ setSection }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [deletingProductId, setDeletingProductId] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 15;
 
   useEffect(() => {
     getProduct()
@@ -51,7 +54,9 @@ const ProductManagement = ({ setSection }) => {
 
   const handleEditClick = async (product) => {
     try {
-    await getProductDetail(product._id).then(data=>setEditedProduct(data.product));
+      await getProductDetail(product._id).then((data) =>
+        setEditedProduct(data.product)
+      );
       setIsEditing(true);
       setEditModalOpen(true);
     } catch (error) {
@@ -88,11 +93,41 @@ const ProductManagement = ({ setSection }) => {
     }
   };
 
+  const filteredProducts = products.filter((product) =>
+    product.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+
+  let clampedCurrentPage = currentPage;
+  if (totalPages === 0) {
+    clampedCurrentPage = 1;
+  } else if (clampedCurrentPage > totalPages) {
+    clampedCurrentPage = totalPages;
+  }
+
+  const indexOfLastProduct = clampedCurrentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = filteredProducts.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+
+  const isNextButtonDisabled = clampedCurrentPage >= totalPages;
+
   return (
     <div className="productManagement-container">
+      <div className="back-product-btn-container">
+        <button className="back-product-btn" onClick={() => setSection("Home")}>
+          <FontAwesomeIcon icon={faTimes} />
+        </button>
+      </div>
       <h2>Gestión de Productos</h2>
-      <button onClick={() => setSection("Home")}>Volver</button>
-
+      <div className="back-add-btn">
+        <button className="add-product-btn" onClick={handleAddProduct}>
+          Agregar Producto
+        </button>
+      </div>
       <div className="product-search-admin">
         <input
           placeholder="Buscar por nombre..."
@@ -101,7 +136,7 @@ const ProductManagement = ({ setSection }) => {
         />
       </div>
       <div className="product-list">
-        {products
+        {currentProducts
           .filter((product) =>
             product.title.toLowerCase().includes(searchTerm.toLowerCase())
           )
@@ -110,29 +145,61 @@ const ProductManagement = ({ setSection }) => {
               <img src={product.image[0]} alt={product.title} />
               <div className="product-list-admin">
                 <p className="">{product?.title}</p>
-                <p className="">${product?.price}</p>
-                <button onClick={() => openProductModal(product)}>
-                  Ver Producto
-                </button>
-                <button onClick={() => handleDeleteProduct(product._id)}>
-                  Eliminar
-                </button>
-                {product.isDeleting && (
-                  <div>
-                    <p>Confirmar Borrado de producto?</p>
-                    <button
-                      onClick={() => handleDeleteConfirmation(product._id)}
-                    >
-                      Confirmar
-                    </button>
-                  </div>
-                )}
-                <button onClick={() => handleEditClick(product)}>Editar</button>
+                <div className="buttons-productManagement">
+                  <p className="">${product?.price}</p>
+                  <button
+                    className="show-product-btn"
+                    onClick={() => openProductModal(product)}
+                  >
+                    Ver Producto
+                  </button>
+                  <button
+                    className="edit-product-btn"
+                    onClick={() => handleEditClick(product)}
+                  >
+                    Editar
+                  </button>
+                  <button
+                    className="delete-product-btn"
+                    onClick={() => handleDeleteProduct(product._id)}
+                  >
+                    Eliminar
+                  </button>
+                  {product.isDeleting && (
+                    <div className="confirmation-delete-btn">
+                      <p>Confirmar Borrado de producto?</p>
+                      <button
+                        onClick={() => handleDeleteConfirmation(product._id)}
+                      >
+                        Confirmar
+                      </button>
+                      <button>
+                        Cancelar
+                      </button>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           ))}
       </div>
-      <button onClick={handleAddProduct}>Agregar Producto</button>
+      <div className="pagination-productManagement">
+        <button
+          onClick={() => setCurrentPage(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Anterior
+        </button>
+        <span className="pagination-productManagement-info">
+          {clampedCurrentPage} de {totalPages}
+        </span>
+        <button
+          onClick={() => setCurrentPage(currentPage + 1)}
+          disabled={isNextButtonDisabled}
+        >
+          Siguiente
+        </button>
+      </div>
 
       <Modal
         isOpen={isProductModalOpen}
@@ -140,19 +207,53 @@ const ProductManagement = ({ setSection }) => {
         contentLabel="Detalles del Producto"
       >
         {selectedProduct && (
-          <div>
-            <h2>Detalles del Producto</h2>
-            <p>Nombre: {selectedProduct?.title}</p>
-            <p>Precio: ${selectedProduct?.price}</p>
-            <p>Descripción: {selectedProduct?.description}</p>
-            {selectedProduct.image.map((imageUrl, index) => (
-              <img
-                key={index}
-                src={imageUrl}
-                alt={`${selectedProduct.title} - Imagen ${index + 1}`}
-              />
-            ))}
-            <button onClick={closeProductModal}>Cerrar</button>
+          <div className="product-details-container">
+            <div className="details-product-text">
+              <div className="close-modal-detail">
+                <button
+                  className="product-details-close-button"
+                  onClick={closeProductModal}
+                >
+                  <FontAwesomeIcon icon={faTimes} />
+                </button>
+              </div>
+              <h2 className="product-details-title">Detalles del Producto</h2>
+              <p className="product-details-p">
+                <span>Nombre: </span>
+                {selectedProduct?.title}
+              </p>
+              <p className="product-details-p">
+                <span>Precio: </span>${selectedProduct?.price}
+              </p>
+              <p className="product-details-p">
+                <span>Descripción: </span>
+                {selectedProduct?.description}
+              </p>
+            </div>
+            <div className="product-details-image-container">
+              {selectedProduct.image.map((imageUrl, index) => (
+                <img
+                  key={index}
+                  src={imageUrl}
+                  alt={`${selectedProduct.title} - Imagen ${index + 1}`}
+                  className="product-details-image"
+                />
+              ))}
+            </div>
+            <div className="product-details-buttons">
+              <button
+                className="edit-product-btn"
+                onClick={() => handleEditClick(selectedProduct)}
+              >
+                Editar
+              </button>
+              <button
+                className="delete-product-btn"
+                onClick={() => handleDeleteProduct(selectedProduct._id)}
+              >
+                Eliminar
+              </button>
+            </div>
           </div>
         )}
       </Modal>
@@ -163,10 +264,7 @@ const ProductManagement = ({ setSection }) => {
           contentLabel="Editar Producto"
         >
           <div>
-            <EditProduct
-              match={{ params: { id: editedProduct._id } }}
-              // product={editedProduct}
-            />
+            <EditProduct match={{ params: { id: editedProduct._id } }} />
             <button onClick={closeEditModal}>Cerrar</button>
           </div>
         </Modal>

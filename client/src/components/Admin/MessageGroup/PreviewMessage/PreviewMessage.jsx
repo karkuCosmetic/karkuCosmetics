@@ -10,7 +10,9 @@ const PreviewMessage = ({ setSection }) => {
       .then((data) => setNotifications(data.emails))
       .catch((error) => console.error("Error fetching emails:", error));
   }, []);
-  console.log(notifications);
+
+  const slicedNotifications = notifications.slice(0, 5);
+
   return (
     <div className="preview-message">
       <p>PreviewMessage</p>
@@ -19,9 +21,8 @@ const PreviewMessage = ({ setSection }) => {
       <div className="email-list">
         <h2>Emails</h2>
         <ul>
-          {
-          notifications && notifications.length > 0 ? (
-            notifications.map((el, index) => (
+          {slicedNotifications && slicedNotifications.length > 0 ? (
+            slicedNotifications.map((el, index) => (
               <li key={index}>
                 <strong>Nombre:</strong> {el.dataMensaje?.user_name}
                 <br />
@@ -35,8 +36,7 @@ const PreviewMessage = ({ setSection }) => {
             ))
           ) : (
             <p>No hay notificaciones disponibles.</p>
-          )
-          }
+          )}
         </ul>
       </div>
     </div>

@@ -32,9 +32,8 @@ const PreviewProduct = ({setSection}) => {
     product.title.toLowerCase ().includes (searchTerm.toLowerCase ())
   );
 
-  const handleDeleteProduct = productId => {
-    setSelectedProduct (productId);
-    // DeleteProductById(productId)
+  const handleDeleteProduct = (productId) => {
+    setSelectedProduct(productId);
   };
 
   const handleEditProduct = async productId => {
@@ -51,7 +50,7 @@ const PreviewProduct = ({setSection}) => {
   const handleDeleteConfirmation = () => {
     if (selectedProduct !== null) {
       try {
-        DeleteProductById (selectedProduct);
+        DeleteProductById(selectedProduct);
 
         const updatedProducts = products.filter (
           product => product._id !== selectedProduct
@@ -67,7 +66,7 @@ const PreviewProduct = ({setSection}) => {
 
   return (
     <div className="previewProduct-container">
-      <h2>Productos</h2>
+      <h2 className="previewProduct-h2">Productos</h2>
       <input
         type="text"
         placeholder="Buscar por nombre..."
@@ -79,20 +78,28 @@ const PreviewProduct = ({setSection}) => {
           ? products.map (product => <li key={product._id}>{product.title}</li>)
           : filteredProducts.slice (0, 5).map (product => (
               <li key={product._id}>
-                <img src={product.image[0]} alt={product.title} />
-                {product.title} ${product.price}
-                <button onClick={() => handleEditProduct (product._id)}>
-                  Editar
-                </button>
-                <button onClick={() => handleDeleteProduct (product._id)}>
-                  Eliminar
-                </button>
+                <div className="previewProduct-container-img-title">
+                  <img src={product.image[0]} alt={product.title} />
+                  <div className="previewProduct-container-title">
+                    {product.title}
+                  </div>
+                </div>
+                <div className="previewProduct-container-buttons">
+                  ${product.price}
+                  <button className="previewProduct-container-buttons-edit" onClick={() => handleEditProduct(product._id)}>
+                    Editar
+                  </button>
+                  <button className="previewProduct-container-buttons-delete" onClick={() => handleDeleteProduct(product._id)}>
+                    Eliminar
+                  </button>
+                </div>
               </li>
             ))}
       </ul>
 
-      {!showAllProducts &&
-        <button onClick={() => setSection ('Product')}>Ver todos</button>}
+      {!showAllProducts && (
+        <button className="button-showAll" onClick={() => setSection("Product")}>Ver todos</button>
+      )}
 
       {selectedProduct !== null &&
         <div>
