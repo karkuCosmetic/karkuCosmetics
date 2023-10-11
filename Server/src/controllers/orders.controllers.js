@@ -24,21 +24,6 @@ export const getOrderById = async (req, res) => {
 
 export const updateOrders = async (req, res) => {
   try {
-    // const { id } = req.params;
-    // const { status } = req.body;
-    // const admin = await Admin.findOne({});
-    // let orderIndex = admin.orders.findIndex((el) => el.id === id);
-    // const email = admin.orders[orderIndex].payer.email;
-    // admin.orders[orderIndex].entrega = status;
-    // await admin.save();
-
-
-    // const user = await User.findOne({ email });
-    // const buyIndex = user.buys.findIndex((el) => el.id === id);
-    // user.buys[buyIndex].entrega = status;
-    // await user.save();
-
-
     const { id } = req.params;
     const { status } = req.body;
 
@@ -54,8 +39,7 @@ export const updateOrders = async (req, res) => {
       { $set: { "buys.$.entrega": status } }
     );
 
-
-    res.status(200).json( "elementos actualizados");
+    res.status(200).json("elementos actualizados");
   } catch (error) {
     res.status(500).json(formatError(error.message));
   }
