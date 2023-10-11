@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import Modal from 'react-modal';
+import React, { useEffect, useState } from "react";
+import Modal from "react-modal";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import {
@@ -10,14 +10,14 @@ import {
 import './PreviewProduct.css';
 import EditProduct from '../Products/EditProduct';
 
-const PreviewProduct = ({setSection}) => {
-  const [products, setProducts] = useState ([]);
-  const [showAllProducts, setShowAllProducts] = useState (false);
-  const [searchTerm, setSearchTerm] = useState ('');
-  const [deletingProductId, setDeletingProductId] = useState (null);
-  const [selectedProduct, setSelectedProduct] = useState (null);
-  const [isEditModalOpen, setIsEditModalOpen] = useState (false);
-  const [selectedProductDetails, setSelectedProductDetails] = useState (null);
+const PreviewProduct = ({ setSection }) => {
+  const [products, setProducts] = useState([]);
+  const [showAllProducts, setShowAllProducts] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [deletingProductId, setDeletingProductId] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [selectedProductDetails, setSelectedProductDetails] = useState(null);
   const MySwal = withReactContent(Swal);
 
   useEffect (() => {
@@ -32,13 +32,8 @@ const PreviewProduct = ({setSection}) => {
     setSelectedProduct(null);
   };
 
-  const closeEditModal = () => {
-    setIsEditModalOpen(false);
-    setSelectedProduct(null);
-  };
-
-  const handleSearchChange = event => {
-    setSearchTerm (event.target.value);
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
   };
 
   const filteredProducts = products.filter (product =>
@@ -142,7 +137,7 @@ const PreviewProduct = ({setSection}) => {
           <p>Confirmar Borrado de producto?</p>
           <button onClick={handleDeleteConfirmation}>Confirmar</button>
         </div>
-      )}
+      }
       <Modal isOpen={isEditModalOpen} onRequestClose={closeEditModal}>
         <EditProduct
           match={{params: {id: selectedProduct}}}
