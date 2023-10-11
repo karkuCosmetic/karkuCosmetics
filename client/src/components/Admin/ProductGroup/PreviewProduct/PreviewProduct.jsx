@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 import {
   getProduct,
   DeleteProductById,
@@ -16,6 +18,7 @@ const PreviewProduct = ({ setSection }) => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedProductDetails, setSelectedProductDetails] = useState(null);
+  const MySwal = withReactContent(Swal);
 
   useEffect(() => {
     getProduct()
@@ -23,6 +26,11 @@ const PreviewProduct = ({ setSection }) => {
       .catch((error) => console.error(error));
     window.scrollTo(0, 0);
   }, []);
+
+  const closeEditModal = () => {
+    setIsEditModalOpen(false);
+    setSelectedProduct(null);
+  };
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -33,7 +41,19 @@ const PreviewProduct = ({ setSection }) => {
   );
 
   const handleDeleteProduct = (productId) => {
-    setSelectedProduct(productId);
+    MySwal.fire({
+      title: "Confirmar Borrado",
+      text: "¿Quieres eliminar este producto?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Sí, borrar",
+      cancelButtonText: "Cancelar",
+      reverseButtons: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handleDeleteConfirmation();
+      }
+    });
   };
 
   const handleEditProduct = async (productId) => {
@@ -88,10 +108,16 @@ const PreviewProduct = ({ setSection }) => {
                 </div>
                 <div className="previewProduct-container-buttons">
                   ${product.price}
-                  <button className="previewProduct-container-buttons-edit" onClick={() => handleEditProduct(product._id)}>
+                  <button
+                    className="previewProduct-container-buttons-edit"
+                    onClick={() => handleEditProduct(product._id)}
+                  >
                     Editar
                   </button>
-                  <button className="previewProduct-container-buttons-delete" onClick={() => handleDeleteProduct(product._id)}>
+                  <button
+                    className="previewProduct-container-buttons-delete"
+                    onClick={() => handleDeleteProduct(product._id)}
+                  >
                     Eliminar
                   </button>
                 </div>
@@ -100,7 +126,12 @@ const PreviewProduct = ({ setSection }) => {
       </ul>
 
       {!showAllProducts && (
-        <button className="button-showAll" onClick={() => setSection("Product")}>Ver todos</button>
+        <button
+          className="button-showAll"
+          onClick={() => setSection("Product")}
+        >
+          Ver todos
+        </button>
       )}
 
       {selectedProduct !== null && (
@@ -109,13 +140,11 @@ const PreviewProduct = ({ setSection }) => {
           <button onClick={handleDeleteConfirmation}>Confirmar</button>
         </div>
       )}
-      <Modal
-        isOpen={isEditModalOpen}
-        onRequestClose={() => setIsEditModalOpen(false)}
-      >
+      <Modal isOpen={isEditModalOpen} onRequestClose={closeEditModal}>
         <EditProduct
           match={{ params: { id: selectedProduct } }}
           productDetails={selectedProductDetails}
+          closeEditModal={closeEditModal}
         />
       </Modal>
     </div>

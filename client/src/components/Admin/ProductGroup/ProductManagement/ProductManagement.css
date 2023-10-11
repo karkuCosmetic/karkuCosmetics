@@ -144,7 +144,7 @@
   color: #fff;
   border: none;
   border-radius: 5px;
-  padding: 10px 20px;
+  padding: 5px 20px;
   font-size: 16px;
   font-family: "jost";
   cursor: pointer;
@@ -180,12 +180,14 @@
 }
 
 .ReactModal__Content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
   background-color: #fff;
   border: 2px solid #ccc;
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  width: 80%;
   margin: 0 auto;
   overflow-x: hidden;
 }

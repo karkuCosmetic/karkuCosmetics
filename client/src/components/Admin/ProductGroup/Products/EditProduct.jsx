@@ -1,46 +1,60 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from "react";
 import {
   getProductDetail,
   updateProduct,
-} from '../../../../functions/fetchingProducts';
-import './EditProduct.css';
+} from "../../../../functions/fetchingProducts";
+import "./EditProduct.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
-const EditProduct = ({match}) => {
-  const [product, setProduct] = useState ({});
+const EditProduct = ({ match, closeEditModal }) => {
+  const [product, setProduct] = useState({});
 
   const id = match.params.id;
 
-  useEffect (() => {
-    fetchingdetail ().then (data => setProduct (data.product)).catch ('error');
+  useEffect(() => {
+    fetchingdetail()
+      .then((data) => setProduct(data.product))
+      .catch("error");
   }, []);
 
   const fetchingdetail = async () => {
-    const data = await getProductDetail (id);
+    const data = await getProductDetail(id);
     return data;
   };
 
-  const handleInputChange = e => {
-    const {name, value} = e.target;
-    setProduct ({
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setProduct({
       ...product,
       [name]: value,
     });
   };
 
-  const handleSubmit = async e => {
-    e.preventDefault ();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
     try {
-      await updateProduct (product, product._id);
+      await updateProduct(product, product._id);
+      closeEditModal();
     } catch (error) {
-      console.error ('Error al actualizar el producto:', error);
+      console.error("Error al actualizar el producto:", error);
     }
+  };
+
+  const closeModal = () => {
+    closeEditModal();
   };
 
   return (
     <div className="form-updateProduct">
-      <h2>Editar Producto</h2>
-      <form onSubmit={handleSubmit}>
+      <div className="container-close-btn">
+        <button className="product-details-close-button" onClick={closeModal}>
+          <FontAwesomeIcon icon={faTimes} />
+        </button>
+      </div>
+      <h2 className="h2-form-updateProduct">Editar Producto</h2>
+      <form className="form-edit-product-admin" onSubmit={handleSubmit}>
         <div>
           <label>Titulo:</label>
           <input
@@ -62,21 +76,20 @@ const EditProduct = ({match}) => {
         <div>
           <label>Descripción:</label>
           <textarea
+          className="textarea-form-edit-product-adm"
             name="description"
             value={product.description}
             onChange={handleInputChange}
           />
         </div>
-        <div>
-          <label>Precio:</label>
+        <div className="form-edit-precio-sock">
+          <label>Precio: $</label>
           <input
             type="number"
             name="price"
             value={product.price}
             onChange={handleInputChange}
           />
-        </div>
-        <div>
           <label>Stock:</label>
           <input
             type="number"
@@ -94,7 +107,11 @@ const EditProduct = ({match}) => {
             onChange={handleInputChange}
           />
         </div>
-        <button type="submit">Guardar Cambios</button>
+        <div className="container-save-product-btn">
+        <button className="save-product-btn" type="submit">
+          Guardar Cambios
+        </button>
+        </div>
       </form>
     </div>
   );

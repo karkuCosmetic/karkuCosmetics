@@ -3,6 +3,8 @@ import Modal from "react-modal";
 import EditProduct from "../Products/EditProduct";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 import "./ProductManagement.css";
 import {
   getProduct,
@@ -24,6 +26,7 @@ const ProductManagement = ({ setSection }) => {
   const [deletingProductId, setDeletingProductId] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 15;
+  const MySwal = withReactContent(Swal);
 
   useEffect(() => {
     getProduct()
@@ -45,11 +48,19 @@ const ProductManagement = ({ setSection }) => {
   };
 
   const handleDeleteProduct = (productId) => {
-    setProducts((prevProducts) =>
-      prevProducts.map((product) =>
-        product._id === productId ? { ...product, isDeleting: true } : product
-      )
-    );
+    MySwal.fire({
+      title: "Confirmar Borrado",
+      text: "¿Quieres eliminar este producto?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Sí, borrar",
+      cancelButtonText: "Cancelar",
+      reverseButtons: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handleDeleteConfirmation(productId);
+      }
+    });
   };
 
   const handleEditClick = async (product) => {
@@ -165,19 +176,6 @@ const ProductManagement = ({ setSection }) => {
                   >
                     Eliminar
                   </button>
-                  {product.isDeleting && (
-                    <div className="confirmation-delete-btn">
-                      <p>Confirmar Borrado de producto?</p>
-                      <button
-                        onClick={() => handleDeleteConfirmation(product._id)}
-                      >
-                        Confirmar
-                      </button>
-                      <button>
-                        Cancelar
-                      </button>
-                    </div>
-                  )}
                 </div>
               </div>
             </div>
@@ -264,8 +262,10 @@ const ProductManagement = ({ setSection }) => {
           contentLabel="Editar Producto"
         >
           <div>
-            <EditProduct match={{ params: { id: editedProduct._id } }} />
-            <button onClick={closeEditModal}>Cerrar</button>
+            <EditProduct
+              match={{ params: { id: editedProduct._id } }}
+              closeEditModal={closeEditModal}
+            />
           </div>
         </Modal>
       )}
