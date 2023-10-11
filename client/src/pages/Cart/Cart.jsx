@@ -41,7 +41,7 @@ export const Cart = () => {
 
   const handlePayment = () => {
     if (token) {
-      Payment(cart);
+      Payment(cart,token);
     } else {
       console.log("debes loguearte");
     }

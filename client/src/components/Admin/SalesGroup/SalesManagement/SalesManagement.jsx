@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { getSales } from '../../../../functions/fetchingSales';
 
 function SalesManagement({setSection}) {
   const [sales, setSales] = useState([]);
 
   useEffect(() => {
-
+    getSales ().then (data => setSales (data.orders));
   }, []);
 
   return (
