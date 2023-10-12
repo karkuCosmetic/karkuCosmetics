@@ -1,7 +1,10 @@
 import React, { useState } from "react";
-import { createProduct } from "../../../../../functions/fetchingProducts";
+import { createProduct } from "../../../../functions/fetchingProducts";
+import "./AddProduct.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
-const AddProduct = () => {
+const AddProduct = ({ closeEditModal }) => {
   const [product, setProduct] = useState({
     title: "",
     dimensions: "",
@@ -24,15 +27,25 @@ const AddProduct = () => {
 
     try {
       await createProduct(product);
+      closeEditModal();
     } catch (error) {
       console.error("Error creating product:", error);
     }
   };
 
+  const closeModal = () => {
+    closeEditModal();
+  };
+
   return (
-    <div>
-      <h2>Nuevo Producto</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="form-updateProduct">
+      <div className="container-close-btn">
+        <button className="product-details-close-button" onClick={closeModal}>
+          <FontAwesomeIcon icon={faTimes} />
+        </button>
+      </div>
+      <h2 className="h2-form-updateProduct">Nuevo Producto</h2>
+      <form className="form-edit-product-admin" onSubmit={handleSubmit}>
         <div>
           <label>Titulo:</label>
           <input
@@ -54,21 +67,20 @@ const AddProduct = () => {
         <div>
           <label>Descripción:</label>
           <textarea
+            className="textarea-form-edit-product-adm"
             name="description"
             value={product.description}
             onChange={handleInputChange}
           />
         </div>
-        <div>
-          <label>Precio:</label>
+        <div className="form-edit-precio-sock">
+          <label>Precio: $</label>
           <input
             type="number"
             name="price"
             value={product.price}
             onChange={handleInputChange}
           />
-        </div>
-        <div>
           <label>Stock:</label>
           <input
             type="number"
@@ -86,7 +98,11 @@ const AddProduct = () => {
             onChange={handleInputChange}
           />
         </div>
-        <button type="submit">Guardar</button>
+        <div className="container-save-product-btn">
+          <button className="save-product-btn" type="submit">
+            Guardar Cambios
+          </button>
+        </div>
       </form>
     </div>
   );

@@ -18,6 +18,8 @@
 .textarea-form-edit-product-adm {
   height: 6rem;
   font-size: 16px;
+  border-radius: 10px !important;
+  border: 1px solid #7d3c93 !important;
 }
 
 .form-updateProduct label {
@@ -78,21 +80,4 @@
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
     rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
   width: calc(8rem + 15px);
-}
-
-/* COLORES ADMIN */
-.color1 {
-  color: #7d3c93;
-}
-.color2 {
-  color: #b4507d;
-}
-.color3 {
-  color: #d99692;
-}
-.color4 {
-  color: #eedcd0;
-}
-.color5 {
-  color: #fefeff;
 }

@@ -336,6 +336,11 @@
   justify-content: flex-end;
 }
 
+.modal-edit-productManagement{
+  display: flex;
+  width: 100%;
+}
+
 /* COLORES ADMIN */
 .color1 {
   color: #7d3c93;

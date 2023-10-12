@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import AddProduct from "../Products/AddProduct";
 import "./ProductManagement.css";
 import {
   getProduct,
@@ -25,6 +26,7 @@ const ProductManagement = ({ setSection }) => {
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [deletingProductId, setDeletingProductId] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
   const productsPerPage = 15;
   const MySwal = withReactContent(Swal);
 
@@ -91,6 +93,14 @@ const ProductManagement = ({ setSection }) => {
     setEditModalOpen(false);
   };
 
+  const openAddProductModal = () => {
+    setIsAddProductModalOpen(true);
+  };
+
+  const closeAddProductModal = () => {
+    setIsAddProductModalOpen(false);
+  };
+
   const handleDeleteConfirmation = async (productId) => {
     try {
       await DeleteProductById(productId);
@@ -134,11 +144,18 @@ const ProductManagement = ({ setSection }) => {
         </button>
       </div>
       <h2>Gestión de Productos</h2>
-      <div className="back-add-btn">
-        <button className="add-product-btn" onClick={handleAddProduct}>
+      <div>
+        <button className="add-product-btn" onClick={openAddProductModal}>
           Agregar Producto
         </button>
       </div>
+      <Modal
+        isOpen={isAddProductModalOpen}
+        onRequestClose={closeAddProductModal}
+        contentLabel="Agregar Producto"
+      >
+        <AddProduct closeEditModal={closeAddProductModal} />
+      </Modal>
       <div className="product-search-admin">
         <input
           placeholder="Buscar por nombre..."
@@ -261,7 +278,7 @@ const ProductManagement = ({ setSection }) => {
           onRequestClose={closeEditModal}
           contentLabel="Editar Producto"
         >
-          <div>
+          <div className="modal-edit-productManagement">
             <EditProduct
               match={{ params: { id: editedProduct._id } }}
               closeEditModal={closeEditModal}

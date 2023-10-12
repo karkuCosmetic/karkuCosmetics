@@ -6,9 +6,10 @@ import {
   getProduct,
   DeleteProductById,
   getProductDetail,
-} from '../../../../functions/fetchingProducts';
-import './PreviewProduct.css';
-import EditProduct from '../Products/EditProduct';
+} from "../../../../functions/fetchingProducts";
+import "./PreviewProduct.css";
+import EditProduct from "../Products/EditProduct";
+import AddProduct from "../Products/AddProduct";
 
 const PreviewProduct = ({ setSection }) => {
   const [products, setProducts] = useState([]);
@@ -17,14 +18,15 @@ const PreviewProduct = ({ setSection }) => {
   const [deletingProductId, setDeletingProductId] = useState(null);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
   const [selectedProductDetails, setSelectedProductDetails] = useState(null);
   const MySwal = withReactContent(Swal);
 
-  useEffect (() => {
-    getProduct ()
-      .then (data => setProducts (data))
-      .catch (error => console.error (error));
-    window.scrollTo (0, 0);
+  useEffect(() => {
+    getProduct()
+      .then((data) => setProducts(data))
+      .catch((error) => console.error(error));
+    window.scrollTo(0, 0);
   }, []);
 
   const closeEditModal = () => {
@@ -32,12 +34,20 @@ const PreviewProduct = ({ setSection }) => {
     setSelectedProduct(null);
   };
 
+  const openAddProductModal = () => {
+    setIsAddProductModalOpen(true);
+  };
+
+  const closeAddProductModal = () => {
+    setIsAddProductModalOpen(false);
+  };
+
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
-  const filteredProducts = products.filter (product =>
-    product.title.toLowerCase ().includes (searchTerm.toLowerCase ())
+  const filteredProducts = products.filter((product) =>
+    product.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const handleDeleteProduct = (productId) => {
@@ -56,14 +66,14 @@ const PreviewProduct = ({ setSection }) => {
     });
   };
 
-  const handleEditProduct = async productId => {
-    setSelectedProduct (productId);
-    setIsEditModalOpen (true);
+  const handleEditProduct = async (productId) => {
+    setSelectedProduct(productId);
+    setIsEditModalOpen(true);
     try {
-      const productData = await getProductDetail (productId);
-      setSelectedProductDetails (productData);
+      const productData = await getProductDetail(productId);
+      setSelectedProductDetails(productData);
     } catch (error) {
-      console.error ('Error al obtener detalles del producto:', error);
+      console.error("Error al obtener detalles del producto:", error);
     }
   };
 
@@ -72,14 +82,14 @@ const PreviewProduct = ({ setSection }) => {
       try {
         DeleteProductById(selectedProduct);
 
-        const updatedProducts = products.filter (
-          product => product._id !== selectedProduct
+        const updatedProducts = products.filter(
+          (product) => product._id !== selectedProduct
         );
-        setProducts (updatedProducts);
+        setProducts(updatedProducts);
 
-        setSelectedProduct (null);
+        setSelectedProduct(null);
       } catch (error) {
-        console.error ('Error al eliminar producto:', error);
+        console.error("Error al eliminar producto:", error);
       }
     }
   };
@@ -87,6 +97,18 @@ const PreviewProduct = ({ setSection }) => {
   return (
     <div className="previewProduct-container">
       <h2 className="previewProduct-h2">Productos</h2>
+      <div>
+        <button className="add-product-btn" onClick={openAddProductModal}>
+          Agregar Producto
+        </button>
+      </div>
+      <Modal
+        isOpen={isAddProductModalOpen}
+        onRequestClose={closeAddProductModal}
+        contentLabel="Agregar Producto"
+      >
+        <AddProduct closeEditModal={closeAddProductModal} />
+      </Modal>
       <input
         type="text"
         placeholder="Buscar por nombre..."
@@ -95,8 +117,10 @@ const PreviewProduct = ({ setSection }) => {
       />
       <ul>
         {showAllProducts
-          ? products.map (product => <li key={product._id}>{product.title}</li>)
-          : filteredProducts.slice (0, 5).map (product => (
+          ? products.map((product) => (
+              <li key={product._id}>{product.title}</li>
+            ))
+          : filteredProducts.slice(0, 5).map((product) => (
               <li key={product._id}>
                 <div className="previewProduct-container-img-title">
                   <img src={product.image[0]} alt={product.title} />
@@ -132,15 +156,15 @@ const PreviewProduct = ({ setSection }) => {
         </button>
       )}
 
-      {selectedProduct !== null &&
+      {selectedProduct !== null && (
         <div>
           <p>Confirmar Borrado de producto?</p>
           <button onClick={handleDeleteConfirmation}>Confirmar</button>
         </div>
-      }
+      )}
       <Modal isOpen={isEditModalOpen} onRequestClose={closeEditModal}>
         <EditProduct
-          match={{params: {id: selectedProduct}}}
+          match={{ params: { id: selectedProduct } }}
           productDetails={selectedProductDetails}
           closeEditModal={closeEditModal}
         />
