@@ -32,22 +32,21 @@ export const createOrder = async (req, res) => {
       };
     });
 
+    // phone: user.phone,
     let preference = {
+      items: items,
       payer: {
-        name: user.name,
-        surname: user.lastName,
+        first_name: user.name,
+        last_name: user.lastName,
         email: user.email,
-        phone: user.phone,
         address: user.adress,
       },
-
-      items: items,
       back_urls: {
         success: "http://localhost:3000/store",
         failure: "http://localhost:3000/cart",
         pending: "http://localhost:3000/store",
       },
-      notification_url: "https://aadc-190-19-78-141.ngrok.io/payment/webhook",
+      notification_url: "https://459mjx2v-3001.brs.devtunnels.ms/payment/webhook",
     };
 
     const result = await mercadopago.preferences.create(preference);
@@ -94,17 +93,9 @@ export const reciveWebhook = async (req, res) => {
       currentDate.setHours(currentDate.getHours() + timeZoneOffset);
       //ajustar fecha
 
-      //precio total
-      let precioFinal = 0;
-      for (const producto of data.response.additional_info.items) {
-        const precioProducto = producto.quantity * producto.unit_price;
-        precioFinal += precioProducto;
-      }
-
-      //precio total
 
       //obtener el id de quien compro
-      let emailUser = data.body.payer.email;
+      let emailUser = data.response.payer.email;
 
       const user = await User.findOne({ email: emailUser });
       //obtener el id de quien compro
@@ -112,38 +103,16 @@ export const reciveWebhook = async (req, res) => {
       //store in base
       const id = generateUniqueID();
 
-      // let informationPayment = {
-      //   id: id,
-      //   userId: user._id,
-
-      //   dataCard: {
-      //     ultDigit: data.response.card.last_four_digits,
-      //     dniComprador: data.response.card.cardholder.identification,
-      //   },
-      //   payer: data.payer,
-      //   payment: data.response.payment_method,
-      //   status: data.response.status,
-      //   status_detail: data.response.status_detail,
-      //   itemsComprados: data.response.additional_info.items,
-      //   entrega: "pendiente",
-      //   fecha: currentDate,
-      //   TotalPagado: precioFinal,
-      // };
-
-      let informationPayment = {
+      var informationPayment = {
         id: id,
         userId: user._id,
-
-        // payer: data.payer,
-
         payer: {
           name: data.response.first_name,
           lastName: data.response.last_name,
           DNI: data.response.card.cardholder.identification.number,
           phonePerson: data.body.payer.phone,
-          email: data.payer.email,
+          email: data.response.payer.email,
         },
-
         methodPay: {
           cardType: data.body.payment_method_id,
           last_four_digit: data.response.card.last_four_digits,
@@ -156,7 +125,8 @@ export const reciveWebhook = async (req, res) => {
           status: "pendiente",
         },
       };
-      console.log(data);
+
+
       if (data) {
         const query = { email: informationPayment.payer.email };
 
@@ -168,7 +138,7 @@ export const reciveWebhook = async (req, res) => {
           { new: true }
         );
 
-        for (const item of informationPayment.itemsComprados) {
+        for (const item of informationPayment.detailPay.items) {
           //Baja el stock de los productos comprados
 
           await Product.findOneAndUpdate(
@@ -182,9 +152,12 @@ export const reciveWebhook = async (req, res) => {
 
         await Admin.updateMany({}, { $push: { orders: informationPayment } }); // A todos los admins se le agrega la compra
       }
-      res.sendStatus(200);
+      res.status(200);
     }
+    // res.status(200);
   } catch (error) {
     res.status(400).json(formatError(error.message));
   }
 };
+
+
