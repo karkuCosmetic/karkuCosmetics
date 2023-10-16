@@ -22,15 +22,13 @@ const MessageManagement = ({ setSection }) => {
           {notifications && notifications.length > 0 ? (
             notifications.map((notification, index) => (
               <li key={index}>
-                <strong>Nombre:</strong> {notification.dataMensaje?.user_name}
+                <strong>Nombre:</strong> {notification.user_name}
                 <br />
-                <strong>Correo:</strong> {notification.dataMensaje?.user_email}
+                <strong>Correo:</strong> {notification.user_email}
                 <br />
-                <strong>Teléfono:</strong>{" "}
-                {notification.dataMensaje?.user_phone}
+                <strong>Teléfono:</strong> {notification.user_phone}
                 <br />
-                <strong>Mensaje:</strong>{" "}
-                {notification.dataMensaje?.user_message}
+                <strong>Mensaje:</strong> {notification.user_message}
               </li>
             ))
           ) : (

@@ -2,7 +2,7 @@ import { Product } from "../models/product.js";
 import { formatError } from "../utils/formatError.js";
 
 export const createProduct = async (req, res) => {
-  const { title, dimensions, description, price, stock, category } = req.body;
+  const { title, dimensions, description, price, stock, category,image } = req.body;
   try {
     let product = new Product({
       title: title[0].toUpperCase() + title.slice(1),
@@ -13,6 +13,7 @@ export const createProduct = async (req, res) => {
       stock,
       image,
     });
+    console.log(image);
     await product.save();
     return res.status(200).json({ msg: "producto creado" });
   } catch (error) {

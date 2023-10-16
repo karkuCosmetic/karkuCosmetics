@@ -4,7 +4,7 @@ import "./PreviewMessage.css";
 
 const PreviewMessage = ({ setSection }) => {
   const [notifications, setNotifications] = useState([]);
-console.log(notifications)
+  console.log(notifications);
   useEffect(() => {
     getEmails()
       .then((data) => setNotifications(data.emails))
@@ -15,20 +15,25 @@ console.log(notifications)
 
   return (
     <div className="preview-message">
-      <h2>Emails</h2>
-
+      <h2>Mensajes</h2>
       <div className="email-list">
         <ul>
           {slicedNotifications && slicedNotifications.length > 0 ? (
             slicedNotifications.map((el, index) => (
               <li key={index}>
-                <strong>Nombre:</strong> {el.dataMensaje?.user_name}
-                <br />
-                <strong>Correo:</strong> {el.dataMensaje?.user_email}
-                <br />
-                <strong>Teléfono:</strong> {el.dataMensaje?.user_phone}
-                <br />
-                <strong>Mensaje:</strong> {el.dataMensaje?.user_message}
+                <div className="message-preview-container">
+                  <div className="info-message-preview-container">
+                    <strong>Nombre:</strong> {el.user_name}
+                    <br />
+                    <strong>Correo:</strong> {el.user_email}
+                    <br />
+                    <strong>Teléfono:</strong> {el.user_phone}
+                    <br />
+                  </div>
+                  <div className="text-message-preview-container">
+                    <strong>Mensaje:</strong> {el.user_message}
+                  </div>
+                </div>
               </li>
             ))
           ) : (

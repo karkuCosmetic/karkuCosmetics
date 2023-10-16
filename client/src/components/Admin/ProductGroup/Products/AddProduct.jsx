@@ -4,9 +4,9 @@ import {
   updateProduct,
 } from "../../../../functions/fetchingProducts";
 import "./AddProduct.css";
+import { fileUpload } from "../../../../utils/fileUpload";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { fileUpload } from "../../../../utils/fileUpload";
 
 const AddProduct = ({ closeEditModal }) => {
   const [product, setProduct] = useState({
@@ -116,6 +116,7 @@ const AddProduct = ({ closeEditModal }) => {
             onChange={handleInputChange}
           />
         </div>
+
         <div className="image-upload-container">
           <input
             type="file"
