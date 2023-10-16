@@ -88,7 +88,7 @@ const Profile = () => {
   };
 
   const totalCompra = selectedPurchase
-    ? selectedPurchase.itemsComprados.reduce((total, item) => {
+    ? selectedPurchase.detailPay.items.reduce((total, item) => {
         return total + item.quantity * item.unit_price;
       }, 0)
     : 0;
@@ -250,7 +250,7 @@ const Profile = () => {
               <FontAwesomeIcon icon={faCircleXmark} />
             </span>
             <div className="item-detail">
-              {selectedPurchase.itemsComprados.map((item, index) => (
+              {selectedPurchase.detailPay.items.map((item, index) => (
                 <div className="item-full" key={index}>
                   <img
                     src={item.picture_url}
@@ -264,9 +264,9 @@ const Profile = () => {
               ))}
               <div className="item-detail-container">
                 <div className="item-info-detail">Total: ${totalCompra}</div>
-                <div>Fecha: {formatDateModal(selectedPurchase.fecha)}</div>
-                <div>Método de pago: {selectedPurchase.metodoPago}</div>
-                <div>Estado de la compra: {selectedPurchase.entrega}</div>
+                <div>Fecha: {formatDateModal(selectedPurchase.methodPay.datePay)}</div>
+                <div>Método de pago: {selectedPurchase.methodPay.cardType}</div>
+                <div>Estado de la compra: {selectedPurchase.detailPay.status}</div>
               </div>
             </div>
           </div>
