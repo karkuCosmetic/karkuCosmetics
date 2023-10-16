@@ -1,8 +1,12 @@
 import React, { useState } from "react";
-import { createProduct } from "../../../../functions/fetchingProducts";
+import {
+  createProduct,
+  updateProduct,
+} from "../../../../functions/fetchingProducts";
 import "./AddProduct.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { fileUpload } from "../../../../utils/fileUpload";
 
 const AddProduct = ({ closeEditModal }) => {
   const [product, setProduct] = useState({
@@ -13,6 +17,20 @@ const AddProduct = ({ closeEditModal }) => {
     stock: 0,
     category: "",
   });
+  const [images, setImages] = useState([]); // buffer de images
+  const [imageurls, setImageurls] = useState(null); //array de urls de cloudinary
+
+  const handleImageUpload = (event) => {
+    const selectedFiles = event.target.files;
+    setImages((prevImages) => [...prevImages, ...selectedFiles]);
+  };
+
+  const handlerSubmitImage = async () => {
+    await fileUpload(images, "products").then((res) => {
+      setImageurls(res);
+      updateProduct(res);
+    });
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -97,6 +115,23 @@ const AddProduct = ({ closeEditModal }) => {
             value={product.category}
             onChange={handleInputChange}
           />
+        </div>
+        <div className="image-upload-container">
+          <input
+            type="file"
+            name=""
+            id=""
+            onChange={(e) => handleImageUpload(e)}
+            multiple
+            className="upload-input"
+          />
+          <button
+            onClick={handlerSubmitImage}
+            disabled={!images.length}
+            className="upload-button"
+          >
+            Subir foto
+          </button>
         </div>
         <div className="container-save-product-btn">
           <button className="save-product-btn" type="submit">

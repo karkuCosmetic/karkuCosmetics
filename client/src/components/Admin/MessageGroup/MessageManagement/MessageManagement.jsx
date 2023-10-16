@@ -14,7 +14,7 @@ const MessageManagement = ({ setSection }) => {
   return (
     <div className="preview-message">
       <p>PreviewMessage</p>
-      <button onClick={() => setSection("Message")}>Mensajes</button>
+      <button onClick={() => setSection("Home")}>Volver</button>
 
       <div className="email-list">
         <h2>Emails</h2>

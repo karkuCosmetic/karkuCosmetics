@@ -1,34 +1,71 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { fileUpload } from "../../../utils/fileUpload";
 import { updateProduct } from "../../../functions/fetchingProducts";
+import "./productUpload.css";
 
 const ProductUpload = () => {
-  const [images, setImages] = useState([]); // buffer de images
-  const [imageurls, setImageurls] = useState(null); //array de urls de cloudinary
+  const [images, setImages] = useState([]);
+  const [imageUrls, setImageUrls] = useState(null);
 
-  const handleImageUpload = (event) => {
+  const handleImageUpload = useCallback((event) => {
     const selectedFiles = event.target.files;
     setImages((prevImages) => [...prevImages, ...selectedFiles]);
-  };
+  }, []);
 
-  const handlerSubmitImage = async () => {
-    await fileUpload(images, "products").then((res) => {
-      setImageurls(res);
-      updateProduct(res);
-    });
-  };
+  const handlerSubmitImage = useCallback(async () => {
+    const uploadedImages = await fileUpload(images, "products");
+    setImageUrls(uploadedImages);
+    updateProduct(uploadedImages);
+  }, [images]);
+
+  useEffect(() => {
+    if (images.length > 0) {
+      document.querySelector(".upload-button").removeAttribute("disabled");
+    } else {
+      document.querySelector(".upload-button").setAttribute("disabled", true);
+    }
+  }, [images]);
 
   return (
-    <div>
+    <div className="product-upload-container">
       <input
+        className="upload-input"
         type="file"
         name=""
         id=""
-        onChange={(e) => handleImageUpload(e)} //input y button se usarian en el admin
+        onChange={handleImageUpload}
         multiple
       />
-      <button onClick={handlerSubmitImage} disabled={images ? false : true}>
+      <div className="selected-images">
+        {images.map((image, index) => (
+          // eslint-disable-next-line jsx-a11y/img-redundant-alt
+          <img
+            key={index}
+            src={URL.createObjectURL(image)}
+            alt={`Selected Image ${index}`}
+            className="selected-image"
+          />
+        ))}
+      </div>
+      {imageUrls && (
+        <div className="previously-uploaded-images">
+          {imageUrls.map((url, index) => (
+            // eslint-disable-next-line jsx-a11y/img-redundant-alt
+            <img
+              key={index}
+              src={url}
+              alt={`Uploaded Image ${index}`}
+              className="previously-uploaded-image"
+            />
+          ))}
+        </div>
+      )}
+
+      <button
+        onClick={handlerSubmitImage}
+        className="upload-button"
+        disabled={!images.length}
+      >
         Subir foto
       </button>
     </div>
