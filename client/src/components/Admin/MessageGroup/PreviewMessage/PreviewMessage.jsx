@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { getEmails, sendEmail } from "../../../../functions/emails";
+import {
+  deleteEmailById,
+  getEmails,
+  sendEmail,
+} from "../../../../functions/emails";
 import "./PreviewMessage.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faTrash } from "@fortawesome/free-solid-svg-icons";
+import Swal from "sweetalert2";
 
 const PreviewMessage = ({ setSection }) => {
   const [notifications, setNotifications] = useState([]);
@@ -30,13 +35,13 @@ const PreviewMessage = ({ setSection }) => {
 
   const handleReply = () => {
     if (selectedMessage && replyText.trim() !== "") {
-      const replyBody = `Respuesta:\n${selectedMessage.user_message}\n\nRespuesta:\n${replyText}`;
+      const replyBody = `Respuesta:\n${selectedMessage.user_message}\n\n\n${replyText}`;
 
       sendEmail({
         to: selectedMessage.user_email,
         subject: `Re: ${selectedMessage.user_message}`,
         body: replyBody,
-        id:selectedMessage.id
+        id: selectedMessage.id,
       })
         .then(() => {
           console.log("Mensaje enviado con éxito");
@@ -49,16 +54,31 @@ const PreviewMessage = ({ setSection }) => {
     }
   };
 
-  // const handleDelete = (id) => {
-  //   deleteEmailById(id)
-  //     .then(() => {
-  //       setNotifications(notifications.filter((email) => email.id !== id));
-  //       console.log("Mensaje eliminado con éxito");
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error al eliminar el mensaje:", error);
-  //     });
-  // };
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "¿Confirmar borrado?",
+      text: "Esto eliminará el mensaje de forma permanente.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Sí, borrar",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteEmailById(id)
+          .then(() => {
+            setNotifications(notifications.filter((email) => email.id !== id));
+            Swal.fire(
+              "Eliminado",
+              "El mensaje ha sido eliminado con éxito",
+              "success"
+            );
+          })
+          .catch((error) => {
+            console.error("Error al eliminar el mensaje:", error);
+          });
+      }
+    });
+  };
 
   const formatDateModal = (isoDate) => {
     const date = new Date(isoDate);
@@ -88,7 +108,7 @@ const PreviewMessage = ({ setSection }) => {
                     <br />
                   </div>
                   <div className="text-message-preview-container">
-                    <strong>Mensaje:</strong> {el.user_message}
+                    <strong>Mensaje:</strong> {el.user_message.slice(0, 200)}...
                   </div>
                   <div className="btn-show-message-container">
                     <button
@@ -100,9 +120,9 @@ const PreviewMessage = ({ setSection }) => {
                   </div>
                   <button
                     className="btn-delete-message"
-                    // onClick={() => handleDelete(el.id)}
+                    onClick={() => handleDelete(el.id)}
                   >
-                    <FontAwesomeIcon icon={faTrash} size="2x"/>
+                    <FontAwesomeIcon icon={faTrash} />
                   </button>
                 </div>
               </li>

@@ -20,6 +20,7 @@
 .message-preview-container {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 2rem;
   font-family: "figtree";
 }
@@ -88,6 +89,25 @@
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 .btn-show-message:hover {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.btn-delete-message{
+  display: flex;
+  align-items: center;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "jost";
+  background-color: #7d3c93;
+  padding: 1rem;
+  height: 2rem;
+  transition: width 0.3s ease;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.btn-delete-message:hover {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
@@ -206,13 +226,13 @@
   cursor: pointer;
   font-family: "jost";
   background-color: #b4507d;
-  width: 10%;
+  width: 20%;
   transition: width 0.3s ease;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .btn-response-message:hover {
-  width: calc(40% + 20px);
+  width: calc(20% + 20px);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
