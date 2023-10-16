@@ -13,7 +13,6 @@ export const createProduct = async (req, res) => {
       stock,
       image,
     });
-    console.log(image);
     await product.save();
     return res.status(200).json({ msg: "producto creado" });
   } catch (error) {

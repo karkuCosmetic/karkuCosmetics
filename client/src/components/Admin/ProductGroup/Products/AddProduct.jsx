@@ -1,58 +1,65 @@
-import React, { useState } from "react";
+import React, {useRef, useState} from 'react';
 import {
   createProduct,
   updateProduct,
-} from "../../../../functions/fetchingProducts";
-import "./AddProduct.css";
-import { fileUpload } from "../../../../utils/fileUpload";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
+} from '../../../../functions/fetchingProducts';
+import './AddProduct.css';
 
-const AddProduct = ({ closeEditModal }) => {
-  const [product, setProduct] = useState({
-    title: "",
-    dimensions: "",
-    description: "",
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faTimes} from '@fortawesome/free-solid-svg-icons';
+
+const AddProduct = ({closeEditModal}) => {
+  const [product, setProduct] = useState ({
+    title: '',
+    dimensions: '',
+    description: '',
     price: 0,
     stock: 0,
-    category: "",
+    category: '',
   });
-  const [images, setImages] = useState([]); // buffer de images
-  const [imageurls, setImageurls] = useState(null); //array de urls de cloudinary
 
-  const handleImageUpload = (event) => {
-    const selectedFiles = event.target.files;
-    setImages((prevImages) => [...prevImages, ...selectedFiles]);
+  const [selectedImages, setSelectedImages] = useState ([]); //preview images
+  const maxImages = 5; // limite de images
+  const inputRef = useRef ();
+
+  const handleImageUpload = event => {
+    const files = event.target.files;
+    const selected = Array.from (files);
+
+    if (selectedImages.length + selected.length > maxImages) {
+      alert (`Máximo ${maxImages} imágenes permitidas.`); //reemplazar este alert por sweetAlert
+    } else {
+      setSelectedImages (prevSelected => [...prevSelected, ...selected]); //hace el prev de las imagenes y las agrega si no hay mas de 5
+    }
+    inputRef.current.value = '';
   };
 
-  const handlerSubmitImage = async () => {
-    await fileUpload(images, "products").then((res) => {
-      setImageurls(res);
-      updateProduct(res);
-    });
+  const handleImageRemove = index => {
+    const updatedImages = [...selectedImages];
+    updatedImages.splice (index, 1);
+    setSelectedImages (updatedImages);
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setProduct({
+  const handleInputChange = e => {
+    const {name, value} = e.target;
+    setProduct ({
       ...product,
       [name]: value,
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const handleSubmit = async e => {
+    e.preventDefault ();
     try {
-      await createProduct(product);
-      closeEditModal();
+      await createProduct (product, selectedImages);
+      closeEditModal ();
     } catch (error) {
-      console.error("Error creating product:", error);
+      console.error ('Error creating product:', error);
     }
   };
 
   const closeModal = () => {
-    closeEditModal();
+    closeEditModal ();
   };
 
   return (
@@ -120,19 +127,27 @@ const AddProduct = ({ closeEditModal }) => {
         <div className="image-upload-container">
           <input
             type="file"
-            name=""
-            id=""
-            onChange={(e) => handleImageUpload(e)}
+            onChange={e => handleImageUpload (e)}
             multiple
             className="upload-input"
+            ref={inputRef}
+            accept="image/*"
           />
-          <button
-            onClick={handlerSubmitImage}
-            disabled={!images.length}
-            className="upload-button"
-          >
-            Subir foto
-          </button>
+          <div style={{display: 'flex', gap: '15px'}}>
+            {selectedImages.map ((image, index) => (
+              <div>
+                <img
+                  key={index}
+                  src={URL.createObjectURL (image)}
+                  alt={`Image ${index}`}
+                  style={{width: '100px', height: '100px'}}
+                />
+                <button type="button" onClick={() => handleImageRemove (index)}>
+                  X
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
         <div className="container-save-product-btn">
           <button className="save-product-btn" type="submit">

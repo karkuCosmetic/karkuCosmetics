@@ -3,8 +3,10 @@ import { fileUpload } from "../utils/fileUpload";
 
 export const createProduct = async (data,images) => {
   let image =await fileUpload(images, "products")
+console.log(data);
+console.log(image);
 
-await axios.post("http://localhost:3001/product", {
+await axios.post("http://localhost:3001/products", {
     title: data.title,
     dimensions: data.dimensions,
     description: data.description,
