@@ -92,13 +92,14 @@ export const ResendConfirmationEmail = async (emailUser) => {
   );
 };
 
-export const SendEmailAdmin = async (emailUser,userMsg,AdminMsg) => {
-
-  let email = emailUser;
+export const SendEmailAdmin = async (to, subject, body) => {
+  let email = to;
+  let userMsg = subject;
+  let AdminMsg = body;
 
   ejs.renderFile(
     _path + "/mesaggeAdmin.ejs",
-    { email,userMsg,AdminMsg},
+    { email, userMsg, AdminMsg },
     async (error, data) => {
       if (error) {
         console.log(error);
@@ -107,7 +108,7 @@ export const SendEmailAdmin = async (emailUser,userMsg,AdminMsg) => {
           await transport.sendMail({
             from: '"Karku cosmetica" karku.cosmeticanatural@gmail.com',
             to: email,
-            subject: "Confirmacion de cuenta",
+            subject: "Respuesta solicitada de Karku",
             html: data,
           });
           console.log("Email Send");

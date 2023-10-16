@@ -65,10 +65,15 @@ export const updateAdminById = async (req, res) => {
 };
 
 export const updateAdminsEmail = async (req, res) => {
+  let currentDate = new Date();
+  const timeZoneOffset = -3; // La diferencia de la zona horaria en horas
+  currentDate.setHours(currentDate.getHours() + timeZoneOffset);
+
   try {
     const { dataMensaje } = req.body;
     const id = generateUniqueID();
     dataMensaje.id = id;
+    dataMensaje.date = currentDate;
     let admin = await Admin.updateMany(
       {},
       { $push: { Notifications: dataMensaje } }
@@ -94,5 +99,3 @@ export const deleteAdminById = async (req, res) => {
     res.status(400).json(formatError(error.message));
   }
 };
-
-

@@ -1,19 +1,17 @@
 import axios from "axios";
 import { fileUpload } from "../utils/fileUpload";
 
-export const createProduct = async (data,images) => {
-  let image =await fileUpload(images, "products")
-console.log(data);
-console.log(image);
+export const createProduct = async (data, images) => {
+  let image = await fileUpload(images, "products");
 
-await axios.post("http://localhost:3001/products", {
+  await axios.post("http://localhost:3001/products", {
     title: data.title,
     dimensions: data.dimensions,
     description: data.description,
     price: data.price,
     stock: data.stock,
     category: data.category,
-    image
+    image,
   });
 };
 

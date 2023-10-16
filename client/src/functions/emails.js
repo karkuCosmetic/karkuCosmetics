@@ -26,3 +26,13 @@ export const deleteEmailById = async (id) => {
     console.log(error);
   }
 };
+
+export const sendEmail=async (data)=>{
+try {
+  const res= await axios.post(`http://localhost:3001/admin/email`,{data});
+  return res.data
+} catch (error) {
+  
+}
+
+}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getEmails } from "../../../../functions/emails";
+import { getEmails, sendEmail } from "../../../../functions/emails";
 import "./PreviewMessage.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -12,7 +12,7 @@ const PreviewMessage = ({ setSection }) => {
 
   useEffect(() => {
     getEmails()
-      .then((data) => setNotifications(data.emails))
+      .then((data) => setNotifications(data.emails.reverse()))
       .catch((error) => console.error("Error fetching emails:", error));
   }, []);
 
@@ -28,25 +28,34 @@ const PreviewMessage = ({ setSection }) => {
     setIsModalOpen(false);
   };
 
-  // const handleReply = () => {
-  //   if (selectedMessage && replyText.trim() !== "") {
-  //     const replyBody = `Mensaje original:\n${selectedMessage.user_message}\n\nRespuesta:\n${replyText}`;
+  const handleReply = () => {
+    if (selectedMessage && replyText.trim() !== "") {
+      const replyBody = `Respuesta:\n${selectedMessage.user_message}\n\nRespuesta:\n${replyText}`;
 
-  //     SendEmail({
-  //       to: selectedMessage.user_email,
-  //       subject: "Re: Respuesta a tu mensaje",
-  //       body: replyBody,
-  //     })
-  //       .then(() => {
-  //         console.log("Mensaje enviado con éxito");
+      sendEmail({
+        to: selectedMessage.user_email,
+        subject: `Re: ${selectedMessage.user_message}`,
+        body: replyBody,
+      })
+        .then(() => {
+          console.log("Mensaje enviado con éxito");
 
-  //         setReplyText("");
-  //       })
-  //       .catch((error) => {
-  //         console.error("Error al enviar el mensaje:", error);
-  //       });
-  //   }
-  // };
+          setReplyText("");
+        })
+        .catch((error) => {
+          console.error("Error al enviar el mensaje:", error);
+        });
+    }
+  };
+
+
+  const formatDateModal = (isoDate) => {
+    const date = new Date(isoDate);
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
 
   return (
     <div className="preview-message">
@@ -64,7 +73,7 @@ const PreviewMessage = ({ setSection }) => {
                     <br />
                     <strong>Teléfono:</strong> {el.user_phone}
                     <br />
-                    <strong>Fecha:</strong> {el.user_phone}
+                    <strong>Fecha: </strong> {formatDateModal(el.date)}
                     <br />
                   </div>
                   <div className="text-message-preview-container">
@@ -113,7 +122,7 @@ const PreviewMessage = ({ setSection }) => {
                   <div className="phone-date">
                     <strong>Teléfono:</strong> {selectedMessage.user_phone}
                     <br />
-                    <strong>Fecha:</strong> {selectedMessage.date}
+                    <strong>Fecha: </strong>{formatDateModal(selectedMessage.date)}
                   </div>
                 </div>
                 <div className="text-message-modal">
@@ -128,7 +137,7 @@ const PreviewMessage = ({ setSection }) => {
                 <div className="btn-response-message-container">
                   <button
                     className="btn-response-message"
-                    //  onClick={handleReply}
+                     onClick={handleReply}
                   >
                     Responder
                   </button>

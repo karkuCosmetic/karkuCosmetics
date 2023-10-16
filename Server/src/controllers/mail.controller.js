@@ -2,7 +2,7 @@ import pkg from "jsonwebtoken";
 const { verify } = pkg;
 import { User } from "../models/user.js";
 import { formatError } from "../utils/formatError.js";
-import { ResendConfirmationEmail } from "../helpers/sendConfirmationEmail.js";
+import { ResendConfirmationEmail, SendEmailAdmin } from "../helpers/sendConfirmationEmail.js";
 import { Admin } from "../models/admin.js";
 
 export const confirmEmail = async (req, res) => {
@@ -79,9 +79,9 @@ export const deleteEmail = async (req, res) => {
 
 export const sendEmail = async (req, res) => {
   try {
-    const { email, user_message, Admin_message } = req.body;
+    const { data} = req.body;
 
-    await SendEmailAdmin(email, user_message, Admin_message);
+    await SendEmailAdmin(data.to,data.subject,data.body);
     return res.status(200).json({ message: "mensaje enviado correctamente" });
   } catch (error) {
     return res.status(400).json(formatError(error.message));
