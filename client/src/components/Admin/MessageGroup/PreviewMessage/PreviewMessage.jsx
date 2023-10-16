@@ -108,7 +108,7 @@ const PreviewMessage = ({ setSection }) => {
                     <br />
                   </div>
                   <div className="text-message-preview-container">
-                    <strong>Mensaje:</strong> {el.user_message.slice(0, 200)}...
+                    {el.user_message.slice(0, 200)}...
                   </div>
                   <div className="btn-show-message-container">
                     <button
