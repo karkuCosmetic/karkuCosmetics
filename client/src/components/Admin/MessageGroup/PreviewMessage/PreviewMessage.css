@@ -1,57 +1,218 @@
-.message-preview-container {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  padding: 1rem;
-  border-bottom: 1px solid #7d3c93;
-}
-
-.message-preview-container{
-  display: flex;
-  gap: 2rem;
-}
-
-.info-message-preview-container{
-  width: 35%;
-}
-
-.text-message-preview-container{
-  width: 80%;
-}
 .preview-message {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 20px;
-  border: 1px solid #ccc;
-  margin: 20px;
   border-radius: 10px;
-  background-color: #f5f5f5;
+  background-color: #fefeff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.message-preview-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 1rem;
+  border-bottom: 1px solid #7d3c935b;
+}
+
+.message-preview-container {
+  display: flex;
+  gap: 2rem;
+  font-family: "figtree";
+}
+
+.info-message-preview-container {
+  width: 35%;
+  flex-wrap: wrap;
+}
+
+.text-message-preview-container {
+  width: 80%;
 }
 
 .preview-message h2 {
+  text-align: center;
   font-family: "jost";
   font-weight: bold;
+  width: 20%;
+  /* border-bottom: 1px solid #7d3c935b; */
 }
 
-.email-list {
-  margin-top: 20px;
+.btn-showAll-messages-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 1rem;
+  width: 100%;
 }
 
-.email-list h2 {
-  font-size: 18px;
-  margin-bottom: 10px;
-  width: 14rem;
+.btn-showAll-messages {
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem;
+  cursor: pointer;
+  font-family: "jost";
+  background-color: #d99692;
+  width: 20%;
+  transition: width 0.3s ease;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.email-list ul {
-  list-style: none;
-  padding: 0;
+.btn-showAll-messages:hover {
+  width: calc(20% + 15px);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-.email-list li {
-  margin-bottom: 5px;
+.btn-show-message-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10%;
+}
+
+.btn-show-message {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "jost";
+  background-color: #b4507d;
+  padding: 0.5rem;
+  height: 2rem;
+  transition: width 0.3s ease;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.btn-show-message:hover {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.message-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.info-message-modal {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  gap: 1rem;
+  font-family: "figtree";
+  margin-bottom: 2rem;
+}
+
+.name-email {
+  width: 30%;
+}
+
+.phone-date {
+  width: 30%;
+}
+
+.text-message-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: justify;
+  width: 80%;
+  margin-bottom: 2rem;
+  gap: 1rem;
+  font-family: "figtree";
+}
+
+.text-message-modal strong {
+  display: flex;
+  justify-content: center;
+}
+
+.message-modal {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  width: 80%;
+  padding: 20px;
+  border-radius: 5px;
+  z-index: 1000;
+}
+
+.close-message-modal-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.close-message-modal {
+  display: flex;
+  justify-content: center;
+  background-color: #7d3c93;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 16px;
+  width: 2rem;
+  height: 2rem;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.close-message-modal:hover {
+  background-color: #b4507d;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.btn-response-message-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.textarea-response-message {
+  border: 1px solid #7d3c935b;
+  border-radius: 10px;
+  color: black;
+  font-family: "jost";
+  padding: 0.5rem;
+  font-size: 16px;
+  width: 80%;
+}
+
+.btn-response-message {
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem;
+  cursor: pointer;
+  font-family: "jost";
+  background-color: #b4507d;
+  width: 10%;
+  transition: width 0.3s ease;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.btn-response-message:hover {
+  width: calc(40% + 20px);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 /* COLORES ADMIN */
