@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getEmails, sendEmail } from "../../../../functions/emails";
 import "./PreviewMessage.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faTimes, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const PreviewMessage = ({ setSection }) => {
   const [notifications, setNotifications] = useState([]);
@@ -48,6 +48,16 @@ const PreviewMessage = ({ setSection }) => {
     }
   };
 
+  // const handleDelete = (id) => {
+  //   deleteEmailById(id)
+  //     .then(() => {
+  //       setNotifications(notifications.filter((email) => email.id !== id));
+  //       console.log("Mensaje eliminado con éxito");
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error al eliminar el mensaje:", error);
+  //     });
+  // };
 
   const formatDateModal = (isoDate) => {
     const date = new Date(isoDate);
@@ -80,13 +90,19 @@ const PreviewMessage = ({ setSection }) => {
                     <strong>Mensaje:</strong> {el.user_message}
                   </div>
                   <div className="btn-show-message-container">
-                  <button
-                    className="btn-show-message"
-                    onClick={() => openModal(el)}
-                  >
-                    Ver mensaje
-                  </button>
+                    <button
+                      className="btn-show-message"
+                      onClick={() => openModal(el)}
+                    >
+                      Ver mensaje
+                    </button>
                   </div>
+                  <button
+                    className="btn-delete-message"
+                    // onClick={() => handleDelete(el.id)}
+                  >
+                    <FontAwesomeIcon icon={faTrash} size="2x"/>
+                  </button>
                 </div>
               </li>
             ))
@@ -122,11 +138,12 @@ const PreviewMessage = ({ setSection }) => {
                   <div className="phone-date">
                     <strong>Teléfono:</strong> {selectedMessage.user_phone}
                     <br />
-                    <strong>Fecha: </strong>{formatDateModal(selectedMessage.date)}
+                    <strong>Fecha: </strong>
+                    {formatDateModal(selectedMessage.date)}
                   </div>
                 </div>
                 <div className="text-message-modal">
-                  <strong>Mensaje:</strong> {selectedMessage.user_message}
+                  <strong>Mensaje:</strong> "{selectedMessage.user_message}"
                 </div>
                 <textarea
                   className="textarea-response-message"
@@ -137,9 +154,9 @@ const PreviewMessage = ({ setSection }) => {
                 <div className="btn-response-message-container">
                   <button
                     className="btn-response-message"
-                     onClick={handleReply}
+                    onClick={handleReply}
                   >
-                    Responder
+                    Enviar Respuesta
                   </button>
                 </div>
               </div>

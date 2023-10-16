@@ -25,12 +25,12 @@
 }
 
 .info-message-preview-container {
-  width: 35%;
+  width: 25%;
   flex-wrap: wrap;
 }
 
 .text-message-preview-container {
-  width: 80%;
+  width: 50%;
 }
 
 .preview-message h2 {
