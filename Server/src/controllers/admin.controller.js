@@ -74,6 +74,8 @@ export const updateAdminsEmail = async (req, res) => {
     const id = generateUniqueID();
     dataMensaje.id = id;
     dataMensaje.date = currentDate;
+    dataMensaje.response=false;
+
     let admin = await Admin.updateMany(
       {},
       { $push: { Notifications: dataMensaje } }

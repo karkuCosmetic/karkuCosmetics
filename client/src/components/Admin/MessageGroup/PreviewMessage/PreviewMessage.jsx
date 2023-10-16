@@ -36,6 +36,7 @@ const PreviewMessage = ({ setSection }) => {
         to: selectedMessage.user_email,
         subject: `Re: ${selectedMessage.user_message}`,
         body: replyBody,
+        id:selectedMessage.id
       })
         .then(() => {
           console.log("Mensaje enviado con éxito");
