@@ -19,6 +19,7 @@
 
 .message-preview-container {
   display: flex;
+  align-items: center;
   gap: 2rem;
   font-family: "figtree";
 }
@@ -97,7 +98,7 @@
   align-items: center;
 }
 
-.overlay {
+.overlay-previewMessage {
   position: fixed;
   top: 0;
   left: 0;

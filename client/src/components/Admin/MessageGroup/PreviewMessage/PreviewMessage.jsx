@@ -104,7 +104,7 @@ const PreviewMessage = ({ setSection }) => {
         </button>
       </div>
       {isModalOpen && (
-        <div className="overlay">
+        <div className="overlay-previewMessage">
           <div className="message-modal">
             <div className="close-message-modal-container">
               <span className="close-message-modal" onClick={closeModal}>
