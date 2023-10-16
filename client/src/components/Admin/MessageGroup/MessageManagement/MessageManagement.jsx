@@ -7,7 +7,11 @@ import {
 import "./MessageManagement.css";
 import Swal from "sweetalert2";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes, faTrash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faTimes,
+  faTrash,
+  faTrashCan,
+} from "@fortawesome/free-solid-svg-icons";
 
 const MessageManagement = ({ setSection }) => {
   const [notifications, setNotifications] = useState([]);
@@ -155,7 +159,7 @@ const MessageManagement = ({ setSection }) => {
                   className="btn-delete-message"
                   onClick={() => handleDelete(el.id)}
                 >
-                  <FontAwesomeIcon icon={faTrash} />
+                  <FontAwesomeIcon icon={faTrashCan} />
                 </button>
               </div>
             </li>

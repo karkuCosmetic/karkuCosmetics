@@ -56,7 +56,7 @@
   padding: 0.3em;
   margin: 1rem;
   font-family: "jost";
-  font-size: 1rem;
+  font-size: 14px;
   cursor: pointer;
   transition: width 0.3s ease;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -336,7 +336,7 @@
   justify-content: flex-end;
 }
 
-.modal-edit-productManagement{
+.modal-edit-productManagement {
   display: flex;
   width: 100%;
 }

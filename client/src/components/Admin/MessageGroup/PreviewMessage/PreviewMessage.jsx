@@ -6,7 +6,7 @@ import {
 } from "../../../../functions/emails";
 import "./PreviewMessage.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faTimes, faTrash, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 
 const PreviewMessage = ({ setSection }) => {
@@ -122,7 +122,7 @@ const PreviewMessage = ({ setSection }) => {
                     className="btn-delete-message"
                     onClick={() => handleDelete(el.id)}
                   >
-                    <FontAwesomeIcon icon={faTrash} />
+           <FontAwesomeIcon icon={faTrashCan} />
                   </button>
                 </div>
               </li>

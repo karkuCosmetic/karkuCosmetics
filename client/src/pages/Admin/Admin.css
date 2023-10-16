@@ -3,18 +3,17 @@
   flex-direction: column;
   background-size: cover;
   align-items: center;
-  height:100vh;
+  height: 100vh;
   background-image: url(../../assets/bgadmin.png);
   overflow-x: hidden;
+  padding: 0.5rem;
 }
 
 .product-sales-message-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 20px;
   width: 100%;
-  padding: 1rem;
   overflow-x: hidden;
 }
 
@@ -23,7 +22,6 @@
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  gap: 0.5rem;
 }
 
 .product-management,

@@ -1,0 +1,55 @@
+.sales-preview-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fefeff;
+  padding: 20px;
+  height: 40rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  font-family: Arial, sans-serif;
+}
+.sale-preview-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.info-sale-preview {
+  width: 50%;
+}
+
+.sales-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  gap: 1rem;
+}
+
+.sale-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  border-bottom: 1px solid #7d3c935b;
+}
+
+/* COLORES ADMIN */
+.color1 {
+  color: #7d3c93;
+}
+.color2 {
+  color: #b4507d;
+}
+.color3 {
+  color: #d99692;
+}
+.color4 {
+  color: #eedcd0;
+}
+.color5 {
+  color: #fefeff;
+}
