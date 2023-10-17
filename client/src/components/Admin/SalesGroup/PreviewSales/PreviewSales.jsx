@@ -6,7 +6,7 @@ const PreviewSales = ({ setSection }) => {
   const [sales, setSales] = useState([]);
   const [selectedSale, setSelectedSale] = useState(null);
 
-  const orderSales = sales.slice(0, 5);
+  const orderSales = sales.slice(0, 6);
 
   useEffect(() => {
     getSales()
@@ -38,24 +38,34 @@ const PreviewSales = ({ setSection }) => {
           <div className="sale-container" key={index}>
             <div className="info-sale-preview">
               <p>
-                Nombre: {sale.payer.name} {sale.payer.lastName}
+                <strong>Nombre: </strong> {sale.payer.name}{" "}
+                {sale.payer.lastName}
               </p>
-              <p>Total: ${sale.methodPay.total}</p>
-              <p>Producto:{sale.detailPay.items.title}</p>
-              <p>Fecha: {formatDateModal(sale.methodPay.datePay)}</p>
+              <p>
+                <strong>Total: </strong>${sale.methodPay.total}
+              </p>
+              <p>
+                <strong>Estado: </strong> {sale.detailPay.status}
+              </p>
             </div>
-            <div className="btn-showSale">
-              <button onClick={() => openSaleDetailsModal(sale)}>
+            <div className="btn-showSale-container">
+              <button
+                className="btn-showSale"
+                onClick={() => openSaleDetailsModal(sale)}
+              >
                 Ver venta
               </button>
-              <p>Estado: {sale.detailPay.status}</p>
+              <p>
+                <strong>Fecha: </strong>{" "}
+                {formatDateModal(sale.methodPay.datePay)}
+              </p>
             </div>
           </div>
         ))}
       </div>
 
       <div className="btn-showAllSales">
-        <button className="button-showAll" onClick={() => setSection("Sales")}>
+        <button className="btn-showAll" onClick={() => setSection("Sales")}>
           Ver más ventas
         </button>
       </div>
@@ -68,6 +78,12 @@ const PreviewSales = ({ setSection }) => {
             <p>
               Nombre: {selectedSale.payer.name} {selectedSale.payer.lastName}
             </p>
+            <div>
+              <p>Productos:</p>
+              {selectedSale.detailPay.items.map((el) => (
+                <p>{el.title}</p>
+              ))}
+            </div>
             <p>Total: ${selectedSale.methodPay.total}</p>
             <p>Fecha: {formatDateModal(selectedSale.methodPay.datePay)}</p>
           </div>
