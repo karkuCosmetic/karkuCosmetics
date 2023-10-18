@@ -206,6 +206,7 @@ const Store = () => {
                       </button>
                       <span className="quantity-store">{product.quantity}</span>
                       <button
+                        disabled={product.quantity>=10}
                         className="quantity-button"
                         onClick={() => handleQuantityChange(product, 1)}
                       >
