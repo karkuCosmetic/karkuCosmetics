@@ -1,5 +1,6 @@
 import { Admin } from "../models/admin.js";
 import { User } from "../models/user.js";
+import { formatError } from "../utils/formatError.js";
 
 export const getOrders = async (req, res) => {
   try {
@@ -24,18 +25,17 @@ export const getOrderById = async (req, res) => {
 export const updateOrders = async (req, res) => {
   try {
     const { id } = req.params;
-    const { status } = req.body;
-console.log(status)
+    const { value } = req.body;
     // Actualiza el campo "entrega" en Admin
     await Admin.updateMany(
       { "orders.id": id },
-      { $set: { "orders.$.detailPay.status": status } }
+      { $set: { "orders.$.detailPay.status": value } }
     );
 
     // Actualiza el campo "entrega" en User
     await User.updateMany(
       { "buys.id": id },
-      { $set: { "buys.$.detailPay.status": status } }
+      { $set: { "buys.$.detailPay.status": value } }
     );
 
     res.status(200).json("elementos actualizados");

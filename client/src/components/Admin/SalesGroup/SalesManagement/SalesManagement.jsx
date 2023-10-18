@@ -58,7 +58,7 @@ const SalesManagement = ({ setSection }) => {
 
   const updateStatus = () => {
     if (selectedSale && selectedStatus) {
-      const updateValue = { detailPay: { status: selectedStatus } };
+      const updateValue = selectedStatus ;
 
       updateSalesById(selectedSale.id, updateValue, token)
         .then((updatedSale) => {
