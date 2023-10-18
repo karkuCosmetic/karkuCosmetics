@@ -4,6 +4,7 @@ import "./SalesManagement.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { GetDecodedCookie } from "../../../../utils/DecodedCookie";
+import SelectStatusSales from "../../../SelectStatusSales/SelectStatusSales";
 
 const SalesManagement = ({ setSection }) => {
   const [sales, setSales] = useState([]);
@@ -58,7 +59,7 @@ const SalesManagement = ({ setSection }) => {
 
   const updateStatus = () => {
     if (selectedSale && selectedStatus) {
-      const updateValue = selectedStatus ;
+      const updateValue = selectedStatus;
 
       updateSalesById(selectedSale.id, updateValue, token)
         .then((updatedSale) => {
@@ -101,7 +102,7 @@ const SalesManagement = ({ setSection }) => {
         <div className="filters-sales">
           <input
             type="text"
-            placeholder="Buscar por nombre"
+            placeholder="Buscar por nombre o apellido..."
             value={nameFilter}
             onChange={(e) => setNameFilter(e.target.value)}
           />
@@ -116,34 +117,33 @@ const SalesManagement = ({ setSection }) => {
       <div className="sales-list">
         {currentSales.map((sale, index) => (
           <div className="sale-container" key={index}>
-            <div className="info-sale">
-              <p>
-                <strong>Nombre: </strong> {sale.payer && sale.payer.name}
-                {sale.payer && sale.payer.lastName}
-              </p>
-              <p>
-                <strong>Total: </strong>$
-                {sale.methodPay && sale.methodPay.total}
-              </p>
-            </div>
-            <div className="status-sale-container">
-              <p>
-                <strong>Estado: </strong>
-                {sale.detailPay && sale.detailPay.status}
-              </p>
-            </div>
-            <div className="btn-showSale-date-container">
-              <p>
-                <strong>Fecha: </strong>
-                {formatDateModal(sale.methodPay && sale.methodPay.datePay)}
-              </p>
-              <button
-                className="btn-showSale"
-                onClick={() => openSaleDetailsModal(sale)}
-              >
-                Ver detalle
-              </button>
-            </div>
+            <p>
+              <strong>Nombre: </strong>
+              {sale.payer.name}
+              <br />
+              <strong>Apellido: </strong>
+              {sale.payer.lastName}
+            </p>
+
+            <p>
+              <strong>Total: </strong>$ {sale.methodPay?.total}
+            </p>
+
+            <p>
+              <strong>Estado: </strong>
+              {sale.detailPay?.status}
+            </p>
+
+            <p>
+              <strong>Fecha: </strong>
+              {formatDateModal(sale.methodPay?.datePay)}
+            </p>
+            <button
+              className="btn-showSale"
+              onClick={() => openSaleDetailsModal(sale)}
+            >
+              Ver detalle
+            </button>
           </div>
         ))}
       </div>
@@ -175,17 +175,14 @@ const SalesManagement = ({ setSection }) => {
 
             <label>
               <strong>Estado:</strong>
-              <select
-                value={selectedStatus}
-                onChange={(e) => setSelectedStatus(e.target.value)}
-              >
-                <option value="Pendiente">Pendiente</option>
-                <option value="En preparación">En preparación</option>
-                <option value="Finalizada">Finalizada</option>
-              </select>
+              <SelectStatusSales
+                options={["Pendiente", "En preparación", "Finalizada"]}
+                selectedOption={selectedStatus}
+                setSelectedOption={setSelectedStatus}
+              />
             </label>
-          </div>
           <button onClick={updateStatus}>Guardar Cambios</button>
+          </div>
         </div>
       )}
       <div className="pagination-productManagement">

@@ -29,6 +29,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  gap: 1rem;
 }
 
 .btn-showSale {
@@ -55,6 +56,7 @@
 .sales-list {
   display: flex;
   flex-direction: column;
+  justify-content: start;
   align-items: center;
   width: 100%;
   gap: 1rem;

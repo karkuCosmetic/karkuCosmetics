@@ -1,0 +1,88 @@
+.custom-select-status {
+  position: relative;
+  width: 12rem;
+  border: 1px solid #7d3c93 !important;
+  border-radius: 5px;
+  cursor: pointer;
+
+  user-select: none;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  font-size: 16px;
+}
+
+.selected-option {
+  display: flex;
+  font-family: "figtree";
+  text-align: left;
+  justify-content: left;
+  align-items: center;
+  padding: 0.3rem;
+}
+
+.selected-option span {
+  flex-grow: 1;
+  padding-right: 10px;
+  font-family: "figtree";
+  color: #7d3c93 !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.selected-option svg {
+  color: #7d3c93 !important;
+  transition: transform 0.2s;
+}
+
+.options {
+  position: absolute;
+  width: 100%;
+  font-family: "figtree";
+  color: #7d3c93;
+  background-color: #fff;
+  border: 1px solid #7d3c93 !important;
+  border-radius: 0 0 5px 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.options.open {
+  display: block;
+  color: #7d3c93;
+}
+
+.option {
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-family: "figtree";
+}
+
+.option:hover {
+  background-color: #7d3c93 !important;
+  color: #7d3c93;
+}
+
+.option.selected {
+  background-color: #7d3c93 !important;
+  color: #ffffff;
+  font-family: "figtree";
+}
+
+/* COLORES ADMIN */
+.color1 {
+  color: #7d3c93;
+}
+.color2 {
+  color: #b4507d;
+}
+.color3 {
+  color: #d99692;
+}
+.color4 {
+  color: #eedcd0;
+}
+.color5 {
+  color: #fefeff;
+}
