@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getSales } from "../../../../functions/fetchingSales";
+import { getSales, updateSalesById } from "../../../../functions/fetchingSales";
 import "./SalesManagement.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -7,11 +7,31 @@ import { GetDecodedCookie } from "../../../../utils/DecodedCookie";
 
 const SalesManagement = ({ setSection }) => {
   const [sales, setSales] = useState([]);
-  const [selectedSale, setSelectedSale] = useState(null);
   const [nameFilter, setNameFilter] = useState("");
   const [dateFilter, setDateFilter] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState("");
+  const [selectedSale, setSelectedSale] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const token = GetDecodedCookie("cookieToken");
+
+  const filterSales = () => {
+    return sales.filter((sale) => {
+      const nameMatch =
+        !nameFilter ||
+        (sale.payer &&
+          (sale.payer.name + " " + sale.payer.lastName)
+            .toLowerCase()
+            .includes(nameFilter.toLowerCase()));
+      const dateMatch =
+        !dateFilter ||
+        (sale.methodPay &&
+          sale.methodPay.datePay &&
+          formatDateModal(sale.methodPay.datePay).includes(dateFilter));
+
+      return nameMatch && dateMatch;
+    });
+  };
 
   useEffect(() => {
     getSales(token)
@@ -29,30 +49,45 @@ const SalesManagement = ({ setSection }) => {
 
   const openSaleDetailsModal = (sale) => {
     setSelectedSale(sale);
+    setSelectedStatus(sale.detailPay.status);
   };
 
   const closeSaleDetailsModal = () => {
     setSelectedSale(null);
   };
 
-  const filterSales = () => {
-    return sales.filter((sale) => {
-      const nameMatch =
-        !nameFilter ||
-        (sale.payer &&
-          sale.payer.name &&
-          sale.payer.name.toLowerCase().includes(nameFilter.toLowerCase()));
-      const dateMatch =
-        !dateFilter ||
-        (sale.methodPay &&
-          sale.methodPay.datePay &&
-          formatDateModal(sale.methodPay.datePay).includes(dateFilter));
+  const updateStatus = () => {
+    if (selectedSale && selectedStatus) {
+      const updateValue = { detailPay: { status: selectedStatus } };
 
-      return nameMatch && dateMatch;
-    });
+      updateSalesById(selectedSale.id, updateValue, token)
+        .then((updatedSale) => {
+          const updatedSales = sales.map((sale) =>
+            sale.id === updatedSale.id ? updatedSale : sale
+          );
+          setSales(updatedSales);
+        })
+        .catch((error) => console.error("Error updating sale status:", error));
+    }
   };
 
   const filteredSales = filterSales();
+
+  const productsPerPage = 15;
+  const totalPages = Math.ceil(filteredSales.length / productsPerPage);
+  let clampedCurrentPage = currentPage;
+
+  if (totalPages === 0) {
+    clampedCurrentPage = 1;
+  } else if (clampedCurrentPage > totalPages) {
+    clampedCurrentPage = totalPages;
+  }
+
+  const indexOfLastSale = clampedCurrentPage * productsPerPage;
+  const indexOfFirstSale = indexOfLastSale - productsPerPage;
+  const currentSales = filteredSales.slice(indexOfFirstSale, indexOfLastSale);
+
+  const isNextButtonDisabled = clampedCurrentPage >= totalPages;
 
   return (
     <div className="sales-container">
@@ -79,7 +114,7 @@ const SalesManagement = ({ setSection }) => {
         </div>
       </div>
       <div className="sales-list">
-        {filteredSales.map((sale, index) => (
+        {currentSales.map((sale, index) => (
           <div className="sale-container" key={index}>
             <div className="info-sale">
               <p>
@@ -137,9 +172,39 @@ const SalesManagement = ({ setSection }) => {
             </div>
             <p>Total: ${selectedSale.methodPay.total}</p>
             <p>Fecha: {formatDateModal(selectedSale.methodPay.datePay)}</p>
+
+            <label>
+              <strong>Estado:</strong>
+              <select
+                value={selectedStatus}
+                onChange={(e) => setSelectedStatus(e.target.value)}
+              >
+                <option value="Pendiente">Pendiente</option>
+                <option value="En preparación">En preparación</option>
+                <option value="Finalizada">Finalizada</option>
+              </select>
+            </label>
           </div>
+          <button onClick={updateStatus}>Guardar Cambios</button>
         </div>
       )}
+      <div className="pagination-productManagement">
+        <button
+          onClick={() => setCurrentPage(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Anterior
+        </button>
+        <span className="pagination-productManagement-info">
+          {clampedCurrentPage} de {totalPages}
+        </span>
+        <button
+          onClick={() => setCurrentPage(currentPage + 1)}
+          disabled={isNextButtonDisabled}
+        >
+          Siguiente
+        </button>
+      </div>
     </div>
   );
 };

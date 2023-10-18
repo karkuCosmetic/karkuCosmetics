@@ -25,7 +25,7 @@ export const updateOrders = async (req, res) => {
   try {
     const { id } = req.params;
     const { status } = req.body;
-
+console.log(status)
     // Actualiza el campo "entrega" en Admin
     await Admin.updateMany(
       { "orders.id": id },
