@@ -8,6 +8,7 @@ import "./PreviewMessage.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faTrash, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
+import { GetDecodedCookie } from '../../../../utils/DecodedCookie';
 
 const PreviewMessage = ({ setSection }) => {
   const [notifications, setNotifications] = useState([]);
@@ -15,8 +16,10 @@ const PreviewMessage = ({ setSection }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [replyText, setReplyText] = useState("");
 
+  const token = GetDecodedCookie("cookieToken");
+
   useEffect(() => {
-    getEmails()
+    getEmails(token)
       .then((data) => setNotifications(data.emails.reverse()))
       .catch((error) => console.error("Error fetching emails:", error));
   }, []);
@@ -64,7 +67,7 @@ const PreviewMessage = ({ setSection }) => {
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteEmailById(id)
+        deleteEmailById(id,token)
           .then(() => {
             setNotifications(notifications.filter((email) => email.id !== id));
             Swal.fire(

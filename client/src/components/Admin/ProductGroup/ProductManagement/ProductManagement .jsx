@@ -14,6 +14,7 @@ import {
   DeleteProductById,
   updateProduct,
 } from "../../../../functions/fetchingProducts";
+import { GetDecodedCookie } from "../../../../utils/DecodedCookie";
 
 const ProductManagement = ({ setSection }) => {
   const [products, setProducts] = useState([]);
@@ -29,7 +30,8 @@ const ProductManagement = ({ setSection }) => {
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
   const productsPerPage = 15;
   const MySwal = withReactContent(Swal);
-
+  const token = GetDecodedCookie("cookieToken");
+  
   useEffect(() => {
     getProduct()
       .then((data) => {
@@ -103,7 +105,7 @@ const ProductManagement = ({ setSection }) => {
 
   const handleDeleteConfirmation = async (productId) => {
     try {
-      await DeleteProductById(productId);
+      await DeleteProductById(productId,token);
 
       const updatedProducts = products.filter(
         (product) => product._id !== productId

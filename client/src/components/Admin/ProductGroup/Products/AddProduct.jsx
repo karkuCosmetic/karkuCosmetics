@@ -7,8 +7,10 @@ import './AddProduct.css';
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faTimes} from '@fortawesome/free-solid-svg-icons';
+import { GetDecodedCookie } from '../../../../utils/DecodedCookie';
 
 const AddProduct = ({closeEditModal}) => {
+  const token = GetDecodedCookie("cookieToken");
   const [product, setProduct] = useState ({
     title: '',
     dimensions: '',
@@ -51,7 +53,7 @@ const AddProduct = ({closeEditModal}) => {
   const handleSubmit = async e => {
     e.preventDefault ();
     try {
-      await createProduct (product, selectedImages);
+      await createProduct (product, selectedImages,token);
       closeEditModal ();
     } catch (error) {
       console.error ('Error creating product:', error);

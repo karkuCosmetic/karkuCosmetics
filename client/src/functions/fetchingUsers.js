@@ -1,15 +1,13 @@
 import axios from "axios";
 
-export const getUserDetail = async (uid) => {
+export const getUserDetail = async (uid, token) => {
   try {
     let response;
-    response = await axios.get(
-      `https://karku-cosmetics-4dsy.vercel.app/user/${uid}`
-    );
+    response = await axios.get(`http://localhost:3001/user/${uid}`,{
+      headers: { "user-token": token },
+    });
     if (!response.data) {
-      response = await axios.get(
-        `https://karku-cosmetics-4dsy.vercel.app/admin/${uid}`
-      );
+      response = await axios.get(`http://localhost:3001/admin/${uid}`);
     }
     return response.data;
   } catch (error) {
@@ -56,7 +54,9 @@ export const UpdatePassword = async (value) => {
 
 export const resendConfirmationEmail = async (emailUser) => {
   try {
-    await axios.post(`http://localhost:3001/email/reconfirmemail`, {emailUser});
+    await axios.post(`http://localhost:3001/email/reconfirmemail`, {
+      emailUser,
+    });
   } catch (error) {
     console.log(error);
   }

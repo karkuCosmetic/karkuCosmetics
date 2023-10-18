@@ -9,7 +9,7 @@ import { sendConfirmationEmail } from "../helpers/sendConfirmationEmail.js";
 
 export const verifyToken = async (req, res, next) => {
   const token = req.header("user-token");
-  if (!token) return res.status(401).json(formatError("Acceso denegado"));
+  
   try {
     const decoded = verify(token, process.env.TOKEN_SECRET); //extrae del token
     req.userId = decoded.value;
@@ -30,7 +30,6 @@ export const verifyToken = async (req, res, next) => {
 
 export const isAdmin = async (req, res, next) => {
   const admin = await Admin.findById(req.userId);
-
   if (!admin) return res.status(401).json(formatError("Debes ser admin"));
   //doble validacion
   if (admin?.Rol === "ROL_Admin") return next();

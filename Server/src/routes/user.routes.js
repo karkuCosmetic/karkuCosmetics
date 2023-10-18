@@ -14,7 +14,7 @@ const router = express.Router();
 router.post("/updatepassword", UpdatePassword);
 
 router.get("/", getAllUser);
-router.get("/:id", getUserById);
+router.get("/:id",[verifyToken], getUserById);
 
 router.put("/confirmemail/:id", confirmEmail);
 router.put("/:id",[verifyToken], updateUser);

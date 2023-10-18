@@ -6,10 +6,11 @@ import {
 import "./EditProduct.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { GetDecodedCookie } from "../../../../utils/DecodedCookie";
 
 const EditProduct = ({ match, closeEditModal }) => {
   const [product, setProduct] = useState({});
-
+  const token = GetDecodedCookie("cookieToken");
   const id = match.params.id;
 
   useEffect(() => {
@@ -35,7 +36,7 @@ const EditProduct = ({ match, closeEditModal }) => {
     e.preventDefault();
 
     try {
-      await updateProduct(product, product._id);
+      await updateProduct(product, product._id,token);
       closeEditModal();
     } catch (error) {
       console.error("Error al actualizar el producto:", error);

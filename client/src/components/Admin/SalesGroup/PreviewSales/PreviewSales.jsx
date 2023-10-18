@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { getSales } from "../../../../functions/fetchingSales";
 import "./PreviewSales.css";
+import { GetDecodedCookie } from "../../../../utils/DecodedCookie";
 
 const PreviewSales = ({ setSection }) => {
   const [sales, setSales] = useState([]);
   const [selectedSale, setSelectedSale] = useState(null);
 
   const orderSales = sales.slice(0, 6);
-
+  const token = GetDecodedCookie("cookieToken");
   useEffect(() => {
-    getSales()
+    getSales(token)
       .then((data) => setSales(data.orders.reverse()))
       .catch((error) => console.error("Error fetching sales:", error));
   }, []);

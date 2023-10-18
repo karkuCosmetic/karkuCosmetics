@@ -45,7 +45,7 @@ const Profile = () => {
   }, [token]);
 
   const callUserDetail = async (uid) => {
-    const info = await getUserDetail(uid);
+    const info = await getUserDetail(uid,token);
     setProfile(info);
     setDataUpdate({
       name: info.name,

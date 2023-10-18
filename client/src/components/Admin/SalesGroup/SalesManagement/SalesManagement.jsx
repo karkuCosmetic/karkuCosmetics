@@ -3,6 +3,7 @@ import { getSales } from "../../../../functions/fetchingSales";
 import "./SalesManagement.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { GetDecodedCookie } from "../../../../utils/DecodedCookie";
 
 const SalesManagement = ({ setSection }) => {
   const [sales, setSales] = useState([]);
@@ -10,8 +11,10 @@ const SalesManagement = ({ setSection }) => {
   const [nameFilter, setNameFilter] = useState("");
   const [dateFilter, setDateFilter] = useState("");
 
+  const token = GetDecodedCookie("cookieToken");
+
   useEffect(() => {
-    getSales()
+    getSales(token)
       .then((data) => setSales(data.orders.reverse()))
       .catch((error) => console.error("Error fetching sales:", error));
   }, []);

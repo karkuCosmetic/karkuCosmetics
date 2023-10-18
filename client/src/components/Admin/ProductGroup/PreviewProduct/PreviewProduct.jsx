@@ -10,6 +10,7 @@ import {
 import "./PreviewProduct.css";
 import EditProduct from "../Products/EditProduct";
 import AddProduct from "../Products/AddProduct";
+import { GetDecodedCookie } from "../../../../utils/DecodedCookie";
 
 const PreviewProduct = ({ setSection }) => {
   const [products, setProducts] = useState([]);
@@ -22,6 +23,7 @@ const PreviewProduct = ({ setSection }) => {
   const [selectedProductDetails, setSelectedProductDetails] = useState(null);
   const MySwal = withReactContent(Swal);
 
+  const token = GetDecodedCookie("cookieToken");
   useEffect(() => {
     getProduct()
       .then((data) => setProducts(data))
@@ -80,7 +82,7 @@ const PreviewProduct = ({ setSection }) => {
   const handleDeleteConfirmation = () => {
     if (selectedProduct !== null) {
       try {
-        DeleteProductById(selectedProduct);
+        DeleteProductById(selectedProduct,token);
 
         const updatedProducts = products.filter(
           (product) => product._id !== selectedProduct

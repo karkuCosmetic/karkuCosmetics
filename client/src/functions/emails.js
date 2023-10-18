@@ -1,38 +1,41 @@
 import axios from "axios";
 
-export const getEmails = async () => {
+export const getEmails = async (token) => {
   try {
-    const res = await axios.get("http://localhost:3001/admin/email");
+    const res = await axios.get("http://localhost:3001/admin/email", {
+      headers: { "user-token": token },
+    });
     return res.data;
   } catch (error) {
     console.log(error);
   }
 };
 
-export const getEmailsById = async (id) => {
+export const getEmailsById = async (id,token) => {
   try {
-    const emails = await axios.get(`http://localhost:3001/admin/email/${id}`);
+    const emails = await axios.get(`http://localhost:3001/admin/email/${id}`,{
+      headers: { "user-token": token },
+    });
     return emails;
   } catch (error) {
     console.log(error);
   }
 };
 
-export const deleteEmailById = async (id) => {
+export const deleteEmailById = async (id,token) => {
   try {
-    const res = await axios.delete(`http://localhost:3001/admin/email/${id}`);
+    const res = await axios.delete(`http://localhost:3001/admin/email/${id}`,{
+      headers: { "user-token": token },
+    });
     return res.data;
   } catch (error) {
     console.log(error);
   }
 };
 
-export const sendEmail=async (data)=>{
-try {
-  const res= await axios.post(`http://localhost:3001/admin/email`,{data});
-  return res.data
-} catch (error) {
-  
-}
-
-}
+export const sendEmail = async (data) => {
+  try {
+    const res = await axios.post(`http://localhost:3001/admin/email`, { data });
+    return res.data;
+  } catch (error) {}
+};

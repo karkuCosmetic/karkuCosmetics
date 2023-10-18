@@ -12,6 +12,7 @@ import {
   faTrash,
   faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
+import { GetDecodedCookie } from "../../../../utils/DecodedCookie";
 
 const MessageManagement = ({ setSection }) => {
   const [notifications, setNotifications] = useState([]);
@@ -21,9 +22,10 @@ const MessageManagement = ({ setSection }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchText, setSearchText] = useState("");
   const messagesPerPage = 10;
+  const token = GetDecodedCookie("cookieToken");
 
   useEffect(() => {
-    getEmails()
+    getEmails(token)
       .then((data) => setNotifications(data.emails.reverse()))
       .catch((error) => console.error("Error fetching emails:", error));
   }, []);
@@ -69,7 +71,7 @@ const MessageManagement = ({ setSection }) => {
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteEmailById(id)
+        deleteEmailById(id,token)
           .then(() => {
             setNotifications(notifications.filter((email) => email.id !== id));
             Swal.fire(
