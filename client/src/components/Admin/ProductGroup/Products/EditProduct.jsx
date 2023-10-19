@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   getProductDetail,
   updateProduct,
@@ -12,6 +12,32 @@ const EditProduct = ({ match, closeEditModal }) => {
   const [product, setProduct] = useState({});
   const token = GetDecodedCookie("cookieToken");
   const id = match.params.id;
+
+
+//----------------------- actualizar images---------------
+const [selectedImages, setSelectedImages] = useState ([]); //preview images
+const maxImages = 5; // limite de images
+const inputRef = useRef ();
+
+const handleImageUpload = event => {
+  const files = event.target.files;
+  const selected = Array.from (files);
+
+  if (selectedImages.length + selected.length > maxImages) {
+    alert (`Máximo ${maxImages} imágenes permitidas.`); //reemplazar este alert por sweetAlert
+  } else {
+    setSelectedImages (prevSelected => [...prevSelected, ...selected]); //hace el prev de las imagenes y las agrega si no hay mas de 5
+  }
+  inputRef.current.value = '';
+};
+
+const handleImageRemove = index => {
+  const updatedImages = [...selectedImages];
+  updatedImages.splice (index, 1);
+  setSelectedImages (updatedImages);
+};
+//----------------------- actualizar images---------------
+
 
   useEffect(() => {
     fetchingdetail()
@@ -36,7 +62,7 @@ const EditProduct = ({ match, closeEditModal }) => {
     e.preventDefault();
 
     try {
-      await updateProduct(product, product._id,token);
+      await updateProduct(product,selectedImages, product._id,token);
       closeEditModal();
     } catch (error) {
       console.error("Error al actualizar el producto:", error);
@@ -46,6 +72,10 @@ const EditProduct = ({ match, closeEditModal }) => {
   const closeModal = () => {
     closeEditModal();
   };
+
+
+
+
 
   return (
     <div className="form-updateProduct">
@@ -108,6 +138,38 @@ const EditProduct = ({ match, closeEditModal }) => {
             onChange={handleInputChange}
           />
         </div>
+        <div>
+          <p>Imagenes actuales del producto</p>
+          {product?.image?.map(el=> <img src={el} alt="" style={{width:"100px", height:"100px"}}/> )}
+        </div>
+
+
+        <div className="image-upload-container" style={{display: 'flex', gap: '15px'}}>
+          <input
+            type="file"
+            onChange={e => handleImageUpload (e)}
+            multiple
+            className="upload-input"
+            ref={inputRef}
+            accept="image/*"
+          />
+          <div style={{display: 'flex', width:"100%", gap: '15px'}}>
+            {selectedImages.map ((image, index) => (
+              <div>
+                <img
+                  key={index}
+                  src={URL.createObjectURL (image)}
+                  alt={`Image ${index}`}
+                  style={{width: '100px', height: '100px'}}
+                />
+                <button type="button" onClick={() => handleImageRemove (index)}>
+                  X
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+
         <div className="container-save-product-btn">
         <button className="save-product-btn" type="submit">
           Guardar Cambios
