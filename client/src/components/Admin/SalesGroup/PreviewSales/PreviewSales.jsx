@@ -133,7 +133,7 @@ const PreviewSales = ({ setSection }) => {
                       </div>
                       {selectedSale.detailPay.items.map((el, index) => (
                         <div className="product">
-                          <p>{el.quantity}</p>
+                          <p>x{el.quantity}</p>
                         </div>
                       ))}
                     </div>

@@ -152,9 +152,15 @@ const SalesManagement = ({ setSection }) => {
         <div className="modal-sales">
           <div className="modal-content-sales">
             <div className="back-btn-sale-container">
-              <p>
-                <strong>Venta N° :</strong> {selectedSale.id}
-              </p>
+              <div className="sale-date-modal-detail">
+                <p>
+                  <strong>Venta N° :</strong> {selectedSale.id}
+                </p>
+                <p>
+                  <strong>Fecha: </strong>
+                  {formatDateModal(selectedSale.methodPay.datePay)}
+                </p>
+              </div>
               <button
                 className="back-product-btn-modal"
                 onClick={closeSaleDetailsModal}
@@ -162,29 +168,55 @@ const SalesManagement = ({ setSection }) => {
                 <FontAwesomeIcon icon={faTimes} />
               </button>
             </div>
-            <p>
-              Nombre: {selectedSale.payer.name} {selectedSale.payer.lastName}
-            </p>
-            <div>
-              <p>
-                <strong>Productos:</strong>
-              </p>
-              {selectedSale.detailPay.items.map((el) => (
-                <p>{el.title}</p>
-              ))}
+            <div className="full-container-detail-sale">
+              <div className="name-detail-sale-modal">
+                <p>
+                  <strong>Nombre: </strong>
+                  {selectedSale.payer.name} {selectedSale.payer.lastName}
+                </p>
+              </div>
+              <div className="detail-sales-container">
+                <div>
+                  <p>
+                    <strong>Productos:</strong>
+                  </p>
+                </div>
+                <div className="products-quantity-detail-sale">
+                  {selectedSale.detailPay.items.map((el) => (
+                    <div className="title-quantity-detail">
+                      <div>
+                        <p>{el.title}</p>
+                      </div>
+                      <div>
+                        <p>x{el.quantity}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="Payment-payer-detail">
+                <div>
+                  <p>
+                    <strong>Tarjeta: </strong>
+                    {selectedSale.methodPay.cardType}
+                  </p>
+                  <p>
+                    <strong>Finalizada en: </strong>
+                    {selectedSale.methodPay.last_four_digit}
+                  </p>
+                  <p>Total: ${selectedSale.methodPay.total}</p>
+                  <label>
+                    <strong>Estado:</strong>
+                    <SelectStatusSales
+                      options={["Pendiente", "En preparación", "Finalizada"]}
+                      selectedOption={selectedStatus}
+                      setSelectedOption={setSelectedStatus}
+                    />
+                  </label>
+                  <button onClick={updateStatus}>Guardar Cambios</button>
+                </div>
+              </div>
             </div>
-            <p>Total: ${selectedSale.methodPay.total}</p>
-            <p>Fecha: {formatDateModal(selectedSale.methodPay.datePay)}</p>
-
-            <label>
-              <strong>Estado:</strong>
-              <SelectStatusSales
-                options={["Pendiente", "En preparación", "Finalizada"]}
-                selectedOption={selectedStatus}
-                setSelectedOption={setSelectedStatus}
-              />
-            </label>
-            <button onClick={updateStatus}>Guardar Cambios</button>
           </div>
         </div>
       )}
