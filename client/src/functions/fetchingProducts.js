@@ -46,15 +46,19 @@ export const getProductDetail = async (id) => {
   }
 };
 
-export const updateProduct = async (res,images,id, token) => {
+export const updateProduct = async (res, images, id, token) => {
   try {
-
-    let image = await fileUpload(images, "products");
+    let imageArray;
+    if (images[0]) {
+      imageArray = await fileUpload(images, "products"); // si no mando imagen se guarda la que ya esta
+    } else {
+      imageArray = res.image;
+    }
 
     await axios.put(
       `http://localhost:3001/products/${id}`,
       {
-        image,
+        image: imageArray,
         title: res.title,
         description: res.description,
         category: res.category,
