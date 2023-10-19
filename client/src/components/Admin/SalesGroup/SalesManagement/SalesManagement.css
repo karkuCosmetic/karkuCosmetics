@@ -7,7 +7,7 @@
   width: 80%;
   margin-top: 3rem;
   padding-bottom: 0;
-  background-color: #fefeff98;
+  background-color: #fefeff;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
@@ -28,20 +28,24 @@
   border-bottom: 1px solid #7d3c935b;
 }
 
-.filters-sales{
-    display: flex;
-    flex-direction: row;
-    align-content: center;
-    justify-content: center;
-    width: 80%;
-    margin-bottom: 0.5rem;
-    gap: 5rem;
+.filters-sales {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+  width: 80%;
+  margin-bottom: 0.5rem;
+  gap: 5rem;
 }
 
-.status-sale-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.filters-sales input {
+  border: 1px solid #7d3c935b !important;
+}
+
+.status-sale-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .btn-showSale-date-container {
@@ -63,7 +67,7 @@
   font-family: "jost";
   background-color: #b4507d;
   padding: 0.5rem;
-  width: 5rem;
+  width: 5.5rem;
   height: 1.5rem;
   transition: width 0.3s ease;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -83,9 +87,8 @@
 }
 
 .sale-container p {
-  flex: 0 0 20%; 
+  flex: 0 0 20%;
 }
-
 
 .sale-container p {
   font-family: "figtree";
@@ -107,7 +110,7 @@
 }
 
 .btn-showAlll:hover {
-  width: calc(40% + 15px);
+  width: calc(15rem + 15px);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
@@ -131,7 +134,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   height: auto;
   width: 80%;
   height: 80%;
@@ -140,6 +143,36 @@
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   position: relative;
+}
+
+.back-btn-sale-container {
+  width: 95%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.back-product-btn-modal {
+  color: #fff;
+  background-color: #7d3c93;
+  border: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  width: 30px;
+  height: 30px;
+  font-family: "jost";
+  cursor: pointer;
+  transition: width 0.3s ease;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.back-product-btn-modal:hover {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 /* COLORES ADMIN */

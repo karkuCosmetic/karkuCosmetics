@@ -4,8 +4,9 @@
   justify-content: center;
   align-items: center;
   padding: 20px;
+  width: 80%;
   padding-bottom: 0;
-  background-color: #fefeff98;
+  background-color: #fefeff;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
@@ -41,6 +42,7 @@
   width: 20rem !important;
   margin-top: 2rem !important;
   margin-bottom: 1rem !important;
+  border: 1px solid #7d3c935b !important;
 }
 
 .info-messages-container {

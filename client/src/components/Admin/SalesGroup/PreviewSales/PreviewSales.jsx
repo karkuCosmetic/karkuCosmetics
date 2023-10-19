@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { getSales } from "../../../../functions/fetchingSales";
 import "./PreviewSales.css";
 import { GetDecodedCookie } from "../../../../utils/DecodedCookie";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const PreviewSales = ({ setSection }) => {
   const [sales, setSales] = useState([]);
@@ -54,7 +56,7 @@ const PreviewSales = ({ setSection }) => {
                 className="btn-showSale"
                 onClick={() => openSaleDetailsModal(sale)}
               >
-                Ver venta
+                Vista rápida
               </button>
               <p>
                 <strong>Fecha: </strong>{" "}
@@ -66,27 +68,91 @@ const PreviewSales = ({ setSection }) => {
       </div>
 
       <div className="btn-showAllSales">
-        <button className="btn-showAll" onClick={() => setSection("Sales")}>
+        <button
+          className="btn-showAll-preview"
+          onClick={() => setSection("Sales")}
+        >
           Ver más ventas
         </button>
       </div>
       {selectedSale && (
-        <div className="modal">
-          <div className="modal-content">
-            <button onClick={closeSaleDetailsModal}>Cerrar</button>
-            <h3>Detalles de la Venta</h3>
-            <p>Venta: {selectedSale.id}</p>
-            <p>
-              Nombre: {selectedSale.payer.name} {selectedSale.payer.lastName}
-            </p>
-            <div>
-              <p>Productos:</p>
-              {selectedSale.detailPay.items.map((el) => (
-                <p>{el.title}</p>
-              ))}
+        <div className="modal-previewSales">
+          <div className="modal-previewSales-content">
+            <div className="close-previewSales-modal-container">
+              <button
+                className="back-previewSale-btn"
+                onClick={closeSaleDetailsModal}
+              >
+                <FontAwesomeIcon icon={faTimes} />
+              </button>
             </div>
-            <p>Total: ${selectedSale.methodPay.total}</p>
-            <p>Fecha: {formatDateModal(selectedSale.methodPay.datePay)}</p>
+            <div className="detail-sale-container">
+              <div className="saleId-status-container">
+                <p>
+                  <strong>Venta N° :</strong> {selectedSale.id}
+                </p>
+                <p>
+                  <strong>Estado:</strong> {selectedSale.detailPay.status}
+                </p>
+              </div>
+              <div className="detailSale-container">
+                <div className="title-name-date-detailSale">
+                  <div className="date-total-container">
+                    <p>
+                      <strong>Fecha: </strong>
+                      {formatDateModal(selectedSale.methodPay.datePay)}
+                    </p>
+                    <p>
+                      <strong>Total: </strong> ${selectedSale.methodPay.total}
+                    </p>
+                  </div>
+                  <div className="name-lastName-container">
+                    <p>
+                      <strong>Nombre y Apellido: </strong>
+                      {selectedSale.payer.name} {selectedSale.payer.lastName}
+                    </p>
+                  </div>
+                </div>
+                <div className="products-full-container">
+                  <div className="products-totalPay-detailSale">
+                    <div className="detail-product-sale">
+                      <div className="product-header">
+                        <strong>Producto/s: </strong>
+                      </div>
+                      {selectedSale.detailPay.items.map((el, index) => (
+                        <div className="product">
+                          <p>{el.title}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="products-totalPay-detailSale">
+                    <div className="detail-product-sale">
+                      <div className="product-header">
+                        <strong>Cantidad: </strong>
+                      </div>
+                      {selectedSale.detailPay.items.map((el, index) => (
+                        <div className="product">
+                          <p>{el.quantity}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="products-totalPay-detailSale">
+                    <div className="detail-product-sale">
+                      <div className="product-header">
+                        <strong>Precio unitario: </strong>
+                      </div>
+                      {selectedSale.detailPay.items.map((el, index) => (
+                        <div className="product">
+                          <p>{el.unit_price}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}

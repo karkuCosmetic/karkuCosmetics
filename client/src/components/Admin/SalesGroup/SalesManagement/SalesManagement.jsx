@@ -151,14 +151,17 @@ const SalesManagement = ({ setSection }) => {
       {selectedSale && (
         <div className="modal-sales">
           <div className="modal-content-sales">
-            <button
-              className="back-product-btn"
-              onClick={closeSaleDetailsModal}
-            >
-              <FontAwesomeIcon icon={faTimes} />
-            </button>
-            <h3>Detalles de la Venta</h3>
-            <p>Venta: {selectedSale.id}</p>
+            <div className="back-btn-sale-container">
+              <p>
+                <strong>Venta N° :</strong> {selectedSale.id}
+              </p>
+              <button
+                className="back-product-btn-modal"
+                onClick={closeSaleDetailsModal}
+              >
+                <FontAwesomeIcon icon={faTimes} />
+              </button>
+            </div>
             <p>
               Nombre: {selectedSale.payer.name} {selectedSale.payer.lastName}
             </p>
@@ -181,7 +184,7 @@ const SalesManagement = ({ setSection }) => {
                 setSelectedOption={setSelectedStatus}
               />
             </label>
-          <button onClick={updateStatus}>Guardar Cambios</button>
+            <button onClick={updateStatus}>Guardar Cambios</button>
           </div>
         </div>
       )}

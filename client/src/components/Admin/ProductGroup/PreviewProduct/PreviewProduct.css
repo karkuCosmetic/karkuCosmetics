@@ -112,7 +112,7 @@
 }
 
 .button-showAll:hover {
-  width: calc(40% + 15px);
+  width: calc(15rem + 15px);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 

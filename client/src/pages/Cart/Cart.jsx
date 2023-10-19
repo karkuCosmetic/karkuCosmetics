@@ -41,7 +41,7 @@ export const Cart = () => {
 
   const handlePayment = () => {
     if (token) {
-      Payment(cart,token);
+      Payment(cart, token);
     } else {
       console.log("debes loguearte");
     }
@@ -66,8 +66,12 @@ export const Cart = () => {
                   <div className="item-image-title">
                     <img
                       className="image-cart"
-                      src={item.product.image[0]}
-                      alt={item.product.title}
+                      src={
+                        item.product &&
+                        item.product.image &&
+                        item.product.image[0]
+                      }
+                      alt={item.product && item.product.title}
                     />
                     <div className="product-info-cart">
                       <p className="title-cart">{item.product.title}</p>

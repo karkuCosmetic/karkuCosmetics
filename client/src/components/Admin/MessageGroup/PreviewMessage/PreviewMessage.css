@@ -63,7 +63,7 @@
 }
 
 .btn-showAll-messages:hover {
-  width: calc(20% + 15px);
+  width: calc(15rem + 15px);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 

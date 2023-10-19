@@ -71,7 +71,7 @@ const MessageManagement = ({ setSection }) => {
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteEmailById(id,token)
+        deleteEmailById(id, token)
           .then(() => {
             setNotifications(notifications.filter((email) => email.id !== id));
             Swal.fire(
@@ -139,8 +139,8 @@ const MessageManagement = ({ setSection }) => {
                 <div className="info-messages-container">
                   <strong>Nombre:</strong> {el.user_name}
                   <br />
-                  <strong>Correo:</strong> {el.user_email}
-                  <br />
+                  {/* <strong>Correo:</strong> {el.user_email}
+                  <br /> */}
                   <strong>Teléfono:</strong> {el.user_phone}
                   <br />
                   <strong>Fecha: </strong> {formatDateModal(el.date)}
