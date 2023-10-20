@@ -107,11 +107,12 @@ export const reciveWebhook = async (req, res) => {
         id: id,
         userId: user._id,
         payer: {
-          name: data.response.first_name,
-          lastName: data.response.last_name,
+          name: user.name,
+          lastName:user.last_name,
           DNI: data.response.card.cardholder.identification.number,
           phonePerson: data.body.payer.phone,
           email: data.response.payer.email,
+          address:user.adress
         },
         methodPay: {
           cardType: data.body.payment_method_id,
