@@ -10,11 +10,9 @@ import {
 import {
   deleteEmail,
   getEmails,
-  getEmailsById,
   sendEmail,
 } from "../controllers/mail.controller.js";
 import {
-  getOrderById,
   getOrders,
   updateOrders,
 } from "../controllers/orders.controllers.js";
@@ -25,10 +23,9 @@ router.put("/email", [verifyToken, isAdmin], updateAdminsEmail); //edita a todos
 router.delete("/email/:id", [verifyToken, isAdmin], deleteEmail); //elimnina el mail guardado en base
 router.post("/email", sendEmail);
 router.get("/email", [verifyToken, isAdmin], getEmails);
-router.get("/email/:id", [verifyToken, isAdmin], getEmailsById);
+
 
 router.get("/orders",[verifyToken, isAdmin], getOrders);
-router.get("/orders/:id",[verifyToken, isAdmin], getOrderById);
 router.put("/orders/:id",[verifyToken, isAdmin], updateOrders); //chequear por que en back funciona en la base no
 
 //AGREGAR MIDDLEWARE ↓

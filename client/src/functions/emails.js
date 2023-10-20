@@ -11,17 +11,6 @@ export const getEmails = async (token) => {
   }
 };
 
-export const getEmailsById = async (id,token) => {
-  try {
-    const emails = await axios.get(`http://localhost:3001/admin/email/${id}`,{
-      headers: { "user-token": token },
-    });
-    return emails;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 export const deleteEmailById = async (id,token) => {
   try {
     const res = await axios.delete(`http://localhost:3001/admin/email/${id}`,{

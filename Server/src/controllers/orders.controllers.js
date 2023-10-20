@@ -11,17 +11,6 @@ export const getOrders = async (req, res) => {
   }
 };
 
-export const getOrderById = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const admin = await Admin.findOne({});
-    let order = admin.orders.find((el) => el.id === id);
-    res.status(200).json({ orders: order });
-  } catch (error) {
-    res.status(500).json(formatError(error.message));
-  }
-};
-
 export const updateOrders = async (req, res) => {
   try {
     const { id } = req.params;

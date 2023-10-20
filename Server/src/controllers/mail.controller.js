@@ -54,35 +54,6 @@ export const getEmailsById = async (req, res) => {
   }
 };
 
-// export const deleteEmail = async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const admins = await Admin.find({}); // Busca todos los administradores
-
-//     let emailDeleted = false; // Variable para rastrear si se eliminó el email en al menos un administrador
-
-//     for (const admin of admins) {
-//       const index = admin.Notifications.findIndex((el) => el.id === id);
-//       if (index !== -1) {
-//         admin.Notifications.splice(index, 1); // Elimina el objeto
-//         await admin.save();
-//         emailDeleted = true; // Establece a true si se eliminó el email en al menos un administrador
-//       }
-//     }
-
-//     if (emailDeleted) {
-//       return res.status(200).json({
-//         message: "Email eliminado correctamente en todos los administradores",
-//       });
-//     }
-
-//     return res
-//       .status(404)
-//       .json({ message: "Email no encontrado en ningún administrador" });
-//   } catch (error) {
-//     return res.status(400).json(formatError(error.message));
-//   }
-// };
 export const deleteEmail = async (req, res) => {
   try {
     const { id } = req.params;
