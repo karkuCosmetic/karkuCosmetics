@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { GetDecodedCookie } from "../../../../utils/DecodedCookie";
 import SelectStatusSales from "../../../SelectStatusSales/SelectStatusSales";
+import Swal from "sweetalert2";
 
 const SalesManagement = ({ setSection }) => {
   const [sales, setSales] = useState([]);
@@ -67,6 +68,13 @@ const SalesManagement = ({ setSection }) => {
             sale.id === updatedSale.id ? updatedSale : sale
           );
           setSales(updatedSales);
+          Swal.fire("Estado actualizado correctamente", "", "success").then(
+            (result) => {
+              if (result.isConfirmed) {
+                closeSaleDetailsModal();
+              }
+            }
+          );
         })
         .catch((error) => console.error("Error updating sale status:", error));
     }
@@ -149,71 +157,112 @@ const SalesManagement = ({ setSection }) => {
       </div>
 
       {selectedSale && (
-        <div className="modal-sales">
-          <div className="modal-content-sales">
-            <div className="back-btn-sale-container">
-              <div className="sale-date-modal-detail">
-                <p>
-                  <strong>Venta N° :</strong> {selectedSale.id}
-                </p>
-                <p>
-                  <strong>Fecha: </strong>
-                  {formatDateModal(selectedSale.methodPay.datePay)}
-                </p>
-              </div>
+        <div className="modal-previewSales">
+          <div className="modal-previewSales-content">
+            <div className="close-previewSales-modal-container">
               <button
-                className="back-product-btn-modal"
+                className="back-previewSale-btn"
                 onClick={closeSaleDetailsModal}
               >
                 <FontAwesomeIcon icon={faTimes} />
               </button>
             </div>
-            <div className="full-container-detail-sale">
-              <div className="name-detail-sale-modal">
+            <div className="detail-sale-container">
+              <div className="saleId-status-container">
                 <p>
-                  <strong>Nombre: </strong>
-                  {selectedSale.payer.name} {selectedSale.payer.lastName}
+                  <strong>Venta N° :</strong> {selectedSale.id}
                 </p>
-              </div>
-              <div className="detail-sales-container">
-                <div>
+
+                <div className="status-btnSave-container">
                   <p>
-                    <strong>Productos:</strong>
+                    <strong>Estado:</strong>
                   </p>
+                  <SelectStatusSales
+                    options={["Pendiente", "En preparación", "Finalizada"]}
+                    selectedOption={selectedStatus}
+                    setSelectedOption={setSelectedStatus}
+                  />
+                  <button className="btn-save-status" onClick={updateStatus}>
+                    Guardar
+                  </button>
                 </div>
-                <div className="products-quantity-detail-sale">
-                  {selectedSale.detailPay.items.map((el) => (
-                    <div className="title-quantity-detail">
-                      <div>
-                        <p>{el.title}</p>
-                      </div>
-                      <div>
-                        <p>x{el.quantity}</p>
-                      </div>
+              </div>
+              <div className="detailSale-container">
+                <div className="title-name-date-detailSale">
+                  <div className="name-lastName-container">
+                    <p>
+                      <strong>Nombre y Apellido: </strong>
+                      {selectedSale.payer.name} {selectedSale.payer.lastName}
+                    </p>
+
+                    <div>
+                      {" "}
+                      <p>
+                        <strong>Domicilio:</strong>{" "}
+                        {selectedSale.payer.adress.callePrincipal}{" "}
+                        {selectedSale.payer.adress.numero} - Piso{" "}
+                        {selectedSale.payer.adress.piso}.{" "}
+                        {selectedSale.payer.adress.localidad},{" "}
+                        {selectedSale.payer.adress.provincia}.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="date-total-container">
+                    <p>
+                      <strong>Fecha: </strong>
+                      {formatDateModal(selectedSale.methodPay.datePay)}
+                    </p>
+                    <p>
+                      <strong>Total: </strong>$ {selectedSale.methodPay.total}
+                    </p>
+
+                    <p>
+                      <strong>Tarjeta: </strong>
+                      {selectedSale.methodPay.cardType}
+                    </p>
+                    <p>
+                      <strong>Finalizada en: </strong>
+                      ***{selectedSale.methodPay.last_four_digit}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="products-full-container">
+              <div className="products-totalPay-detailSale">
+                <div className="detail-product-sale">
+                  <div className="product-header">
+                    <strong>Producto/s: </strong>
+                  </div>
+                  {selectedSale.detailPay.items.map((el, index) => (
+                    <div className="product">
+                      <p>{el.title}</p>
                     </div>
                   ))}
                 </div>
               </div>
-              <div className="Payment-payer-detail">
-                <div>
-                  <p>
-                    <strong>Tarjeta: </strong>
-                    {selectedSale.methodPay.cardType}
-                  </p>
-                  <p>
-                    <strong>Finalizada en: </strong>
-                    {selectedSale.methodPay.last_four_digit}
-                  </p>
-                  <p>Total: ${selectedSale.methodPay.total}</p>
-                  <label>
-                    <strong>Estado:</strong>
-                    <SelectStatusSales
-                      options={["Pendiente", "En preparación", "Finalizada"]}
-                      selectedOption={selectedStatus}
-                      setSelectedOption={setSelectedStatus}
-                    />
-                  </label>
-                  <button onClick={updateStatus}>Guardar Cambios</button>
+              <div className="products-totalPay-detailSale">
+                <div className="detail-product-sale">
+                  <div className="product-header">
+                    <strong>Cantidad: </strong>
+                  </div>
+                  {selectedSale.detailPay.items.map((el, index) => (
+                    <div className="product">
+                      <p>x{el.quantity}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="products-totalPay-detailSale">
+                <div className="detail-product-sale">
+                  <div className="product-header">
+                    <strong>Precio unitario: </strong>
+                  </div>
+                  {selectedSale.detailPay.items.map((el, index) => (
+                    <div className="product">
+                      <p>$ {el.unit_price}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>

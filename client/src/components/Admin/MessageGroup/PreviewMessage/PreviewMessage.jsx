@@ -6,9 +6,9 @@ import {
 } from "../../../../functions/emails";
 import "./PreviewMessage.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes, faTrash, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faTimes, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
-import { GetDecodedCookie } from '../../../../utils/DecodedCookie';
+import { GetDecodedCookie } from "../../../../utils/DecodedCookie";
 
 const PreviewMessage = ({ setSection }) => {
   const [notifications, setNotifications] = useState([]);
@@ -36,24 +36,35 @@ const PreviewMessage = ({ setSection }) => {
     setIsModalOpen(false);
   };
 
-  const handleReply = () => {
+  const handleReply = async () => {
     if (selectedMessage && replyText.trim() !== "") {
       const replyBody = `Respuesta:\n${selectedMessage.user_message}\n\n\n${replyText}`;
 
-      sendEmail({
-        to: selectedMessage.user_email,
-        subject: `Re: ${selectedMessage.user_message}`,
-        body: replyBody,
-        id: selectedMessage.id,
-      })
-        .then(() => {
-          console.log("Mensaje enviado con éxito");
-
-          setReplyText("");
-        })
-        .catch((error) => {
-          console.error("Error al enviar el mensaje:", error);
+      try {
+        await sendEmail({
+          to: selectedMessage.user_email,
+          subject: `Re: ${selectedMessage.user_message}`,
+          body: replyBody,
+          id: selectedMessage.id,
         });
+
+        await deleteEmailById(selectedMessage.id, token);
+
+        setNotifications(
+          notifications.filter((email) => email.id !== selectedMessage.id)
+        );
+
+        Swal.fire(
+          "Respuesta enviada correctamente. Podés seguir por Gmail",
+          "",
+          "success"
+        ).then(() => {
+          closeModal();
+          setReplyText("");
+        });
+      } catch (error) {
+        console.error("Error al enviar el mensaje:", error);
+      }
     }
   };
 
@@ -67,7 +78,7 @@ const PreviewMessage = ({ setSection }) => {
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteEmailById(id,token)
+        deleteEmailById(id, token)
           .then(() => {
             setNotifications(notifications.filter((email) => email.id !== id));
             Swal.fire(
@@ -125,7 +136,7 @@ const PreviewMessage = ({ setSection }) => {
                     className="btn-delete-message"
                     onClick={() => handleDelete(el.id)}
                   >
-           <FontAwesomeIcon icon={faTrashCan} />
+                    <FontAwesomeIcon icon={faTrashCan} />
                   </button>
                 </div>
               </li>

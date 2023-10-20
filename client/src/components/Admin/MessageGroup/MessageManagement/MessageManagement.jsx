@@ -7,11 +7,8 @@ import {
 import "./MessageManagement.css";
 import Swal from "sweetalert2";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faTimes,
-  faTrash,
-  faTrashCan,
-} from "@fortawesome/free-solid-svg-icons";
+import { faTimes, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+
 import { GetDecodedCookie } from "../../../../utils/DecodedCookie";
 
 const MessageManagement = ({ setSection }) => {
@@ -40,24 +37,35 @@ const MessageManagement = ({ setSection }) => {
     setIsModalOpen(false);
   };
 
-  const handleReply = () => {
+  const handleReply = async () => {
     if (selectedMessage && replyText.trim() !== "") {
       const replyBody = `Respuesta:\n${selectedMessage.user_message}\n\n\n${replyText}`;
 
-      sendEmail({
-        to: selectedMessage.user_email,
-        subject: `Re: ${selectedMessage.user_message}`,
-        body: replyBody,
-        id: selectedMessage.id,
-      })
-        .then(() => {
-          console.log("Mensaje enviado con éxito");
-
-          setReplyText("");
-        })
-        .catch((error) => {
-          console.error("Error al enviar el mensaje:", error);
+      try {
+        await sendEmail({
+          to: selectedMessage.user_email,
+          subject: `Re: ${selectedMessage.user_message}`,
+          body: replyBody,
+          id: selectedMessage.id,
         });
+
+        await deleteEmailById(selectedMessage.id, token);
+
+        setNotifications(
+          notifications.filter((email) => email.id !== selectedMessage.id)
+        );
+
+        Swal.fire(
+          "Respuesta enviada correctamente. Podés seguir por Gmail",
+          "",
+          "success"
+        ).then(() => {
+          closeModal();
+          setReplyText("");
+        });
+      } catch (error) {
+        console.error("Error al enviar el mensaje:", error);
+      }
     }
   };
 

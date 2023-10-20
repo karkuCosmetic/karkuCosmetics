@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { getSales } from "../../../../functions/fetchingSales";
+import { getSales, updateSalesById } from "../../../../functions/fetchingSales";
 import "./PreviewSales.css";
 import { GetDecodedCookie } from "../../../../utils/DecodedCookie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import SelectStatusSales from "../../../SelectStatusSales/SelectStatusSales";
+import Swal from "sweetalert2";
 
 const PreviewSales = ({ setSection }) => {
   const [sales, setSales] = useState([]);
   const [selectedSale, setSelectedSale] = useState(null);
+  const [selectedStatus, setSelectedStatus] = useState("");
 
   const orderSales = sales.slice(0, 6);
   const token = GetDecodedCookie("cookieToken");
@@ -25,8 +28,32 @@ const PreviewSales = ({ setSection }) => {
     return `${day}/${month}/${year}`;
   };
 
+  const updateStatus = () => {
+    if (selectedSale && selectedStatus) {
+      const updateValue = selectedStatus;
+
+      updateSalesById(selectedSale.id, updateValue, token)
+        .then((updatedSale) => {
+          const updatedSales = sales.map((sale) =>
+            sale.id === updatedSale.id ? updatedSale : sale
+          );
+          setSales(updatedSales);
+
+          Swal.fire("Estado actualizado correctamente", "", "success").then(
+            (result) => {
+              if (result.isConfirmed) {
+                closeSaleDetailsModal();
+              }
+            }
+          );
+        })
+        .catch((error) => console.error("Error updating sale status:", error));
+    }
+  };
+
   const openSaleDetailsModal = (sale) => {
     setSelectedSale(sale);
+    setSelectedStatus(sale.detailPay.status);
   };
 
   const closeSaleDetailsModal = () => {
@@ -56,7 +83,7 @@ const PreviewSales = ({ setSection }) => {
                 className="btn-showSale"
                 onClick={() => openSaleDetailsModal(sale)}
               >
-                Vista rápida
+                Ver detalle
               </button>
               <p>
                 <strong>Fecha: </strong>{" "}
@@ -91,65 +118,97 @@ const PreviewSales = ({ setSection }) => {
                 <p>
                   <strong>Venta N° :</strong> {selectedSale.id}
                 </p>
-                <p>
-                  <strong>Estado:</strong> {selectedSale.detailPay.status}
-                </p>
+
+                <div className="status-btnSave-container">
+                  <p>
+                    <strong>Estado:</strong>
+                  </p>
+                  <SelectStatusSales
+                    options={["Pendiente", "En preparación", "Finalizada"]}
+                    selectedOption={selectedStatus}
+                    setSelectedOption={setSelectedStatus}
+                  />
+                  <button className="btn-save-status" onClick={updateStatus}>
+                    Guardar
+                  </button>
+                </div>
               </div>
               <div className="detailSale-container">
                 <div className="title-name-date-detailSale">
+                  <div className="name-lastName-container">
+                    <p>
+                      <strong>Nombre y Apellido: </strong>
+                      {selectedSale.payer.name} {selectedSale.payer.lastName}
+                    </p>
+
+                    <div>
+                      {" "}
+                      <p>
+                        <strong>Domicilio:</strong>{" "}
+                        {selectedSale.payer.adress.callePrincipal}{" "}
+                        {selectedSale.payer.adress.numero} - Piso{" "}
+                        {selectedSale.payer.adress.piso}.{" "}
+                        {selectedSale.payer.adress.localidad},{" "}
+                        {selectedSale.payer.adress.provincia}.
+                      </p>
+                    </div>
+                  </div>
                   <div className="date-total-container">
                     <p>
                       <strong>Fecha: </strong>
                       {formatDateModal(selectedSale.methodPay.datePay)}
                     </p>
                     <p>
-                      <strong>Total: </strong> ${selectedSale.methodPay.total}
+                      <strong>Total: </strong>$ {selectedSale.methodPay.total}
                     </p>
-                  </div>
-                  <div className="name-lastName-container">
+
                     <p>
-                      <strong>Nombre y Apellido: </strong>
-                      {selectedSale.payer.name} {selectedSale.payer.lastName}
+                      <strong>Tarjeta: </strong>
+                      {selectedSale.methodPay.cardType}
+                    </p>
+                    <p>
+                      <strong>Finalizada en: </strong>
+                      ***{selectedSale.methodPay.last_four_digit}
                     </p>
                   </div>
                 </div>
-                <div className="products-full-container">
-                  <div className="products-totalPay-detailSale">
-                    <div className="detail-product-sale">
-                      <div className="product-header">
-                        <strong>Producto/s: </strong>
-                      </div>
-                      {selectedSale.detailPay.items.map((el, index) => (
-                        <div className="product">
-                          <p>{el.title}</p>
-                        </div>
-                      ))}
-                    </div>
+              </div>
+            </div>
+            <div className="products-full-container">
+              <div className="products-totalPay-detailSale">
+                <div className="detail-product-sale">
+                  <div className="product-header">
+                    <strong>Producto/s: </strong>
                   </div>
-                  <div className="products-totalPay-detailSale">
-                    <div className="detail-product-sale">
-                      <div className="product-header">
-                        <strong>Cantidad: </strong>
-                      </div>
-                      {selectedSale.detailPay.items.map((el, index) => (
-                        <div className="product">
-                          <p>x{el.quantity}</p>
-                        </div>
-                      ))}
+                  {selectedSale.detailPay.items.map((el, index) => (
+                    <div className="product">
+                      <p>{el.title}</p>
                     </div>
+                  ))}
+                </div>
+              </div>
+              <div className="products-totalPay-detailSale">
+                <div className="detail-product-sale">
+                  <div className="product-header">
+                    <strong>Cantidad: </strong>
                   </div>
-                  <div className="products-totalPay-detailSale">
-                    <div className="detail-product-sale">
-                      <div className="product-header">
-                        <strong>Precio unitario: </strong>
-                      </div>
-                      {selectedSale.detailPay.items.map((el, index) => (
-                        <div className="product">
-                          <p>{el.unit_price}</p>
-                        </div>
-                      ))}
+                  {selectedSale.detailPay.items.map((el, index) => (
+                    <div className="product">
+                      <p>x{el.quantity}</p>
                     </div>
+                  ))}
+                </div>
+              </div>
+              <div className="products-totalPay-detailSale">
+                <div className="detail-product-sale">
+                  <div className="product-header">
+                    <strong>Precio unitario: </strong>
                   </div>
+                  {selectedSale.detailPay.items.map((el, index) => (
+                    <div className="product">
+                      <p>$ {el.unit_price}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>

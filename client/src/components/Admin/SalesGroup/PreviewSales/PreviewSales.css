@@ -43,7 +43,7 @@
   font-family: "jost";
   background-color: #b4507d;
   padding: 0.5rem;
-  width: 5rem;
+  width: 6rem;
   height: 1.5rem;
   transition: width 0.3s ease;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -145,6 +145,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-items: center;
   width: 100%;
   gap: 2rem;
   font-family: "figtree";
@@ -154,6 +155,41 @@
 
 .saleId-status-container strong {
   color: #7d3c93;
+}
+
+.saleNumber-status-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.status-btnSave-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn-save-status {
+  display: flex;
+  justify-content: center;
+  background-color: #7d3c93;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 12px;
+  font-family: "figtree";
+  width: 6rem;
+  height: 2rem;
+  padding: 0.2rem;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.btn-save-status:hover {
+  background-color: #b4507d;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
 .back-previewSale-btn {
@@ -222,8 +258,10 @@
 
 .name-lastName-container {
   display: flex;
-  flex-direction: row;
-  gap: 2rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .name-lastName-container p {

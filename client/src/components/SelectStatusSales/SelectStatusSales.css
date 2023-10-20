@@ -1,6 +1,6 @@
 .custom-select-status {
   position: relative;
-  width: 12rem;
+  width: 9rem;
   border: 1px solid #7d3c93 !important;
   border-radius: 5px;
   cursor: pointer;
@@ -11,7 +11,7 @@
   font-size: 16px;
 }
 
-.selected-option {
+.selected-option-preview {
   display: flex;
   font-family: "figtree";
   text-align: left;
@@ -20,7 +20,7 @@
   padding: 0.3rem;
 }
 
-.selected-option span {
+.selected-option-preview span {
   flex-grow: 1;
   padding-right: 10px;
   font-family: "figtree";
@@ -30,40 +30,42 @@
   white-space: nowrap;
 }
 
-.selected-option svg {
+.selected-option-preview svg {
   color: #7d3c93 !important;
   transition: transform 0.2s;
 }
 
-.options {
+.options-preview {
   position: absolute;
   width: 100%;
+  margin-top: 0.1rem;
   font-family: "figtree";
   color: #7d3c93;
   background-color: #fff;
   border: 1px solid #7d3c93 !important;
-  border-radius: 0 0 5px 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
-.options.open {
+.options-preview.open {
   display: block;
   color: #7d3c93;
 }
 
-.option {
-  padding: 0.5rem;
+.option-preview {
+  padding: 0.3rem;
   cursor: pointer;
   transition: background-color 0.2s;
   font-family: "figtree";
 }
 
-.option:hover {
-  background-color: #7d3c93 !important;
-  color: #7d3c93;
+.option-preview:hover {
+  background-color:  #b4507d !important;
+  color: #ffffff;
 }
 
-.option.selected {
+.option-preview.selected {
   background-color: #7d3c93 !important;
   color: #ffffff;
   font-family: "figtree";
