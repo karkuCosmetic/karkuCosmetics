@@ -56,9 +56,15 @@ export const Cart = () => {
       <Navbar />
       <div className="cart-full">
         <div className="cart-container">
-          <button className="empty-cart-button" onClick={handleEmptyCart}>
+          {
+            cart[0]?
+          <>
+            <button className="empty-cart-button" onClick={handleEmptyCart}>
             Vaciar Carrito
           </button>
+          </>
+              :""
+        }
           <div className="cart-items">
             {cart.map((item, index) => (
               <div key={index} className="cart-item">

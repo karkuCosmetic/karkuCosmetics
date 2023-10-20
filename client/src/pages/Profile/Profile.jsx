@@ -96,7 +96,7 @@ const Profile = () => {
   const indexOfLastPurchase = currentPage * purchasesPerPage;
   const indexOfFirstPurchase = indexOfLastPurchase - purchasesPerPage;
   const currentPurchases = profile.buys
-    ? profile.buys.slice(indexOfFirstPurchase, indexOfLastPurchase)
+    ? profile.buys.reverse().slice(indexOfFirstPurchase, indexOfLastPurchase)
     : [];
 
   const paginate = (pageNumber) => {
@@ -166,7 +166,7 @@ const Profile = () => {
                 <h2>
                   {profile.name} {profile.lastName}
                 </h2>
-                <p>Teléfono: {profile.cellphone}</p>
+                <p>Teléfono: {profile.phone}</p>
                 {profile.email && (
                   <p>
                     E-mail:{" "}
