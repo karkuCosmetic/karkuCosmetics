@@ -60,7 +60,7 @@ const EditProduct = ({match, closeEditModal}) => {
       [name]: value,
     });
   };
-console.log(selectedImages);
+
   const handleSubmit = async e => {
     e.preventDefault ();
 

@@ -7,17 +7,19 @@ import './AddProduct.css';
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faTimes} from '@fortawesome/free-solid-svg-icons';
-import { GetDecodedCookie } from '../../../../utils/DecodedCookie';
+import {GetDecodedCookie} from '../../../../utils/DecodedCookie';
+import SelectCategoryProduct
+  from '../../../SelectCategoryProduct/SelectCategoryProduct';
 
 const AddProduct = ({closeEditModal}) => {
-  const token = GetDecodedCookie("cookieToken");
+  const token = GetDecodedCookie ('cookieToken');
   const [product, setProduct] = useState ({
     title: '',
     dimensions: '',
     description: '',
     price: 0,
     stock: 0,
-    category: '',
+    category: {primary: '', secondary: ''},
   });
 
   const [selectedImages, setSelectedImages] = useState ([]); //preview images
@@ -53,7 +55,7 @@ const AddProduct = ({closeEditModal}) => {
   const handleSubmit = async e => {
     e.preventDefault ();
     try {
-      await createProduct (product, selectedImages,token);
+      await createProduct (product, selectedImages, token);
       closeEditModal ();
     } catch (error) {
       console.error ('Error creating product:', error);
@@ -63,6 +65,11 @@ const AddProduct = ({closeEditModal}) => {
   const closeModal = () => {
     closeEditModal ();
   };
+
+const selectCategory=()=>{
+
+}
+
 
   return (
     <div className="form-updateProduct">
@@ -118,12 +125,13 @@ const AddProduct = ({closeEditModal}) => {
         </div>
         <div>
           <label>Categoría:</label>
-          <input
+          <SelectCategoryProduct setProduct={setProduct} product={product}/>
+          {/* <input
             type="text"
             name="category"
             value={product.category}
             onChange={handleInputChange}
-          />
+          /> */}
         </div>
 
         <div className="image-upload-container">

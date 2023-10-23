@@ -5,9 +5,9 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  category:{
-    type:String,
-    default:""
+  category: {
+    type: {},
+    default: { primary: "", secondary: "" },
   },
   dimensions: {
     type: String,
@@ -26,7 +26,7 @@ const productSchema = new mongoose.Schema({
   },
   image: {
     type: Array,
-    default:[]
+    default: [],
   },
 });
 

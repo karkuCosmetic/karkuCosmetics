@@ -4,7 +4,7 @@ import deleteFile from "../utils/deleteFile";
 
 export const createProduct = async (data, images, token) => {
   let image = await fileUpload(images, "products");
-
+console.log(data);
   await axios.post(
     "http://localhost:3001/products",
     {
@@ -89,3 +89,14 @@ export const DeleteProductById = async (id, token) => {
     console.log(error);
   }
 };
+
+export const getAllCategories=async(token)=>{
+  try {
+    const res = await axios.get(`http://localhost:3001/products/categories`, {
+      headers: { "user-token": token },
+    });
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
