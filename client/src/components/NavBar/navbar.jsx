@@ -7,6 +7,7 @@ import { faSignOut } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { GetDecodedCookie } from "../../utils/DecodedCookie";
 import Swal from "sweetalert2";
+import Cookies from "js-cookie";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -37,7 +38,7 @@ const Navbar = () => {
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        document.cookie = encodeURIComponent("cookieToken") + "=" + "";
+        Cookies.remove("cookieToken");
         window.location.href = "/login";
       }
     });

@@ -142,14 +142,13 @@ const PreviewSales = ({ setSection }) => {
                     </p>
 
                     <div>
-                      {" "}
                       <p>
-                        <strong>Domicilio:</strong>{" "}
-                        {selectedSale.payer.adress.callePrincipal}{" "}
-                        {selectedSale.payer.adress.numero} - Piso{" "}
-                        {selectedSale.payer.adress.piso}.{" "}
-                        {selectedSale.payer.adress.localidad},{" "}
-                        {selectedSale.payer.adress.provincia}.
+                        <strong>Domicilio:</strong>
+                        {selectedSale.payer.adress?.callePrincipal}
+                        {selectedSale.payer.adress?.numero} - Piso
+                        {selectedSale.payer.adress?.piso}.
+                        {selectedSale.payer.adress?.localidad},
+                        {selectedSale.payer.adress?.provincia}.
                       </p>
                     </div>
                   </div>

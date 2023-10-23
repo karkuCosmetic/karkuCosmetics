@@ -3,10 +3,10 @@
   flex-direction: column;
   background-size: cover;
   align-items: center;
+  width: 100%;
   height: 100vh;
   background-image: url(../../assets/bgadmin.png);
   overflow-x: hidden;
-  padding: 0.5rem;
 }
 
 .product-sales-message-container {
@@ -14,6 +14,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
+  padding: 1rem;
   overflow-x: hidden;
 }
 
@@ -30,4 +31,13 @@
   width: 100%;
   padding: 10px;
   overflow-x: hidden;
+}
+
+.navbarAdmin{
+  width: 100%;
+  position: sticky;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+align-items: center;
 }
