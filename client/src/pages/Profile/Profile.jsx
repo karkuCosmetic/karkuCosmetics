@@ -128,115 +128,115 @@ const Profile = () => {
               </div>
             )}
 
-{editing ? (
-  <div className="input-edit">
-    <label className="label-edit-profile" htmlFor="name">
-      Nombre:
-    </label>
-    <input
-      type="text"
-      placeholder="Escribe aquí tu nombre"
-      value={dataUpdate.name}
-      name="name"
-      onChange={handleChange}
-    />
-    <label className="label-edit-profile" htmlFor="lastName">
-      Apellido:
-    </label>
-    <input
-      type="text"
-      placeholder="Escribe aquí tu apellido"
-      value={dataUpdate.lastName}
-      name="lastName"
-      onChange={handleChange}
-    />
-    <label className="label-edit-profile" htmlFor="cellphone">
-      Nuevo Número:
-    </label>
-    <input
-      type="text"
-      placeholder="Nuevo Número"
-      value={dataUpdate.cellphone}
-      name="cellphone"
-      onChange={handleChange}
-    />
-    <label className="label-edit-profile" htmlFor="callePrincipal">
-      Calle Principal:
-    </label>
-    <input
-      type="text"
-      placeholder="Calle Principal"
-      value={dataUpdate.adress?.callePrincipal}
-      name="adress.callePrincipal"
-      onChange={handleChange}
-    />
-    <label className="label-edit-profile" htmlFor="numero">
-      Número:
-    </label>
-    <input
-      type="text"
-      placeholder="Número"
-      value={dataUpdate.adress?.numero}
-      name="adress.numero"
-      onChange={handleChange}
-    />
-    <label className="label-edit-profile" htmlFor="piso">
-      Piso:
-    </label>
-    <input
-      type="text"
-      placeholder="Piso"
-      value={dataUpdate.adress?.piso}
-      name="adress.piso"
-      onChange={handleChange}
-    />
-    <label className="label-edit-profile" htmlFor="localidad">
-      Localidad:
-    </label>
-    <input
-      type="text"
-      placeholder="Localidad"
-      value={dataUpdate.adress?.localidad}
-      name="adress.localidad"
-      onChange={handleChange}
-    />
-    <label className="label-edit-profile" htmlFor="provincia">
-      Provincia:
-    </label>
-    <input
-      type="text"
-      placeholder="Provincia"
-      value={dataUpdate.adress?.provincia}
-      name="adress.provincia"
-      onChange={handleChange}
-    />
-  </div>
-) : (
-  <div className="info-user">
-    <h2>
-      {profile.name} {profile.lastName}
-    </h2>
-    <p>
-      Domicilio: {profile.adress?.callePrincipal}{" "}
-      {profile.adress?.numero} {profile.adress?.piso},{" "}
-      {profile.adress?.localidad} - {profile.adress?.provincia}
-    </p>
+            {editing ? (
+              <div className="input-edit">
+                <label className="label-edit-profile" htmlFor="name">
+                  Nombre:
+                </label>
+                <input
+                  type="text"
+                  placeholder="Escribe aquí tu nombre"
+                  value={dataUpdate.name}
+                  name="name"
+                  onChange={handleChange}
+                />
+                <label className="label-edit-profile" htmlFor="lastName">
+                  Apellido:
+                </label>
+                <input
+                  type="text"
+                  placeholder="Escribe aquí tu apellido"
+                  value={dataUpdate.lastName}
+                  name="lastName"
+                  onChange={handleChange}
+                />
+                <label className="label-edit-profile" htmlFor="cellphone">
+                  Nuevo Número:
+                </label>
+                <input
+                  type="text"
+                  placeholder="Nuevo Número"
+                  value={dataUpdate.cellphone}
+                  name="cellphone"
+                  onChange={handleChange}
+                />
+                <label className="label-edit-profile" htmlFor="callePrincipal">
+                  Calle Principal:
+                </label>
+                <input
+                  type="text"
+                  placeholder="Calle Principal"
+                  value={dataUpdate.adress?.callePrincipal}
+                  name="adress.callePrincipal"
+                  onChange={handleChange}
+                />
+                <label className="label-edit-profile" htmlFor="numero">
+                  Número:
+                </label>
+                <input
+                  type="text"
+                  placeholder="Número"
+                  value={dataUpdate.adress?.numero}
+                  name="adress.numero"
+                  onChange={handleChange}
+                />
+                <label className="label-edit-profile" htmlFor="piso">
+                  Piso:
+                </label>
+                <input
+                  type="text"
+                  placeholder="Piso"
+                  value={dataUpdate.adress?.piso}
+                  name="adress.piso"
+                  onChange={handleChange}
+                />
+                <label className="label-edit-profile" htmlFor="localidad">
+                  Localidad:
+                </label>
+                <input
+                  type="text"
+                  placeholder="Localidad"
+                  value={dataUpdate.adress?.localidad}
+                  name="adress.localidad"
+                  onChange={handleChange}
+                />
+                <label className="label-edit-profile" htmlFor="provincia">
+                  Provincia:
+                </label>
+                <input
+                  type="text"
+                  placeholder="Provincia"
+                  value={dataUpdate.adress?.provincia}
+                  name="adress.provincia"
+                  onChange={handleChange}
+                />
+              </div>
+            ) : (
+              <div className="info-user">
+                <h2>
+                  {profile.name} {profile.lastName}
+                </h2>
+                <p>
+                  Domicilio: {profile.adress?.callePrincipal}{" "}
+                  {profile.adress?.numero} {profile.adress?.piso},{" "}
+                  {profile.adress?.localidad} - {profile.adress?.provincia}
+                </p>
 
-    <p>Teléfono: {profile.phone}</p>
-    {profile.email && (
-      <p>
-        E-mail:{" "}
-        {profile.email.length > 20
-          ? profile.email.slice(0, 20) + "..."
-          : profile.email}
-      </p>
-    )}
-  </div>
-)}
-<button onClick={() => setEditing(!editing)}>
-  {editing ? "Cancelar" : "Editar"}
-</button>
-{editing && <button onClick={handleSave}>Guardar</button>}
+                <p>Teléfono: {profile.phone}</p>
+                {profile.email && (
+                  <p>
+                    E-mail:{" "}
+                    {profile.email.length > 20
+                      ? profile.email.slice(0, 20) + "..."
+                      : profile.email}
+                  </p>
+                )}
+              </div>
+            )}
+            <button onClick={() => setEditing(!editing)}>
+              {editing ? "Cancelar" : "Editar"}
+            </button>
+            {editing && <button onClick={handleSave}>Guardar</button>}
           </div>
 
           <div className="purchase-history-card">
