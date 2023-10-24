@@ -444,7 +444,6 @@ a {
     margin-top: 5rem;
     padding: 0.8rem;
     background-color: #f8f8f800;
-    backdrop-filter: blur(2px);
   }
 
   .filters-box {

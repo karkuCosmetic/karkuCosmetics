@@ -21,7 +21,7 @@ const Profile = () => {
     lastName: profile.lastName ? profile.lastName : "Apellido",
     phone: profile.phone ? profile.phone : "Telefono",
     image: profile.image ? profile.image : "",
-  });
+  })
   const [dataUpdateAdress, setDataUpdateAdress] = useState(
     profile.adress
   );
@@ -29,7 +29,7 @@ const Profile = () => {
 
   const [selectedPurchase, setSelectedPurchase] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const purchasesPerPage = 5;
+  const purchasesPerPage = 10;
 
   const imageProfile = [
     "https://res.cloudinary.com/dqai9sgfs/image/upload/v1693836416/karku/profiles/avatar5_pfvu9n.png",
@@ -368,6 +368,7 @@ const Profile = () => {
                           <strong>Estado:</strong>{" "}
                           {selectedPurchase.detailPay.status}
                         </p>
+                        <p><strong>Envío: </strong></p>
                       </div>
                       <div className="item-detail">
                         <div className="item-detail-container">

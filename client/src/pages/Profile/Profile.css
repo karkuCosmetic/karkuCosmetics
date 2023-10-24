@@ -20,7 +20,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  font-family: "Quicksand";
+  font-family: "jost";
   font-weight: bold;
 }
 
@@ -30,10 +30,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-family: "jost";
   border-radius: 15px;
   background-color: #f9f9f9;
-  border: 3px solid #7b60c8;
-  color: #7b60c8;
+  border: 2px solid #317d24;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   padding: 1rem;
   width: 30rem;
@@ -52,7 +52,7 @@
   height: 5rem;
   border-radius: 50%;
   object-fit: contain;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
 .edit-avatar {
@@ -95,7 +95,7 @@
 }
 
 .selected-avatar {
-  border: 3px solid #7b60c8;
+  border: 2px solid  #317d24;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -103,7 +103,7 @@
   display: flex;
   flex-wrap: wrap;
   margin: 0;
-  font-family: "quicksand";
+  font-family: "jost";
   font-size: 1.5rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -113,7 +113,6 @@
   display: flex;
   flex-wrap: wrap;
   margin: 0.2rem;
-  color: #7b60c8;
 }
 
 .purchase-history-card {
@@ -124,13 +123,12 @@
   align-items: center;
   width: 30rem;
   background-color: #f9f9f9;
-  font-family: "Quicksand";
   font-weight: bold;
   border-radius: 10px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   margin-top: 2rem;
   padding: 1rem;
-  border: 2px solid #7b60c8;
+  border: 2px solid #619d52;
 }
 
 @media (max-width: 520px) {
@@ -141,9 +139,8 @@
 
 .store-buys-title {
   font-size: 1.3rem;
-  color: #7b60c8;
   font-weight: bold;
-  font-family: "quicksand";
+  font-family: "jost";
 }
 
 .purchase-history-card ul {
@@ -164,7 +161,6 @@
   display: flex;
   justify-content: center;
   max-width: 25rem;
-
   margin-top: 0.1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -172,7 +168,7 @@
   border-radius: 10px;
 }
 
-.input-edit{
+.input-edit {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -187,16 +183,17 @@
 }
 
 .label-edit-profile {
-  font-family: "quicksand";
+  font-family: "jost";
   margin: 0;
   color: #7b60c8;
 }
 
 .profile-card button {
-  background-color: #7b60c8;
-  border-radius: 15px;
+  background-color: #317d24;
+  border-radius: 10px;
   margin-top: 1rem;
-  padding: 0.5rem;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
   width: 5rem;
   color: white;
   cursor: pointer;
@@ -205,30 +202,26 @@
   text-decoration: none;
   transition: all 250ms;
   border: 0;
-  font-family: "Quicksand";
-  font-size: 12px;
+  font-family: "jost";
+  font-size: 14px;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
 .profile-card button:hover {
   background-color: #d3599f;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
   transform: scale(1.05);
 }
 
 .profile-card button:not([disabled]):focus {
-  box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
-    -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5),
-    0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 
 .profile-card button:not([disabled]):hover {
-  box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
-    -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5),
-    0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 
 input:focus {
@@ -249,7 +242,7 @@ input:focus {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  font-family: "quicksand";
+  font-family: "jost";
   padding: 0.5rem;
   margin-bottom: 0.5rem;
   border: 1px solid #ccc;
@@ -307,7 +300,7 @@ input:focus {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "quicksand";
+  font-family: "jost";
 }
 
 .modal-content {
@@ -321,6 +314,12 @@ input:focus {
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   position: relative;
+}
+
+@media (max-width: 525px){
+  .modal-content{
+    width: 95%;
+  }
 }
 
 .close-button {
@@ -341,6 +340,16 @@ input:focus {
   border-bottom: 1px solid #7b60c8;
 }
 
+@media (max-width: 525px) {
+  .status-id-purchase {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    justify-content: center;
+    gap: 1rem;
+  }
+}
+
 .item-image-detail {
   height: 3rem;
   width: 3rem;
@@ -351,6 +360,12 @@ input:focus {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+@media (max-width: 525px){
+  .item-detail{
+    width: 100%;
+  }
 }
 
 .item-title-detail {
@@ -364,7 +379,7 @@ input:focus {
   justify-content: space-between;
   align-items: center;
   color: #000000;
-  font-family: "quicksand";
+  font-family: "jost";
 }
 
 .item-full {
@@ -382,10 +397,22 @@ input:focus {
   margin-top: 1rem;
 }
 
+
+
 .purchase-history-item {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
+  width: 50%;
+}
+
+@media (max-width: 525px) {
+  .purchase-history-item {
+    width: 100%;
+  }
+  .item-detail-container{
+    width: 100%;
+  }
 }
 
 .pagination-history {
@@ -397,11 +424,17 @@ input:focus {
   padding-bottom: 5rem;
 }
 
+@media (max-width: 525px){
+.pagination-history{
+  padding-bottom: 1rem;
+}
+}
+
 .pagination-history button {
   border: none;
   color: #333;
   margin: 0 5px;
-  font-family: "quicksand";
+  font-family: "jost";
   cursor: pointer;
   transition: background-color 0.3s;
   border-radius: 50%;
@@ -423,7 +456,7 @@ input:focus {
 .pagination-history .arrow-button {
   color: #f38f82;
   font-size: 14px;
-  font-family: "quicksand";
+  font-family: "jost";
   font-weight: bold;
   width: 1.5rem;
   height: 1.5rem;
@@ -444,7 +477,7 @@ input:focus {
 }
 
 .no-purchases {
-  font-family: "quicksand";
+  font-family: "jost";
   color: rgb(255, 255, 255);
   font-size: 14px;
   font-style: italic;
@@ -459,4 +492,29 @@ input:focus {
   align-items: center;
   justify-content: space-between;
   gap: 5rem;
+}
+
+@media (max-width: 525px){
+  .payment-detail-purchase{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+/* COLORES USER */
+
+.color1 {
+  color: #317d24;
+}
+.color2 {
+  color: #619d52;
+}
+.color3 {
+  color: #91be7f;
+}
+.color4 {
+  color: #c2deac;
+}
+.color5 {
+  color: #f2ffd9;
 }

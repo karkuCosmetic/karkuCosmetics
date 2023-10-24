@@ -5,77 +5,68 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
   background-repeat: no-repeat;
 }
 
 .home {
-  background-image: url(../../assets/bgKarku.png);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-.container-home {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .welcome {
+  background-image: url(../../assets/AssetsHome/bgHome1.jpg);
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: #000000;
-  text-align: center;
-  padding: 100px 0;
+  width: 100%;
+  height: 30rem;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding-top: 10rem;
 }
 
-.welcome h1 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
+.welcome-home {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-family: "Jost";
+  font-size: 22px;
+  color: #f2ffd9;
+  justify-content: center;
+  align-items: center;
+  background-color: #619d529c;
 }
 
-.welcome p {
-  font-size: 1.2rem;
-  margin-bottom: 30px;
+.section1-1-home {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: auto;
+  background-color: #f2ffd9;
 }
 
-.cta-button {
-  display: inline-block;
-  background-color: #fff;
-  color: #007bff;
-  padding: 10px 20px;
-  border-radius: 5px;
-  text-decoration: none;
-  transition: background-color 0.3s ease, color 0.3s ease;
+.text1-home{
+  width: 50%;
+  padding: 2rem;
+  text-align: justify;
 }
 
-.cta-button:hover {
-  background-color: #007bff;
-  color: #fff;
-}
+/* COLORES USER */
 
-.features-section {
-  padding: 80px 0;
+.color1 {
+  color: #317d24;
 }
-
-.object {
-  margin-bottom: 40px;
+.color2 {
+  color: #619d52;
 }
-
-.object h3 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
+.color3 {
+  color: #91be7f;
 }
-
-.footer-section {
-  background-color: #333;
-  color: #fff;
-  padding: 40px 0;
-  text-align: center;
+.color4 {
+  color: #c2deac;
 }
-
-.footer-section p {
-  font-size: 1.2rem;
+.color5 {
+  color: #f2ffd9;
 }

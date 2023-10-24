@@ -1,14 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import "./select.css";
 
 const RenderSelect = ({
-  TodosCategories,
+  categories,
   selectedCategory,
   setSelectedCategory,
+  isPrimary,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [subCategories, setSubCategories] = useState([]);
+
+  useEffect(() => {
+    if (isPrimary && categories.primary) {
+      setSubCategories(categories.primary);
+    } else if (categories.secondary) {
+      let filteredSecondaryCategories = categories.secondary;
+
+      if (!isPrimary && selectedCategory !== "Todos") {
+        filteredSecondaryCategories = categories.secondary.filter(
+          (secondaryCategory) => {
+            return secondaryCategory.primaryCategory === selectedCategory;
+          }
+        );
+      }
+
+      setSubCategories(filteredSecondaryCategories);
+    }
+  }, [isPrimary, categories, selectedCategory]);
 
   const handleOptionSelect = (category) => {
     setSelectedCategory(category);
@@ -30,11 +50,10 @@ const RenderSelect = ({
           icon={isOpen ? faCaretUp : faCaretDown}
           className="arrow"
         />
-
       </div>
       {isOpen && (
         <div className="options">
-          {TodosCategories.primary.map((category, index) => (
+          {subCategories.map((category, index) => (
             <div
               key={index}
               className={`option ${

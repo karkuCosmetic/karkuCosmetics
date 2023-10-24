@@ -22,16 +22,14 @@ const Store = () => {
   const { id } = useParams();
   const [isSelectOpen, setIsSelectOpen] = useState(false);
 
-const [categories,setCategories] = useState({
-  primary:["Todos"],
-  secondary:["Todos"]
-
-}) 
+  const [categories, setCategories] = useState({
+    primary: ["Todos"],
+    secondary: ["Todos"],
+  });
   useEffect(() => {
     CallProducts();
     window.scrollTo(0, 0);
   }, [id]);
-
 
   const handleQuantityChange = (product, amount) => {
     const updatedProducts = dataProducts.map((p) => {
@@ -68,14 +66,13 @@ const [categories,setCategories] = useState({
       quantity: 1,
     }));
     SetDataProducts(productsWithQuantity);
-    await getAllCategories().then(data=>{
-      setCategories({...categories,
-        primary:[...categories.primary,...data.categories.primary],
-        secondary:[...categories.secondary,...data.categories.secondary]
+    await getAllCategories().then((data) => {
+      setCategories({
+        ...categories,
+        primary: [...categories.primary, ...data.categories.primary],
+        secondary: [...categories.secondary, ...data.categories.secondary],
       });
-    })
-   
-  
+    });
   };
 
   const handlePriceFilter = () => {
@@ -103,13 +100,16 @@ const [categories,setCategories] = useState({
   const filteredProductsByCategory =
     selectedCategory === "Todos"
       ? dataProducts
-      : dataProducts.filter((product) => product?.category?.primary === selectedCategory || product?.category?.secondary === selectedCategory);
+      : dataProducts.filter(
+          (product) =>
+            product?.category?.primary === selectedCategory ||
+            product?.category?.secondary === selectedCategory
+        );
 
   useEffect(() => {
     setFilteredProducts(filteredProductsByCategory);
     setCurrentPage(1);
-  }, [dataProducts,selectedCategory]);
-
+  }, [dataProducts, selectedCategory]);
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -127,7 +127,6 @@ const [categories,setCategories] = useState({
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-
   return (
     <>
       <div className="page-container">
@@ -140,17 +139,22 @@ const [categories,setCategories] = useState({
               <h2 className="sidebar-categories">Categorías</h2>
               <div className="render-select">
                 <RenderSelect
-                  TodosCategories={categories.primary}
+                  categories={categories}
                   selectedCategory={selectedCategory}
                   setSelectedCategory={setSelectedCategory}
-                  setIsSelectOpen={setIsSelectOpen}
+                  isPrimary={true}
+                />
+                <RenderSelect
+                  categories={categories}
+                  selectedCategory={selectedCategory}
+                  setSelectedCategory={setSelectedCategory}
+                  isPrimary={false}
                 />
               </div>
-              <ul>
+              {/* <ul>
                 <span>Principales</span>
 
                 {categories.primary.map((category, index) => (
-                  
                   <li
                     key={index}
                     className={selectedCategory === category ? "active" : ""}
@@ -161,7 +165,7 @@ const [categories,setCategories] = useState({
                 ))}
               </ul>
               <ul>
-              <span>Secundarias</span>
+                <span>Secundarias</span>
                 {categories.secondary.map((category, index) => (
                   <li
                     key={index}
@@ -171,7 +175,7 @@ const [categories,setCategories] = useState({
                     {category}
                   </li>
                 ))}
-              </ul>
+              </ul> */}
               <div className="price-filter">
                 <h3 className="h3-store">Precio</h3>
                 <div className="inputs-filter">
@@ -231,7 +235,7 @@ const [categories,setCategories] = useState({
                       </button>
                       <span className="quantity-store">{product.quantity}</span>
                       <button
-                        disabled={product.quantity>=10}
+                        disabled={product.quantity >= 10}
                         className="quantity-button"
                         onClick={() => handleQuantityChange(product, 1)}
                       >

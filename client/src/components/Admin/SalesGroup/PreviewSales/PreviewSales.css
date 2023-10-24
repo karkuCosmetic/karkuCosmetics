@@ -225,6 +225,17 @@
   font-family: "figtree";
 }
 
+@media (max-width: 525px) {
+  .products-full-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.2rem;
+  }
+}
+
 .detailSale-container {
   display: flex;
   flex-direction: column;
@@ -282,6 +293,12 @@
   flex-direction: row;
   width: 100%;
   justify-content: space-evenly;
+}
+
+@media (max-width: 525px) {
+  .product-header {
+    display: none;
+  }
 }
 
 .detail-product-sale {
