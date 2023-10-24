@@ -79,6 +79,7 @@ export const updateProduct = async (res, images, id, token) => {
 };
 
 export const DeleteProductById = async (id, token) => {
+  console.log(id);
   try {
     const res = await axios.delete(`http://localhost:3001/products/${id}`, {
       headers: { "user-token": token },
