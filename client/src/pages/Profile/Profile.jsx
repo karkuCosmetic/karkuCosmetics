@@ -19,9 +19,14 @@ const Profile = () => {
   const [dataUpdate, setDataUpdate] = useState({
     name: profile.name ? profile.name : "Nombre",
     lastName: profile.lastName ? profile.lastName : "Apellido",
-    cellphone: profile.cellphone ? profile.cellphone : "Telefono",
+    phone: profile.phone ? profile.phone : "Telefono",
     image: profile.image ? profile.image : "",
   });
+  const [dataUpdateAdress, setDataUpdateAdress] = useState(
+    profile.adress
+  );
+
+
   const [selectedPurchase, setSelectedPurchase] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const purchasesPerPage = 5;
@@ -50,20 +55,28 @@ const Profile = () => {
     setDataUpdate({
       name: info.name,
       lastName: info.lastName,
-      cellphone: info.cellphone,
+      phone: info.phone,
       image: info.image,
     });
+    setDataUpdateAdress(info.adress)
   };
 
   const handleChange = (event) => {
+    console.log(event.target.name);
     const property = event.target.name;
     const value = event.target.value;
     setDataUpdate({ ...dataUpdate, [property]: value });
   };
 
-  const handleSave = () => {
-    setEditing(false);
-    PutUser(profile.uid, dataUpdate, token);
+  const handleChangeAdress = (event) => {
+    const property = event.target.name;
+    const value = event.target.value;
+    setDataUpdateAdress({ ...dataUpdateAdress, [property]: value });
+  };
+
+  const handleSave = async() => {
+    setEditing(false);   
+   await PutUser(profile.uid, {data:{dataUpdate,dataUpdateAdress}}, token);
     window.location.reload();
   };
 
@@ -156,8 +169,8 @@ const Profile = () => {
     <input
       type="text"
       placeholder="Nuevo Número"
-      value={dataUpdate.cellphone}
-      name="cellphone"
+      value={dataUpdate.phone}
+      name="phone"
       onChange={handleChange}
     />
     <label className="label-edit-profile" htmlFor="callePrincipal">
@@ -166,9 +179,9 @@ const Profile = () => {
     <input
       type="text"
       placeholder="Calle Principal"
-      value={dataUpdate.adress?.callePrincipal}
-      name="adress.callePrincipal"
-      onChange={handleChange}
+      value={dataUpdateAdress.callePrincipal}
+      name="callePrincipal"
+      onChange={handleChangeAdress}
     />
     <label className="label-edit-profile" htmlFor="numero">
       Número:
@@ -176,9 +189,9 @@ const Profile = () => {
     <input
       type="text"
       placeholder="Número"
-      value={dataUpdate.adress?.numero}
-      name="adress.numero"
-      onChange={handleChange}
+      value={dataUpdateAdress.numero}
+      name="numero"
+      onChange={handleChangeAdress}
     />
     <label className="label-edit-profile" htmlFor="piso">
       Piso:
@@ -186,9 +199,9 @@ const Profile = () => {
     <input
       type="text"
       placeholder="Piso"
-      value={dataUpdate.adress?.piso}
-      name="adress.piso"
-      onChange={handleChange}
+      value={dataUpdateAdress.piso}
+      name="piso"
+      onChange={handleChangeAdress}
     />
     <label className="label-edit-profile" htmlFor="localidad">
       Localidad:
@@ -196,9 +209,9 @@ const Profile = () => {
     <input
       type="text"
       placeholder="Localidad"
-      value={dataUpdate.adress?.localidad}
-      name="adress.localidad"
-      onChange={handleChange}
+      value={dataUpdateAdress.localidad}
+      name="localidad"
+      onChange={handleChangeAdress}
     />
     <label className="label-edit-profile" htmlFor="provincia">
       Provincia:
@@ -206,9 +219,9 @@ const Profile = () => {
     <input
       type="text"
       placeholder="Provincia"
-      value={dataUpdate.adress?.provincia}
-      name="adress.provincia"
-      onChange={handleChange}
+      value={dataUpdateAdress.provincia}
+      name="provincia"
+      onChange={handleChangeAdress}
     />
   </div>
 ) : (

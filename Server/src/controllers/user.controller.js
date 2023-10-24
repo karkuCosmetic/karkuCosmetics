@@ -25,17 +25,9 @@ export const getUserById = async (req, res) => {
 
 export const updateUser = async (req, res) => {
   const { id } = req.params;
-  const {
-    name,
-    lastName,
-    country,
-    email,
-    carrito,
-    adress,
-    image,
-    dni,
-    cellphone,
-  } = req.body;
+  const { name, lastName, country, email, carrito, image, dni, phone } =
+    req.body.data.dataUpdate;
+
   let Name;
   let LastName;
   if (name || lastName) {
@@ -53,9 +45,9 @@ export const updateUser = async (req, res) => {
         email: email,
         image: image,
         carrito: carrito,
-        adress: adress,
+        adress: req.body.data.dataUpdateAdress,
         dni: dni,
-        cellphone: cellphone,
+        phone: phone,
       },
       { new: true }
     ).select("-password");
@@ -111,11 +103,11 @@ export const UpdatePassword = async (req, res) => {
         sendNewPassword(email);
       }
     } else if (password && token) {
-      const { value } = DecodedToken(token);//devolveria un email
+      const { value } = DecodedToken(token); //devolveria un email
 
       if (value) {
         const salt = await bcryptjs.genSalt(10);
-        let passwordHash = await bcryptjs.hash(password.toString(), salt);//hashea la password enviada
+        let passwordHash = await bcryptjs.hash(password.toString(), salt); //hashea la password enviada
 
         await User.findOneAndUpdate(
           { email: value },

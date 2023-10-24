@@ -18,6 +18,7 @@ export const getUserDetail = async (uid, token) => {
 
 export const PutUser = async (uid, value, token) => {
   try {
+
     let response;
     response = await axios.put(`http://localhost:3001/user/${uid}`, value, {
       headers: { "user-token": token },
