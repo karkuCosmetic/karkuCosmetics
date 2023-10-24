@@ -34,7 +34,7 @@ const RenderSelect = ({
       </div>
       {isOpen && (
         <div className="options">
-          {TodosCategories.map((category, index) => (
+          {TodosCategories.primary.map((category, index) => (
             <div
               key={index}
               className={`option ${

@@ -4,7 +4,6 @@ import deleteFile from "../utils/deleteFile";
 
 export const createProduct = async (data, images, token) => {
   let image = await fileUpload(images, "products");
-console.log(data);
   await axios.post(
     "http://localhost:3001/products",
     {
@@ -25,7 +24,7 @@ console.log(data);
 export const getProduct = async () => {
   try {
     const response = await axios.get(
-      "https://karku-cosmetics-4dsy.vercel.app/products"
+      "http://localhost:3001/products"
     );
 
     return response.data;

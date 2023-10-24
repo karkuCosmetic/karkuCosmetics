@@ -6,7 +6,7 @@ const productSchema = new mongoose.Schema({
     required: true,
   },
   category: {
-    type: {},
+    type: Object,
     default: { primary: "", secondary: "" },
   },
   dimensions: {

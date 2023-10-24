@@ -4,7 +4,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 70%;
+  width: 80%;
   height: auto;
   background-color: #fefeff;
   margin-top: 3rem;
@@ -193,12 +193,12 @@
 }
 
 .ReactModal__Overlay {
-  background-color: rgba(0, 0, 0, 0.753);
+  background-color: rgba(0, 0, 0, 0.589) !important;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(3px);
 }
 
 .ReactModal__Body--open {

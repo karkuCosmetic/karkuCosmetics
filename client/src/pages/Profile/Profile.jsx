@@ -45,7 +45,7 @@ const Profile = () => {
   }, [token]);
 
   const callUserDetail = async (uid) => {
-    const info = await getUserDetail(uid,token);
+    const info = await getUserDetail(uid, token);
     setProfile(info);
     setDataUpdate({
       name: info.name,
@@ -128,59 +128,115 @@ const Profile = () => {
               </div>
             )}
 
-            {editing ? (
-              <div className="input-edit">
-                <label className="label-edit-profile" htmlFor="name">
-                  Nombre:
-                </label>
-                <input
-                  type="text"
-                  placeholder="Escribe aquí tu nombre"
-                  value={dataUpdate.name}
-                  name="name"
-                  onChange={handleChange}
-                />
-                <label className="label-edit-profile" htmlFor="lastName">
-                  Apellido:
-                </label>
-                <input
-                  type="text"
-                  placeholder="Escribe aquí tu apellido"
-                  value={dataUpdate.lastName}
-                  name="lastName"
-                  onChange={handleChange}
-                />
-                <label className="label-edit-profile" htmlFor="cellphone">
-                  Nuevo Número:
-                </label>
-                <input
-                  type="text"
-                  placeholder="Nuevo Número"
-                  value={dataUpdate.cellphone}
-                  name="cellphone"
-                  onChange={handleChange}
-                />
-              </div>
-            ) : (
-              <div className="info-user">
-                <h2>
-                  {profile.name} {profile.lastName}
-                </h2>
-                <p>Teléfono: {profile.phone}</p>
-                {profile.email && (
-                  <p>
-                    E-mail:{" "}
-                    {profile.email.length > 20
-                      ? profile.email.slice(0, 20) + "..."
-                      : profile.email}
-                  </p>
-                )}
-              </div>
-            )}
-            <button onClick={() => setEditing(!editing)}>
-              {editing ? "Cancelar" : "Editar"}
-            </button>
-            {editing && <button onClick={handleSave}>Guardar</button>}
+{editing ? (
+  <div className="input-edit">
+    <label className="label-edit-profile" htmlFor="name">
+      Nombre:
+    </label>
+    <input
+      type="text"
+      placeholder="Escribe aquí tu nombre"
+      value={dataUpdate.name}
+      name="name"
+      onChange={handleChange}
+    />
+    <label className="label-edit-profile" htmlFor="lastName">
+      Apellido:
+    </label>
+    <input
+      type="text"
+      placeholder="Escribe aquí tu apellido"
+      value={dataUpdate.lastName}
+      name="lastName"
+      onChange={handleChange}
+    />
+    <label className="label-edit-profile" htmlFor="cellphone">
+      Nuevo Número:
+    </label>
+    <input
+      type="text"
+      placeholder="Nuevo Número"
+      value={dataUpdate.cellphone}
+      name="cellphone"
+      onChange={handleChange}
+    />
+    <label className="label-edit-profile" htmlFor="callePrincipal">
+      Calle Principal:
+    </label>
+    <input
+      type="text"
+      placeholder="Calle Principal"
+      value={dataUpdate.adress?.callePrincipal}
+      name="adress.callePrincipal"
+      onChange={handleChange}
+    />
+    <label className="label-edit-profile" htmlFor="numero">
+      Número:
+    </label>
+    <input
+      type="text"
+      placeholder="Número"
+      value={dataUpdate.adress?.numero}
+      name="adress.numero"
+      onChange={handleChange}
+    />
+    <label className="label-edit-profile" htmlFor="piso">
+      Piso:
+    </label>
+    <input
+      type="text"
+      placeholder="Piso"
+      value={dataUpdate.adress?.piso}
+      name="adress.piso"
+      onChange={handleChange}
+    />
+    <label className="label-edit-profile" htmlFor="localidad">
+      Localidad:
+    </label>
+    <input
+      type="text"
+      placeholder="Localidad"
+      value={dataUpdate.adress?.localidad}
+      name="adress.localidad"
+      onChange={handleChange}
+    />
+    <label className="label-edit-profile" htmlFor="provincia">
+      Provincia:
+    </label>
+    <input
+      type="text"
+      placeholder="Provincia"
+      value={dataUpdate.adress?.provincia}
+      name="adress.provincia"
+      onChange={handleChange}
+    />
+  </div>
+) : (
+  <div className="info-user">
+    <h2>
+      {profile.name} {profile.lastName}
+    </h2>
+    <p>
+      Domicilio: {profile.adress?.callePrincipal}{" "}
+      {profile.adress?.numero} {profile.adress?.piso},{" "}
+      {profile.adress?.localidad} - {profile.adress?.provincia}
+    </p>
+
+    <p>Teléfono: {profile.phone}</p>
+    {profile.email && (
+      <p>
+        E-mail:{" "}
+        {profile.email.length > 20
+          ? profile.email.slice(0, 20) + "..."
+          : profile.email}
+      </p>
+    )}
+  </div>
+)}
+<button onClick={() => setEditing(!editing)}>
+  {editing ? "Cancelar" : "Editar"}
+</button>
+{editing && <button onClick={handleSave}>Guardar</button>}
           </div>
 
           <div className="purchase-history-card">
@@ -249,24 +305,135 @@ const Profile = () => {
             <span className="close-button" onClick={closePurchaseDetail}>
               <FontAwesomeIcon icon={faCircleXmark} />
             </span>
+            <div className="status-id-purchase">
+              Compra N°: {selectedPurchase.id}
+              Estado: {selectedPurchase.detailPay.status}
+            </div>
             <div className="item-detail">
-              {selectedPurchase.detailPay.items.map((item, index) => (
-                <div className="item-full" key={index}>
-                  <img
-                    src={item.picture_url}
-                    alt={item.title}
-                    className="item-image-detail"
-                  />
-                  <div className="item-title-detail">{item.title}</div>
-                  <div>x{item.quantity}</div>
-                  <div>${item.quantity * item.unit_price}</div>
-                </div>
-              ))}
               <div className="item-detail-container">
-                <div className="item-info-detail">Total: ${totalCompra}</div>
-                <div>Fecha: {formatDateModal(selectedPurchase.methodPay.datePay)}</div>
-                <div>Método de pago: {selectedPurchase.methodPay.cardType}</div>
-                <div>Estado de la compra: {selectedPurchase.detailPay.status}</div>
+                <div className="payment-detail-purchase">
+                  <div className="item-info-detail">
+                    <p>
+                      <strong>Total: </strong>
+                      {totalCompra}
+                    </p>
+                  </div>
+                  <div className="item-info-detail">
+                    <p>
+                      <strong>Fecha: </strong>
+                      {formatDateModal(selectedPurchase.methodPay.datePay)}
+                    </p>
+                  </div>
+                  <div className="item-info-detail">
+                    <p>
+                      <strong>Forma de pago: </strong>
+                      {selectedPurchase.methodPay.cardType}
+                    </p>
+                  </div>
+
+                  <div className="item-info-detail">
+                    <p>
+                      <strong>Finalizada en: </strong>
+                      ***{selectedPurchase.methodPay.last_four_digit}
+                    </p>
+                  </div>
+                </div>
+                {selectedPurchase && (
+                  <div className="modal">
+                    <div className="modal-content">
+                      <span
+                        className="close-button"
+                        onClick={closePurchaseDetail}
+                      >
+                        <FontAwesomeIcon icon={faCircleXmark} />
+                      </span>
+                      <div className="status-id-purchase">
+                        <p>
+                          <strong>Compra N°:</strong> {selectedPurchase.id}
+                        </p>
+                        <p>
+                          <strong>Estado:</strong>{" "}
+                          {selectedPurchase.detailPay.status}
+                        </p>
+                      </div>
+                      <div className="item-detail">
+                        <div className="item-detail-container">
+                          <div className="payment-detail-purchase">
+                            <div className="item-info-detail">
+                              <p>
+                                <strong>Total: $</strong> {totalCompra}
+                              </p>
+                            </div>
+                            <div className="item-info-detail">
+                              <p>
+                                <strong>Fecha: </strong>
+                                {formatDateModal(
+                                  selectedPurchase.methodPay.datePay
+                                )}
+                              </p>
+                            </div>
+                            <div className="item-info-detail">
+                              <p>
+                                <strong>Forma de pago: </strong>
+                                {selectedPurchase.methodPay.cardType}
+                              </p>
+                            </div>
+                            <div className="item-info-detail">
+                              <p>
+                                <strong>Finalizada en: </strong>
+                                ***{selectedPurchase.methodPay.last_four_digit}
+                              </p>
+                            </div>
+                          </div>
+                          <div className="products-full-container">
+                            <div className="products-totalPay-detailSale">
+                              <div className="detail-product-sale">
+                                <div className="product-header">
+                                  <strong>Producto/s:</strong>
+                                </div>
+                                {selectedPurchase.detailPay.items.map(
+                                  (item, index) => (
+                                    <div className="product" key={index}>
+                                      <p>{item.title}</p>
+                                    </div>
+                                  )
+                                )}
+                              </div>
+                            </div>
+                            <div className="products-totalPay-detailSale">
+                              <div className="detail-product-sale">
+                                <div className="product-header">
+                                  <strong>Cantidad:</strong>
+                                </div>
+                                {selectedPurchase.detailPay.items.map(
+                                  (item, index) => (
+                                    <div className="product" key={index}>
+                                      <p>x{item.quantity}</p>
+                                    </div>
+                                  )
+                                )}
+                              </div>
+                            </div>
+                            <div className="products-totalPay-detailSale">
+                              <div className="detail-product-sale">
+                                <div className="product-header">
+                                  <strong>Precio unitario:</strong>
+                                </div>
+                                {selectedPurchase.detailPay.items.map(
+                                  (item, index) => (
+                                    <div className="product" key={index}>
+                                      <p>$ {item.unit_price}</p>
+                                    </div>
+                                  )
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>

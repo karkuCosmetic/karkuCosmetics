@@ -66,6 +66,16 @@
   border-radius: 5px;
   object-fit: cover;
 }
+.showProduct-preview {
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-family: "jost";
+  cursor: pointer;
+  transition: width 0.3s ease;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
 
 .previewProduct-container li button {
   color: #fff;
@@ -86,13 +96,19 @@
   background-color: #b4507d;
 }
 
+.showProduct-preview {
+  background-color: #d99692;
+}
+
+.showProduct-preview:hover {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
 .previewProduct-container-buttons-delete:hover {
-  width: calc(40% + 15px);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .previewProduct-container-buttons-edit:hover {
-  width: calc(40% + 15px);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 

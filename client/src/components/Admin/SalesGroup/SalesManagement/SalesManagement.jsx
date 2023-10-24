@@ -199,11 +199,11 @@ const SalesManagement = ({ setSection }) => {
                       {" "}
                       <p>
                         <strong>Domicilio:</strong>{" "}
-                        {selectedSale.payer.adress.callePrincipal}{" "}
-                        {selectedSale.payer.adress.numero} - Piso{" "}
-                        {selectedSale.payer.adress.piso}.{" "}
-                        {selectedSale.payer.adress.localidad},{" "}
-                        {selectedSale.payer.adress.provincia}.
+                        {selectedSale.payer?.adress?.callePrincipal}{" "}
+                        {selectedSale.payer?.adress?.numero} - Piso{" "}
+                        {selectedSale.payer?.adress?.piso}.{" "}
+                        {selectedSale.payer?.adress?.localidad},{" "}
+                        {selectedSale.payer?.adress?.provincia}.
                       </p>
                     </div>
                   </div>

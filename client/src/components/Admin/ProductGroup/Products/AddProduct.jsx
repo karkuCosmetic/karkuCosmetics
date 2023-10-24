@@ -126,12 +126,6 @@ const selectCategory=()=>{
         <div>
           <label>Categoría:</label>
           <SelectCategoryProduct setProduct={setProduct} product={product}/>
-          {/* <input
-            type="text"
-            name="category"
-            value={product.category}
-            onChange={handleInputChange}
-          /> */}
         </div>
 
         <div className="image-upload-container">

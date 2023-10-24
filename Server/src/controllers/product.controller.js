@@ -76,7 +76,7 @@ export const DeleteProductById = async (req, res) => {
   }
 };
 
-export const getAllCategories = async (req,res) => {
+export const getAllCategories = async (req, res) => {
   try {
     let products = await Product.find();
     const categoriesPrimary = new Set(
@@ -88,14 +88,12 @@ export const getAllCategories = async (req,res) => {
     const uniqueCategoriesPrimary = Array.from(categoriesPrimary);
     const uniqueCategoriesSecondary = Array.from(categoriesSecondary);
 
-    return res
-      .status(200)
-      .json({
-        categories: {
-          primary: uniqueCategoriesPrimary,
-          secondary: uniqueCategoriesSecondary,
-        },
-      });
+    return res.status(200).json({
+      categories: {
+        primary: uniqueCategoriesPrimary,
+        secondary: uniqueCategoriesSecondary,
+      },
+    });
   } catch (error) {
     res.status(400).json(formatError(error.message));
   }

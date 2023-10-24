@@ -7,6 +7,7 @@ import { faSignOut } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { GetDecodedCookie } from "../../utils/DecodedCookie";
 import Swal from "sweetalert2";
+import Cookies from "js-cookie";
 
 const NavbarAdmin = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -37,18 +38,18 @@ const NavbarAdmin = () => {
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        document.cookie = encodeURIComponent("cookieToken") + "=" + "";
+        Cookies.remove("cookieToken");
         window.location.href = "/login";
       }
     });
   };
 
   return (
-    <nav className="navbar">
-      <div className="container">
-        <div className="navbar-left">
-          <Link to="/">
-            <img src={logoKarkuCircular} alt="Logo de Karku" className="logo" />
+    <div className="navbar-admin">
+      <div className="container-navbarAdmin">
+        <div className="navbarAdmin-left">
+          <Link to="/admin/home">
+            <img src={logoKarkuCircular} alt="Logo de Karku" className="logo-admin" />
           </Link>
         </div>
         <button
@@ -58,14 +59,11 @@ const NavbarAdmin = () => {
           <span className="menu-icon" />
         </button>
 
-        <nav className={`nav-links ${menuOpen ? "open" : ""}`}>
+        <nav className={`nav-links-admin ${menuOpen ? "open" : ""}`}>
           <NavLink to="/admin/home" exact className="active">
             Inicio
           </NavLink>
-          <NavLink to="/store" className="active">
-            Tienda
-          </NavLink>
-      
+
           <a href="#" onClick={handleLogout} alt="Cerrar Sesion">
             <FontAwesomeIcon icon={faSignOut} />
           </a>
@@ -75,7 +73,7 @@ const NavbarAdmin = () => {
         className={`overlay ${menuOpen ? "active" : ""}`}
         onClick={toggleMenu}
       />
-    </nav>
+    </div>
   );
 };
 
