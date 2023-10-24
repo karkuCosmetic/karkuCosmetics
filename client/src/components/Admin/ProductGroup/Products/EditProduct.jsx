@@ -7,6 +7,8 @@ import './EditProduct.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faTimes} from '@fortawesome/free-solid-svg-icons';
 import {GetDecodedCookie} from '../../../../utils/DecodedCookie';
+import SelectEditCategoryProduct
+  from '../../../SelectEditCategoryProduct/SelectEditCategoryProduct';
 
 const EditProduct = ({match, closeEditModal}) => {
   const [product, setProduct] = useState ({});
@@ -22,10 +24,7 @@ const EditProduct = ({match, closeEditModal}) => {
     const files = event.target.files;
     const selected = Array.from (files);
 
-    if (
-      selectedImages.length + selected.length>
-      maxImages
-    ) {
+    if (selectedImages.length + selected.length > maxImages) {
       alert (`Máximo ${maxImages} imágenes permitidas.`); //reemplazar este alert por sweetAlert
     } else {
       setSelectedImages (prevSelected => [...prevSelected, ...selected]); //hace el prev de las imagenes y las agrega si no hay mas de 5
@@ -41,11 +40,11 @@ const EditProduct = ({match, closeEditModal}) => {
   //----------------------- actualizar images---------------
   useEffect (() => {
     fetchingdetail ()
-    .then (data => {
-      setProduct (data.product);
-      setSelectedImages (data.product.image);
-    })
-    .catch ('error');
+      .then (data => {
+        setProduct (data.product);
+        setSelectedImages (data.product.image);
+      })
+      .catch ('error');
   }, []);
 
   const fetchingdetail = async () => {
@@ -77,7 +76,7 @@ const EditProduct = ({match, closeEditModal}) => {
   const closeModal = () => {
     closeEditModal ();
   };
-
+  console.log (product);
   return (
     <div className="form-updateProduct">
       <div className="container-close-btn">
@@ -132,14 +131,14 @@ const EditProduct = ({match, closeEditModal}) => {
         </div>
         <div>
           <label>Categoría:</label>
-          <input
-            type="text"
-            name="category"
-            value={product.category}
-            onChange={handleInputChange}
-          />
-        </div>
         
+          {product &&
+            <SelectEditCategoryProduct
+              product={product.category}
+              setProduct={setProduct}
+            />}
+
+        </div>
 
         <div
           className="image-upload-container"
@@ -153,16 +152,19 @@ const EditProduct = ({match, closeEditModal}) => {
             ref={inputRef}
             accept="image/*"
           />
-     
 
           <div style={{display: 'flex', width: '100%', gap: '15px'}}>
 
-             {selectedImages &&
+            {selectedImages &&
               selectedImages.map ((image, index) => (
                 <div>
 
                   <img
-                    src={typeof image==="string"? image : URL.createObjectURL (image)}
+                    src={
+                      typeof image === 'string'
+                        ? image
+                        : URL.createObjectURL (image)
+                    }
                     alt={`Image ${index}`}
                     style={{width: '100px', height: '100px'}}
                   />
@@ -173,7 +175,7 @@ const EditProduct = ({match, closeEditModal}) => {
                     X
                   </button>
                 </div>
-              ))} 
+              ))}
           </div>
         </div>
 

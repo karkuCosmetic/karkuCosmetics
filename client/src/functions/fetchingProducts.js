@@ -37,7 +37,7 @@ export const getProduct = async () => {
 export const getProductDetail = async (id) => {
   try {
     const response = await axios.get(
-      `https://karku-cosmetics-4dsy.vercel.app/products/${id}`
+      `http://localhost:3001/products/${id}`
     );
     return response.data;
   } catch (error) {
