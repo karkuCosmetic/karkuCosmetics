@@ -41,16 +41,6 @@ const ProductManagement = ({ setSection }) => {
     window.scrollTo(0, 0);
   }, []);
 
-  const handleAddProduct = async () => {
-    try {
-      const newProductData = await createProduct(newProduct);
-      setNewProduct("");
-      setProducts([...products, newProductData]);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   const handleDeleteProduct = (productId) => {
     MySwal.fire({
       title: "Confirmar Borrado",

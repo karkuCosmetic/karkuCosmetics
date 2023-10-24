@@ -1,42 +1,41 @@
 import axios from "axios";
+import sha1 from "js-sha1";
 
-const deleteFile = async (publicIdToDelete) => {
-  const cloudinaryApiKey = "592434557711317";
-  const cloudinaryApiSecret = "Qq8iB7UpfdwBK5NYosghUYWKwn8";
-
-  const url =
-    "https://res.cloudinary.com/dqai9sgfs/image/upload/v1697757530/karku/products/lhetniuylarbeedjqw1p.jpg";
-  const nombrearr = url.split("/");
-  const nombre = nombrearr[nombrearr.length - 1];
-  const imageUrlToDelete = nombre.split(".");
-
-  const cloudinaryUrl = `https://api.cloudinary.com/v1_1/dqai9sgfs/image/destroy?public_id=${imageUrlToDelete[0]}`;
-
-  try {
-    // const response = await fetch(cloudinaryUrl, {
-    //   method: "DELETE",
-    //   headers: {
-    //     Authorization: `Basic ${btoa(
-    //       `${cloudinaryApiKey}:${cloudinaryApiSecret}`
-    //     )}`,
-    //   },
-    // });
-    const response= await axios.delete(cloudinaryUrl,{headers: {
-             Authorization: `Basic ${btoa(
-               `${cloudinaryApiKey}:${cloudinaryApiSecret}`
-             )}`
-           }})
-
-    if (response.ok) {
-      const data = await response.json();
-      console.log("Imagen eliminada:", data);
-      // Realiza alguna acción después de la eliminación, como actualizar la interfaz de usuario.
-    } else {
-      console.error("Error al eliminar la imagen:", response.status);
-    }
-  } catch (error) {
-    console.error("Error al eliminar la imagen:", error);
-  }
+const generateSignature = (publicId, apiSecret) => {
+  const timestamp = new Date().getTime();
+  const signatureData = `public_id=${publicId}&timestamp=${timestamp}${apiSecret}`;
+  const signature = sha1(signatureData);
+  return signature;
 };
+  
+  const deleteFile = async (publicIdToDelete) => {
+    const urlimg =
+      "https://res.cloudinary.com/dqai9sgfs/image/upload/v1697827491/karku/products/axcfao9axlvnghkbf45s.jpg";
+    const nombrearr = urlimg.split("/");
+    const nombre = nombrearr[nombrearr.length - 1];
+    const imageUrlToDelete = nombre.split(".");
+    const publicId = imageUrlToDelete[0];
+  
+    const cloudName = "dqai9sgfs";
+    const timestamp = new Date().getTime();
+    const apiKey = "592434557711317";
+    const apiSecret = "Qq8iB7UpfdwBK5NYosghUYWKwn8";
+    const signature = generateSignature(publicId, apiSecret);
+    const url = `https://api.cloudinary.com/v1_1/${cloudName}/image/destroy`;
+  
+    try {
+      const response = await axios.delete(url, {
+        public_id: publicId,
+        signature: signature,
+        api_key: apiKey,
+        timestamp: timestamp,
+      });
+  
+      console.error(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
 
 export default deleteFile;

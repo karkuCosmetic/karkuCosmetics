@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./Store.css";
 import Navbar from "../../components/NavBar/navbar";
-import { getProduct } from "../../functions/fetchingProducts";
+import { getAllCategories, getProduct } from "../../functions/fetchingProducts";
 import { AddCart } from "../../utils/addCart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
@@ -22,10 +22,16 @@ const Store = () => {
   const { id } = useParams();
   const [isSelectOpen, setIsSelectOpen] = useState(false);
 
+const [categories,setCategories] = useState({
+  primary:["Todos"],
+  secondary:["Todos"]
+
+}) 
   useEffect(() => {
     CallProducts();
     window.scrollTo(0, 0);
   }, [id]);
+
 
   const handleQuantityChange = (product, amount) => {
     const updatedProducts = dataProducts.map((p) => {
@@ -57,12 +63,19 @@ const Store = () => {
 
   const CallProducts = async () => {
     const data = await getProduct();
-
     const productsWithQuantity = data.map((product) => ({
       ...product,
       quantity: 1,
     }));
     SetDataProducts(productsWithQuantity);
+    await getAllCategories().then(data=>{
+      setCategories({...categories,
+        primary:[...categories.primary,...data.categories.primary],
+        secondary:[...categories.secondary,...data.categories.secondary]
+      });
+    })
+   
+  
   };
 
   const handlePriceFilter = () => {
@@ -90,17 +103,13 @@ const Store = () => {
   const filteredProductsByCategory =
     selectedCategory === "Todos"
       ? dataProducts
-      : dataProducts.filter((product) => product.category === selectedCategory);
+      : dataProducts.filter((product) => product?.category?.primary === selectedCategory || product?.category?.secondary === selectedCategory);
 
   useEffect(() => {
     setFilteredProducts(filteredProductsByCategory);
     setCurrentPage(1);
-  }, [filteredProductsByCategory, selectedCategory]);
+  }, [dataProducts,selectedCategory]);
 
-  const TodosCategories = [
-    "Todos",
-    ...new Set(dataProducts.map((product) => product.category)),
-  ];
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -118,6 +127,7 @@ const Store = () => {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+
   return (
     <>
       <div className="page-container">
@@ -130,14 +140,29 @@ const Store = () => {
               <h2 className="sidebar-categories">Categorías</h2>
               <div className="render-select">
                 <RenderSelect
-                  TodosCategories={TodosCategories}
+                  TodosCategories={categories.primary}
                   selectedCategory={selectedCategory}
                   setSelectedCategory={setSelectedCategory}
                   setIsSelectOpen={setIsSelectOpen}
                 />
               </div>
               <ul>
-                {TodosCategories.map((category, index) => (
+                <span>Principales</span>
+
+                {categories.primary.map((category, index) => (
+                  
+                  <li
+                    key={index}
+                    className={selectedCategory === category ? "active" : ""}
+                    onClick={() => setSelectedCategory(category)}
+                  >
+                    {category}
+                  </li>
+                ))}
+              </ul>
+              <ul>
+              <span>Secundarias</span>
+                {categories.secondary.map((category, index) => (
                   <li
                     key={index}
                     className={selectedCategory === category ? "active" : ""}

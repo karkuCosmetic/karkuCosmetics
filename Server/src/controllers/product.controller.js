@@ -55,7 +55,7 @@ export const UpdateProductById = async (req, res) => {
         price,
         dimensions,
         stock,
-        image:image,
+        image: image,
       },
       { new: true }
     );
@@ -71,6 +71,29 @@ export const DeleteProductById = async (req, res) => {
     await Product.findByIdAndRemove(id);
 
     return res.status(200).json("producto eliminado");
+  } catch (error) {
+    res.status(400).json(formatError(error.message));
+  }
+};
+
+export const getAllCategories = async (req, res) => {
+  try {
+    let products = await Product.find();
+    const categoriesPrimary = new Set(
+      products.map((el) => el.category.primary)
+    );
+    const categoriesSecondary = new Set(
+      products.map((el) => el.category.secondary)
+    );
+    const uniqueCategoriesPrimary = Array.from(categoriesPrimary);
+    const uniqueCategoriesSecondary = Array.from(categoriesSecondary);
+
+    return res.status(200).json({
+      categories: {
+        primary: uniqueCategoriesPrimary,
+        secondary: uniqueCategoriesSecondary,
+      },
+    });
   } catch (error) {
     res.status(400).json(formatError(error.message));
   }
