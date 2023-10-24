@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import "./SelectCategoryProduct.css";
 import { getAllCategories } from "../../functions/fetchingProducts";
+import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 
 const SelectCategoryProduct = ({ setProduct }) => {
   const [isOpenPrimary, setIsOpenPrimary] = useState(false);
@@ -67,7 +67,6 @@ const SelectCategoryProduct = ({ setProduct }) => {
       },
     }));
     setIsOpenPrimary(false);
-    setSelectedOptionSecondary("");
   };
 
   const toggleSelect = () => {
