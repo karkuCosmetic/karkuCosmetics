@@ -24,7 +24,7 @@ export const createProduct = async (req, res) => {
 export const GetAllProduct = async (req, res) => {
   try {
     let products = await Product.find();
-    return res.status(200).json(products);
+    return res.status(200).json(products.reverse());
   } catch (error) {
     res.status(400).json(formatError(error.message));
   }

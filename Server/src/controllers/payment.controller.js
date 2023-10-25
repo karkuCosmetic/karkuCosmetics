@@ -16,44 +16,56 @@ export const createOrder = async (req, res) => {
 
     const user = await User.findById(id);
 
-    mercadopago.configure({
-      access_token: process.env.ACCESS_TOKEN,
-    });
+    if (
+      user.adress.callePrincipal !== "" &&
+      user.adress.provincia !== "" &&
+      user.adress.localidad !== "" &&
+      user.adress.codigoPostal !== "" &&
+      user.adress.numero !== "" &&
+      user.adress.piso !== ""
+    ) {
+      mercadopago.configure({
+        access_token: process.env.ACCESS_TOKEN,
+      });
 
-    const items = data.map((producto) => {
-      return {
-        title:
-          producto.product.title[0].toUpperCase() +
-          producto.product.title.slice(1),
-        quantity: producto.quantity,
-        currency_id: "ARS",
-        unit_price: producto.product.price,
-        picture_url: producto.product.image[0],
+      const items = data.map((producto) => {
+        return {
+          title:
+            producto.product.title[0].toUpperCase() +
+            producto.product.title.slice(1),
+          quantity: producto.quantity,
+          currency_id: "ARS",
+          unit_price: producto.product.price,
+          picture_url: producto.product.image[0],
+        };
+      });
+
+      // phone: user.phone,
+      let preference = {
+        items: items,
+        payer: {
+          first_name: user.name,
+          last_name: user.lastName,
+          email: user.email,
+          address: user.adress,
+        },
+        back_urls: {
+          success: "http://localhost:3000/store",
+          failure: "http://localhost:3000/cart",
+          pending: "http://localhost:3000/store",
+        },
+        notification_url:
+          "https://459mjx2v-3001.brs.devtunnels.ms/payment/webhook",
       };
-    });
 
-    // phone: user.phone,
-    let preference = {
-      items: items,
-      payer: {
-        first_name: user.name,
-        last_name: user.lastName,
-        email: user.email,
-        address: user.adress,
-      },
-      back_urls: {
-        success: "http://localhost:3000/store",
-        failure: "http://localhost:3000/cart",
-        pending: "http://localhost:3000/store",
-      },
-      notification_url: "https://459mjx2v-3001.brs.devtunnels.ms/payment/webhook",
-    };
+      const result = await mercadopago.preferences.create(preference);
 
-    const result = await mercadopago.preferences.create(preference);
-
-    res.send(result.response.init_point);
+      res.send(result.response.init_point);
+    } else {
+      throw new Error("Email no verificado");
+    }
   } catch (error) {
-    console.log(error);
+    res.status(400).json(formatError(error.message));
   }
 };
 
@@ -93,7 +105,6 @@ export const reciveWebhook = async (req, res) => {
       currentDate.setHours(currentDate.getHours() + timeZoneOffset);
       //ajustar fecha
 
-
       //obtener el id de quien compro
       let emailUser = data.response.payer.email;
 
@@ -108,11 +119,11 @@ export const reciveWebhook = async (req, res) => {
         userId: user._id,
         payer: {
           name: user.name,
-          lastName:user.lastName,
+          lastName: user.lastName,
           DNI: data.response.card.cardholder.identification.number,
           phonePerson: user.phone,
           email: data.response.payer.email,
-          address:user.adress
+          address: user.adress,
         },
         methodPay: {
           cardType: data.body.payment_method_id,
@@ -126,7 +137,6 @@ export const reciveWebhook = async (req, res) => {
           status: "pendiente",
         },
       };
-
 
       if (data) {
         const query = { email: informationPayment.payer.email };
@@ -160,5 +170,3 @@ export const reciveWebhook = async (req, res) => {
     res.status(400).json(formatError(error.message));
   }
 };
-
-

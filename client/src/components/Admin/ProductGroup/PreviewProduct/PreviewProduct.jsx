@@ -22,7 +22,7 @@ const PreviewProduct = ({setSection}) => {
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState (false);
   const [selectedProductDetails, setSelectedProductDetails] = useState (null);
   const MySwal = withReactContent (Swal);
-console.log(products);
+
   const token = GetDecodedCookie ('cookieToken');
   useEffect (() => {
     getProduct ()
