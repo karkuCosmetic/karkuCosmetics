@@ -8,15 +8,16 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background-image: url(../../assets/bgContact.png);
+  /* background-image: url(../../assets/AssetsHome/bgContact.png); */
+  background-image: url(../../assets/bgStore2.png);
   background-size: cover;
   background-repeat: no-repeat;
   padding: 1.5rem;
   height: 90vh;
 }
 
-@media (max-width: 400px){
-  .contact-container{
+@media (max-width: 400px) {
+  .contact-container {
     height: 85vh;
   }
 }
@@ -24,13 +25,15 @@ body {
 .contact-container p {
   display: flex;
   flex-wrap: wrap;
-  font-family: "Quicksand";
-  background-color: #7b60c8;
+  font-family: "jost";
+  font-size: 21px;
+  background-color: #f2ffd9;
   max-width: 50rem;
   margin-top: 1rem;
   padding: 1rem;
   border-radius: 15px;
-  color: white;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+  rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
 
 @media screen and (max-width: 400px) {
@@ -48,10 +51,10 @@ body {
   text-align: left;
   width: 100%;
   max-width: 30rem;
-  padding: 1rem;
+  padding: 2rem;
   margin-bottom: 3rem;
   margin-top: 2rem;
-  background-color: #7b60c8;
+  background-color: #f2ffd9;
   border-radius: 10px;
   box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
     rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
@@ -65,7 +68,8 @@ body {
     text-align: left;
     margin-bottom: 2rem;
     margin-top: 2rem;
-    background-color: #7b60c8;
+    padding: 1rem;
+    background-color: #f2ffd9;
     border-radius: 10px;
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
       rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
@@ -75,10 +79,8 @@ body {
 label {
   display: block;
   margin-bottom: 5px;
-  color: white;
   font-weight: bold;
-  font-family: "quicksand";
-  border: none;
+  font-family: "jost";
 }
 
 textarea:focus {
@@ -96,15 +98,15 @@ textarea {
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 12px;
-  font-family: "quicksand";
+  font-family: "jost";
   font-style: italic;
   resize: none;
-  border: none;
+  border: 1px solid #619d52;
 }
 
 input[type="submit"] {
-  background-color: #7b60c8;
-  border: 1px solid white;
+  background-color: #619d52;
+  border: none;
   color: #fff;
   padding: 10px 20px;
   border-radius: 5px;
@@ -112,14 +114,12 @@ input[type="submit"] {
   cursor: pointer;
   transition: background-color 0.3s;
   font-weight: bold;
-  font-family: "quicksand";
+  font-family: "jost";
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 input[type="submit"]:hover {
-  background-color: #f38f82;
-  border: 1px solid #f38f82;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
-    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 
 @media screen and (max-width: 480px) {
@@ -142,4 +142,22 @@ input[type="submit"]:hover {
   font-size: 16px;
   font-family: "quicksand";
   color: #7b60c8;
+}
+
+/* COLORES USER */
+
+.color1 {
+  color: #317d24;
+}
+.color2 {
+  color: #619d52;
+}
+.color3 {
+  color: #91be7f;
+}
+.color4 {
+  color: #c2deac;
+}
+.color5 {
+  color: #f2ffd9;
 }
