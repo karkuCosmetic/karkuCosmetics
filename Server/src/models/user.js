@@ -51,10 +51,6 @@ const userSchema = new mongoose.Schema({
       piso: "",
     },
   },
-  dni: {
-    type: Number,
-    default: null,
-  },
   admission: {
     type: Date,
   },

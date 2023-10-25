@@ -17,6 +17,9 @@ export const createOrder = async (req, res) => {
     const user = await User.findById(id);
 
     if (
+      user.adress.name !== "" &&
+      user.adress.lastName !== "" &&
+      user.adress.phone !== "" &&
       user.adress.callePrincipal !== "" &&
       user.adress.provincia !== "" &&
       user.adress.localidad !== "" &&

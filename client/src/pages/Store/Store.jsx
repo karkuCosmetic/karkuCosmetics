@@ -26,6 +26,8 @@ const Store = () => {
     primary: ['Todos'],
     secondary: ['Todos'],
   });
+
+ 
   useEffect (
     () => {
       CallProducts ();
@@ -114,20 +116,24 @@ const Store = () => {
         return primaryMatch && secondaryMatch;
       });
       setFilteredProducts (filteredProductsByCategory);
-
       setCurrentPage (1);
     },
     [dataProducts, selectedCategory]
-  );
+    );
+    
+    const indexOfLastProduct = currentPage * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    
+    const currentProducts = filteredProducts.slice (
+      indexOfFirstProduct,
+      indexOfLastProduct
+      );
+      
+      useEffect(()=>{
+      // setCategories({...categories,secondary:filteredProducts?.category?.secondary})
 
-  const indexOfLastProduct = currentPage * productsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-
-  const currentProducts = filteredProducts.slice (
-    indexOfFirstProduct,
-    indexOfLastProduct
-  );
-
+},[categories,filteredProducts])
+    
   const navigate = useNavigate ();
 
   const redirectToProductDetail = productId => {
@@ -135,7 +141,6 @@ const Store = () => {
   };
 
   const paginate = pageNumber => setCurrentPage (pageNumber);
-
   return (
     <>
       <div className="page-container">
@@ -181,7 +186,7 @@ const Store = () => {
               </ul>
               <ul>
                 <span>Secundarias</span>
-                {categories.secondary.map ((category, index) => (
+                {categories?.secondary?.map ((category, index) => (
                   <li
                     key={index}
                     className={selectedCategory === category ? 'active' : ''}
@@ -193,7 +198,8 @@ const Store = () => {
                   >
                     {category}
                   </li>
-                ))}
+                ))
+              }
               </ul>
               <div className="price-filter">
                 <h3 className="h3-store">Precio</h3>
