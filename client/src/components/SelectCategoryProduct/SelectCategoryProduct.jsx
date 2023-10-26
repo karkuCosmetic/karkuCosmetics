@@ -186,7 +186,7 @@ const SelectCategoryProduct = ({setProduct}) => {
               onClick={toggleSelectCategories}
             >
               <div className="selected-option-preview">
-                <span>{selectedOptionCategories}</span>
+                <span>{selectedOptionCategories==="primary"?"Primaria":"Secundaria"}</span>
                 <FontAwesomeIcon
                   icon={isOpenCategories ? faCaretUp : faCaretDown}
                   className="arrow"

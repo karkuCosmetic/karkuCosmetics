@@ -96,6 +96,7 @@ const selectCategory=()=>{
             name="dimensions"
             value={product.dimensions}
             onChange={handleInputChange}
+            placeholder='ML/CC/CM/UNIDAD'
           />
         </div>
         <div>
