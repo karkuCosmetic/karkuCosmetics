@@ -39,7 +39,7 @@
   gap: 1.5rem;
   align-items: center;
   background-color: #f3f3f3;
-  border: 1px solid #ddd;
+  border: 1px solid #317d24;
   border-radius: 10px;
   padding: 1rem;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
@@ -90,7 +90,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #ff7504;
+  background-color: #ff0404;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -206,7 +206,7 @@
   margin-bottom: 3rem;
   margin-top: 3rem;
   border-radius: 10px;
-  border: 1px solid #4caf50;
+  border: 1px solid  #317d24;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
@@ -236,7 +236,7 @@
 }
 
 .checkout-button {
-  background-color: #4caf50;
+  background-color: #317d24;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -267,7 +267,7 @@
     width: 100%;
     align-items: center;
     background-color: #f3f3f3;
-    border: 1px solid #ddd;
+    border: 1px solid #317d24;
     border-radius: 10px;
     padding: 0.5rem;
     gap: 0rem;
@@ -413,6 +413,7 @@
   background-color: #f3f3f3;
   border: 0;
   border-radius: 10px;
+  border: 1px solid  #317d24;
   box-sizing: border-box;
   margin-top: 1rem;
   color: #111827;
@@ -442,4 +443,23 @@
 
 .empty-cart-button:focus-visible {
   box-shadow: none;
+}
+
+
+/* COLORES USER */
+
+.color1 {
+  color: #317d24;
+}
+.color2 {
+  color: #619d52;
+}
+.color3 {
+  color: #91be7f;
+}
+.color4 {
+  color: #c2deac;
+}
+.color5 {
+  color: #f2ffd9;
 }

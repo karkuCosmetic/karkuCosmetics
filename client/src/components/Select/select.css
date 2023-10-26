@@ -1,7 +1,7 @@
 .custom-select {
   position: relative;
   width: 12rem;
-  border: 1px solid #f38f82;
+  border: 1px solid#317d24;
   border-radius: 5px;
   cursor: pointer;
   user-select: none;
@@ -28,7 +28,7 @@
 }
 
 .selected-option svg {
-  color: #f38f82;
+  color: #317d24;
   transition: transform 0.2s;
 }
 
@@ -36,7 +36,7 @@
   position: absolute;
   width: 100%;
   background-color: #fff;
-  border: 1px solid #f38f82;
+  border: 1px solid#317d24;
   border-radius: 0 0 5px 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -52,11 +52,30 @@
 }
 
 .option:hover {
-  background-color: #f38f82;
-  color: #fff;
+  background-color: #c2deac;
+  color: #000000;
 }
 
 .option.selected {
-  background-color: #f38f82;
+  background-color:#91be7f;
   color: #fff;
 }
+
+/* COLORES USER */
+
+.color1 {
+  color: #317d24;
+}
+.color2 {
+  color: #619d52;
+}
+.color3 {
+  color: #91be7f;
+}
+.color4 {
+  color: #c2deac;
+}
+.color5 {
+  color: #f2ffd9;
+}
+

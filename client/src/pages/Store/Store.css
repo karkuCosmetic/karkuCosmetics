@@ -31,7 +31,6 @@
   width: 15rem;
   height: 100%;
   background-color: #f8f8f8;
-  padding: 1.5rem;
   box-sizing: border-box;
   position: fixed;
   left: 0;
@@ -43,18 +42,29 @@
 
 .sidebar ul li {
   cursor: pointer;
-  margin: 10px;
   list-style-type: none;
 }
 
+.sidebar ul li{
+  padding-left: 3rem;
+}
+
+ span{
+  width: 100%;
+  padding-left: 1.5rem;
+  font-weight: bold;
+  background-color: #317d24;
+  color: white;
+
+}
 .sidebar ul li.active {
   font-weight: bold;
-  color: #f38f82;
   list-style-type: none;
 }
 
 .sidebar-categories {
   font-size: 20px;
+  padding: 1rem;
 }
 
 .input-searchItem-sidebar {
@@ -237,9 +247,9 @@ a {
 
 .btn-see-more {
   background-color: #f8f8f8;
-  border: 1px solid #f38f82;
+  border: 1px solid #619d52;
   border-radius: 25px;
-  color: #f38f82;
+  color: #619d52;
   cursor: pointer;
   display: inline-block;
   font-family: "quicksand";
@@ -285,7 +295,7 @@ a {
 }
 
 .add-to-cart-button-store {
-  background-color: #f38f82;
+  background-color: #619d52;
   border: 0;
   border-radius: 25px;
   color: #ffffff;
@@ -348,7 +358,7 @@ a {
 }
 
 .button-filtrar {
-  background-color: #f38f82;
+  background-color: #619d52;
   border: 0;
   border-radius: 10px;
   color: #ffffff;
@@ -410,9 +420,11 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 95%;
   margin-top: 0.5rem;
   font-family: "quicksand";
   z-index: 1;
+  gap: 1rem;
 }
 
 .hidden-select {
@@ -535,7 +547,7 @@ a {
 
 .input-price-store[type="number"] {
   padding: 0.3rem;
-  border: 1px solid #f38f82;
+  border: 1px solid #317d24;
   border-radius: 5px;
   font-size: 12px;
   font-family: "figtree";
@@ -568,6 +580,14 @@ a {
     justify-content: center;
     align-items: center;
   }
+
+  ul span {
+    display: none;
+  }
+}
+
+ul {
+  font-family: "figtree";
 }
 
 .store-container.blur {
@@ -591,4 +611,22 @@ a {
 .title-add-to-cart {
   font-size: 20px;
   color: green;
+}
+
+/* COLORES USER */
+
+.color1 {
+  color: #317d24;
+}
+.color2 {
+  color: #619d52;
+}
+.color3 {
+  color: #91be7f;
+}
+.color4 {
+  color: #c2deac;
+}
+.color5 {
+  color: #f2ffd9;
 }

@@ -1,6 +1,6 @@
 .navbar {
-  background-color: #f38f82;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color:#91be7f;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   position: sticky;
   top: 0;
   z-index: 999;
@@ -131,7 +131,6 @@
     margin: 0 auto;
     transform: translateY(-20px);
     opacity: 0;
-    background-color: #f38f82;
     border-radius: 10px;
     width: 20rem;
     padding: 1rem;
@@ -205,4 +204,23 @@
 
 .overlay.active {
   display: block;
+}
+
+
+/* COLORES USER */
+
+.color1 {
+  color: #317d24;
+}
+.color2 {
+  color: #619d52;
+}
+.color3 {
+  color: #91be7f;
+}
+.color4 {
+  color: #c2deac;
+}
+.color5 {
+  color: #f2ffd9;
 }
