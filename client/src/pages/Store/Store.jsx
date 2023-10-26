@@ -27,7 +27,6 @@ const Store = () => {
     secondary: ['Todos'],
   });
 
- 
   useEffect (
     () => {
       CallProducts ();
@@ -119,21 +118,24 @@ const Store = () => {
       setCurrentPage (1);
     },
     [dataProducts, selectedCategory]
-    );
-    
-    const indexOfLastProduct = currentPage * productsPerPage;
-    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-    
-    const currentProducts = filteredProducts.slice (
-      indexOfFirstProduct,
-      indexOfLastProduct
-      );
-      
-      useEffect(()=>{
-      // setCategories({...categories,secondary:filteredProducts?.category?.secondary})
+  );
 
-},[categories,filteredProducts])
-    
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+
+  const currentProducts = filteredProducts.slice (
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+
+  useEffect (
+    () => {
+      let secundaria = filteredProducts.map (el => el.category.secondary);
+      setCategories ({...categories, secondary: ['Todos', ...secundaria]});
+    },
+    [filteredProducts, selectedCategory]
+  );
+
   const navigate = useNavigate ();
 
   const redirectToProductDetail = productId => {
@@ -142,7 +144,7 @@ const Store = () => {
 
   const paginate = pageNumber => setCurrentPage (pageNumber);
   return (
-    <>
+    <div>
       <div className="page-container">
         <div className="navbar-store">
           <Navbar />
@@ -152,20 +154,20 @@ const Store = () => {
             <div className="sidebar">
               <h2 className="sidebar-categories">Categorías</h2>
               <div className="render-select">
-          
-                 <RenderSelect
-                 categories={categories}
-                 selectedCategory={selectedCategory}
-                 setSelectedCategory={setSelectedCategory}
-                 isPrimary={true}
-                 />
+
                 <RenderSelect
-                categories={categories}
-                selectedCategory={selectedCategory}
-                setSelectedCategory={setSelectedCategory}
-                isPrimary={false}
+                  categories={categories}
+                  selectedCategory={selectedCategory}
+                  setSelectedCategory={setSelectedCategory}
+                  isPrimary={true}
                 />
-              
+                <RenderSelect
+                  categories={categories}
+                  selectedCategory={selectedCategory}
+                  setSelectedCategory={setSelectedCategory}
+                  isPrimary={false}
+                />
+
               </div>
               <ul>
                 <span>Principales</span>
@@ -173,7 +175,9 @@ const Store = () => {
                 {categories.primary.map ((category, index) => (
                   <li
                     key={index}
-                    className={selectedCategory === category ? 'active' : ''}
+                    className={
+                      selectedCategory.primary === category ? 'active' : ''
+                    }
                     onClick={() =>
                       setSelectedCategory ({
                         ...selectedCategory,
@@ -186,10 +190,12 @@ const Store = () => {
               </ul>
               <ul>
                 <span>Secundarias</span>
-                {categories?.secondary?.map ((category, index) => (
+                {categories.secondary.map ((category, index) => (
                   <li
                     key={index}
-                    className={selectedCategory === category ? 'active' : ''}
+                    className={
+                      selectedCategory.secondary === category ? 'active' : ''
+                    }
                     onClick={() =>
                       setSelectedCategory ({
                         ...selectedCategory,
@@ -198,8 +204,7 @@ const Store = () => {
                   >
                     {category}
                   </li>
-                ))
-              }
+                ))}
               </ul>
               <div className="price-filter">
                 <h3 className="h3-store">Precio</h3>
@@ -319,7 +324,7 @@ const Store = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
