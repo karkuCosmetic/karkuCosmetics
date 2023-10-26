@@ -40,22 +40,53 @@
     rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
 }
 
+.ul-categories {
+  padding-top: 1rem;
+}
+
 .sidebar ul li {
   cursor: pointer;
   list-style-type: none;
 }
 
-.sidebar ul li{
+.sidebar ul li {
   padding-left: 3rem;
 }
 
- span{
+span {
   width: 100%;
   padding-left: 1.5rem;
   font-weight: bold;
   background-color: #317d24;
   color: white;
+}
 
+.title-categories-sidebar {
+  display: flex;
+  width: 100%;
+  background-color: #317d24;
+  color: white;
+  font-family: "figtree";
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  padding: 0.3rem;
+}
+.title-categories-sidebar p {
+  padding-left: 2rem;
+}
+
+.title-subcategories-sidebar {
+  display: flex;
+  width: 100%;
+  background-color: #317d24;
+  color: white;
+  font-family: "figtree";
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  padding: 0.3rem;
+}
+.title-subcategories-sidebar p {
+  padding-left: 2rem;
 }
 .sidebar ul li.active {
   font-weight: bold;
