@@ -18,10 +18,10 @@ const SelectCategoryProduct = ({ setProduct }) => {
   const [selectedOptionSecondary, setSelectedOptionSecondary] = useState("");
   const [catSecondary, setCatSecondary] = useState([
     "Shampoo",
-    "Acondicionado",
+    "Acondicionador",
     "Oleo",
     "Crema",
-    "desodorante",
+    "Desodorante",
     "Jabon",
     "Sal",
     "Bomba",
@@ -158,11 +158,11 @@ const SelectCategoryProduct = ({ setProduct }) => {
           {isOpenSecondary && (
             <div className="options-preview">
               {catSecondary
-                .filter(
-                  (category) =>
-                    !selectedOptionPrimary ||
-                    category.includes(selectedOptionPrimary)
-                )
+                // .filter(
+                //   (category) =>
+                //     !selectedOptionPrimary ||
+                //     category.includes(selectedOptionPrimary)
+                // )
                 .map((option, index) => (
                   <div
                     key={index}
