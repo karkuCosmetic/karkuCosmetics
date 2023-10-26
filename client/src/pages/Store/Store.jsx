@@ -128,13 +128,10 @@ const Store = () => {
     indexOfLastProduct
   );
 
-  useEffect (
-    () => {
-      let secundaria = filteredProducts.map (el => el.category.secondary);
-      setCategories ({...categories, secondary: ['Todos', ...secundaria]});
-    },
-    [filteredProducts, selectedCategory]
-  );
+  useEffect(() => {
+    let secundaria = new Set(filteredProducts.map(el => el.category.secondary));
+    setCategories({ ...categories, secondary: ['Todos', ...secundaria] });
+  }, [filteredProducts, selectedCategory]);
 
   const navigate = useNavigate ();
 
