@@ -4,10 +4,11 @@ import "./Cart.css";
 import { Payment } from "../../functions/payment";
 import Footer from "../../components/Footer/footer";
 import { GetDecodedCookie } from "../../utils/DecodedCookie";
+import { Link, useLocation } from "react-router-dom";
 
 export const Cart = () => {
   const token = GetDecodedCookie("cookieToken");
-
+  const location = useLocation();
   const [cart, SetCart] = useState(
     JSON.parse(localStorage.getItem("cart")) || []
   );
@@ -56,15 +57,15 @@ export const Cart = () => {
       <Navbar />
       <div className="cart-full">
         <div className="cart-container">
-          {
-            cart[0]?
-          <>
-            <button className="empty-cart-button" onClick={handleEmptyCart}>
-            Vaciar Carrito
-          </button>
-          </>
-              :""
-        }
+          {cart[0] ? (
+            <>
+              <button className="empty-cart-button" onClick={handleEmptyCart}>
+                Vaciar Carrito
+              </button>
+            </>
+          ) : (
+            ""
+          )}
           <div className="cart-items">
             {cart.map((item, index) => (
               <div key={index} className="cart-item">
@@ -120,9 +121,10 @@ export const Cart = () => {
         <div className="cart-summary">
           <p className="total-label">Total:</p>
           <p className="total-amount">${calculateTotal().toFixed(2)}</p>
-          <button className="checkout-button" onClick={handlePayment}>
+          <Link to="/shipping">Continuar compra</Link>
+          {/* <button className="checkout-button" onClick={handlePayment}>
             Ir a Pagar
-          </button>
+          </button> */}
         </div>
       </div>
       <Footer />

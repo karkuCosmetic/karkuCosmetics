@@ -5,7 +5,11 @@ import Navbar from "../../components/NavBar/navbar";
 import { getAllCategories, getProduct } from "../../functions/fetchingProducts";
 import { AddCart } from "../../utils/addCart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowLeft,
+  faArrowRight,
+  faSearch,
+} from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import RenderSelect from "../../components/Select/select";
@@ -21,6 +25,8 @@ const Store = () => {
   const [quantity, setQuantity] = useState(1);
   const { id } = useParams();
   const [isSelectOpen, setIsSelectOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
   const [categories, setCategories] = useState({
     primary: ["Todos"],
@@ -49,7 +55,7 @@ const Store = () => {
 
     Swal.fire({
       position: "top",
-      title: "Producto agregado a carrito",
+      title: "Producto agregado al carrito",
       showConfirmButton: false,
       timer: 150000000,
       customClass: {
@@ -66,6 +72,7 @@ const Store = () => {
       ...product,
       quantity: 1,
     }));
+
     SetDataProducts(productsWithQuantity);
     await getAllCategories().then((data) => {
       setCategories({
@@ -74,6 +81,20 @@ const Store = () => {
         secondary: [...categories.secondary, ...data.categories.secondary],
       });
     });
+  };
+
+  const handleSearchInputChange = (e) => {
+    setSearchQuery(e.target.value.toLowerCase());
+  };
+
+  const handleSearch = () => {
+    console.log("Search query: ", searchQuery);
+    const query = searchQuery.toLowerCase();
+    const filteredProducts = dataProducts.filter((product) =>
+      product.title.toLowerCase().includes(query)
+    );
+    setSearchResults(filteredProducts);
+    setCurrentPage(1);
   };
 
   const handlePriceFilter = () => {
@@ -136,6 +157,7 @@ const Store = () => {
   };
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <div>
       <div className="page-container">
@@ -145,6 +167,20 @@ const Store = () => {
         <div className={`store-container ${isSelectOpen ? "blur" : ""}`}>
           <div className="product-container">
             <div className="sidebar">
+              <div className="searchBar-filter">
+                <input
+                  className="input-searchBar-store"
+                  type="text"
+                  placeholder="Buscar por nombre..."
+                  value={searchQuery}
+                  onChange={handleSearchInputChange}
+                />
+                <FontAwesomeIcon
+                  icon={faSearch}
+                  className="search-icon"
+                  onClick={handleSearch}
+                />
+              </div>
               <div className="render-select">
                 <RenderSelect
                   categories={categories}
@@ -203,12 +239,12 @@ const Store = () => {
                 ))}
               </ul>
               <div className="price-filter">
-                <h3 className="h3-store">Precio</h3>
+                <p className="h3-store">Precio</p>
                 <div className="inputs-filter">
                   <input
                     className="input-price-store"
                     type="number"
-                    placeholder="Precio Mínimo"
+                    placeholder="Mínimo"
                     value={minPrice}
                     onChange={(e) => setMinPrice(e.target.value)}
                   />
@@ -216,7 +252,7 @@ const Store = () => {
                   <input
                     className="input-price-store"
                     type="number"
-                    placeholder="Precio Máximo"
+                    placeholder="Máximo"
                     value={maxPrice}
                     onChange={(e) => setMaxPrice(e.target.value)}
                   />
@@ -232,55 +268,103 @@ const Store = () => {
               </div>
             </div>
             <div className="cards-container">
-              {currentProducts &&
-                currentProducts.map((product, index) => (
-                  <div key={index} className="product-card">
-                    <div
-                      className="product-image"
-                      onClick={() => redirectToProductDetail(product._id)}
-                    >
-                      <img src={product.image[0]} alt={product.title} />
-                      <div className="detail-info-store">
-                        <p className="title-store">{product.title}</p>
-                        <p className="price">${product.price}</p>
-                      </div>
-                    </div>
-                    <div className="buttons-quantity">
-                      <button
-                        className="btn-see-more"
+              {searchResults.length > 0
+                ? searchResults.map((product, index) => (
+                    <div key={index} className="product-card">
+                      <div
+                        className="product-image"
                         onClick={() => redirectToProductDetail(product._id)}
                       >
-                        Ver más
-                      </button>
-                      <div className="detail-quantity-store">
+                        <img src={product.image[0]} alt={product.title} />
+                        <div className="detail-info-store">
+                          <p className="title-store">{product.title}</p>
+                          <p className="price">${product.price}</p>
+                        </div>
+                      </div>
+                      <div className="buttons-quantity">
                         <button
-                          className="quantity-button"
-                          onClick={() => handleQuantityChange(product, -1)}
-                          disabled={product.quantity <= 1}
+                          className="btn-see-more"
+                          onClick={() => redirectToProductDetail(product._id)}
                         >
-                          -
+                          Ver
                         </button>
-                        <span className="quantity-store">
-                          {product.quantity}
-                        </span>
+                        <div className="detail-quantity-store">
+                          <button
+                            className="quantity-button"
+                            onClick={() => handleQuantityChange(product, -1)}
+                            disabled={product.quantity <= 1}
+                          >
+                            -
+                          </button>
+                          <span className="quantity-store">
+                            {product.quantity}
+                          </span>
+                          <button
+                            disabled={product.quantity >= 10}
+                            className="quantity-button"
+                            onClick={() => handleQuantityChange(product, 1)}
+                          >
+                            +
+                          </button>
+                        </div>
+
                         <button
-                          disabled={product.quantity >= 10}
-                          className="quantity-button"
-                          onClick={() => handleQuantityChange(product, 1)}
+                          className="add-to-cart-button-store"
+                          onClick={() => addToCart(product)}
                         >
-                          +
+                          Agregar al carrito
                         </button>
                       </div>
-
-                      <button
-                        className="add-to-cart-button-store"
-                        onClick={() => addToCart(product)}
-                      >
-                        Agregar al carrito
-                      </button>
                     </div>
-                  </div>
-                ))}
+                  ))
+                : currentProducts.map((product, index) => (
+                    <div key={index} className="product-card">
+                      <div
+                        className="product-image"
+                        onClick={() => redirectToProductDetail(product._id)}
+                      >
+                        <img src={product.image[0]} alt={product.title} />
+                        <div className="detail-info-store">
+                          <p className="title-store">{product.title}</p>
+                          <p className="price">${product.price}</p>
+                        </div>
+                      </div>
+                      <div className="buttons-quantity">
+                        <button
+                          className="btn-see-more"
+                          onClick={() => redirectToProductDetail(product._id)}
+                        >
+                          Ver
+                        </button>
+                        <div className="detail-quantity-store">
+                          <button
+                            className="quantity-button"
+                            onClick={() => handleQuantityChange(product, -1)}
+                            disabled={product.quantity <= 1}
+                          >
+                            -
+                          </button>
+                          <span className="quantity-store">
+                            {product.quantity}
+                          </span>
+                          <button
+                            disabled={product.quantity >= 10}
+                            className="quantity-button"
+                            onClick={() => handleQuantityChange(product, 1)}
+                          >
+                            +
+                          </button>
+                        </div>
+
+                        <button
+                          className="add-to-cart-button-store"
+                          onClick={() => addToCart(product)}
+                        >
+                          Agregar al carrito
+                        </button>
+                      </div>
+                    </div>
+                  ))}
             </div>
           </div>
 
@@ -292,23 +376,26 @@ const Store = () => {
             >
               <FontAwesomeIcon icon={faArrowLeft} />
             </button>
-            {filteredProducts.length > productsPerPage &&
-              Array.from(
-                {
-                  length: Math.ceil(filteredProducts.length / productsPerPage),
-                },
-                (_, index) => (
-                  <button
-                    key={index}
-                    className={`pagination-button ${
-                      currentPage === index + 1 ? "active" : ""
-                    }`}
-                    onClick={() => paginate(index + 1)}
-                  >
-                    {index + 1}
-                  </button>
-                )
-              )}
+            {searchResults.length > 0
+              ? null
+              : Array.from(
+                  {
+                    length: Math.ceil(
+                      filteredProducts.length / productsPerPage
+                    ),
+                  },
+                  (_, index) => (
+                    <button
+                      key={index}
+                      className={`pagination-button ${
+                        currentPage === index + 1 ? "active" : ""
+                      }`}
+                      onClick={() => paginate(index + 1)}
+                    >
+                      {index + 1}
+                    </button>
+                  )
+                )}
             <button
               className="arrow-button"
               onClick={() => paginate(currentPage + 1)}

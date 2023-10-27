@@ -12,6 +12,7 @@ import DetailPage from "./pages/DetailPage/DetailPage";
 import Store from "./pages/Store/Store";
 import NewPasswordPage from "./pages/NewPasswordPage/NewPasswordPage";
 import Profile from "./pages/Profile/Profile";
+import ShippingPage from "./pages/Cart/Shipping/ShippingPage";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/contact" Component={Contact} />
         <Route path="/new-password/:token" Component={NewPasswordPage} />
         <Route path="/cart" Component={Cart} />
+        <Route path="/shipping" Component={ShippingPage} />
 
         <Route
           path="/profile"
