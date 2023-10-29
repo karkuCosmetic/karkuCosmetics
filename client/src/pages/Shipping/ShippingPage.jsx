@@ -1,57 +1,59 @@
-import React, {useState} from 'react';
-import {useNavigate} from 'react-router-dom';
-import './ShippingPage.css';
-import {GetDecodedCookie} from '../../../utils/DecodedCookie';
-import {Payment} from '../../../functions/payment';
-import {useEffect} from 'react';
-import {DecodedToken} from '../../../utils/DecodedToken';
-import {getUserDetail} from '../../../functions/fetchingUsers';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./ShippingPage.css";
 
-const ShippingPage = ({location}) => {
-  const navigate = useNavigate ();
-  const [shippingInfo, setShippingInfo] = useState ({//info que se actualiza 
-    method: 'acordar-con-vendedor',
+import { Payment } from "../../functions/payment";
+import { useEffect } from "react";
+
+import { GetDecodedCookie } from "../../utils/DecodedCookie";
+import { getUserDetail } from "../../functions/fetchingUsers";
+import { DecodedToken } from "../../utils/DecodedToken";
+
+const ShippingPage = ({ location }) => {
+  const navigate = useNavigate();
+  const [shippingInfo, setShippingInfo] = useState({
+    //info que se actualiza
+    method: "acordar-con-vendedor",
     adress: {
-      calle: '',
-      numero: '',
-      piso: '',
-      entreCalles: '',
-      localidad: '',
-      codigoPostal: '',
-      provincia: '',
+      calle: "",
+      numero: "",
+      piso: "",
+      entreCalles: "",
+      localidad: "",
+      codigoPostal: "",
+      provincia: "",
     },
   });
 
-  const [AdressCurrent,setAdressCurrent]=useState({})//mapear info ya cargada en la base 
-  
-  const token = GetDecodedCookie ('cookieToken');
+  const [AdressCurrent, setAdressCurrent] = useState({}); //mapear info ya cargada en la base
 
-  useEffect (
-    () => {
-      if (token) {
-        let {value} = DecodedToken (token);
-        callUserDetail (value);
-      }
-    },
-    [token]
-  );
+  const token = GetDecodedCookie("cookieToken");
+
+  useEffect(() => {
+    if (token) {
+      let { value } = DecodedToken(token);
+      callUserDetail(value);
+    }
+  }, [token]);
   const callUserDetail = async (uid) => {
-    await getUserDetail(uid, token).then(data=>{setAdressCurrent(data.adress)})
+    await getUserDetail(uid, token).then((data) => {
+      setAdressCurrent(data.adress);
+    });
   };
 
-  const [cart, SetCart] = useState (
-    JSON.parse (localStorage.getItem ('cart')) || []
+  const [cart, SetCart] = useState(
+    JSON.parse(localStorage.getItem("cart")) || []
   );
 
   const handleBackToCart = () => {
-    navigate ('/cart');
+    navigate("/cart");
   };
 
   const handlePayment = () => {
     if (token) {
-      Payment (cart, token, shippingInfo);
+      Payment(cart, token, shippingInfo);
     } else {
-      console.log ('debes loguearte');
+      console.log("debes loguearte");
     }
   };
   return (
@@ -63,8 +65,9 @@ const ShippingPage = ({location}) => {
           <select
             className="shipping-select"
             value={shippingInfo.method}
-            onChange={e =>
-              setShippingInfo ({...shippingInfo, method: e.target.value})}
+            onChange={(e) =>
+              setShippingInfo({ ...shippingInfo, method: e.target.value })
+            }
           >
             <option value="acordar-con-vendedor">
               Acordar con el vendedor
@@ -73,7 +76,7 @@ const ShippingPage = ({location}) => {
           </select>
         </label>
 
-        {shippingInfo.method === 'envio-por-correo' &&
+        {shippingInfo.method === "envio-por-correo" && (
           <div>
             <label className="shipping-form-label">
               Calle:
@@ -81,14 +84,15 @@ const ShippingPage = ({location}) => {
                 className="shipping-input"
                 type="text"
                 value={shippingInfo.adress.calle}
-                onChange={e =>
-                  setShippingInfo (prevInfo => ({
+                onChange={(e) =>
+                  setShippingInfo((prevInfo) => ({
                     ...prevInfo,
                     adress: {
                       ...prevInfo.adress,
                       calle: e.target.value,
                     },
-                  }))}
+                  }))
+                }
               />
             </label>
             <label className="shipping-form-label">
@@ -97,14 +101,15 @@ const ShippingPage = ({location}) => {
                 className="shipping-input"
                 type="text"
                 value={shippingInfo.adress.numero}
-                onChange={e =>
-                  setShippingInfo (prevInfo => ({
+                onChange={(e) =>
+                  setShippingInfo((prevInfo) => ({
                     ...prevInfo,
                     adress: {
                       ...prevInfo.adress,
                       numero: e.target.value,
                     },
-                  }))}
+                  }))
+                }
               />
             </label>
             <label className="shipping-form-label">
@@ -113,14 +118,15 @@ const ShippingPage = ({location}) => {
                 className="shipping-input"
                 type="text"
                 value={shippingInfo.adress.piso}
-                onChange={e =>
-                  setShippingInfo (prevInfo => ({
+                onChange={(e) =>
+                  setShippingInfo((prevInfo) => ({
                     ...prevInfo,
                     adress: {
                       ...prevInfo.adress,
                       piso: e.target.value,
                     },
-                  }))}
+                  }))
+                }
               />
             </label>
             <label className="shipping-form-label">
@@ -129,14 +135,15 @@ const ShippingPage = ({location}) => {
                 className="shipping-input"
                 type="text"
                 value={shippingInfo.adress.entreCalles}
-                onChange={e =>
-                  setShippingInfo (prevInfo => ({
+                onChange={(e) =>
+                  setShippingInfo((prevInfo) => ({
                     ...prevInfo,
                     adress: {
                       ...prevInfo.adress,
                       entreCalles: e.target.value,
                     },
-                  }))}
+                  }))
+                }
               />
             </label>
             <label className="shipping-form-label">
@@ -145,14 +152,15 @@ const ShippingPage = ({location}) => {
                 className="shipping-input"
                 type="text"
                 value={shippingInfo.adress.localidad}
-                onChange={e =>
-                  setShippingInfo (prevInfo => ({
+                onChange={(e) =>
+                  setShippingInfo((prevInfo) => ({
                     ...prevInfo,
                     adress: {
                       ...prevInfo.adress,
                       localidad: e.target.value,
                     },
-                  }))}
+                  }))
+                }
               />
             </label>
             <label className="shipping-form-label">
@@ -161,14 +169,15 @@ const ShippingPage = ({location}) => {
                 className="shipping-input"
                 type="text"
                 value={shippingInfo.adress.codigoPostal}
-                onChange={e =>
-                  setShippingInfo (prevInfo => ({
+                onChange={(e) =>
+                  setShippingInfo((prevInfo) => ({
                     ...prevInfo,
                     adress: {
                       ...prevInfo.adress,
                       codigoPostal: e.target.value,
                     },
-                  }))}
+                  }))
+                }
               />
             </label>
             <label className="shipping-form-label">
@@ -177,17 +186,19 @@ const ShippingPage = ({location}) => {
                 className="shipping-input"
                 type="text"
                 value={shippingInfo.adress.provincia}
-                onChange={e =>
-                  setShippingInfo (prevInfo => ({
+                onChange={(e) =>
+                  setShippingInfo((prevInfo) => ({
                     ...prevInfo,
                     adress: {
                       ...prevInfo.adress,
                       provincia: e.target.value,
                     },
-                  }))}
+                  }))
+                }
               />
             </label>
-          </div>}
+          </div>
+        )}
 
         <div className="shipping-buttons">
           <button className="shipping-button" onClick={handleBackToCart}>

@@ -12,7 +12,7 @@ import DetailPage from "./pages/DetailPage/DetailPage";
 import Store from "./pages/Store/Store";
 import NewPasswordPage from "./pages/NewPasswordPage/NewPasswordPage";
 import Profile from "./pages/Profile/Profile";
-import ShippingPage from "./pages/Cart/Shipping/ShippingPage";
+import ShippingPage from "./pages/Shipping/ShippingPage";
 
 function App() {
   return (
