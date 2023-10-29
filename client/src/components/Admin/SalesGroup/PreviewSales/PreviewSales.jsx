@@ -11,6 +11,7 @@ const PreviewSales = ({ setSection }) => {
   const [sales, setSales] = useState([]);
   const [selectedSale, setSelectedSale] = useState(null);
   const [selectedStatus, setSelectedStatus] = useState("");
+  const [shippingNumber, setShippingNumber] = useState("");
 
   const orderSales = sales.slice(0, 6);
   const token = GetDecodedCookie("cookieToken");
@@ -58,6 +59,13 @@ const PreviewSales = ({ setSection }) => {
 
   const closeSaleDetailsModal = () => {
     setSelectedSale(null);
+  };
+  const handleShippingNumberChange = (e) => {
+    setShippingNumber(e.target.value);
+  };
+
+  const handleSaveShippingNumber = () => {
+    console.log("Número de envío:", shippingNumber);
   };
 
   return (
@@ -118,7 +126,20 @@ const PreviewSales = ({ setSection }) => {
                 <p>
                   <strong>Venta N° :</strong> {selectedSale.id}
                 </p>
-
+                <div className="shipping-input-container">
+                  <input
+                    type="text"
+                    placeholder="Número de envío"
+                    value={shippingNumber}
+                    onChange={handleShippingNumberChange}
+                  />
+                  <button
+                    className="btn-save-shipping"
+                    onClick={handleSaveShippingNumber}
+                  >
+                    Guardar Envío
+                  </button>
+                </div>
                 <div className="status-btnSave-container">
                   <p>
                     <strong>Estado:</strong>

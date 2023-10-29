@@ -14,6 +14,7 @@ const SalesManagement = ({ setSection }) => {
   const [selectedStatus, setSelectedStatus] = useState("");
   const [selectedSale, setSelectedSale] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [shippingNumber, setShippingNumber] = useState("");
 
   const token = GetDecodedCookie("cookieToken");
 
@@ -78,6 +79,14 @@ const SalesManagement = ({ setSection }) => {
         })
         .catch((error) => console.error("Error updating sale status:", error));
     }
+  };
+
+  const handleShippingNumberChange = (e) => {
+    setShippingNumber(e.target.value);
+  };
+
+  const handleSaveShippingNumber = () => {
+    console.log("Número de envío:", shippingNumber);
   };
 
   const filteredSales = filterSales();
@@ -172,7 +181,20 @@ const SalesManagement = ({ setSection }) => {
                 <p>
                   <strong>Venta N° :</strong> {selectedSale.id}
                 </p>
-
+                <div className="shipping-input-container">
+                  <input
+                    type="text"
+                    placeholder="Número de envío"
+                    value={shippingNumber}
+                    onChange={handleShippingNumberChange}
+                  />
+                  <button
+                    className="btn-save-shipping"
+                    onClick={handleSaveShippingNumber}
+                  >
+                    Guardar Envío
+                  </button>
+                </div>
                 <div className="status-btnSave-container">
                   <p>
                     <strong>Estado:</strong>

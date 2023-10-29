@@ -1,5 +1,5 @@
 .navbar {
-  background-color:#91be7f;
+  background-color: #91be7f;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   position: sticky;
   top: 0;
@@ -17,8 +17,7 @@
   padding: 1rem;
 }
 
-@media (min-width:1630px){
-
+@media (min-width: 1630px) {
 }
 
 .navbar-left {
@@ -49,7 +48,7 @@
 
 .nav-links a {
   font-family: "quicksand";
-  font-weight: 500;
+
   text-decoration: none;
   color: #ffffff;
   transition: color 0.3s ease;
@@ -205,7 +204,6 @@
 .overlay.active {
   display: block;
 }
-
 
 /* COLORES USER */
 

@@ -111,7 +111,8 @@ export const Cart = () => {
         <div className="cart-summary">
           <p className="total-label">Total:</p>
           <p className="total-amount">${calculateTotal().toFixed(2)}</p>
-          <Link to="/shipping">Continuar compra</Link>
+          <Link to="/shipping" className="btn-buy">Continuar compra</Link>
+
         </div>
       </div>
       <Footer />
