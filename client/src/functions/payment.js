@@ -1,10 +1,11 @@
 import axios from "axios";
 
-export const Payment = async (carrito, token) => {
+export const Payment = async (carrito, token,shippingInfo) => {
+  console.log(carrito,token,shippingInfo);
   try {
     const response = await axios.post(
       "http://localhost:3001/payment/create-order",
-      { carrito, token },
+      { carrito, token,shippingInfo },
       {
         headers: { "user-token": token },
       }
@@ -13,10 +14,10 @@ export const Payment = async (carrito, token) => {
     const paymentUrl = response.data;
 
     // Redirigir al usuario al enlace de pago
-    window.location.href = paymentUrl;
+    // window.location.href = paymentUrl;
 
     // Limpiar el carrito después de la redirección
-    window.localStorage.clear();
+    // window.localStorage.clear();
   } catch (error) {
  
     // Por ejemplo, puedes mostrar un mensaje de error al usuario:

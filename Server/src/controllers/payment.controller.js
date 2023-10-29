@@ -11,22 +11,23 @@ export const createOrder = async (req, res) => {
   try {
     const data = req.body.carrito;
     const { token } = req.body;
+    const { shippingInfo } = req.body;
 
     const id = DecodedToken(token).value;
 
     const user = await User.findById(id);
 
-    if (
-      user.adress.name !== "" &&
-      user.adress.lastName !== "" &&
-      user.adress.phone !== "" &&
-      user.adress.callePrincipal !== "" &&
-      user.adress.provincia !== "" &&
-      user.adress.localidad !== "" &&
-      user.adress.codigoPostal !== "" &&
-      user.adress.numero !== "" &&
-      user.adress.piso !== ""
-    ) {
+    // if (
+    //   user.name !== "" &&
+    //   user.lastName !== "" &&
+    //   user.phone !== "" &&
+    //   user.adress.callePrincipal !== "" &&
+    //   user.adress.provincia !== "" &&
+    //   user.adress.localidad !== "" &&
+    //   user.adress.codigoPostal !== "" &&
+    //   user.adress.numero !== "" &&
+    //   user.adress.piso !== ""
+    // ) {
       mercadopago.configure({
         access_token: process.env.ACCESS_TOKEN,
       });
@@ -43,14 +44,14 @@ export const createOrder = async (req, res) => {
         };
       });
 
-      // phone: user.phone,
       let preference = {
         items: items,
         payer: {
           first_name: user.name,
           last_name: user.lastName,
           email: user.email,
-          address: user.adress,
+          
+          address:shippingInfo.method==="envio-por-correo"? shippingInfo.adress:user.adress,
         },
         back_urls: {
           success: "http://localhost:3000/store",
@@ -64,9 +65,9 @@ export const createOrder = async (req, res) => {
       const result = await mercadopago.preferences.create(preference);
 
       res.send(result.response.init_point);
-    } else {
-      throw new Error("Email no verificado");
-    }
+    // } else {
+    //   throw new Error("");
+    // }
   } catch (error) {
     res.status(400).json(formatError(error.message));
   }

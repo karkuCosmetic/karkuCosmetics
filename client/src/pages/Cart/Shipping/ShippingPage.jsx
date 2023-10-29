@@ -1,23 +1,59 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "./ShippingPage.css";
+import React, {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
+import './ShippingPage.css';
+import {GetDecodedCookie} from '../../../utils/DecodedCookie';
+import {Payment} from '../../../functions/payment';
+import {useEffect} from 'react';
+import {DecodedToken} from '../../../utils/DecodedToken';
+import {getUserDetail} from '../../../functions/fetchingUsers';
 
-const ShippingPage = ({ location }) => {
-  const navigate = useNavigate();
-  const [shippingInfo, setShippingInfo] = useState({
-    method: "acordar-con-vendedor",
-    address: "",
+const ShippingPage = ({location}) => {
+  const navigate = useNavigate ();
+  const [shippingInfo, setShippingInfo] = useState ({//info que se actualiza 
+    method: 'acordar-con-vendedor',
+    adress: {
+      calle: '',
+      numero: '',
+      piso: '',
+      entreCalles: '',
+      localidad: '',
+      codigoPostal: '',
+      provincia: '',
+    },
   });
 
+  const [AdressCurrent,setAdressCurrent]=useState({})//mapear info ya cargada en la base 
+  
+  const token = GetDecodedCookie ('cookieToken');
+
+  useEffect (
+    () => {
+      if (token) {
+        let {value} = DecodedToken (token);
+        callUserDetail (value);
+      }
+    },
+    [token]
+  );
+  const callUserDetail = async (uid) => {
+    await getUserDetail(uid, token).then(data=>{setAdressCurrent(data.adress)})
+  };
+
+  const [cart, SetCart] = useState (
+    JSON.parse (localStorage.getItem ('cart')) || []
+  );
+
   const handleBackToCart = () => {
-    navigate("/cart");
+    navigate ('/cart');
   };
 
   const handlePayment = () => {
-    location.state.handlePayment(shippingInfo);
-    navigate("/payment");
+    if (token) {
+      Payment (cart, token, shippingInfo);
+    } else {
+      console.log ('debes loguearte');
+    }
   };
-
   return (
     <div className="shipping">
       <div className="shipping-container">
@@ -27,9 +63,8 @@ const ShippingPage = ({ location }) => {
           <select
             className="shipping-select"
             value={shippingInfo.method}
-            onChange={(e) =>
-              setShippingInfo({ ...shippingInfo, method: e.target.value })
-            }
+            onChange={e =>
+              setShippingInfo ({...shippingInfo, method: e.target.value})}
           >
             <option value="acordar-con-vendedor">
               Acordar con el vendedor
@@ -38,17 +73,22 @@ const ShippingPage = ({ location }) => {
           </select>
         </label>
 
-        {shippingInfo.method === "envio-por-correo" && (
+        {shippingInfo.method === 'envio-por-correo' &&
           <div>
             <label className="shipping-form-label">
               Calle:
               <input
                 className="shipping-input"
                 type="text"
-                value={shippingInfo.calle}
-                onChange={(e) =>
-                  setShippingInfo({ ...shippingInfo, calle: e.target.value })
-                }
+                value={shippingInfo.adress.calle}
+                onChange={e =>
+                  setShippingInfo (prevInfo => ({
+                    ...prevInfo,
+                    adress: {
+                      ...prevInfo.adress,
+                      calle: e.target.value,
+                    },
+                  }))}
               />
             </label>
             <label className="shipping-form-label">
@@ -56,10 +96,15 @@ const ShippingPage = ({ location }) => {
               <input
                 className="shipping-input"
                 type="text"
-                value={shippingInfo.numero}
-                onChange={(e) =>
-                  setShippingInfo({ ...shippingInfo, numero: e.target.value })
-                }
+                value={shippingInfo.adress.numero}
+                onChange={e =>
+                  setShippingInfo (prevInfo => ({
+                    ...prevInfo,
+                    adress: {
+                      ...prevInfo.adress,
+                      numero: e.target.value,
+                    },
+                  }))}
               />
             </label>
             <label className="shipping-form-label">
@@ -67,10 +112,15 @@ const ShippingPage = ({ location }) => {
               <input
                 className="shipping-input"
                 type="text"
-                value={shippingInfo.piso}
-                onChange={(e) =>
-                  setShippingInfo({ ...shippingInfo, piso: e.target.value })
-                }
+                value={shippingInfo.adress.piso}
+                onChange={e =>
+                  setShippingInfo (prevInfo => ({
+                    ...prevInfo,
+                    adress: {
+                      ...prevInfo.adress,
+                      piso: e.target.value,
+                    },
+                  }))}
               />
             </label>
             <label className="shipping-form-label">
@@ -78,13 +128,15 @@ const ShippingPage = ({ location }) => {
               <input
                 className="shipping-input"
                 type="text"
-                value={shippingInfo.entreCalles}
-                onChange={(e) =>
-                  setShippingInfo({
-                    ...shippingInfo,
-                    entreCalles: e.target.value,
-                  })
-                }
+                value={shippingInfo.adress.entreCalles}
+                onChange={e =>
+                  setShippingInfo (prevInfo => ({
+                    ...prevInfo,
+                    adress: {
+                      ...prevInfo.adress,
+                      entreCalles: e.target.value,
+                    },
+                  }))}
               />
             </label>
             <label className="shipping-form-label">
@@ -92,13 +144,15 @@ const ShippingPage = ({ location }) => {
               <input
                 className="shipping-input"
                 type="text"
-                value={shippingInfo.localidad}
-                onChange={(e) =>
-                  setShippingInfo({
-                    ...shippingInfo,
-                    localidad: e.target.value,
-                  })
-                }
+                value={shippingInfo.adress.localidad}
+                onChange={e =>
+                  setShippingInfo (prevInfo => ({
+                    ...prevInfo,
+                    adress: {
+                      ...prevInfo.adress,
+                      localidad: e.target.value,
+                    },
+                  }))}
               />
             </label>
             <label className="shipping-form-label">
@@ -106,13 +160,15 @@ const ShippingPage = ({ location }) => {
               <input
                 className="shipping-input"
                 type="text"
-                value={shippingInfo.codigoPostal}
-                onChange={(e) =>
-                  setShippingInfo({
-                    ...shippingInfo,
-                    codigoPostal: e.target.value,
-                  })
-                }
+                value={shippingInfo.adress.codigoPostal}
+                onChange={e =>
+                  setShippingInfo (prevInfo => ({
+                    ...prevInfo,
+                    adress: {
+                      ...prevInfo.adress,
+                      codigoPostal: e.target.value,
+                    },
+                  }))}
               />
             </label>
             <label className="shipping-form-label">
@@ -120,17 +176,18 @@ const ShippingPage = ({ location }) => {
               <input
                 className="shipping-input"
                 type="text"
-                value={shippingInfo.provincia}
-                onChange={(e) =>
-                  setShippingInfo({
-                    ...shippingInfo,
-                    provincia: e.target.value,
-                  })
-                }
+                value={shippingInfo.adress.provincia}
+                onChange={e =>
+                  setShippingInfo (prevInfo => ({
+                    ...prevInfo,
+                    adress: {
+                      ...prevInfo.adress,
+                      provincia: e.target.value,
+                    },
+                  }))}
               />
             </label>
-          </div>
-        )}
+          </div>}
 
         <div className="shipping-buttons">
           <button className="shipping-button" onClick={handleBackToCart}>

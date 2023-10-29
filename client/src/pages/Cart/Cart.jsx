@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../../components/NavBar/navbar";
 import "./Cart.css";
-import { Payment } from "../../functions/payment";
 import Footer from "../../components/Footer/footer";
-import { GetDecodedCookie } from "../../utils/DecodedCookie";
 import { Link, useLocation } from "react-router-dom";
 
 export const Cart = () => {
-  const token = GetDecodedCookie("cookieToken");
-  const location = useLocation();
   const [cart, SetCart] = useState(
     JSON.parse(localStorage.getItem("cart")) || []
   );
@@ -40,13 +36,7 @@ export const Cart = () => {
     return total;
   };
 
-  const handlePayment = () => {
-    if (token) {
-      Payment(cart, token);
-    } else {
-      console.log("debes loguearte");
-    }
-  };
+
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -122,9 +112,6 @@ export const Cart = () => {
           <p className="total-label">Total:</p>
           <p className="total-amount">${calculateTotal().toFixed(2)}</p>
           <Link to="/shipping">Continuar compra</Link>
-          {/* <button className="checkout-button" onClick={handlePayment}>
-            Ir a Pagar
-          </button> */}
         </div>
       </div>
       <Footer />
