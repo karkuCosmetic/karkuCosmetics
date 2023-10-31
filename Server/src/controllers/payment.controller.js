@@ -7,27 +7,28 @@ import { Admin } from "../models/admin.js";
 import { generateUniqueID } from "../utils/GenerateId.js";
 import { DecodedToken } from "../utils/DecodedToken.js";
 
+
 export const createOrder = async (req, res) => {
   try {
     const data = req.body.carrito;
-    const { token } = req.body;
-    const { shippingInfo } = req.body;
+    const { token, adressData, method } = req.body;
 
     const id = DecodedToken(token).value;
 
     const user = await User.findById(id);
 
-    // if (
-    //   user.name !== "" &&
-    //   user.lastName !== "" &&
-    //   user.phone !== "" &&
-    //   user.adress.callePrincipal !== "" &&
-    //   user.adress.provincia !== "" &&
-    //   user.adress.localidad !== "" &&
-    //   user.adress.codigoPostal !== "" &&
-    //   user.adress.numero !== "" &&
-    //   user.adress.piso !== ""
-    // ) {
+    if (
+      user &&
+      user.name !== "" &&
+      user.lastName !== "" &&
+      user.phone !== "" &&
+      user.adress.callePrincipal !== "" &&
+      user.adress.provincia !== "" &&
+      user.adress.localidad !== "" &&
+      user.adress.codigoPostal !== "" &&
+      user.adress.numero !== "" &&
+      user.adress.piso !== ""
+    ) {
       mercadopago.configure({
         access_token: process.env.ACCESS_TOKEN,
       });
@@ -47,28 +48,33 @@ export const createOrder = async (req, res) => {
       let preference = {
         items: items,
         payer: {
-          first_name: user.name,
-          last_name: user.lastName,
+          name: user.name,
+          surname: user.lastName,
           email: user.email,
-          
-          address:shippingInfo.method==="envio-por-correo"? shippingInfo.adress:user.adress,
+          address: {
+            street_name: JSON.stringify(adressData),
+          },
         },
+        metadata: { method },
         back_urls: {
           success: "http://localhost:3000/store",
           failure: "http://localhost:3000/cart",
           pending: "http://localhost:3000/store",
         },
+        auto_return: "approved",
+
         notification_url:
-          "https://459mjx2v-3001.brs.devtunnels.ms/payment/webhook",
+          "https://7011ths9-3001.brs.devtunnels.ms/payment/webhook",
       };
 
       const result = await mercadopago.preferences.create(preference);
 
-      res.send(result.response.init_point);
-    // } else {
-    //   throw new Error("");
-    // }
+      res.status(200).json(result.response.init_point);
+    } else {
+      throw new Error("faltan datos");
+    }
   } catch (error) {
+    console.log(error);
     res.status(400).json(formatError(error.message));
   }
 };
@@ -100,6 +106,7 @@ export const pendingOrder = async (req, res) => {
 export const reciveWebhook = async (req, res) => {
   try {
     const payment = req.query;
+
     if (payment.type === "payment") {
       const data = await mercadopago.payment.findById(payment["data.id"]);
 
@@ -111,7 +118,6 @@ export const reciveWebhook = async (req, res) => {
 
       //obtener el id de quien compro
       let emailUser = data.response.payer.email;
-
       const user = await User.findOne({ email: emailUser });
       //obtener el id de quien compro
 
@@ -127,7 +133,9 @@ export const reciveWebhook = async (req, res) => {
           DNI: data.response.card.cardholder.identification.number,
           phonePerson: user.phone,
           email: data.response.payer.email,
-          address: user.adress,
+          address: JSON.parse(
+            data.body.additional_info.payer.address.street_name
+          ),
         },
         methodPay: {
           cardType: data.body.payment_method_id,
@@ -139,6 +147,9 @@ export const reciveWebhook = async (req, res) => {
         detailPay: {
           items: data.response.additional_info.items,
           status: "pendiente",
+          optionSend: data.response.metadata.method,
+          delivery: "",
+          TrackNumber: "",
         },
       };
 

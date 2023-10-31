@@ -5,7 +5,7 @@ import deleteFile from "../utils/deleteFile";
 export const createProduct = async (data, images, token) => {
   let image = await fileUpload(images, "products");
   await axios.post(
-    "http://localhost:3001/products",
+    `${process.env.REACT_APP_URL_API}/products`,
     {
       title: data.title,
       dimensions: data.dimensions,
@@ -24,7 +24,7 @@ export const createProduct = async (data, images, token) => {
 export const getProduct = async () => {
   try {
     const response = await axios.get(
-      "http://localhost:3001/products"
+      `${process.env.REACT_APP_URL_API}/products`
     );
 
     return response.data;
@@ -37,7 +37,7 @@ export const getProduct = async () => {
 export const getProductDetail = async (id) => {
   try {
     const response = await axios.get(
-      `http://localhost:3001/products/${id}`
+      `${process.env.REACT_APP_URL_API}/products/${id}`
     );
     return response.data;
   } catch (error) {
@@ -54,11 +54,11 @@ export const updateProduct = async (res, images, id, token) => {
     } else {
       imageArray = res.image;
     }
-   
+
     // await deleteFile()
 
     await axios.put(
-      `http://localhost:3001/products/${id}`,
+      `${process.env.REACT_APP_URL_API}/products/${id}`,
       {
         image: imageArray,
         title: res.title,
@@ -79,18 +79,20 @@ export const updateProduct = async (res, images, id, token) => {
 };
 
 export const DeleteProductById = async (id, token) => {
-  console.log(id);
   try {
-    const res = await axios.delete(`http://localhost:3001/products/${id}`, {
-      headers: { "user-token": token },
-    });
+    const res = await axios.delete(
+      `${process.env.REACT_APP_URL_API}/products/${id}`,
+      {
+        headers: { "user-token": token },
+      }
+    );
     return res.data;
   } catch (error) {
     console.log(error);
   }
 };
 
-export const getAllCategories=async(token)=>{
+export const getAllCategories = async (token) => {
   try {
     const res = await axios.get(`http://localhost:3001/products/categories`, {
       headers: { "user-token": token },
@@ -99,4 +101,4 @@ export const getAllCategories=async(token)=>{
   } catch (error) {
     console.log(error);
   }
-}
+};

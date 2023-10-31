@@ -14,6 +14,7 @@ import {
 } from "../controllers/mail.controller.js";
 import {
   getOrders,
+  updateDeliveryOrders,
   updateOrders,
 } from "../controllers/orders.controllers.js";
 import { isAdmin, verifyToken } from "../middlewares/VerifyToken.js";
@@ -26,7 +27,8 @@ router.get("/email", [verifyToken, isAdmin], getEmails);
 
 
 router.get("/orders",[verifyToken, isAdmin], getOrders);
-router.put("/orders/:id",[verifyToken, isAdmin], updateOrders); //chequear por que en back funciona en la base no
+router.put("/orders/:id",[verifyToken, isAdmin], updateOrders); 
+router.put("/orders/delivery/:id",[verifyToken, isAdmin], updateDeliveryOrders); 
 
 //AGREGAR MIDDLEWARE ↓
 router.post("/", createAdmin);

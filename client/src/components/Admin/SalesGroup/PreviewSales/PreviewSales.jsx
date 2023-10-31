@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getSales, updateSalesById } from "../../../../functions/fetchingSales";
+import { getSales, updateSalesById, updateSalesTranckingNumber } from "../../../../functions/fetchingSales";
 import "./PreviewSales.css";
 import { GetDecodedCookie } from "../../../../utils/DecodedCookie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -66,6 +66,7 @@ const PreviewSales = ({ setSection }) => {
 
   const handleSaveShippingNumber = () => {
     console.log("Número de envío:", shippingNumber);
+    updateSalesTranckingNumber(selectedSale.id,token,"correo",shippingNumber)
   };
 
   return (
