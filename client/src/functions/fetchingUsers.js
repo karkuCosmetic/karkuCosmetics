@@ -3,11 +3,13 @@ import axios from "axios";
 export const getUserDetail = async (uid, token) => {
   try {
     let response;
-    response = await axios.get(`http://localhost:3001/user/${uid}`,{
+    response = await axios.get(`${process.env.REACT_APP_URL_API}/user/${uid}`, {
       headers: { "user-token": token },
     });
     if (!response.data) {
-      response = await axios.get(`http://localhost:3001/admin/${uid}`);
+      response = await axios.get(
+        `${process.env.REACT_APP_URL_API}/admin/${uid}`
+      );
     }
     return response.data;
   } catch (error) {
@@ -18,11 +20,14 @@ export const getUserDetail = async (uid, token) => {
 
 export const PutUser = async (uid, value, token) => {
   try {
-
     let response;
-    response = await axios.put(`http://localhost:3001/user/${uid}`, value, {
-      headers: { "user-token": token },
-    });
+    response = await axios.put(
+      `${process.env.REACT_APP_URL_API}/user/${uid}`,
+      value,
+      {
+        headers: { "user-token": token },
+      }
+    );
     return response.data;
   } catch (error) {
     console.log(error);
@@ -34,7 +39,7 @@ export const ConfirmEmail = async (uid, value) => {
   try {
     let response;
     response = await axios.put(
-      `http://localhost:3001/user/confirmemail/${uid}`,
+      `${process.env.REACT_APP_URL_API}/user/confirmemail/${uid}`,
       { value }
     );
     return response.data;
@@ -47,7 +52,10 @@ export const ConfirmEmail = async (uid, value) => {
 export const UpdatePassword = async (value) => {
   //value puede recibir un email o password
   try {
-    await axios.post(`http://localhost:3001/user/updatepassword`, value);
+    await axios.post(
+      `${process.env.REACT_APP_URL_API}/user/updatepassword`,
+      value
+    );
   } catch (error) {
     console.log(error);
   }
@@ -55,7 +63,7 @@ export const UpdatePassword = async (value) => {
 
 export const resendConfirmationEmail = async (emailUser) => {
   try {
-    await axios.post(`http://localhost:3001/email/reconfirmemail`, {
+    await axios.post(`${process.env.REACT_APP_URL_API}/email/reconfirmemail`, {
       emailUser,
     });
   } catch (error) {

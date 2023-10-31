@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const getEmails = async (token) => {
   try {
-    const res = await axios.get("http://localhost:3001/admin/email", {
+    const res = await axios.get(`${process.env.REACT_APP_URL_API}/admin/email`, {
       headers: { "user-token": token },
     });
     return res.data;
@@ -13,7 +13,7 @@ export const getEmails = async (token) => {
 
 export const deleteEmailById = async (id,token) => {
   try {
-    const res = await axios.delete(`http://localhost:3001/admin/email/${id}`,{
+    const res = await axios.delete(`${process.env.REACT_APP_URL_API}/admin/email/${id}`,{
       headers: { "user-token": token },
     });
     return res.data;
@@ -24,7 +24,7 @@ export const deleteEmailById = async (id,token) => {
 
 export const sendEmail = async (data) => {
   try {
-    const res = await axios.post(`http://localhost:3001/admin/email`, { data });
+    const res = await axios.post(`${process.env.REACT_APP_URL_API}/admin/email`, { data });
     return res.data;
   } catch (error) {}
 };

@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const postlogin = async (values) => {
   try {
-    const resp = await axios.post("http://localhost:3001/login", values);
+    const resp = await axios.post(`${process.env.REACT_APP_URL_API}/login`, values);
     let token = resp.data.token;
     document.cookie =
       encodeURIComponent("cookieToken") + "=" + encodeURIComponent(token);
@@ -20,7 +20,7 @@ export const postlogin = async (values) => {
 
 export const postRegister = async (values) => {
   try {
-    await axios.post("http://localhost:3001/register", values);
+    await axios.post(`${process.env.REACT_APP_URL_API}/register`, values);
     return "Usuario Creado";
   } catch (error) {
     console.log(error);

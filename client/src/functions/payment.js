@@ -5,7 +5,7 @@ export const Payment = async (carrito, token, adressData,method) => {
 
   try {
     const response = await axios.post(
-      "http://localhost:3001/payment/create-order",
+      `${process.env.REACT_APP_URL_API}/payment/create-order`,
       { carrito, token, adressData,method },
       {
         headers: { "user-token": token },
