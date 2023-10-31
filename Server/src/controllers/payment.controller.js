@@ -57,14 +57,16 @@ export const createOrder = async (req, res) => {
         },
         metadata: { method },
         back_urls: {
-          success: "http://localhost:3000/store",
-          failure: "http://localhost:3000/cart",
-          pending: "http://localhost:3000/store",
+          success: `${process.env.DEPLOY_CLIENT_URL}/store`,
+          failure: `${process.env.DEPLOY_CLIENT_URL}/cart`,
+          pending: `${process.env.DEPLOY_CLIENT_URL}/store`,
         },
         auto_return: "approved",
 
+        // notification_url:
+        //   "https://7011ths9-3001.brs.devtunnels.ms/payment/webhook",
         notification_url:
-          "https://7011ths9-3001.brs.devtunnels.ms/payment/webhook",
+          `${process.env.DEPLOY_API_URL}/payment/webhook`,
       };
 
       const result = await mercadopago.preferences.create(preference);

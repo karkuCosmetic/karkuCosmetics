@@ -39,7 +39,7 @@ app.use("/products",productRoute)
 
 app.use("/payment", paymentRoute)
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log("server listenning on port", port);
 });
