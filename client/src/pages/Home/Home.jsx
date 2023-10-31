@@ -69,7 +69,7 @@ const Home = () => {
         </div>
         <div className="sections-home-container">
           <div className="section1-home">
-            <div className="section1-1-home">
+            <div className="section1-1-home" data-aos="zoom-in">
               <p className="title-section">Capilares</p>
               <div className="text1-img-home">
                 <div className="text1-home" data-aos="zoom-in-right">
@@ -96,17 +96,9 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div className="section1-2-home bg-color-section">
+            <div className="section1-2-home " data-aos="zoom-in">
               <p className="title-section">Corporales</p>
               <div className="text2-img-home">
-                <div className="img1-home" data-aos="flip-left">
-                  <div class="gallery">
-                    <img src={KarkuImg6} alt="" />
-                    <img src={KarkuImg7} alt="" />
-                    <img src={KarkuImg3} alt="" />
-                    <img src={KarkuImg2} alt="" />
-                  </div>
-                </div>
                 <div className="text2-home" data-aos="zoom-in-left">
                   <p>
                     Los productos de cuidado corporal naturales, como cremas,
@@ -120,9 +112,17 @@ const Home = () => {
                     respetuosas con el medio ambiente.
                   </p>
                 </div>
+                <div className="img1-home" data-aos="flip-left">
+                  <div class="gallery">
+                    <img src={KarkuImg6} alt="" />
+                    <img src={KarkuImg7} alt="" />
+                    <img src={KarkuImg3} alt="" />
+                    <img src={KarkuImg2} alt="" />
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="section1-3-home">
+            <div className="section1-3-home" data-aos="zoom-in">
               <p className="title-section">Faciales</p>
               <div className="text3-img-home">
                 <div className="text3-home" data-aos="zoom-in-right">
@@ -150,18 +150,10 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div className="section1-3-home bg-color-section">
+            <div className="section1-4-home bg-color-section">
               <p className="title-section">Serums</p>
-              <div className="text3-img-home">
-                <div className="img1-home" data-aos="flip-left">
-                  <div class="gallery">
-                    <img src={KarkuImg6} alt="" />
-                    <img src={KarkuImg7} alt="" />
-                    <img src={KarkuImg3} alt="" />
-                    <img src={KarkuImg2} alt="" />
-                  </div>
-                </div>
-                <div className="text3-home" data-aos="zoom-in-left">
+              <div className="text4-img-home">
+                <div className="text4-home" data-aos="zoom-in-left">
                   <p>
                     Los serums faciales naturales son una opción ideal para una
                     piel radiante y saludable. Con ingredientes naturales como
@@ -175,6 +167,14 @@ const Home = () => {
                     Descubre la belleza natural en cada gota de serum.
                   </p>
                 </div>
+                <div className="img1-home" data-aos="flip-left">
+                  <div class="gallery">
+                    <img src={KarkuImg6} alt="" />
+                    <img src={KarkuImg7} alt="" />
+                    <img src={KarkuImg3} alt="" />
+                    <img src={KarkuImg2} alt="" />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -184,7 +184,7 @@ const Home = () => {
             <FontAwesomeIcon icon={faCaretUp} />
           </button>
         )}
-        <div className="gallery-home-container" id="gallery">
+        <div className="gallery-home-container" id="gallery" data-aos="zoom-in">
           <p className="title-carousel">
             "En Karku, podés encontrar una amplia gama de productos
             confeccionados a partir de materiales premium de alta calidad."
@@ -192,7 +192,7 @@ const Home = () => {
           <Gallery />
         </div>
         <div className="map-container">
-          <div className="text-map-home">
+          <div className="text-map-home" data-aos="zoom-in">
             <p>Karku se ubica en la ciudad de Zárate.</p>
             <br />
             <p>
