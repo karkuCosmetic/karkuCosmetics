@@ -27,7 +27,7 @@ const _path = path.join(__dirname, "..", "emails");
 export const sendNewPassword = async (email) => {
   const { token, expiresIn } = generateToken(email);
 
-  let url = `http://localhost:3000/new-password/${token}`;
+  let url = `${process.env.DEPLOY_CLIENT_URL}/new-password/${token}`;
   
 
   ejs.renderFile(

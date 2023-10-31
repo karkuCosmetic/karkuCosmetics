@@ -16,7 +16,7 @@ export const verifyToken = async (req, res, next) => {
 
     let user = await User.findById(req.userId, { password: 0 });
     if (!user) user = await Admin.findById(req.userId, { password: 0 });
-    if (!user) return res.redirect(303, "http://localhost:3000/login");
+    if (!user) return res.redirect(303, `${process.env.DEPLOY_CLIENT_URL}/login`);
 
     if (!user.verify) {
       sendConfirmationEmail(token);

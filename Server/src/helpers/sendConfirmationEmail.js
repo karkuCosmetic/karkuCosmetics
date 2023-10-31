@@ -30,7 +30,7 @@ export const sendConfirmationEmail = async (token) => {
 
   let user = await User.findById(id, { password: 0 });
 
-  let url = `http://localhost:3000/confirm/${token}`;
+  let url = `${process.env.DEPLOY_CLIENT_URL}/confirm/${token}`;
   let email = user.email;
 
   ejs.renderFile(
@@ -65,7 +65,7 @@ export const ResendConfirmationEmail = async (emailUser) => {
 
   const { token } = generateToken(id);
   console.log(token);
-  let url = `http://localhost:3000/confirm/${token}`;
+  let url = `${process.env.DEPLOY_CLIENT_URL}/confirm/${token}`;
 
   ejs.renderFile(
     _path + "/Confirmation.ejs",
