@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../../components/NavBar/navbar";
 import "./Cart.css";
 import Footer from "../../components/Footer/footer";
-import { Link, useLocation } from "react-router-dom";
+import { Link, Navigate } from 'react-router-dom';
+import Swal from 'sweetalert2'; 
 
-export const Cart = () => {
+const Cart = () => {
   const [cart, SetCart] = useState(
     JSON.parse(localStorage.getItem("cart")) || []
   );
@@ -36,7 +37,30 @@ export const Cart = () => {
     return total;
   };
 
+  const handleContinueToCheckout = () => {
+  
+    const isUserLoggedIn = true; 
 
+    if (isUserLoggedIn) {
+ 
+      Navigate('/shipping');
+    } else {
+  
+      Swal.fire({
+        title: 'Inicia sesión',
+        text: 'Debes iniciar sesión para continuar con la compra.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Iniciar sesión',
+        cancelButtonText: 'Cancelar',
+      }).then((result) => {
+        if (result.isConfirmed) {
+         
+          Navigate('/login'); 
+        }
+      });
+    }
+  };
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -111,8 +135,9 @@ export const Cart = () => {
         <div className="cart-summary">
           <p className="total-label">Total:</p>
           <p className="total-amount">${calculateTotal().toFixed(2)}</p>
-          <Link to="/shipping" className="btn-buy">Continuar compra</Link>
-
+          <Link to="#" className="btn-buy" onClick={handleContinueToCheckout}>
+            Continuar compra
+          </Link>
         </div>
       </div>
       <Footer />
