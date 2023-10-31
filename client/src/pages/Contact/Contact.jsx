@@ -84,7 +84,7 @@ export const Contact = () => {
     setDataMensaje({ ...dataMensaje, [property]: value });
   };
 
-  const MAX_MESSAGE_LENGTH = 140; 
+  const MAX_MESSAGE_LENGTH = 140;
 
   useEffect(() => {
     window.scrollTo(0, 0);

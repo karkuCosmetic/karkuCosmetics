@@ -1,55 +1,71 @@
-import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import React  from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 import "./Gallery.css";
+
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
+
+// IMAGENES
 import Karku1 from "../../assets/AssetsHome/Karku1.jpg";
 import Karku2 from "../../assets/AssetsHome/Karku2.jpg";
 import Karku3 from "../../assets/AssetsHome/Karku3.jpg";
 import Karku4 from "../../assets/AssetsHome/Karku4.jpg";
 import Karku5 from "../../assets/AssetsHome/Karku5.jpg";
 import Karku6 from "../../assets/AssetsHome/Karku6.jpg";
+import Karku7 from "../../assets/AssetsHome/Karku7.jpg";
+import Karku8 from "../../assets/AssetsHome/Karku8.jpg";
+import Karku9 from "../../assets/AssetsHome/Karku9.jpg";
 
 const Gallery = () => {
   return (
-    <div
-      id="carouselExampleInterval"
-      class="carousel slide"
-      data-bs-ride="carousel"
-    >
-      <div class="carousel-inner">
-        <div class="carousel-item " data-bs-interval="5000">
-          <img src={Karku1} alt="..." />
-        </div>
-        <div class="carousel-item" data-bs-interval="5000">
-          <img src={Karku2} alt="..." />
-        </div>
-        <div class="carousel-item" data-bs-interval="5000">
-          <img src={Karku3} alt="..." />
-        </div>
-        <div class="carousel-item" data-bs-interval="5000">
-          <img src={Karku4} alt="..." />
-        </div>
-      </div>
-      <button
-        class="carousel-control-prev"
-        type="button"
-        data-bs-target="#carouselExampleInterval"
-        data-bs-slide="prev"
+    <>
+      <Swiper
+        spaceBetween={30}
+        centeredSlides={true}
+        autoplay={{
+          delay: 3500,
+          disableOnInteraction: false,
+        }}
+        pagination={{
+          clickable: true,
+        }}
+        navigation={true}
+        modules={[Autoplay, Pagination, Navigation]}
+        className="mySwiper"
       >
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button
-        class="carousel-control-next"
-        type="button"
-        data-bs-target="#carouselExampleInterval"
-        data-bs-slide="next"
-      >
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
+        <SwiperSlide>
+          <img src={Karku1} alt="Karku 1" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src={Karku2} alt="Karku 2" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src={Karku3} alt="Karku 3" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src={Karku4} alt="Karku 4" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src={Karku5} alt="Karku 5" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src={Karku6} alt="Karku 6" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src={Karku7} alt="Karku 7" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src={Karku8} alt="Karku 8" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src={Karku9} alt="Karku 9" />
+        </SwiperSlide>
+      </Swiper>
+    </>
   );
 };
 

@@ -1,22 +1,33 @@
-.carousel {
-  width: 60%;
+.swiper {
+  width: 80%;
+  height:90%;
+  
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 20px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
-.carousel-item img {
-  background-image: url(../../assets/bgDetailop1.jpg);
-  width: 100%;
+.swiper-slide img {
+  display: block;
+  width: 70%;
   height: 30rem;
-  object-fit: cover;
-  border-radius: 20px;
+  object-fit: contain;
+  border-radius: 10px;
+
 }
 
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  font-size: 2rem;
-  color: #007bff;
+.swiper-button-prev,
+.swiper-button-next {
+  color: #317d24;
+}
+
+.swiper-pagination {
+  padding: 1rem;
 }
