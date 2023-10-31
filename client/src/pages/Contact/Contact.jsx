@@ -30,7 +30,7 @@ export const Contact = () => {
       )
       .then(
         (result) => {
-          console.log(result.text);
+       
           MySwal.fire({
             icon: "success",
             title: "Mensaje enviado. Te responderemos a la brevedad.",
@@ -47,7 +47,7 @@ export const Contact = () => {
             user_phone: "",
             user_message: "",
           });
-          window.location.reload();
+          // window.location.reload();
         },
         (error) => {
           console.log(error.text);

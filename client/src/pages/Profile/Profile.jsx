@@ -370,7 +370,7 @@ const Profile = () => {
                           {selectedPurchase.detailPay.status}
                         </p>
                         <p>
-                          <strong>Envío: </strong>
+                          <strong>Envío: {selectedPurchase.detailPay.TrackNumber?selectedPurchase.detailPay.TrackNumber: "-"} </strong>
                         </p>
                       </div>
                       <div className="item-detail">

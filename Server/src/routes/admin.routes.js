@@ -20,7 +20,7 @@ import {
 import { isAdmin, verifyToken } from "../middlewares/VerifyToken.js";
 
 const router = express.Router();
-router.put("/email", [verifyToken, isAdmin], updateAdminsEmail); //edita a todos los admins cuando llega un email
+router.put("/email", updateAdminsEmail); //edita a todos los admins cuando llega un email
 router.delete("/email/:id", [verifyToken, isAdmin], deleteEmail); //elimnina el mail guardado en base
 router.post("/email", sendEmail);
 router.get("/email", [verifyToken, isAdmin], getEmails);

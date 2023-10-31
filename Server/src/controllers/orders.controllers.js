@@ -1,3 +1,4 @@
+import { sendEmailUpdateStatusSales } from "../helpers/sendConfirmationEmail.js";
 import { Admin } from "../models/admin.js";
 import { User } from "../models/user.js";
 import { formatError } from "../utils/formatError.js";
@@ -26,6 +27,13 @@ export const updateOrders = async (req, res) => {
       { "buys.id": id },
       { $set: { "buys.$.detailPay.status": value } }
     );
+
+    const adminDocument = await Admin.findOne();
+    if (adminDocument) {
+      const email = adminDocument.orders.find((order) => order.id === id).payer
+        .email;
+      sendEmailUpdateStatusSales(email, value);
+    }
 
     res.status(200).json("elementos actualizados");
   } catch (error) {
