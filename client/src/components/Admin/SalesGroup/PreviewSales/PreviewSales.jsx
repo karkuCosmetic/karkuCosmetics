@@ -11,9 +11,9 @@ const PreviewSales = ({ setSection }) => {
   const [sales, setSales] = useState([]);
   const [selectedSale, setSelectedSale] = useState(null);
   const [selectedStatus, setSelectedStatus] = useState("");
-  const [showEditField, setShowEditField] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
   const [shippingNumber, setShippingNumber] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
+  const [showEditField, setShowEditField] = useState(false);
 
   const orderSales = sales.slice(0, 6);
   const token = GetDecodedCookie("cookieToken");
@@ -63,21 +63,19 @@ const PreviewSales = ({ setSection }) => {
     setSelectedSale(null);
   };
 
-  const handleShippingNumberChange = (e) => {
-    setShippingNumber(e.target.value);
-  };
-
-  const handleSaveShippingNumber = () => {
-    setIsEditing(false);
-  };
-
-  
   const handleEditClick = () => {
     setIsEditing(true);
     setShowEditField(true);
   };
 
+  const handleShippingNumberChange = (e) => {
+    setShippingNumber(e.target.value);
+  };
 
+  const handleSaveShippingNumber = () => {
+    console.log("Número de envío:", shippingNumber);
+    updateSalesTranckingNumber(selectedSale.id,token,"correo",shippingNumber)
+  };
 
   return (
     <div className="sales-preview-container">
@@ -169,7 +167,6 @@ const PreviewSales = ({ setSection }) => {
                         {selectedSale.payer.adress?.provincia}.
                       </p>
                     </div>
-                    
                     <div className="tn-shipping">
                       <p>
                         <strong>TN: </strong>

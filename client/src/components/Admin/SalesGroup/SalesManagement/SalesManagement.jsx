@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { getSales, updateSalesById } from "../../../../functions/fetchingSales";
+import {
+  getSales,
+  updateSalesById,
+  updateSalesTranckingNumber,
+} from "../../../../functions/fetchingSales";
 import "./SalesManagement.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faPen, faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -83,10 +87,6 @@ const SalesManagement = ({ setSection }) => {
     }
   };
 
-  const handleShippingNumberChange = (e) => {
-    setShippingNumber(e.target.value);
-  };
-
   const filteredSales = filterSales();
 
   const productsPerPage = 15;
@@ -110,8 +110,18 @@ const SalesManagement = ({ setSection }) => {
     setShowEditField(true);
   };
 
+  const handleShippingNumberChange = (e) => {
+    setShippingNumber(e.target.value);
+  };
+
   const handleSaveShippingNumber = () => {
-    setIsEditing(false);
+    console.log("Número de envío:", shippingNumber);
+    updateSalesTranckingNumber(
+      selectedSale.id,
+      token,
+      "correo",
+      shippingNumber
+    );
   };
 
   return (
@@ -222,11 +232,10 @@ const SalesManagement = ({ setSection }) => {
                         {selectedSale.payer?.adress?.provincia}.
                       </p>
                     </div>
-
                     <div className="tn-shipping">
                       <p>
                         <strong>TN: </strong>
-                        {selectedSale.detailPay?.TrackNumber}{" "}
+                        {selectedSale.detailPay?.TrackNumber}
                       </p>
                       {isEditing ? (
                         <input
@@ -237,7 +246,7 @@ const SalesManagement = ({ setSection }) => {
                         />
                       ) : (
                         <FontAwesomeIcon
-                        className="icon-edit-shipping"
+                          className="icon-edit-shipping"
                           icon={faPen}
                           onClick={handleEditClick}
                         />
