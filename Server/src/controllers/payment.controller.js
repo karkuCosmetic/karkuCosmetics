@@ -7,7 +7,6 @@ import { Admin } from "../models/admin.js";
 import { generateUniqueID } from "../utils/GenerateId.js";
 import { DecodedToken } from "../utils/DecodedToken.js";
 
-
 export const createOrder = async (req, res) => {
   try {
     const data = req.body.carrito;
@@ -65,8 +64,7 @@ export const createOrder = async (req, res) => {
 
         // notification_url:
         //   "https://7011ths9-3001.brs.devtunnels.ms/payment/webhook",
-        notification_url:
-          `${process.env.DEPLOY_API_URL}/payment/webhook`,
+        notification_url: `${process.env.DEPLOY_API_URL}/payment/webhook`,
       };
 
       const result = await mercadopago.preferences.create(preference);
