@@ -85,7 +85,6 @@ const SalesManagement = ({ setSection }) => {
 
   const handleShippingNumberChange = (e) => {
     setShippingNumber(e.target.value);
-    console.log("Número de envío:", shippingNumber);
   };
 
   const filteredSales = filterSales();

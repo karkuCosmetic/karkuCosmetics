@@ -62,13 +62,13 @@ const PreviewSales = ({ setSection }) => {
   const closeSaleDetailsModal = () => {
     setSelectedSale(null);
   };
+
   const handleShippingNumberChange = (e) => {
     setShippingNumber(e.target.value);
   };
 
   const handleSaveShippingNumber = () => {
-    console.log("Número de envío:", shippingNumber);
-    updateSalesTranckingNumber(selectedSale.id,token,"correo",shippingNumber)
+    setIsEditing(false);
   };
 
   
@@ -173,7 +173,7 @@ const PreviewSales = ({ setSection }) => {
                     <div className="tn-shipping">
                       <p>
                         <strong>TN: </strong>
-                        {selectedSale.detailPay?.TrackNumber}{" "}
+                        {selectedSale.detailPay?.TrackNumber}
                       </p>
                       {isEditing ? (
                         <input
