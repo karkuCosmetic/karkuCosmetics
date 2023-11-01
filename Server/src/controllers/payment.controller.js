@@ -150,7 +150,6 @@ export const reciveWebhook = async (req, res) => {
           items: data.response.additional_info.items,
           status: "pendiente",
           optionSend: data.response.metadata.method,
-          delivery: "",
           TrackNumber: "",
         },
       };

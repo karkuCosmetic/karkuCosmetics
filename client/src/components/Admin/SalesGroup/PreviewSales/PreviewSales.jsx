@@ -74,7 +74,7 @@ const PreviewSales = ({ setSection }) => {
 
   const handleSaveShippingNumber = () => {
     console.log("Número de envío:", shippingNumber);
-    updateSalesTranckingNumber(selectedSale.id,token,"correo",shippingNumber)
+    updateSalesTranckingNumber(selectedSale.id,token,shippingNumber)
   };
 
   return (

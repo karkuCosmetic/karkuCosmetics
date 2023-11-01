@@ -32,11 +32,9 @@ export const updateSalesById = async (id, value, token) => {
 export const updateSalesTranckingNumber = async (
   id,
   token,
-  delivery,
   shippingNumber
 ) => {
   try {
-    console.log({ id, token, shippingNumber, delivery });
     const res = await axios.put(
       `${process.env.REACT_APP_URL_API}/admin/orders/delivery/${id}`,
       { shippingNumber, delivery },

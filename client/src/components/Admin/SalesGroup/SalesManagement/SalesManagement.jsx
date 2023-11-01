@@ -119,7 +119,6 @@ const SalesManagement = ({ setSection }) => {
     updateSalesTranckingNumber(
       selectedSale.id,
       token,
-      "correo",
       shippingNumber
     );
   };
