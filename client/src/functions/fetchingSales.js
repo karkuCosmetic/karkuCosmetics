@@ -37,7 +37,7 @@ export const updateSalesTranckingNumber = async (
   try {
     const res = await axios.put(
       `${process.env.REACT_APP_URL_API}/admin/orders/delivery/${id}`,
-      { shippingNumber, delivery },
+      { shippingNumber},
       {
         headers: { "user-token": token },
       }
