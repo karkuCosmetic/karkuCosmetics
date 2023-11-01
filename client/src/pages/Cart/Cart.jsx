@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../../components/NavBar/navbar";
 import "./Cart.css";
 import Footer from "../../components/Footer/footer";
-import { Link, Navigate } from 'react-router-dom';
-import Swal from 'sweetalert2'; 
+import { Link } from "react-router-dom"; // Importa Link en lugar de Navigate
+import Swal from "sweetalert2";
 
 const Cart = () => {
-  const [cart, SetCart] = useState(
+  const [cart, setCart] = useState(
     JSON.parse(localStorage.getItem("cart")) || []
   );
 
@@ -16,17 +16,17 @@ const Cart = () => {
     if (updatedCart[index].quantity < 1) {
       updatedCart[index].quantity = 1;
     }
-    SetCart(updatedCart);
+    setCart(updatedCart);
   };
 
   const handleRemoveItem = (index) => {
     const updatedCart = [...cart];
     updatedCart.splice(index, 1);
-    SetCart(updatedCart);
+    setCart(updatedCart);
   };
 
   const handleEmptyCart = () => {
-    SetCart([]);
+    setCart([]);
   };
 
   const calculateTotal = () => {
@@ -38,25 +38,21 @@ const Cart = () => {
   };
 
   const handleContinueToCheckout = () => {
-  
-    const isUserLoggedIn = true; 
+    const isUserLoggedIn = false;
 
     if (isUserLoggedIn) {
- 
-      Navigate('/shipping');
+      window.location.href = "/shipping";
     } else {
-  
       Swal.fire({
-        title: 'Inicia sesión',
-        text: 'Debes iniciar sesión para continuar con la compra.',
-        icon: 'warning',
+        title: "Inicia sesión",
+        text: "Debes iniciar sesión para continuar con la compra.",
+        icon: "warning",
         showCancelButton: true,
-        confirmButtonText: 'Iniciar sesión',
-        cancelButtonText: 'Cancelar',
+        confirmButtonText: "Iniciar sesión",
+        cancelButtonText: "Cancelar",
       }).then((result) => {
         if (result.isConfirmed) {
-         
-          Navigate('/login'); 
+          window.location.href = "/login";
         }
       });
     }

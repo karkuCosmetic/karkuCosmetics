@@ -7,7 +7,6 @@ export const Register = () => {
   const initialFormInput = {
     email: "",
     password: "",
-    phone: "",
   };
 
   const [formInput, setFormInput] = useState(initialFormInput);
@@ -18,8 +17,8 @@ export const Register = () => {
 
     if (
       property === "email" ||
-      property === "password" ||
-      property === "phone"
+      property === "password"
+
     ) {
       setFormInput({ ...formInput, [property]: value });
     }
@@ -83,14 +82,6 @@ export const Register = () => {
           placeholder="Escribe una contraseña"
           onChange={handlerChange}
           value={formInput.password}
-          required
-        />
-        <input
-          type="number"
-          name="phone"
-          placeholder="Escribe un teléfono"
-          onChange={handlerChange}
-          value={formInput.phone}
           required
         />
         <button type="submit">Registrarse</button>

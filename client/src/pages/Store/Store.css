@@ -278,8 +278,11 @@ a {
 
 @media (max-width: 600px) {
   .product-image {
+    display: flex;
+    justify-content: space-between;
     flex-direction: row;
     align-items: normal;
+    width: 100%;
   }
 }
 
@@ -292,7 +295,7 @@ a {
 
 @media (max-width: 600px) {
   .product-image img {
-    width: 5rem;
+    max-width: 5rem;
     height: 4rem;
     border-radius: 5px;
     object-fit: cover;
@@ -459,6 +462,10 @@ a {
 @media (max-width: 870px) {
   .price-filter {
     margin-top: 0.5rem;
+  }
+  .h3-store {
+    color: black;
+    background-color: rgba(255, 255, 255, 0);
   }
 }
 

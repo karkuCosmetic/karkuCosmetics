@@ -3,7 +3,6 @@ import Login from "../../components/Login/login";
 import Register from "../../components/Register/register";
 import "./LoginPage.css";
 import Navbar from "../../components/NavBar/navbar";
-import Footer from "../../components/Footer/footer";
 import { ForgotPassword } from "../../components/ForgotPassword/forgotPassword";
 
 const LoginPage = () => {
@@ -26,7 +25,7 @@ const LoginPage = () => {
           setFormPassword={setFormPassword}
         />
       )}
-      <Footer />
+  
     </div>
   );
 };

@@ -13,17 +13,17 @@
   align-items: center;
   text-align: center;
   width: 10rem;
-  background-color: #f38f82;
+  background-color: #317d24;
   color: white;
-  padding: 1rem;
+  padding: 1rem 2rem;
   border-radius: 15px;
-  font-family: "quicksand";
+  font-family: "figtree";
   box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
     rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
 
-.login-hello p{
-  font-size: 20px;
+.login-hello p {
+  font-size: 20px ;
 }
 
 .login-form {
@@ -36,7 +36,7 @@
   border-radius: 10px;
   box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
     rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
-  background-color: #f38f82;
+  background-color:   #91be7f;
 }
 
 @media (min-width: 600px) {
@@ -57,12 +57,12 @@
   margin-bottom: 10px;
   border: 1px solid #ccc;
   background-color: #fff;
-  font-size: 14px;
-  font-family: "quicksand";
+  font-size: 14px !important;
+  font-family: "figtree";
 }
 
 .login-form input::placeholder {
-  font-family: "quicksand";
+  font-family: "figtree";
   font-style: italic;
   color: #999;
 }
@@ -73,7 +73,7 @@
   align-items: center;
   margin-top: 1.5rem;
   text-decoration: none;
-  font-family: "quicksand";
+  font-family: "figtree";
   color: #ffffff;
   gap: 5px;
 }
@@ -83,8 +83,9 @@
   justify-content: center;
   align-items: center;
   text-decoration: none;
-  font-family: "quicksand";
-  color: #7b60c8;
+  font-family: "figtree";
+  font-weight: bold;
+  color: #317d24;
   cursor: pointer;
 }
 
@@ -101,7 +102,7 @@
   display: flex;
   justify-content: left;
   text-decoration: none;
-  font-family: "quicksand";
+  font-family: "figtree";
   color: #ffffff;
   cursor: pointer;
   margin-top: 1rem;
@@ -109,7 +110,7 @@
 }
 
 .button-login {
-  background-color: #7b60c8;
+  background-color: #317d24;
   border-radius: 5px;
   padding: 0.5rem;
   width: 100%;
@@ -120,7 +121,7 @@
   text-decoration: none;
   transition: all 250ms;
   border: 0;
-  font-family: "quicksand";
+  font-family: "figtree";
   font-size: 16px;
   user-select: none;
   -webkit-user-select: none;
@@ -128,9 +129,9 @@
 }
 
 .login-form button:hover {
-  background-color: #d3599f;
+  background-color: #f38f82;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  transform: scale(1.02);
+
 }
 
 .login-form button:not([disabled]):focus {
@@ -153,10 +154,10 @@ button .recover-password-btn {
   display: flex;
   text-align: left;
   min-width: 10rem;
-  color: #7b60c8;
+  color: #317d24;
   font-size: 0.85rem;
   padding: 2rem;
-  font-family: "quicksand";
+  font-family: "figtree";
 }
 
 input:focus {
@@ -167,7 +168,7 @@ input:focus {
   display: flex;
   align-items: center;
   text-align: center;
-  font-family: "quicksand";
+  font-family: "figtree";
   color: white;
   border-radius: 10px;
 }
@@ -177,11 +178,30 @@ input:focus {
   align-items: center;
   text-align: center;
   width: 23rem;
-  background-color: #7b60c8;
-  font-family: "quicksand";
+  background-color:  #317d24;
+  font-family: "figtree";
   color: white;
   border-radius: 10px;
-  padding: 1rem;
+  padding: 1rem 2rem;
   box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
     rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
+/* COLORES USER */
+
+.color1 {
+  color: #317d24;
+}
+.color2 {
+  color: #619d52;
+}
+.color3 {
+  color: #91be7f;
+}
+.color4 {
+  color: #c2deac;
+}
+
+.color5 {
+  color: #f2ffd9;
 }
