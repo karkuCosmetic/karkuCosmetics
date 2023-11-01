@@ -272,12 +272,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
   gap: 0.5rem;
 }
 
 .name-lastName-container p {
   font-family: "figtree";
   font-size: 18px;
+  max-width: 30rem;
 }
 
 .products-totalPay-detailSale {

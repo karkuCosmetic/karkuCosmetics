@@ -3,7 +3,7 @@ import { getSales, updateSalesById, updateSalesTranckingNumber } from "../../../
 import "./PreviewSales.css";
 import { GetDecodedCookie } from "../../../../utils/DecodedCookie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faTimes } from "@fortawesome/free-solid-svg-icons";
 import SelectStatusSales from "../../../SelectStatusSales/SelectStatusSales";
 import Swal from "sweetalert2";
 
@@ -11,6 +11,8 @@ const PreviewSales = ({ setSection }) => {
   const [sales, setSales] = useState([]);
   const [selectedSale, setSelectedSale] = useState(null);
   const [selectedStatus, setSelectedStatus] = useState("");
+  const [showEditField, setShowEditField] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const [shippingNumber, setShippingNumber] = useState("");
 
   const orderSales = sales.slice(0, 6);
@@ -68,6 +70,14 @@ const PreviewSales = ({ setSection }) => {
     console.log("Número de envío:", shippingNumber);
     updateSalesTranckingNumber(selectedSale.id,token,"correo",shippingNumber)
   };
+
+  
+  const handleEditClick = () => {
+    setIsEditing(true);
+    setShowEditField(true);
+  };
+
+
 
   return (
     <div className="sales-preview-container">
@@ -127,20 +137,6 @@ const PreviewSales = ({ setSection }) => {
                 <p>
                   <strong>Venta N° :</strong> {selectedSale.id}
                 </p>
-                <div className="shipping-input-container">
-                  <input
-                    type="text"
-                    placeholder="Número de envío"
-                    value={shippingNumber}
-                    onChange={handleShippingNumberChange}
-                  />
-                  <button
-                    className="btn-save-shipping"
-                    onClick={handleSaveShippingNumber}
-                  >
-                    Guardar Envío
-                  </button>
-                </div>
                 <div className="status-btnSave-container">
                   <p>
                     <strong>Estado:</strong>
@@ -172,6 +168,36 @@ const PreviewSales = ({ setSection }) => {
                         {selectedSale.payer.adress?.localidad},
                         {selectedSale.payer.adress?.provincia}.
                       </p>
+                    </div>
+                    
+                    <div className="tn-shipping">
+                      <p>
+                        <strong>TN: </strong>
+                        {selectedSale.detailPay?.TrackNumber}{" "}
+                      </p>
+                      {isEditing ? (
+                        <input
+                          type="text"
+                          placeholder="Número de envío"
+                          value={shippingNumber}
+                          onChange={handleShippingNumberChange}
+                        />
+                      ) : (
+                        <FontAwesomeIcon
+                        className="icon-edit-shipping"
+                          icon={faPen}
+                          onClick={handleEditClick}
+                        />
+                      )}
+
+                      {isEditing && (
+                        <button
+                          className="btn-save-shipping"
+                          onClick={handleSaveShippingNumber}
+                        >
+                          Guardar Envío
+                        </button>
+                      )}
                     </div>
                   </div>
                   <div className="date-total-container">

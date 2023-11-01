@@ -1,7 +1,7 @@
 .custom-select-status {
   position: relative;
   width: 9rem;
-  border: 1px solid #317d24 !important;
+  border: 1px solid #f38f82 !important;
   border-radius: 5px;
   cursor: pointer;
   user-select: none;
@@ -24,14 +24,14 @@
   flex-grow: 1;
   padding-right: 10px;
   font-family: "figtree";
-  color: black !important;
+  color: #7d3c93 !important;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .selected-option-preview svg {
-  color: #317d24 !important;
+  color: #7d3c93 !important;
   transition: transform 0.2s;
 }
 
@@ -40,7 +40,7 @@
   width: 100%;
   margin-top: 0.1rem;
   font-family: "figtree";
-  color: #317d24;
+  color: #f38f82;
   background-color: #fff;
   border: 1px solid #7d3c93 !important;
   border-radius: 5px;
@@ -50,7 +50,7 @@
 
 .options-preview.open {
   display: block;
-  color: #317d24;
+  color: #f38f82;
 }
 
 .option-preview {
@@ -61,12 +61,12 @@
 }
 
 .option-preview:hover {
-  background-color: #619d52 !important;
+  background-color: #f38f82 !important;
   color: #ffffff;
 }
 
 .option-preview.selected {
-  background-color: #619d52 !important;
+  background-color: #f38f82 !important;
   color: #ffffff;
   font-family: "figtree";
 }

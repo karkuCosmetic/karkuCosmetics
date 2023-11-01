@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getSales, updateSalesById } from "../../../../functions/fetchingSales";
 import "./SalesManagement.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faPen, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { GetDecodedCookie } from "../../../../utils/DecodedCookie";
 import SelectStatusSales from "../../../SelectStatusSales/SelectStatusSales";
 import Swal from "sweetalert2";
@@ -14,6 +14,8 @@ const SalesManagement = ({ setSection }) => {
   const [selectedStatus, setSelectedStatus] = useState("");
   const [selectedSale, setSelectedSale] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [showEditField, setShowEditField] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const [shippingNumber, setShippingNumber] = useState("");
 
   const token = GetDecodedCookie("cookieToken");
@@ -83,9 +85,6 @@ const SalesManagement = ({ setSection }) => {
 
   const handleShippingNumberChange = (e) => {
     setShippingNumber(e.target.value);
-  };
-
-  const handleSaveShippingNumber = () => {
     console.log("Número de envío:", shippingNumber);
   };
 
@@ -106,6 +105,15 @@ const SalesManagement = ({ setSection }) => {
   const currentSales = filteredSales.slice(indexOfFirstSale, indexOfLastSale);
 
   const isNextButtonDisabled = clampedCurrentPage >= totalPages;
+
+  const handleEditClick = () => {
+    setIsEditing(true);
+    setShowEditField(true);
+  };
+
+  const handleSaveShippingNumber = () => {
+    setIsEditing(false);
+  };
 
   return (
     <div className="sales-container">
@@ -181,20 +189,7 @@ const SalesManagement = ({ setSection }) => {
                 <p>
                   <strong>Venta N° :</strong> {selectedSale.id}
                 </p>
-                <div className="shipping-input-container">
-                  <input
-                    type="text"
-                    placeholder="Número de envío"
-                    value={shippingNumber}
-                    onChange={handleShippingNumberChange}
-                  />
-                  <button
-                    className="btn-save-shipping"
-                    onClick={handleSaveShippingNumber}
-                  >
-                    Guardar Envío
-                  </button>
-                </div>
+
                 <div className="status-btnSave-container">
                   <p>
                     <strong>Estado:</strong>
@@ -227,6 +222,36 @@ const SalesManagement = ({ setSection }) => {
                         {selectedSale.payer?.adress?.localidad},{" "}
                         {selectedSale.payer?.adress?.provincia}.
                       </p>
+                    </div>
+
+                    <div className="tn-shipping">
+                      <p>
+                        <strong>TN: </strong>
+                        {selectedSale.detailPay?.TrackNumber}{" "}
+                      </p>
+                      {isEditing ? (
+                        <input
+                          type="text"
+                          placeholder="Número de envío"
+                          value={shippingNumber}
+                          onChange={handleShippingNumberChange}
+                        />
+                      ) : (
+                        <FontAwesomeIcon
+                        className="icon-edit-shipping"
+                          icon={faPen}
+                          onClick={handleEditClick}
+                        />
+                      )}
+
+                      {isEditing && (
+                        <button
+                          className="btn-save-shipping"
+                          onClick={handleSaveShippingNumber}
+                        >
+                          Guardar Envío
+                        </button>
+                      )}
                     </div>
                   </div>
                   <div className="date-total-container">
