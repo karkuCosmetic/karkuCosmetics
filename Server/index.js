@@ -12,19 +12,25 @@ import cors from "cors";
 import "./src/dataBase/connectDB.js";
 const app = express();
 
-// app.use(
-//   cors({
-//     origin: function (origin, callback) {
-//       console.log("😲😲😲 =>", origin);
-//       if (!origin || whiteList.includes(origin)) {
-//         return callback(null, origin);
-//       }
-//       return callback("Error de CORS origin: " + origin + " No autorizado!");
-//     },
-//     credentials: true,
-//   })
-// );
-app.use(cors())
+const whiteList = [
+  process.env.DEPLOY_CLIENT_URL,
+  "https://karku-cosmetics-qg8h3jmpz-karkucosmetic.vercel.app",
+  // Agrega aquí otros orígenes permitidos si es necesario
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      console.log("😲😲😲 =>", origin);
+      if (!origin || whiteList.includes(origin)) {
+        return callback(null, origin);
+      }
+      return callback("Error de CORS origin: " + origin + " No autorizado!");
+    },
+    credentials: true,
+  })
+);
+// app.use(cors())
 app.use(morgan("dev"));
 app.use(express.json());
 
