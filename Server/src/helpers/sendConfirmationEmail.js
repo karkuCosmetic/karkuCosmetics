@@ -64,7 +64,6 @@ export const ResendConfirmationEmail = async (emailUser) => {
   let id = user._id.toString();
 
   const { token } = generateToken(id);
-  console.log(token);
   let url = `${process.env.DEPLOY_CLIENT_URL}/confirm/${token}`;
 
   ejs.renderFile(
