@@ -49,10 +49,10 @@
   gap: 3rem;
 }
 
-.item-image {
+/* .item-image {
   flex: 0 0 2rem;
   height: 2rem;
-}
+} */
 
 .item-title {
   flex: 1;

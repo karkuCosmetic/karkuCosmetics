@@ -52,7 +52,8 @@
   height: 5rem;
   border-radius: 50%;
   object-fit: contain;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
 .edit-avatar {
@@ -95,7 +96,7 @@
 }
 
 .selected-avatar {
-  border: 2px solid  #317d24;
+  border: 2px solid #317d24;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -133,7 +134,7 @@
 
 @media (max-width: 520px) {
   .purchase-history-card {
-    width: 95%;
+    width: 100%;
   }
 }
 
@@ -185,7 +186,7 @@
 .label-edit-profile {
   font-family: "jost";
   margin: 0;
-  color: #7b60c8;
+  color:#317d24;
 }
 
 .profile-card button {
@@ -211,7 +212,7 @@
 }
 
 .profile-card button:hover {
-  background-color: #d3599f;
+  background-color: #f38f82;
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
   transform: scale(1.05);
 }
@@ -278,6 +279,7 @@ input:focus {
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .item-title-img {
@@ -316,8 +318,8 @@ input:focus {
   position: relative;
 }
 
-@media (max-width: 525px){
-  .modal-content{
+@media (max-width: 525px) {
+  .modal-content {
     width: 95%;
   }
 }
@@ -337,7 +339,7 @@ input:focus {
   justify-content: space-between;
   width: 90%;
   padding-bottom: 0.5rem;
-  border-bottom: 1px solid #7b60c8;
+  border-bottom: 1px solid #619d52;
 }
 
 @media (max-width: 525px) {
@@ -348,6 +350,45 @@ input:focus {
     justify-content: center;
     gap: 1rem;
   }
+}
+
+.copy-shipping {
+  background-color: #317d24;
+  border-radius: 10px;
+  padding: 0.5em;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-family: "jost";
+  font-size: 12px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.follow-shipping {
+  background-color: #317d24;
+  border-radius: 10px;
+  width: 7rem;
+  padding: 0.2rem 0.8rem;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-family: "jost";
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
 .item-image-detail {
@@ -362,8 +403,8 @@ input:focus {
   gap: 1rem;
 }
 
-@media (max-width: 525px){
-  .item-detail{
+@media (max-width: 525px) {
+  .item-detail {
     width: 100%;
   }
 }
@@ -397,7 +438,9 @@ input:focus {
   margin-top: 1rem;
 }
 
-
+.products-full-container {
+  border: 1px solid #619d52;
+}
 
 .purchase-history-item {
   display: flex;
@@ -410,7 +453,7 @@ input:focus {
   .purchase-history-item {
     width: 100%;
   }
-  .item-detail-container{
+  .item-detail-container {
     width: 100%;
   }
 }
@@ -424,10 +467,10 @@ input:focus {
   padding-bottom: 5rem;
 }
 
-@media (max-width: 525px){
-.pagination-history{
-  padding-bottom: 1rem;
-}
+@media (max-width: 525px) {
+  .pagination-history {
+    padding-bottom: 1rem;
+  }
 }
 
 .pagination-history button {
@@ -494,8 +537,8 @@ input:focus {
   gap: 5rem;
 }
 
-@media (max-width: 525px){
-  .payment-detail-purchase{
+@media (max-width: 525px) {
+  .payment-detail-purchase {
     display: flex;
     flex-direction: column;
     gap: 1rem;

@@ -10,6 +10,7 @@ import {
   faCircleXmark,
   faArrowLeft,
   faArrowRight,
+  faCopy,
 } from "@fortawesome/free-solid-svg-icons";
 import PurchaseHistoryItem from "../../components/PurchaseHistoryItem/purchaseHistoryItem";
 
@@ -23,6 +24,7 @@ const Profile = () => {
     image: profile.image ? profile.image : "",
   });
   const [dataUpdateAdress, setDataUpdateAdress] = useState(profile.adress);
+  const [trackNumberCopied, setTrackNumberCopied] = useState(false);
 
   const [selectedPurchase, setSelectedPurchase] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -116,6 +118,18 @@ const Profile = () => {
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
     console.log("currentPage:", pageNumber);
+  };
+
+  const handleCopyTrackNumber = () => {
+    if (selectedPurchase.detailPay.TrackNumber) {
+      const textArea = document.createElement("textarea");
+      textArea.value = selectedPurchase.detailPay.TrackNumber;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textArea);
+      setTrackNumberCopied(true);
+    }
   };
 
   return (
@@ -370,8 +384,29 @@ const Profile = () => {
                           {selectedPurchase.detailPay.status}
                         </p>
                         <p>
-                          <strong>Envío: {selectedPurchase.detailPay.TrackNumber?selectedPurchase.detailPay.TrackNumber: "-"} </strong>
+                          <strong>Envío: </strong>
+                          {selectedPurchase.detailPay.TrackNumber ? (
+                            <>
+                              {selectedPurchase.detailPay.TrackNumber}{" "}
+                              <button
+                                onClick={handleCopyTrackNumber}
+                                className="copy-shipping"
+                              >
+                                Copiar N°
+                              </button>
+                            </>
+                          ) : (
+                            "-"
+                          )}
                         </p>
+                        <a
+                          href="https://www.correoargentino.com.ar/formularios/ondnc"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="follow-shipping"
+                        >
+                          Seguir envío
+                        </a>
                       </div>
                       <div className="item-detail">
                         <div className="item-detail-container">
