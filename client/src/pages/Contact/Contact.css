@@ -17,7 +17,7 @@ body {
 
 @media (max-width: 400px) {
   .contact-container {
-    height: 90vh;
+    height: 100vh;
   }
 }
 

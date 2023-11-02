@@ -76,7 +76,7 @@ export const Contact = () => {
     setDataMensaje({ ...dataMensaje, [property]: value });
   };
 
-  const MAX_MESSAGE_LENGTH = 140;
+  const MAX_MESSAGE_LENGTH = 500;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -123,7 +123,7 @@ export const Contact = () => {
           <textarea
             name="user_message"
             onChange={handlerChange}
-            placeholder="Máximo 140 carácteres."
+            placeholder="Máximo 500 carácteres."
             maxLength={MAX_MESSAGE_LENGTH}
             required
           />
