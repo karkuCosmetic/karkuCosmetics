@@ -1,7 +1,7 @@
 import express from "express";
 import morgan from "morgan";
 import "dotenv/config";
-import productRoute from "./src/routes/product.routes.js"
+import productRoute from "./src/routes/product.routes.js";
 import userRouter from "./src/routes/user.routes.js";
 import authRouter from "./src/routes/auth.routes.js";
 import AdminRouter from "./src/routes/admin.routes.js";
@@ -15,7 +15,7 @@ const app = express();
 const whiteList = [
   process.env.DEPLOY_CLIENT_URL,
   "https://karku-cosmetics-qg8h3jmpz-karkucosmetic.vercel.app",
-"  https://karku-cosmetics.vercel.app/"
+  "https://karku-cosmetics.vercel.app",
   // Agrega aquí otros orígenes permitidos si es necesario
 ];
 
@@ -35,16 +35,15 @@ app.use(
 app.use(morgan("dev"));
 app.use(express.json());
 
-
 app.use("/", authRouter);
 app.use("/email", emailRouter);
 
 app.use("/user", userRouter);
 app.use("/admin", AdminRouter);
 
-app.use("/products",productRoute)
+app.use("/products", productRoute);
 
-app.use("/payment", paymentRoute)
+app.use("/payment", paymentRoute);
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
