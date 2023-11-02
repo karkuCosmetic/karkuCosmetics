@@ -30,7 +30,6 @@ export const Contact = () => {
       )
       .then(
         (result) => {
-       
           MySwal.fire({
             icon: "success",
             title: "Mensaje enviado. Te responderemos a la brevedad.",
@@ -61,13 +60,6 @@ export const Contact = () => {
       );
 
     UpdateAdmin(dataMensaje);
-  };
-
-  const handleKeyPress = (event) => {
-    const validCharacters = /^[0-9]*$/;
-    if (!validCharacters.test(event.key)) {
-      event.preventDefault();
-    }
   };
 
   const handlerChange = (event) => {
@@ -124,7 +116,6 @@ export const Contact = () => {
             type="number"
             name="user_phone"
             onChange={handlerChange}
-            onKeyPress={handleKeyPress}
             placeholder="Numero telefonico"
             required
           />
