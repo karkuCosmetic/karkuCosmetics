@@ -175,11 +175,9 @@ const Store = () => {
                   value={searchQuery}
                   onChange={handleSearchInputChange}
                 />
-                <FontAwesomeIcon
-                  icon={faSearch}
-                  className="search-icon"
+                <button
                   onClick={handleSearch}
-                />
+                >Buscar</button>
               </div>
               <div className="render-select">
                 <RenderSelect
@@ -244,7 +242,7 @@ const Store = () => {
                   <input
                     className="input-price-store"
                     type="number"
-                    placeholder="Mínimo"
+                    placeholder="$ Mínimo"
                     value={minPrice}
                     onChange={(e) => setMinPrice(e.target.value)}
                   />
@@ -252,12 +250,10 @@ const Store = () => {
                   <input
                     className="input-price-store"
                     type="number"
-                    placeholder="Máximo"
+                    placeholder="$ Máximo"
                     value={maxPrice}
                     onChange={(e) => setMaxPrice(e.target.value)}
                   />
-                </div>
-                <div className="button-filter-store">
                   <button
                     className="button-filtrar"
                     onClick={handlePriceFilter}
@@ -265,6 +261,8 @@ const Store = () => {
                     Filtrar
                   </button>
                 </div>
+                {/* <div className="button-filter-store">
+                </div> */}
               </div>
             </div>
             <div className="cards-container">
