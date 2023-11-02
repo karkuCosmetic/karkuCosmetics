@@ -55,7 +55,6 @@ body {
 
 @media (max-width: 768px) {
   .welcome {
-    height: 30rem;
     background-image: url(../../assets/AssetsHome/Karku13.jpg);
   }
   .welcome-home {
@@ -89,7 +88,7 @@ body {
     background-image: none;
     box-shadow: none;
     padding: 2rem;
-    background-image: url(../../assets/bgContact.png);
+    background-image: url(../../assets/AssetsHome/bgContact.png);
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
@@ -107,7 +106,7 @@ body {
   text-align: center;
   align-items: center;
   justify-content: center;
-  background-color: #619d52;
+  background-color: #619d52c2;
   padding: 20px 40px;
   margin-bottom: 1rem;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
@@ -261,7 +260,7 @@ body {
   text-align: center;
   align-items: center;
   justify-content: center;
-  background-color: #619d52;
+  background-color: #619d52c2;
   padding: 20px 40px;
   margin-bottom: 1rem;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
@@ -334,7 +333,7 @@ body {
   text-align: center;
   align-items: center;
   justify-content: center;
-  background-color: #619d52;
+  background-color: #619d52c2;
   padding: 20px 40px;
   margin-bottom: 1rem;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
