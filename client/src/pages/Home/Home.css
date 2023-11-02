@@ -42,15 +42,26 @@ body {
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 1rem;
+  padding: 0.5rem;
   gap: 0.5rem;
-  font-family: "Jost";
+  font-family: "Figtree";
   font-size: 22px;
   color: #ffffff;
   justify-content: center;
   align-items: center;
   backdrop-filter: blur(1px);
   background-color: #619d529c;
+}
+
+@media (max-width: 768px) {
+  .welcome {
+    height: 30rem;
+    background-image: url(../../assets/AssetsHome/Karku13.jpg);
+  }
+  .welcome-home {
+    gap: 0;
+    font-size: 18px;
+  }
 }
 
 .textIntro-sections {
@@ -73,15 +84,32 @@ body {
     rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
 
+@media (max-width: 768px) {
+  .textIntro-sections {
+    background-image: none;
+    box-shadow: none;
+    padding: 2rem;
+    background-image: url(../../assets/bgContact.png);
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+      rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+  }
+}
+
 .textIntro-sections p {
-  width: 100%;
-  backdrop-filter: blur(1px);
-  background-color: #619d52af;
-  padding: 1rem;
-  border-radius: 10px;
   font-family: "figtree";
-  font-size: 18px;
+  font-size: 16px;
+  border-radius: 10px;
   color: white;
+  max-width: 800px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  background-color: #619d52;
+  padding: 20px 40px;
+  margin-bottom: 1rem;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
@@ -112,9 +140,9 @@ body {
   justify-content: center;
   flex-direction: column;
   width: 100%;
+  max-width: 900px;
   height: auto;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 }
 
 .text1-home,
@@ -126,14 +154,16 @@ body {
   text-align: justify;
 }
 
-.text1-home p,
-.text2-home p,
-.text3-home p,
-.text4-home p {
+.section1-1-home p,
+.section1-2-home p,
+.section1-3-home p,
+.section1-4-home p {
   height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: justify;
+  margin-bottom: 2rem;
 }
 
 .text1-img-home,
@@ -148,12 +178,19 @@ body {
 }
 
 @media (max-width: 768px) {
+  .features {
+    background-color: white;
+    background-image: none;
+  }
+
   .section1-home {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   .section1-1-home,
@@ -163,9 +200,9 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding: 1rem;
     height: 35rem;
-    margin-bottom: 5rem;
+    margin-bottom: 3rem;
+    margin-top: 3rem;
   }
 
   .text1-home,
@@ -174,10 +211,13 @@ body {
   .text4-home {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
     flex-direction: row;
     width: 100%;
     padding: 0;
   }
+
   .text1-img-home,
   .text2-img-home,
   .text3-img-home,
@@ -197,7 +237,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 5rem;
+    /* padding-top: 5rem; */
   }
 
   .img1-home img {
@@ -215,7 +255,7 @@ body {
 
 .title-carousel {
   font-family: "figtree";
-  font-size: 18px;
+  font-size: 16px;
   border-radius: 10px;
   color: white;
   text-align: center;
@@ -229,6 +269,13 @@ body {
 }
 
 @media (max-width: 768px) {
+  .text1-home,
+  .text2-home,
+  .text3-home,
+  .text4-home {
+    padding-bottom: 2rem;
+  }
+
   .title-carousel {
     display: flex;
     width: 100%;
@@ -277,16 +324,23 @@ body {
 }
 
 .text-map-home {
+  font-family: "figtree";
+  font-size: 16px;
+  border-radius: 10px;
+  color: white;
   width: 50%;
   display: flex;
   flex-direction: column;
   text-align: center;
-  padding: 2rem;
-  line-height: 1.5;
-  border-radius: 10px;
-  background-color: #c2deac;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  align-items: center;
+  justify-content: center;
+  background-color: #619d52;
+  padding: 20px 40px;
+  margin-bottom: 1rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
+
 @media (max-width: 768px) {
   .map-container {
     display: flex;
@@ -432,10 +486,9 @@ body {
   }
 }
 
-/* Otra media query para pantallas aún más pequeñas */
 @media (max-width: 480px) {
   .gallery > img {
-    width: 100%; /* Volver al ancho al 100% del contenedor */
+    width: 100%;
   }
 }
 

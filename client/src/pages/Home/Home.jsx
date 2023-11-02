@@ -67,118 +67,89 @@ const Home = () => {
             ambiente.
           </p>
         </div>
-        <div className="sections-home-container">
-          <div className="section1-home">
-            <div className="section1-1-home" data-aos="zoom-in">
-              <p className="title-section">Capilares</p>
-              <div className="text1-img-home">
-                <div className="text1-home" data-aos="zoom-in-right">
-                  <p>
-                    Los productos de cosmética capilar natural son una elección
-                    perfecta para mantener la salud y belleza de tu cabello de
-                    manera sostenible. El uso de ingredientes naturales, como
-                    aceites esenciales, extractos de plantas y aceites
-                    vegetales, ayuda a fortalecer el cabello, aportando brillo y
-                    suavidad. Estos productos evitan la exposición a químicos
-                    dañinos, lo que es beneficioso tanto para tu cabello como
-                    para el medio ambiente. Además, la cosmética capilar natural
-                    suele ser libre de crueldad animal, promoviendo prácticas
-                    éticas en la industria.
-                  </p>
-                </div>
-                <div className="img1-home" data-aos="flip-right">
-                  <div class="gallery">
-                    <img src={KarkuImg6} alt="" />
-                    <img src={KarkuImg7} alt="" />
-                    <img src={KarkuImg3} alt="" />
-                    <img src={KarkuImg2} alt="" />
-                  </div>
-                </div>
+        <div className="section1-home">
+          <div className="section1-1-home" data-aos="zoom-in">
+            <p className="title-section">Capilares</p>
+            <p>
+              Los productos de cosmética capilar natural son una elección
+              perfecta para mantener la salud y belleza de tu cabello de manera
+              sostenible. El uso de ingredientes naturales, como aceites
+              esenciales, extractos de plantas y aceites vegetales, ayuda a
+              fortalecer el cabello, aportando brillo y suavidad. Estos
+              productos evitan la exposición a químicos dañinos, lo que es
+              beneficioso tanto para tu cabello como para el medio ambiente.
+              
+            </p>
+            <div className="img1-home" data-aos="flip-right">
+              <div class="gallery">
+                <img src={KarkuImg6} alt="" />
+                <img src={KarkuImg7} alt="" />
+                <img src={KarkuImg3} alt="" />
+                <img src={KarkuImg2} alt="" />
               </div>
             </div>
-            <div className="section1-2-home " data-aos="zoom-in">
-              <p className="title-section">Corporales</p>
-              <div className="text2-img-home">
-                <div className="text2-home" data-aos="zoom-in-left">
-                  <p>
-                    Los productos de cuidado corporal naturales, como cremas,
-                    sueros y jabones, son esenciales para una rutina de cuidado
-                    de la piel saludable y respetuosa con el planeta. Estos
-                    productos están formulados con ingredientes naturales, como
-                    aceites esenciales, mantecas vegetales y extractos de
-                    plantas, que nutren y protegen la piel de manera efectiva.
-                    Al optar por la cosmética corporal natural, estás evitando
-                    la exposición a químicos agresivos y optando por soluciones
-                    respetuosas con el medio ambiente.
-                  </p>
-                </div>
-                <div className="img1-home" data-aos="flip-left">
-                  <div class="gallery">
-                    <img src={KarkuImg6} alt="" />
-                    <img src={KarkuImg7} alt="" />
-                    <img src={KarkuImg3} alt="" />
-                    <img src={KarkuImg2} alt="" />
-                  </div>
-                </div>
+          </div>
+          <div className="section1-2-home " data-aos="zoom-in">
+            <p className="title-section">Corporales</p>
+            <p>
+              Los productos de cuidado corporal naturales, como cremas, sueros y
+              jabones, son esenciales para una rutina de cuidado de la piel
+              saludable y respetuosa con el planeta. Estos productos están
+              formulados con ingredientes naturales, como aceites esenciales,
+              mantecas vegetales y extractos de plantas, que nutren y protegen
+              la piel de manera efectiva.
+            </p>
+            <div className="img1-home" data-aos="flip-left">
+              <div class="gallery">
+                <img src={KarkuImg6} alt="" />
+                <img src={KarkuImg7} alt="" />
+                <img src={KarkuImg3} alt="" />
+                <img src={KarkuImg2} alt="" />
               </div>
             </div>
-            <div className="section1-3-home" data-aos="zoom-in">
-              <p className="title-section">Faciales</p>
-              <div className="text3-img-home">
-                <div className="text3-home" data-aos="zoom-in-right">
-                  <p>
-                    Los productos de cuidado facial naturales, como cremas,
-                    sueros y limpiadores, son esenciales para mantener una piel
-                    sana y radiante. Formulados con ingredientes naturales como
-                    aceites esenciales y extractos de plantas, estos productos
-                    nutren y protegen la piel de manera efectiva sin el uso de
-                    químicos agresivos. Optar por la cosmética facial natural es
-                    una elección respetuosa con tu piel y el medio ambiente.
-                    Además, muchas marcas éticas no realizan pruebas en
-                    animales, lo que hace que cuidar tu piel sea una experiencia
-                    consciente y compasiva. ¡Descubre la belleza de la
-                    naturaleza en tu rutina de cuidado facial!
-                  </p>
-                </div>
-                <div className="img1-home" data-aos="flip-left">
-                  <div class="gallery">
-                    <img src={KarkuImg6} alt="" />
-                    <img src={KarkuImg7} alt="" />
-                    <img src={KarkuImg3} alt="" />
-                    <img src={KarkuImg2} alt="" />
-                  </div>
-                </div>
+          </div>
+          <div className="section1-3-home" data-aos="zoom-in">
+            <p className="title-section">Faciales</p>
+            <p>
+              Los productos de cuidado facial naturales, como cremas, sueros y
+              limpiadores, son esenciales para mantener una piel sana y
+              radiante. Formulados con ingredientes naturales como aceites
+              esenciales y extractos de plantas, estos productos nutren y
+              protegen la piel de manera efectiva sin el uso de químicos
+              agresivos. Optar por la cosmética facial natural es una elección
+              respetuosa con tu piel y el medio ambiente.
+            </p>
+            <div className="img1-home" data-aos="flip-left">
+              <div class="gallery">
+                <img src={KarkuImg6} alt="" />
+                <img src={KarkuImg7} alt="" />
+                <img src={KarkuImg3} alt="" />
+                <img src={KarkuImg2} alt="" />
               </div>
             </div>
-            <div className="section1-4-home bg-color-section">
-              <p className="title-section">Serums</p>
-              <div className="text4-img-home">
-                <div className="text4-home" data-aos="zoom-in-left">
-                  <p>
-                    Los serums faciales naturales son una opción ideal para una
-                    piel radiante y saludable. Con ingredientes naturales como
-                    aceites esenciales y antioxidantes, estos productos aportan
-                    una hidratación profunda y combaten el envejecimiento de la
-                    piel de manera efectiva, sin químicos agresivos. Al elegir
-                    serums faciales naturales, estás cuidando tu piel de forma
-                    consciente y respetando el medio ambiente. Además, muchas
-                    marcas éticas no realizan pruebas en animales, lo que hace
-                    que el cuidado de tu piel sea una elección compasiva.
-                    Descubre la belleza natural en cada gota de serum.
-                  </p>
-                </div>
-                <div className="img1-home" data-aos="flip-left">
-                  <div class="gallery">
-                    <img src={KarkuImg6} alt="" />
-                    <img src={KarkuImg7} alt="" />
-                    <img src={KarkuImg3} alt="" />
-                    <img src={KarkuImg2} alt="" />
-                  </div>
-                </div>
+          </div>
+          <div className="section1-4-home" data-aos="zoom-in">
+            <p className="title-section">Serums</p>
+            <p>
+              Los serums faciales naturales son una opción ideal para una piel
+              radiante y saludable. Con ingredientes naturales como aceites
+              esenciales y antioxidantes, estos productos aportan una
+              hidratación profunda y combaten el envejecimiento de la piel de
+              manera efectiva, sin químicos agresivos. Al elegir serums faciales
+              naturales, estás cuidando tu piel de forma consciente y respetando
+              el medio ambiente.
+            </p>
+            <div className="img1-home" data-aos="flip-left">
+              <div class="gallery">
+                <img src={KarkuImg6} alt="" />
+                <img src={KarkuImg7} alt="" />
+                <img src={KarkuImg3} alt="" />
+                <img src={KarkuImg2} alt="" />
               </div>
             </div>
           </div>
         </div>
+
         {showScrollButton && (
           <button className="scroll-to-top" onClick={scrollToTop}>
             <FontAwesomeIcon icon={faCaretUp} />
