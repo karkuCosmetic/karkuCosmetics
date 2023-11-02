@@ -14,8 +14,7 @@ const app = express();
 
 const whiteList = [
   process.env.DEPLOY_CLIENT_URL,
-  "https://karku-cosmetics-qg8h3jmpz-karkucosmetic.vercel.app",
-  "https://karku-cosmetics.vercel.app",
+"http://localhost:3000"
   // Agrega aquí otros orígenes permitidos si es necesario
 ];
 

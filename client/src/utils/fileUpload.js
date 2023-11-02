@@ -14,7 +14,7 @@ export const fileUpload = async (images, path) => {
           formData.append("upload_preset", `karku_${path}`);
 
           const res = await axios.post(
-            "https://api.cloudinary.com/v1_1/dqai9sgfs/upload",
+            `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/upload`,
             formData
           );
           arrayUrls.push(res.data.secure_url);
