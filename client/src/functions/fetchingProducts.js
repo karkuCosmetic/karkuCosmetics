@@ -94,7 +94,7 @@ export const DeleteProductById = async (id, token) => {
 
 export const getAllCategories = async (token) => {
   try {
-    const res = await axios.get(`http://localhost:3001/products/categories`, {
+    const res = await axios.get(`${process.env.REACT_APP_URL_API}/products/categories`, {
       headers: { "user-token": token },
     });
     return res.data;
