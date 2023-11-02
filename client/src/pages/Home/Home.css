@@ -89,7 +89,6 @@ body {
     box-shadow: none;
     padding: 2rem;
     background-image: url(../../assets/AssetsHome/bgContact.png);
-    background-attachment: fixed;
     background-size: cover;
     background-position: center;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
