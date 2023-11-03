@@ -98,9 +98,9 @@ export const UpdatePassword = async (req, res) => {
 
   try {
     if (email) {
-      let user = await User.findOne({ email: email });
-
-      sendNewPassword(user.email);
+      await User.findOne({ email: email }).then((data) => {
+        sendNewPassword(data.email);
+      });
     } else if (password && token) {
       const { value } = DecodedToken(token); //devolveria un email
 
