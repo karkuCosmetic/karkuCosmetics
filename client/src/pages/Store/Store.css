@@ -100,6 +100,28 @@
   cursor: pointer;
 }
 
+.searchBar-filter button {
+  background-color: #317d24;
+  border: 0;
+  border-radius: 10px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: "quicksand";
+  display: flex;
+  align-items: center;
+  outline: transparent;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  transition: box-shadow 0.2s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  height: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 @media (max-width: 870px) {
   .searchBar-filter {
     width: 80%;
@@ -120,8 +142,10 @@
     cursor: pointer;
     font-size: 14px;
     font-family: "quicksand";
+    display: flex;
+    align-items: center;
     outline: transparent;
-    padding: 0 1rem;
+    padding: 0.5rem 1rem;
     text-decoration: none;
     transition: box-shadow 0.2s ease-in-out;
     user-select: none;
@@ -504,7 +528,6 @@ a {
   display: inline-block;
   font-family: "quicksand";
   outline: transparent;
-  margin-top: 0.5rem;
   padding: 0 1rem;
   text-decoration: none;
   transition: box-shadow 0.2s ease-in-out;
@@ -544,7 +567,6 @@ a {
 
 @media (max-width: 870px) {
   .button-filtrar {
-    width: 6rem;
     height: 2rem;
     font-size: 14px;
     padding: 0.5rem 1rem;
@@ -706,9 +728,9 @@ a {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  flex-wrap: wrap;
   align-items: center;
   gap: 0.5rem;
-  width: 5rem;
 }
 
 @media screen and (max-width: 870px) {
