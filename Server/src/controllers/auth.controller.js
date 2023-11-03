@@ -8,7 +8,7 @@ import {
 } from "../helpers/sendConfirmationEmail.js";
 
 export const register = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password } = req.body.values;
 
   try {
     let user = await User.findOne({ email });
