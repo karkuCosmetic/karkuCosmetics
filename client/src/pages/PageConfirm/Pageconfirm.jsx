@@ -24,9 +24,9 @@ const PageConfirm = () => {
       <div>
         <div className="confirm-container">
           <div className="confirm-hello">
-            <h2 className="text-hello">
+            <p className="text-hello">
               Confirma haciendo click en el siguiente botón
-            </h2>
+            </p>
           </div>
           <button className="confirm-button" onClick={handlerUpdate}>
             Continuar
