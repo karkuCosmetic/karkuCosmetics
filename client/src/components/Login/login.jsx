@@ -76,7 +76,7 @@ const Login = ({ formPassword, setFormPassword }) => {
             confirmButtonText: "Reenviar confirmación",
           }).then(async (result) => {
             if (result.isConfirmed) {
-              await resendConfirmationEmail(formInput.email);
+              resendConfirmationEmail(formInput.email);
               Swal.fire(
                 "Enviado",
                 "Revisa el correo no deseado si no lo encuentras en la bandeja principal.",
