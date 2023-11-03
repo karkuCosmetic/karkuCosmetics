@@ -23,11 +23,11 @@ export const register = async (req, res) => {
       admission: currentDate,
     });
 
-    await user.save();
     const { token, expiresIn } = generateToken(user._id);
-    // generateRefreshToken(user.id, res);
-
     sendConfirmationEmail(token, email);
+    // generateRefreshToken(user.id, res);
+    
+    await user.save();
 
     return res.status(200).json("usuario creado");
   } catch (error) {
