@@ -40,7 +40,8 @@ export const Register = () => {
     // }
 
     postRegister(formInput)
-      .then(() => {
+      .then((data) => {
+        console.log(data);
         Swal.fire({
           title: "Genial",
           text: "Ahora verifica tu cuenta a través del correo electrónico que hemos enviado al email que ingresaste.",
