@@ -95,10 +95,10 @@ console.log(req.body);
 
 export const UpdatePassword = async (req, res) => {
   const { email, password, token } = req.body;
-
+console.log(req.body);
   try {
     if (email) {
-      let user = await User.findOne({ email });
+      let user = await User.findOne({ email:email });
       if (user) {
         sendNewPassword(email);
       }
