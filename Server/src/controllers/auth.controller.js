@@ -5,7 +5,7 @@ import { Admin } from "../models/admin.js";
 import { sendConfirmationEmail } from "../helpers/sendConfirmationEmail.js";
 
 export const register = async (req, res) => {
-  const { email, password, phone } = req.body;
+  const { email, password } = req.body;
 
   try {
     let user = await User.findOne({ email });
@@ -20,7 +20,6 @@ export const register = async (req, res) => {
     user = new User({
       email,
       password,
-      phone,
       admission: currentDate,
     });
 
