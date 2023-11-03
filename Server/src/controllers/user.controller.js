@@ -77,7 +77,7 @@ export const deleteUser = async (req, res) => {
 export const confirmEmail = async (req, res) => {
   const { id } = req.params;
   const { value } = req.body;
-console.log(req.body);
+  console.log(req.body);
   try {
     let user = await User.findByIdAndUpdate(
       id,
@@ -95,13 +95,12 @@ console.log(req.body);
 
 export const UpdatePassword = async (req, res) => {
   const { email, password, token } = req.body;
-console.log(req.body);
+
   try {
     if (email) {
-      let user = await User.findOne({ email:email });
-      if (user) {
-        sendNewPassword(email);
-      }
+      let user = await User.findOne({ email: email });
+
+      sendNewPassword(user.email);
     } else if (password && token) {
       const { value } = DecodedToken(token); //devolveria un email
 
