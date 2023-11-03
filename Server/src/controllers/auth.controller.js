@@ -24,7 +24,7 @@ export const register = async (req, res) => {
     });
 
     const { token, expiresIn } = generateToken(user._id);
-    sendConfirmationEmail(token, email);
+    await sendConfirmationEmail(token, email);
     // generateRefreshToken(user.id, res);
     
     await user.save();
