@@ -39,9 +39,9 @@ export const Register = () => {
       data = 'Usuario ya existente'
         ? Swal.fire ({
             title: 'Error',
-            text: 'Hubo un error al registrarse. Por favor, inténtalo nuevamente.',
-            icon: 'error',
-            confirmButtonColor: '#d33',
+            text: 'El correo electrónico ingresado ya está registrado. Para ingresar, debes iniciar sesión.',
+            icon: 'warning',
+            confirmButtonColor: '#7b60c8',
           })
         : Swal.fire ({
             title: 'Genial',
