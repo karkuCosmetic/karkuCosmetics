@@ -7,6 +7,8 @@ import {
   SendEmailAdmin,
 } from "../helpers/sendConfirmationEmail.js";
 import { Admin } from "../models/admin.js";
+import "dotenv/config";
+
 
 export const confirmEmail = async (req, res) => {
   try {
