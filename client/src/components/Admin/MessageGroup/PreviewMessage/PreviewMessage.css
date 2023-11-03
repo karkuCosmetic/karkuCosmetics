@@ -67,15 +67,23 @@
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
+.btn-container-previewMessage {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 10rem;
+}
+
 .btn-show-message-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 10%;
+  width: 100%;
 }
 
-.btn-show-message {
+.btn-show-message-previewMessage {
   display: flex;
+  flex-direction: row;
   align-items: center;
   color: #fff;
   border: none;
@@ -92,7 +100,7 @@
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-.btn-delete-message{
+.btn-delete-message {
   display: flex;
   align-items: center;
   color: #fff;
@@ -170,7 +178,7 @@
 .already-responded {
   display: flex;
   align-items: center;
-  color: #4CAF50;
+  color: #4caf50;
   margin-top: 5px;
 }
 
@@ -245,6 +253,48 @@
 .btn-response-message:hover {
   width: calc(20% + 20px);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+@media (max-width: 925px) {
+  .email-list {
+    width: 100%;
+  }
+
+  .email-list p {
+    width: 100%;
+  }
+
+  .message-preview-container {
+    display: flex;
+    justify-content: space-around;
+    padding-inline: 0;
+  }
+  .info-message-preview-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 50%;
+  }
+
+  .text-message-preview-container {
+    display: none;
+  }
+
+  .previewMessage-email,
+  .previewMessage-phone {
+    display: none;
+  }
+
+  .btn-show-message {
+    display: flex;
+    width: 10rem;
+    align-items: center;
+  }
+
+  .btn-container-previewMessage {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 /* COLORES ADMIN */

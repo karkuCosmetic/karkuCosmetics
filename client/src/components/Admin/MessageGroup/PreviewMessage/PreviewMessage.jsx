@@ -112,32 +112,40 @@ const PreviewMessage = ({ setSection }) => {
               <li key={index}>
                 <div className="message-preview-container">
                   <div className="info-message-preview-container">
-                    <strong>Nombre:</strong> {el.user_name}
-                    <br />
-                    <strong>Correo:</strong> {el.user_email}
-                    <br />
-                    <strong>Teléfono:</strong> {el.user_phone}
-                    <br />
-                    <strong>Fecha: </strong> {formatDateModal(el.date)}
-                    <br />
+                    <p>
+                      <strong>Nombre:</strong> {el.user_name}
+                    </p>
+                    <p className="previewMessage-email">
+                      <strong>Correo:</strong> {el.user_email}
+                    </p>
+                    <p className="previewMessage-phone">
+                      <strong>Teléfono:</strong> {el.user_phone}
+                    </p>
+                    <p>
+                      <strong>Fecha: </strong> {formatDateModal(el.date)}
+                    </p>
                   </div>
                   <div className="text-message-preview-container">
                     {el.user_message.slice(0, 200)}...
                   </div>
-                  <div className="btn-show-message-container">
-                    <button
-                      className="btn-show-message"
-                      onClick={() => openModal(el)}
-                    >
-                      Ver mensaje
-                    </button>
+                  <div className="btn-container-previewMessage">
+                    <div className="btn-show-message-container">
+                      <button
+                        className="btn-show-message-previewMessage"
+                        onClick={() => openModal(el)}
+                      >
+                        Ver mensaje
+                      </button>
+                    </div>
+                    <div>
+                      <button
+                        className="btn-delete-message"
+                        onClick={() => handleDelete(el.id)}
+                      >
+                        <FontAwesomeIcon icon={faTrashCan} />
+                      </button>
+                    </div>
                   </div>
-                  <button
-                    className="btn-delete-message"
-                    onClick={() => handleDelete(el.id)}
-                  >
-                    <FontAwesomeIcon icon={faTrashCan} />
-                  </button>
                 </div>
               </li>
             ))

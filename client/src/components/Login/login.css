@@ -57,7 +57,7 @@
   margin-bottom: 10px;
   border: 1px solid #ccc;
   background-color: #fff;
-  font-size: 14px !important;
+  font-size: 16px !important;
   font-family: "figtree";
 }
 
@@ -94,8 +94,7 @@
   justify-content: center;
   align-items: center;
   text-decoration: none;
-  color: #7b60c8;
-  text-decoration: underline;
+  color: #cc7468;
 }
 
 .go-back-login {
