@@ -11,6 +11,7 @@ import {
   faArrowLeft,
   faArrowRight,
   faCopy,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import PurchaseHistoryItem from "../../components/PurchaseHistoryItem/purchaseHistoryItem";
 
@@ -137,8 +138,14 @@ const Profile = () => {
         <div className="profile-container">
           <div className="profile-card">
             {editing === false ? (
-              <div>
-                <img src={profile.image} alt="" />
+              <div className="profile-image">
+                {profile.image ? (
+                  <img src={profile.image} alt="Foto de perfil" />
+                ) : (
+                  <div className="default-profile-image">
+                    <FontAwesomeIcon icon={faUser} />
+                  </div>
+                )}
               </div>
             ) : (
               <div className="edit-avatar">
