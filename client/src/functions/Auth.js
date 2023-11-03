@@ -20,8 +20,8 @@ export const postlogin = async (values) => {
 
 export const postRegister = async (values) => {
   try {
-    await axios.post(`${process.env.REACT_APP_URL_API}/register`, values);
-    return "Usuario Creado";
+    const res= await axios.post(`${process.env.REACT_APP_URL_API}/register`, {values});
+    return res.data;
   } catch (error) {
     console.log(error);
     return "Usuario ya existente";

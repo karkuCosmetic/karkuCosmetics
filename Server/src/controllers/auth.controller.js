@@ -2,10 +2,13 @@ import { formatError } from "../utils/formatError.js";
 import { User } from "../models/user.js";
 import { generateRefreshToken, generateToken } from "../utils/tokenManager.js";
 import { Admin } from "../models/admin.js";
-import { sendConfirmationEmail } from "../helpers/sendConfirmationEmail.js";
+import {
+  ResendConfirmationEmail,
+  sendConfirmationEmail,
+} from "../helpers/sendConfirmationEmail.js";
 
 export const register = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password } = req.body.values;
 
   try {
     let user = await User.findOne({ email });
@@ -23,13 +26,15 @@ export const register = async (req, res) => {
       admission: currentDate,
     });
 
-    await user.save();
     const { token, expiresIn } = generateToken(user._id);
+    
+   sendConfirmationEmail(token, email);
+
     // generateRefreshToken(user.id, res);
 
-    sendConfirmationEmail(token,email);
+    await user.save();
 
-    return res.status(200).json({ msg: "usuario creado" });
+    return res.status(200).json("usuario creado");
   } catch (error) {
     res.status(400).json(formatError(error.message));
   }

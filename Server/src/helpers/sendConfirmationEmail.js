@@ -25,13 +25,7 @@ const __dirname = path.dirname(__filename);
 const _path = path.join(__dirname, "..", "emails");
 
 export const sendConfirmationEmail = async (token,email) => {
-  // const decoded = verify(token, process.env.TOKEN_SECRET); //extrae del token
-  // let id = decoded.value;
-
-  // let user = await User.findById(id, { password: 0 });
-
   let url = `${process.env.DEPLOY_CLIENT_URL}/confirm/${token}`;
-  // let email = user.email;
 
   ejs.renderFile(
     _path + "/Confirmation.ejs",
