@@ -6,13 +6,13 @@ import { ConfirmEmail } from "../../functions/fetchingUsers";
 
 const PageConfirm = () => {
   const { token } = useParams();
-
   const [uid, setUid] = useState("");
-
+  
   useEffect(() => {
     let { value } = DecodedToken(token);
     setUid(value);
   }, [token]);
+ 
 
   const handlerUpdate = () => {
     ConfirmEmail(uid, true);

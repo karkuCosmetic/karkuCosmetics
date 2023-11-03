@@ -24,11 +24,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const _path = path.join(__dirname, "..", "emails");
 
-export const sendConfirmationEmail = async (token,email) => {
-  // const decoded = verify(token, process.env.TOKEN_SECRET); //extrae del token
-
+export const sendConfirmationEmail = async (token, email) => {
   let url = `${process.env.DEPLOY_CLIENT_URL}/confirm/${token}`;
-
 
   ejs.renderFile(
     _path + "/Confirmation.ejs",
@@ -118,7 +115,7 @@ export const SendEmailAdmin = async (to, subject, body) => {
   );
 };
 
-export const sendEmailUpdateStatusSales=(email,status)=>{
+export const sendEmailUpdateStatusSales = (email, status) => {
   ejs.renderFile(
     _path + "/EmailChangeStatusSales.ejs",
     { email, status },
@@ -142,4 +139,4 @@ export const sendEmailUpdateStatusSales=(email,status)=>{
       }
     }
   );
-}
+};
