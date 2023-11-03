@@ -2,7 +2,10 @@ import { formatError } from "../utils/formatError.js";
 import { User } from "../models/user.js";
 import { generateRefreshToken, generateToken } from "../utils/tokenManager.js";
 import { Admin } from "../models/admin.js";
-import { sendConfirmationEmail } from "../helpers/sendConfirmationEmail.js";
+import {
+  ResendConfirmationEmail,
+  sendConfirmationEmail,
+} from "../helpers/sendConfirmationEmail.js";
 
 export const register = async (req, res) => {
   const { email, password } = req.body;
@@ -24,9 +27,11 @@ export const register = async (req, res) => {
     });
 
     const { token, expiresIn } = generateToken(user._id);
-    await sendConfirmationEmail(token, email);
-    // generateRefreshToken(user.id, res);
     
+    token && sendConfirmationEmail(token, email);
+
+    // generateRefreshToken(user.id, res);
+
     await user.save();
 
     return res.status(200).json("usuario creado");
