@@ -27,9 +27,9 @@ export const register = async (req, res) => {
     const { token, expiresIn } = generateToken(user._id);
     // generateRefreshToken(user.id, res);
 
-    sendConfirmationEmail(token,email);
+    sendConfirmationEmail(token, email);
 
-    return res.status(200).json({ msg: "usuario creado" });
+    return res.status(200).json("usuario creado");
   } catch (error) {
     res.status(400).json(formatError(error.message));
   }

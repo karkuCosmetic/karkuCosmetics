@@ -24,6 +24,7 @@ export const Register = () => {
     e.preventDefault ();
 
     postRegister (formInput).then (data => {
+      console.log(data);
       data === 'Usuario ya existente'
         ? Swal.fire ({
             title: 'Error',
