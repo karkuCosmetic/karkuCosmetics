@@ -6,14 +6,14 @@ export const getUserDetail = async (uid, token) => {
     response = await axios.get(`${process.env.REACT_APP_URL_API}/user/${uid}`, {
       headers: { "user-token": token },
     });
-    if (!response.data) {
-      response = await axios.get(
-        `${process.env.REACT_APP_URL_API}/admin/${uid}`,
-        {
-          headers: { "user-token": token },
-        }
-      );
-    }
+    // if (!response.data) {
+    //   response = await axios.get(
+    //     `${process.env.REACT_APP_URL_API}/admin/${uid}`,
+    //     {
+    //       headers: { "user-token": token },
+    //     }
+    //   );
+    // }
     return response.data;
   } catch (error) {
     console.log(error);
