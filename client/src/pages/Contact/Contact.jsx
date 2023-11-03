@@ -46,7 +46,7 @@ export const Contact = () => {
             user_phone: "",
             user_message: "",
           });
-          // window.location.reload();
+          window.location.reload();
         },
         (error) => {
           console.log(error.text);

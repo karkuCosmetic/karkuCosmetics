@@ -13,7 +13,7 @@ export const ForgotPassword = ({ setFormPassword }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await UpdatePassword(formInput);
+UpdatePassword(formInput);
 
     Swal.fire({
       icon: "info",
