@@ -23,18 +23,6 @@ export const Register = () => {
   const handleSubmit = async e => {
     e.preventDefault ();
 
-    // const emailExists = await postRegister(formInput.email);
-
-    // if (emailExists==="Usuario ya registrado") {
-    //   Swal.fire({
-    //     title: "Correo ya registrado!",
-    //     text: "El correo electrónico ingresado ya está registrado. Para ingresar, debes iniciar sesión.",
-    //     icon: "warning",
-    //     confirmButtonColor: "#7b60c8",
-    //   });
-    //   return;
-    // }
-
     postRegister (formInput).then (data => {
       data = 'Usuario ya existente'
         ? Swal.fire ({
