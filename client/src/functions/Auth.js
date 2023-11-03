@@ -24,5 +24,6 @@ export const postRegister = async (values) => {
     return "Usuario Creado";
   } catch (error) {
     console.log(error);
+    return "Usuario ya existente";
   }
 };

@@ -29,7 +29,7 @@ export const Register = () => {
 
     const emailExists = await postRegister(formInput.email);
 
-    if (emailExists) {
+    if (emailExists==="Usuario ya existente") {
       Swal.fire({
         title: "Correo ya registrado!",
         text: "El correo electrónico ingresado ya está registrado. Para ingresar, debes iniciar sesión.",
