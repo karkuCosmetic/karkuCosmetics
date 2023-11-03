@@ -24,7 +24,7 @@ export const Register = () => {
     e.preventDefault ();
 
     postRegister (formInput).then (data => {
-      data = 'Usuario ya existente'
+      data === 'Usuario ya existente'
         ? Swal.fire ({
             title: 'Error',
             text: 'El correo electrónico ingresado ya está registrado. Para ingresar, debes iniciar sesión.',
