@@ -129,7 +129,9 @@ const PreviewProduct = ({setSection}) => {
                   </div>
                 </div>
                 <div className="previewProduct-container-buttons">
+                  <div className='previewProduct-price'>
                   ${product.price}
+                  </div>
                   <button
                     className="previewProduct-container-buttons-edit"
                     onClick={() => handleEditProduct (product._id)}
