@@ -61,7 +61,6 @@ const Profile = () => {
   };
 
   const handleChange = (event) => {
-    console.log(event.target.name);
     const property = event.target.name;
     const value = event.target.value;
     setDataUpdate({ ...dataUpdate, [property]: value });
@@ -117,7 +116,6 @@ const Profile = () => {
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
-    console.log("currentPage:", pageNumber);
   };
 
   const handleCopyTrackNumber = () => {

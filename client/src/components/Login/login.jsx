@@ -64,7 +64,6 @@ const Login = ({ formPassword, setFormPassword }) => {
     if (validateForm()) {
       try {
         const credential = await postlogin(formInput);
-        console.log(credential.rol);
         if (credential.error && credential.error === "Email no verificado") {
           Swal.fire({
             title: "Cuenta no verificada",

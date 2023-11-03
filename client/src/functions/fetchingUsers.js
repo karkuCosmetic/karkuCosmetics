@@ -8,7 +8,10 @@ export const getUserDetail = async (uid, token) => {
     });
     if (!response.data) {
       response = await axios.get(
-        `${process.env.REACT_APP_URL_API}/admin/${uid}`
+        `${process.env.REACT_APP_URL_API}/admin/${uid}`,
+        {
+          headers: { "user-token": token },
+        }
       );
     }
     return response.data;
