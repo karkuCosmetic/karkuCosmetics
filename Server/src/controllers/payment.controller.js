@@ -147,6 +147,8 @@ export const reciveWebhook = async (req, res) => {
           status: "pendiente",
           optionSend: data.response.metadata.method,
           TrackNumber: "",
+          shipPrice:null,
+          shipStatus:false
         },
       };
 
