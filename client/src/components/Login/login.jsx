@@ -143,7 +143,7 @@ const Login = ({ formPassword, setFormPassword }) => {
           <p>
             Si olvidaste tu contraseña{" "}
             <span onClick={() => setFormPassword(!formPassword)}>
-              ház click aquí
+              <strong>ház click aquí</strong>
             </span>
           </p>
         </form>

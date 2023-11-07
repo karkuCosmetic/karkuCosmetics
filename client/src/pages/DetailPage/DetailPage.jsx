@@ -14,6 +14,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
+import Footer from "../../components/Footer/footer";
 
 export const DetailPage = () => {
   const [detailProduct, setDetailProduct] = useState({});
@@ -100,88 +101,90 @@ export const DetailPage = () => {
           </button>
         </div>
         <div className="detail-container">
-          <div className="detail-image">
-            <img
-              src={detailProduct.image && detailProduct.image[0]}
-              alt={detailProduct.title}
-              onClick={() => openImageModal(detailProduct.image[0], 0)}
-            />
-            <div className="image-grid">
-              {detailProduct.image &&
-                detailProduct.image
-                  .slice(1)
-                  .map((image, index) => (
-                    <img
-                      key={index}
-                      src={image}
-                      alt=""
-                      onClick={() => openImageModal(image, index + 1)}
-                    />
-                  ))}
-            </div>
-            {selectedImage && (
-              <div className="image-modal-overlay">
-                <div className="image-modal">
-                  <div className="image-modal-nav">
+          <div className="detail-img-buttons">
+            <div className="detail-image">
+              <img
+                src={detailProduct.image && detailProduct.image[0]}
+                alt={detailProduct.title}
+                onClick={() => openImageModal(detailProduct.image[0], 0)}
+              />
+              <div className="image-grid">
+                {detailProduct.image &&
+                  detailProduct.image
+                    .slice(1)
+                    .map((image, index) => (
+                      <img
+                        key={index}
+                        src={image}
+                        alt=""
+                        onClick={() => openImageModal(image, index + 1)}
+                      />
+                    ))}
+              </div>
+              {selectedImage && (
+                <div className="image-modal-overlay">
+                  <div className="image-modal">
+                    <div className="image-modal-nav">
+                      <button
+                        className="prev-image-button"
+                        onClick={handlePrevImage}
+                        disabled={imageIndex === 0}
+                      >
+                        <FontAwesomeIcon icon={faChevronLeft} />
+                      </button>
+                      <img src={selectedImage} alt="Expanded" />
+                      <button
+                        className="next-image-button"
+                        onClick={handleNextImage}
+                        disabled={imageIndex === detailProduct.image.length - 1}
+                      >
+                        <FontAwesomeIcon icon={faChevronRight} />
+                      </button>
+                    </div>
                     <button
-                      className="prev-image-button"
-                      onClick={handlePrevImage}
-                      disabled={imageIndex === 0}
+                      className="close-modal-button"
+                      onClick={closeImageModal}
                     >
-                      <FontAwesomeIcon icon={faChevronLeft} />
-                    </button>
-                    <img src={selectedImage} alt="Expanded" />
-                    <button
-                      className="next-image-button"
-                      onClick={handleNextImage}
-                      disabled={imageIndex === detailProduct.image.length - 1}
-                    >
-                      <FontAwesomeIcon icon={faChevronRight} />
+                      Cerrar
                     </button>
                   </div>
+                </div>
+              )}
+            </div>
+            <div className="detail-info">
+              <p className="detail-title">
+                {detailProduct.title && detailProduct.title}
+              </p>
+              <p className="detail-dimensions">
+                {detailProduct.dimensions &&
+                  detailProduct.dimensions.charAt(0).toUpperCase() +
+                    detailProduct.dimensions.slice(1)}
+              </p>
+              <p className="detail-price">${detailProduct.price}</p>
+
+              <div className="price-buy-detail">
+                <button className="detail-buy-button">Comprar</button>
+              </div>
+              <div className="detail-quantity">
+                <div className="quantity-buttons-container-detail">
                   <button
-                    className="close-modal-button"
-                    onClick={closeImageModal}
+                    className="quantity-button-detail"
+                    onClick={() => handleQuantityChange(-1)}
                   >
-                    Cerrar
+                    -
+                  </button>
+                  <span className="quantity-detail">{quantity}</span>
+                  <button
+                    className="quantity-button-detail"
+                    onClick={() => handleQuantityChange(1)}
+                  >
+                    +
                   </button>
                 </div>
-              </div>
-            )}
-          </div>
-          <div className="detail-info">
-            <p className="detail-title">
-              {detailProduct.title && detailProduct.title}
-            </p>
-            <p className="detail-dimensions">
-              {detailProduct.dimensions &&
-                detailProduct.dimensions.charAt(0).toUpperCase() +
-                  detailProduct.dimensions.slice(1)}
-            </p>
-            <p className="detail-price">${detailProduct.price}</p>
-
-            <div className="price-buy-detail">
-              <button className="detail-buy-button">Comprar</button>
-            </div>
-            <div className="detail-quantity">
-              <div className="quantity-buttons-container-detail">
-                <button
-                  className="quantity-button-detail"
-                  onClick={() => handleQuantityChange(-1)}
-                >
-                  -
-                </button>
-                <span className="quantity-detail">{quantity}</span>
-                <button
-                  className="quantity-button-detail"
-                  onClick={() => handleQuantityChange(1)}
-                >
-                  +
+                <button className="add-to-cart-button" onClick={addToCart}>
+                  Agregar al carrito
                 </button>
               </div>
-              <button className="add-to-cart-button" onClick={addToCart}>
-                Agregar al carrito
-              </button>
             </div>
           </div>
           <div>
@@ -193,6 +196,7 @@ export const DetailPage = () => {
           </div>
         </div>
       </div>
+        <Footer />
     </>
   );
 };

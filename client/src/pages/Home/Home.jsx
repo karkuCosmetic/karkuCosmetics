@@ -78,7 +78,6 @@ const Home = () => {
               fortalecer el cabello, aportando brillo y suavidad. Estos
               productos evitan la exposición a químicos dañinos, lo que es
               beneficioso tanto para tu cabello como para el medio ambiente.
-              
             </p>
             <div className="img1-home" data-aos="flip-right">
               <div class="gallery">
@@ -167,10 +166,12 @@ const Home = () => {
             <p>Karku se ubica en la ciudad de Zárate.</p>
             <br />
             <p>
-              La opción "Acordar con el vendedor" está disponible únicamente
-              para compradores que se encuentren en la ciudad de Zárate. Si te
-              encuentras fuera de esta zona, por favor selecciona la opción de
-              envío por correo al realizar tu compra.
+              Los envíos realizados a través de nuestra página web se gestionan
+              mediante Correo Argentino. La opción de "Acordar con el vendedor"
+              está disponible exclusivamente para compradores ubicados en la
+              ciudad de Zárate y Campana. Si te encuentras fuera de esta zona,
+              podrás seleccionar la dirección de envío por correo al completar
+              tu compra.
             </p>
           </div>
           <iframe

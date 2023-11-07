@@ -17,18 +17,16 @@
   padding: 1rem;
 }
 
-@media (min-width: 1630px) {
-}
-
 .navbar-left {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0.5rem;
 }
 
 .logo {
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 4rem;
+  height: 4rem;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 50%;
   cursor: pointer;

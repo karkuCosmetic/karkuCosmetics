@@ -15,8 +15,8 @@
   min-height: 100vh;
   padding-bottom: 5%;
   text-transform: capitalize;
-  font-family: "quicksand";
-  background-image: url(../../assets/bgStore2.png);
+  font-family: "figtree";
+  background-image: url(../../assets/bgDetailop5.png);
 }
 
 @media (max-width: 870px) {
@@ -28,32 +28,38 @@
 
 .sidebar {
   margin-top: 4rem;
-  width: 15rem;
+  width: 16rem;
   height: 100%;
   background-color: #f8f8f8;
   box-sizing: border-box;
   position: fixed;
   left: 0;
   top: 0;
-  bottom: 0;
+  padding-bottom: 8rem;
+  overflow-y: auto;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
     rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
 }
 
-.sidebar ul li {
-  cursor: pointer;
-  list-style-type: none;
+.sidebar::-webkit-scrollbar {
+  width: 0;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: transparent;
 }
 
 .sidebar ul li {
-  padding-left: 3rem;
-  margin: 0.15rem;
+  text-align: center;
+  cursor: pointer;
+  list-style-type: none;
+  margin:0.5rem;
 }
 
 .sidebar span {
   width: 100%;
   font-weight: bold;
-  background-color: #317d24;
+  background-color: #f38f82;
   color: white;
 }
 
@@ -107,7 +113,7 @@
   color: #ffffff;
   cursor: pointer;
   font-size: 12px;
-  font-family: "quicksand";
+  font-family: "figtree";
   display: flex;
   align-items: center;
   outline: transparent;
@@ -141,7 +147,7 @@
     color: #ffffff;
     cursor: pointer;
     font-size: 14px;
-    font-family: "quicksand";
+    font-family: "figtree";
     display: flex;
     align-items: center;
     outline: transparent;
@@ -164,31 +170,30 @@
 
 .title-categories-sidebar {
   display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  background-color: #619d52;
+  background-color: #91be7f;
   color: white;
   font-family: "figtree";
   margin-bottom: 0.5rem;
   margin-top: 0.5rem;
   padding: 0.3rem;
-}
-.title-categories-sidebar p {
-  padding-left: 2rem;
 }
 
 .title-subcategories-sidebar {
   display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  background-color: #619d52;
+  background-color: #91be7f;
   color: white;
   font-family: "figtree";
   margin-bottom: 0.5rem;
   margin-top: 0.5rem;
   padding: 0.3rem;
 }
-.title-subcategories-sidebar p {
-  padding-left: 2rem;
-}
+
 .sidebar ul li.active {
   font-weight: bold;
   list-style-type: none;
@@ -218,6 +223,11 @@
   }
 }
 
+.loader-container {
+  display: flex;
+  align-items: center;
+}
+
 .product-container {
   display: flex;
   flex-direction: row;
@@ -238,11 +248,13 @@
     width: 100%;
     display: flex;
     flex-direction: row;
+    align-items: flex-start;
     flex-wrap: wrap;
     overflow-y: auto;
     margin-left: 0;
     padding-top: 0;
     gap: 1rem;
+    flex: none;
   }
 }
 
@@ -360,7 +372,7 @@ a {
 .title-store {
   text-align: center;
   font-size: 1rem;
-  font-family: "quicksand";
+  font-family: "figtree";
 }
 
 @media (max-width: 870px) {
@@ -395,7 +407,7 @@ a {
   color: #619d52;
   cursor: pointer;
   display: inline-block;
-  font-family: "quicksand";
+  font-family: "figtree";
   font-size: 14px;
   outline: transparent;
   text-align: center;
@@ -445,7 +457,7 @@ a {
   color: #ffffff;
   cursor: pointer;
   display: inline-block;
-  font-family: "quicksand";
+  font-family: "figtree";
   font-size: 12px;
   outline: transparent;
   padding-inline: 1rem;
@@ -492,7 +504,7 @@ a {
   display: flex;
   justify-content: center;
   width: 100%;
-  background-color: #619d52;
+  background-color: #91be7f;
   color: white;
   font-family: "figtree";
 }
@@ -526,7 +538,7 @@ a {
   color: #ffffff;
   cursor: pointer;
   display: inline-block;
-  font-family: "quicksand";
+  font-family: "figtree";
   outline: transparent;
   padding: 0 1rem;
   text-decoration: none;
@@ -581,9 +593,9 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50%;
+  max-width: 80%;
   margin-top: 0.5rem;
-  font-family: "quicksand";
+  font-family: "figtree";
   z-index: 1;
   gap: 1rem;
 }
@@ -591,7 +603,7 @@ a {
 .hidden-select {
   padding: 0.5rem;
   border-radius: 5px;
-  font-family: "quicksand";
+  font-family: "figtree";
 }
 
 @media (min-width: 870px) {
@@ -714,7 +726,7 @@ a {
   font-size: 12px;
   font-family: "figtree";
   resize: none;
-  width: 6rem;
+  width: 6.5rem;
   height: 2rem;
 }
 
@@ -739,6 +751,7 @@ a {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    width: 80%;
   }
 
   .button-filter-store {
@@ -765,8 +778,7 @@ ul {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-inline: 28rem;
-  font-family: "quicksand";
+  font-family: "figtree";
 }
 
 .swal-content {

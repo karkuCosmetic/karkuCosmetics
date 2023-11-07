@@ -3,12 +3,12 @@
   flex-direction: column;
   flex-wrap: wrap;
   overflow: hidden;
-  background-image: url(../../assets/bgStore2.png);
+  background-image: url(../../assets/bgDetailop5.png);
   background-size: cover;
   background-repeat: no-repeat;
   padding-bottom: 5%;
   padding-top: 2.5%;
-  min-height: 100vh;
+height: 100vh;
   align-items: center;
 }
 
@@ -17,9 +17,23 @@
   flex-direction: column;
   align-items: center;
 }
+.detail-img-buttons {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+@media (max-width: 870px) {
+  .detail-img-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
 
 .detail-container {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
   width: 90%;
@@ -76,7 +90,8 @@
 }
 
 @media (max-width: 670) {
-  .detail-info {
+  .detail-info,
+  .detail-img-buttons {
     flex-direction: column;
     gap: 2rem;
   }
@@ -88,14 +103,14 @@
   justify-content: center;
   text-align: center;
   font-size: 1.5rem;
-  font-family: "quicksand";
+  font-family: "figtree";
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
 }
 
 .detail-price {
-  font-family: "quicksand";
+  font-family: "figtree";
   font-size: 2rem;
   font-weight: bold;
   user-select: none;
@@ -104,7 +119,7 @@
 }
 
 .detail-description {
-  font-family: "quicksand";
+  font-family: "figtree";
   font-size: 1.2rem;
   padding: 1rem;
   width: 100%;
@@ -119,7 +134,7 @@
 
 .detail-dimensions {
   font-size: 16px;
-  font-family: "quicksand";
+  font-family: "figtree";
   font-weight: bold;
   user-select: none;
   -webkit-user-select: none;
@@ -212,18 +227,16 @@
 
 .detail-buy-button,
 .add-to-cart-button {
-  display: flex;
-  flex-wrap: wrap;
-  background: linear-gradient(to bottom right, #ef4765, #ff9a5a);
+  background-color: #317d24;
   border: 0;
-  border-radius: 12px;
-  font-family: "quicksand";
+  border-radius: 25px;
   color: #ffffff;
   cursor: pointer;
+  display: inline-block;
+  font-family: "figtree";
   font-size: 14px;
-  font-weight: 500;
   outline: transparent;
-  padding: 0.5rem;
+  padding-inline: 1rem;
   text-align: center;
   text-decoration: none;
   transition: box-shadow 0.2s ease-in-out;
@@ -231,31 +244,29 @@
   -webkit-user-select: none;
   touch-action: manipulation;
   white-space: nowrap;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 6px;
+  height: 2rem;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
 .detail-buy-button:not([disabled]):focus {
-  box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
-    -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5),
-    0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
 .detail-buy-button:not([disabled]):hover {
-  box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
-    -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5),
-    0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
 .add-to-cart-button:not([disabled]):focus {
-  box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
-    -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5),
-    0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
 .add-to-cart-button:not([disabled]):hover {
-  box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
-    -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5),
-    0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
 .image-modal-overlay {
@@ -289,7 +300,7 @@
   color: #ffffff;
   cursor: pointer;
   display: inline-block;
-  font-family: "quicksand";
+  font-family: "figtree";
   font-size: 12px;
   outline: transparent;
   padding: 0.5rem;
@@ -363,7 +374,7 @@
   color: #ffffff;
   cursor: pointer;
   display: inline-block;
-  font-family: "quicksand";
+  font-family: "figtree";
   font-size: 12px;
   outline: transparent;
   margin-top: 1rem;
@@ -400,39 +411,35 @@
 }
 
 .go-back-btn-detail {
-  background: linear-gradient(to bottom right, #ef4765, #ff9a5a);
+  background-color: #317d24;
   border: 0;
-  margin-bottom: 0.5rem;
   border-radius: 25px;
   color: #ffffff;
   cursor: pointer;
   display: inline-block;
-  font-family: "quicksand";
+  font-family: "figtree";
   font-size: 14px;
-  font-weight: 500;
   outline: transparent;
-  padding: 0.5rem;
+  padding-inline: 1rem;
   text-align: center;
-  align-items: center;
   text-decoration: none;
   transition: box-shadow 0.2s ease-in-out;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
   white-space: nowrap;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 6px;
+  height: 1.5rem;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
-
 .go-back-btn-detail:not([disabled]):focus {
-  box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
-    -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5),
-    0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
 .go-back-btn-detail:not([disabled]):hover {
-  box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
-    -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5),
-    0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
 @media (max-width: 651px) {
@@ -442,7 +449,25 @@
   }
 }
 
-.title-add-to-cart{
+.title-add-to-cart {
   font-size: 20px;
   color: green;
+}
+
+/* COLORES USER */
+
+.color1 {
+  color: #317d24;
+}
+.color2 {
+  color: #619d52;
+}
+.color3 {
+  color: #91be7f;
+}
+.color4 {
+  color: #c2deac;
+}
+.color5 {
+  color: #f2ffd9;
 }

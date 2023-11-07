@@ -4,6 +4,7 @@ import Register from "../../components/Register/register";
 import "./LoginPage.css";
 import Navbar from "../../components/NavBar/navbar";
 import { ForgotPassword } from "../../components/ForgotPassword/forgotPassword";
+import Footer from "../../components/Footer/footer";
 
 const LoginPage = () => {
   const [formPassword, setFormPassword] = useState(false);
@@ -25,7 +26,7 @@ const LoginPage = () => {
           setFormPassword={setFormPassword}
         />
       )}
-  
+  <Footer />
     </div>
   );
 };
