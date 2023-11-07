@@ -70,7 +70,9 @@ const Profile = () => {
   const handleChangeAdress = (event) => {
     const property = event.target.name;
     const value = event.target.value;
-    setDataUpdateAdress({ ...dataUpdateAdress, [property]: value });
+
+    let valueupdate = value.charAt(0).toUpperCase() + value.slice(1);
+    setDataUpdateAdress({ ...dataUpdateAdress, [property]: valueupdate });
   };
 
   const handleSave = async () => {

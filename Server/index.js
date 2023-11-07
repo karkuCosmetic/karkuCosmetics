@@ -15,6 +15,7 @@ const app = express();
 const whiteList = [
   process.env.DEPLOY_CLIENT_URL,
   "https://www.karku.com.ar",
+  "http://localhost:3000"
   // Agrega aquí otros orígenes permitidos si es necesario
 ];
 
@@ -30,7 +31,7 @@ app.use(
     credentials: true,
   })
 );
-// app.use(cors())
+app.use(cors())
 app.use(morgan("dev"));
 app.use(express.json());
 

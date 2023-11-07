@@ -4,11 +4,14 @@ import "./Cart.css";
 import Footer from "../../components/Footer/footer";
 import { Link } from "react-router-dom"; // Importa Link en lugar de Navigate
 import Swal from "sweetalert2";
+import { GetDecodedCookie } from "../../utils/DecodedCookie";
 
 const Cart = () => {
   const [cart, setCart] = useState(
     JSON.parse(localStorage.getItem("cart")) || []
   );
+
+  const token = GetDecodedCookie("cookieToken");
 
   const handleQuantityChange = (index, change) => {
     const updatedCart = [...cart];
@@ -38,9 +41,7 @@ const Cart = () => {
   };
 
   const handleContinueToCheckout = () => {
-    const isUserLoggedIn = false;
-
-    if (isUserLoggedIn) {
+    if (token) {
       window.location.href = "/shipping";
     } else {
       Swal.fire({

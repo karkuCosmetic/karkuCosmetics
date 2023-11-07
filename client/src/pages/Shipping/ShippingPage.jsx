@@ -11,9 +11,9 @@ import SelectShipping from '../../components/SelectShipping/SelectShipping';
 
 const ShippingPage = ({location}) => {
   const navigate = useNavigate ();
-
+  //acordar envio solo para zarate y campana
   const [shippingInfo, setShippingInfo] = useState ({
-    method: 'Acordar con vendedor',
+    method: '',
     adress: {
       calle: '',
       numero: '',
@@ -36,6 +36,7 @@ const ShippingPage = ({location}) => {
         let {value} = DecodedToken (token);
         callUserDetail (value);
       }
+     
     },
     [token]
   );
@@ -43,6 +44,11 @@ const ShippingPage = ({location}) => {
   const callUserDetail = async uid => {
     await getUserDetail (uid, token).then (data => {
       setAdressCurrent (data.adress);
+
+      data.localidad === 'Zarate' || data.localidad === 'Campana'
+      ? setShippingInfo ({...shippingInfo, method: 'Acordar con vendedor'})
+      : setShippingInfo ({...shippingInfo, method: 'Envio por correo'});
+
     });
   };
 
@@ -59,7 +65,7 @@ const ShippingPage = ({location}) => {
       console.log ('Debes iniciar sesión');
       return;
     }
-    
+
     if (shippingInfo.method === 'Envío por correo' && newAddressFormVisible) {
       if (
         shippingInfo.adress.calle !== '' &&
@@ -91,7 +97,7 @@ const ShippingPage = ({location}) => {
       setNewAddressFormVisible (false);
     }
   };
-
+  console.log (AdressCurrent);
   return (
     <div>
       <Navbar />
@@ -123,12 +129,18 @@ const ShippingPage = ({location}) => {
           <h2 className="shipping-title">Seleccionar Envío</h2>
           <label className="shipping-form-label">
             <h4>Método de envío:</h4>
-            <SelectShipping
-              options={['Acordar con vendedor', 'Envío por correo']}
-              selectedOption={shippingInfo.method}
-              setSelectedOption={option =>
-                setShippingInfo ({...shippingInfo, method: option})}
-            />
+            {AdressCurrent.localidad &&
+              <SelectShipping
+                options={
+                  AdressCurrent.localidad === 'Zarate' ||
+                    AdressCurrent.localidad === 'Campana'
+                    ? ['Acordar con vendedor', 'Envío por correo']
+                    : ['Envío por correo']
+                }
+                selectedOption={shippingInfo.method}
+                setSelectedOption={option =>
+                  setShippingInfo ({...shippingInfo, method: option})}
+              />}
           </label>
 
           {shippingInfo.method === 'Envío por correo' &&
