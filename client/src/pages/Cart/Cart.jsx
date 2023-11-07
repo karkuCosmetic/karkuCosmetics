@@ -40,7 +40,7 @@ const Cart = () => {
     return total;
   };
 
-  const handleContinueToCheckout = () => {
+  const handleContinueToCheckout = () => {   
     if (token) {
       window.location.href = "/shipping";
     } else {
@@ -132,9 +132,12 @@ const Cart = () => {
         <div className="cart-summary">
           <p className="total-label">Total:</p>
           <p className="total-amount">${calculateTotal().toFixed(2)}</p>
-          <Link to="#" className="btn-buy" onClick={handleContinueToCheckout}>
+          
+          {cart[0]?
+          <Link to="#" className="btn-buy" onClick={handleContinueToCheckout} >
             Continuar compra
           </Link>
+         :"" }
         </div>
       </div>
       <Footer />
