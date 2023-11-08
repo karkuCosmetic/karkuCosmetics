@@ -88,16 +88,7 @@ const ShippingPage = ({location}) => {
     }
   };
 
-  const handleMethodChange = e => {
-    setShippingInfo ({
-      ...shippingInfo,
-      method: e.target.value,
-    });
-    if (e.target.value !== 'envio-por-correo') {
-      setNewAddressFormVisible (false);
-    }
-  };
-  console.log (AdressCurrent);
+
   return (
     <div>
       <Navbar />
