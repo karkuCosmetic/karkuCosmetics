@@ -14,8 +14,7 @@ const SelectShipping = ({ options, selectedOption, setSelectedOption }) => {
   const toggleSelect = () => {
     setIsOpen(!isOpen);
   };
-console.log(options);
-console.log(selectedOption);
+  
   return (
     <div className={`custom-select ${isOpen ? "open" : ""}`}>
       <div className="selected-option-preview" onClick={toggleSelect}>
