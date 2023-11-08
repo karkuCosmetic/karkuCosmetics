@@ -155,7 +155,7 @@ const ProductManagement = ({ setSection }) => {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
-      <div className="product-list">
+      <div className="productManagement-list">
         {currentProducts
           .filter((product) =>
             product.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -171,7 +171,7 @@ const ProductManagement = ({ setSection }) => {
                     className="show-product-btn"
                     onClick={() => openProductModal(product)}
                   >
-                    Ver Producto
+                    Ver
                   </button>
                   <button
                     className="edit-product-btn"
@@ -183,7 +183,7 @@ const ProductManagement = ({ setSection }) => {
                     className="delete-product-btn"
                     onClick={() => handleDeleteProduct(product._id)}
                   >
-                    Eliminar
+                    Borrar
                   </button>
                 </div>
               </div>

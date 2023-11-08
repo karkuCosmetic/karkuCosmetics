@@ -1,126 +1,126 @@
-import React, {useEffect, useState} from 'react';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import './SelectCategoryProduct.css';
-import {getAllCategories} from '../../functions/fetchingProducts';
-import {faCaretDown, faCaretUp} from '@fortawesome/free-solid-svg-icons';
+import React, { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "./SelectCategoryProduct.css";
+import { getAllCategories } from "../../functions/fetchingProducts";
+import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 
-const SelectCategoryProduct = ({setProduct}) => {
-  const [isOpenPrimary, setIsOpenPrimary] = useState (false);
-  const [selectedOptionPrimary, setSelectedOptionPrimary] = useState ('');
-  const [catPrimary, setCatPrimary] = useState ([
-    'Capilar',
-    'Corporal',
-    'Dental',
-    'Facial',
+const SelectCategoryProduct = ({ setProduct }) => {
+  const [isOpenPrimary, setIsOpenPrimary] = useState(false);
+  const [selectedOptionPrimary, setSelectedOptionPrimary] = useState("");
+  const [catPrimary, setCatPrimary] = useState([
+    "Capilar",
+    "Corporal",
+    "Dental",
+    "Facial",
   ]);
 
-  const [isOpenSecondary, setIsOpenSecondary] = useState (false);
-  const [selectedOptionSecondary, setSelectedOptionSecondary] = useState ('');
-  const [catSecondary, setCatSecondary] = useState ([
-    'Shampoo',
-    'Acondicionador',
-    'Oleo',
-    'Crema',
-    'Desodorante',
-    'Jabon',
-    'Sal',
-    'Bomba',
-    'Pasta',
-    'Cepillo',
-    'Estuche',
-    'Hilo',
-    'Tonico',
-    'Desmaquillante',
-    'Serum',
-    'Agua',
-    'Kit',
+  const [isOpenSecondary, setIsOpenSecondary] = useState(false);
+  const [selectedOptionSecondary, setSelectedOptionSecondary] = useState("");
+  const [catSecondary, setCatSecondary] = useState([
+    "Shampoo",
+    "Acondicionador",
+    "Oleo",
+    "Crema",
+    "Desodorante",
+    "Jabon",
+    "Sal",
+    "Bomba",
+    "Pasta",
+    "Cepillo",
+    "Estuche",
+    "Hilo",
+    "Tonico",
+    "Desmaquillante",
+    "Serum",
+    "Agua",
+    "Kit",
   ]);
 
-  const [AddCategory, setAddCategory] = useState ('');
-  const [isOpenCategories, setIsOpenCategories] = useState (false);
-  const [selectedOptionCategories, setSelectedOptionCategories] = useState ('');
+  const [AddCategory, setAddCategory] = useState("");
+  const [isOpenCategories, setIsOpenCategories] = useState(false);
+  const [selectedOptionCategories, setSelectedOptionCategories] = useState("");
 
-  const option = ['primary', 'secondary'];
+  const option = ["primary", "secondary"];
 
-  useEffect (() => {
-    getAllCategories ().then (data => {
-      const uniqueCatPrimary = new Set ([
+  useEffect(() => {
+    getAllCategories().then((data) => {
+      const uniqueCatPrimary = new Set([
         ...catPrimary,
         ...data.categories.primary,
       ]);
-      const uniqueCatSecondary = new Set ([
+      const uniqueCatSecondary = new Set([
         ...catSecondary,
         ...data.categories.secondary,
       ]);
-      setCatPrimary (Array.from (uniqueCatPrimary));
-      setCatSecondary (Array.from (uniqueCatSecondary));
+      setCatPrimary(Array.from(uniqueCatPrimary));
+      setCatSecondary(Array.from(uniqueCatSecondary));
     });
   }, []);
 
-  const handleOptionSelect = option => {
-    setSelectedOptionPrimary (option);
-    setProduct (prevProduct => ({
+  const handleOptionSelect = (option) => {
+    setSelectedOptionPrimary(option);
+    setProduct((prevProduct) => ({
       ...prevProduct,
       category: {
         ...prevProduct.category,
         primary: option,
       },
     }));
-    setIsOpenPrimary (false);
+    setIsOpenPrimary(false);
   };
 
   const toggleSelect = () => {
-    setIsOpenPrimary (!isOpenPrimary);
+    setIsOpenPrimary(!isOpenPrimary);
   };
 
-  const handleOptionSelectSecondary = option => {
-    setSelectedOptionSecondary (option);
-    setProduct (prevProduct => ({
+  const handleOptionSelectSecondary = (option) => {
+    setSelectedOptionSecondary(option);
+    setProduct((prevProduct) => ({
       ...prevProduct,
       category: {
         ...prevProduct.category,
         secondary: option,
       },
     }));
-    setIsOpenSecondary (false);
+    setIsOpenSecondary(false);
   };
 
   const toggleSelectSecondary = () => {
-    setIsOpenSecondary (!isOpenSecondary);
+    setIsOpenSecondary(!isOpenSecondary);
   };
 
-  const handleInputChange = event => {
-    setAddCategory (event.target.value);
+  const handleInputChange = (event) => {
+    setAddCategory(event.target.value);
   };
 
   const toggleSelectCategories = () => {
-    setIsOpenCategories (!isOpenCategories);
+    setIsOpenCategories(!isOpenCategories);
   };
 
-  const handleOptionSelectCategorie = option => {
-    setSelectedOptionCategories (option);
+  const handleOptionSelectCategorie = (option) => {
+    setSelectedOptionCategories(option);
   };
 
   const handleAddCategory = () => {
-    if (selectedOptionCategories === 'primary') {
-      setCatPrimary ([
+    if (selectedOptionCategories === "primary") {
+      setCatPrimary([
         ...catPrimary,
-        AddCategory[0].toUpperCase () + AddCategory.slice (1),
+        AddCategory[0].toUpperCase() + AddCategory.slice(1),
       ]);
     } else {
-      setCatSecondary ([
+      setCatSecondary([
         ...catSecondary,
-        AddCategory[0].toUpperCase () + AddCategory.slice (1),
+        AddCategory[0].toUpperCase() + AddCategory.slice(1),
       ]);
     }
   };
 
   return (
-    <div style={{display: 'flex', justifyContent: 'space-between'}}>
+    <div className="select-categories-modal-admin">
       <div>
         <p>Primaria</p>
         <div
-          className={`custom-select-status ${isOpenPrimary ? 'open' : ''}`}
+          className={`custom-select-status ${isOpenPrimary ? "open" : ""}`}
           onClick={toggleSelect}
         >
           <div className="selected-option-preview">
@@ -130,25 +130,28 @@ const SelectCategoryProduct = ({setProduct}) => {
               className="arrow"
             />
           </div>
-          {isOpenPrimary &&
+          {isOpenPrimary && (
             <div className="options-preview">
-              {catPrimary.map ((option, index) => (
+              {catPrimary.map((option, index) => (
                 <div
                   key={index}
-                  className={`option-preview ${option === selectedOptionPrimary ? 'selected' : ''}`}
-                  onClick={() => handleOptionSelect (option)}
+                  className={`option-preview ${
+                    option === selectedOptionPrimary ? "selected" : ""
+                  }`}
+                  onClick={() => handleOptionSelect(option)}
                 >
                   {option}
                 </div>
               ))}
-            </div>}
+            </div>
+          )}
         </div>
       </div>
 
       <div>
         <p>Secundaria</p>
         <div
-          className={`custom-select-status ${isOpenSecondary ? 'open' : ''}`}
+          className={`custom-select-status ${isOpenSecondary ? "open" : ""}`}
           onClick={toggleSelectSecondary}
         >
           <div className="selected-option-preview">
@@ -158,52 +161,65 @@ const SelectCategoryProduct = ({setProduct}) => {
               className="arrow"
             />
           </div>
-          {isOpenSecondary &&
+          {isOpenSecondary && (
             <div className="options-preview">
-              {catSecondary.map ((option, index) => (
+              {catSecondary.map((option, index) => (
                 <div
                   key={index}
-                  className={`option-preview ${option === selectedOptionSecondary ? 'selected' : ''}`}
-                  onClick={() => handleOptionSelectSecondary (option)}
+                  className={`option-preview ${
+                    option === selectedOptionSecondary ? "selected" : ""
+                  }`}
+                  onClick={() => handleOptionSelectSecondary(option)}
                 >
                   {option}
                 </div>
               ))}
-            </div>}
+            </div>
+          )}
         </div>
       </div>
       <div>
-        <div>
+        <div className="add-categorie-product-adm">
           <p>Agregar categoría</p>
-          <div style={{display: 'flex'}}>
+          <div className="inputs-newCategorie-adm">
             <input
               type="text"
+              placeholder="Nueva Categoría"
               value={AddCategory}
               onChange={handleInputChange}
             />
             <div
-              className={`custom-select-status ${isOpenCategories ? 'open' : ''}`}
+              className={`custom-select-status ${
+                isOpenCategories ? "open" : ""
+              }`}
               onClick={toggleSelectCategories}
             >
               <div className="selected-option-preview">
-                <span>{selectedOptionCategories==="primary"?"Primaria":"Secundaria"}</span>
+                <span>
+                  {selectedOptionCategories === "primary"
+                    ? "Primaria"
+                    : "Secundaria"}
+                </span>
                 <FontAwesomeIcon
                   icon={isOpenCategories ? faCaretUp : faCaretDown}
                   className="arrow"
                 />
               </div>
-              {isOpenCategories &&
+              {isOpenCategories && (
                 <div className="options-preview">
-                  {option.map ((option, index) => (
+                  {option.map((option, index) => (
                     <div
                       key={index}
-                      className={`option-preview ${option === selectedOptionCategories ? 'selected' : ''}`}
-                      onClick={() => handleOptionSelectCategorie (option)}
+                      className={`option-preview ${
+                        option === selectedOptionCategories ? "selected" : ""
+                      }`}
+                      onClick={() => handleOptionSelectCategorie(option)}
                     >
-                      {option === 'primary' ? 'primaria' : 'secundaria'}
+                      {option === "primary" ? "primaria" : "secundaria"}
                     </div>
                   ))}
-                </div>}
+                </div>
+              )}
             </div>
           </div>
         </div>

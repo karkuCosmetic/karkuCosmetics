@@ -1,75 +1,71 @@
-import React, {useRef, useState} from 'react';
+import React, { useRef, useState } from "react";
 import {
   createProduct,
   updateProduct,
-} from '../../../../functions/fetchingProducts';
-import './AddProduct.css';
+} from "../../../../functions/fetchingProducts";
+import "./AddProduct.css";
 
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faTimes} from '@fortawesome/free-solid-svg-icons';
-import {GetDecodedCookie} from '../../../../utils/DecodedCookie';
-import SelectCategoryProduct
-  from '../../../SelectCategoryProduct/SelectCategoryProduct';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { GetDecodedCookie } from "../../../../utils/DecodedCookie";
+import SelectCategoryProduct from "../../../SelectCategoryProduct/SelectCategoryProduct";
 
-const AddProduct = ({closeEditModal}) => {
-  const token = GetDecodedCookie ('cookieToken');
-  const [product, setProduct] = useState ({
-    title: '',
-    dimensions: '',
-    description: '',
+const AddProduct = ({ closeEditModal }) => {
+  const token = GetDecodedCookie("cookieToken");
+  const [product, setProduct] = useState({
+    title: "",
+    dimensions: "",
+    description: "",
     price: 0,
     stock: 0,
-    category: {primary: '', secondary: ''},
+    category: { primary: "", secondary: "" },
   });
 
-  const [selectedImages, setSelectedImages] = useState ([]); //preview images
+  const [selectedImages, setSelectedImages] = useState([]); //preview images
   const maxImages = 5; // limite de images
-  const inputRef = useRef ();
+  const inputRef = useRef();
 
-  const handleImageUpload = event => {
+  const handleImageUpload = (event) => {
     const files = event.target.files;
-    const selected = Array.from (files);
+    const selected = Array.from(files);
 
     if (selectedImages.length + selected.length > maxImages) {
-      alert (`Máximo ${maxImages} imágenes permitidas.`); //reemplazar este alert por sweetAlert
+      alert(`Máximo ${maxImages} imágenes permitidas.`); //reemplazar este alert por sweetAlert
     } else {
-      setSelectedImages (prevSelected => [...prevSelected, ...selected]); //hace el prev de las imagenes y las agrega si no hay mas de 5
+      setSelectedImages((prevSelected) => [...prevSelected, ...selected]); //hace el prev de las imagenes y las agrega si no hay mas de 5
     }
-    inputRef.current.value = '';
+    inputRef.current.value = "";
   };
 
-  const handleImageRemove = index => {
+  const handleImageRemove = (index) => {
     const updatedImages = [...selectedImages];
-    updatedImages.splice (index, 1);
-    setSelectedImages (updatedImages);
+    updatedImages.splice(index, 1);
+    setSelectedImages(updatedImages);
   };
 
-  const handleInputChange = e => {
-    const {name, value} = e.target;
-    setProduct ({
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setProduct({
       ...product,
       [name]: value,
     });
   };
 
-  const handleSubmit = async e => {
-    e.preventDefault ();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      await createProduct (product, selectedImages, token);
-      closeEditModal ();
+      await createProduct(product, selectedImages, token);
+      closeEditModal();
     } catch (error) {
-      console.error ('Error creating product:', error);
+      console.error("Error creating product:", error);
     }
   };
 
   const closeModal = () => {
-    closeEditModal ();
+    closeEditModal();
   };
 
-const selectCategory=()=>{
-
-}
-
+  const selectCategory = () => {};
 
   return (
     <div className="form-updateProduct">
@@ -96,7 +92,7 @@ const selectCategory=()=>{
             name="dimensions"
             value={product.dimensions}
             onChange={handleInputChange}
-            placeholder='ML/CC/CM/UNIDAD'
+            placeholder="ML/CC/CM/UNIDAD"
           />
         </div>
         <div>
@@ -109,45 +105,49 @@ const selectCategory=()=>{
           />
         </div>
         <div className="form-edit-precio-sock">
-          <label>Precio: $</label>
-          <input
-            type="number"
-            name="price"
-            value={product.price}
-            onChange={handleInputChange}
-          />
-          <label>Stock:</label>
-          <input
-            type="number"
-            name="stock"
-            value={product.stock}
-            onChange={handleInputChange}
-          />
+          <div className="price-formEdit">
+            <label>Precio: $</label>
+            <input
+              type="number"
+              name="price"
+              value={product.price}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="stock-formEdit">
+            <label>Stock:</label>
+            <input
+              type="number"
+              name="stock"
+              value={product.stock}
+              onChange={handleInputChange}
+            />
+          </div>
         </div>
-        <div>
+        <div className="container-categories-modal-admin">
           <label>Categoría:</label>
-          <SelectCategoryProduct setProduct={setProduct} product={product}/>
+          <SelectCategoryProduct setProduct={setProduct} product={product} />
         </div>
 
         <div className="image-upload-container">
           <input
             type="file"
-            onChange={e => handleImageUpload (e)}
+            onChange={(e) => handleImageUpload(e)}
             multiple
             className="upload-input"
             ref={inputRef}
             accept="image/*"
           />
-          <div style={{display: 'flex', gap: '15px'}}>
-            {selectedImages.map ((image, index) => (
+          <div style={{ display: "flex", gap: "15px" }}>
+            {selectedImages.map((image, index) => (
               <div>
                 <img
                   key={index}
-                  src={URL.createObjectURL (image)}
+                  src={URL.createObjectURL(image)}
                   alt={`Image ${index}`}
-                  style={{width: '100px', height: '100px'}}
+                  style={{ width: "100px", height: "100px" }}
                 />
-                <button type="button" onClick={() => handleImageRemove (index)}>
+                <button type="button" onClick={() => handleImageRemove(index)}>
                   X
                 </button>
               </div>

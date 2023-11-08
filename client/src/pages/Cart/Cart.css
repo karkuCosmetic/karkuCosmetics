@@ -317,6 +317,8 @@
 
   .cart-summary {
     margin-top: 1rem;
+    padding: 0.8rem;
+    width: auto;
   }
 
   .item-image-title {
@@ -437,6 +439,7 @@
   font-weight: 600;
   line-height: 1rem;
   padding: 0.5rem 1rem;
+  align-items: center;
   text-align: center;
   text-decoration: none #d1d5db solid;
   text-decoration-thickness: auto;

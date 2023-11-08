@@ -13,6 +13,13 @@
   box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
 }
 
+@media (max-width: 1000px) {
+  .productManagement-container {
+    width: 98%;
+    margin-top: 0.5rem;
+  }
+}
+
 .productManagement-container h2 {
   font-family: "jost";
   font-weight: bolder;
@@ -67,11 +74,17 @@
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.product-list {
+.productManagement-list {
   display: flex;
   flex-direction: column;
   gap: 10px;
   width: 90%;
+}
+
+@media (max-width: 1000px) {
+  .productManagement-list {
+    width: 95%;
+  }
 }
 
 .product-list-admin {
@@ -83,6 +96,19 @@
   font-weight: bold;
   width: 100%;
 }
+
+@media (max-width: 1000px) {
+  .product-list-admin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    gap: 10px;
+  }
+}
+
 .product-search-admin {
   display: flex;
   justify-content: center;
@@ -122,6 +148,12 @@
   margin-right: 1rem;
 }
 
+@media (max-width: 1000px) {
+  .product-image-admin img {
+    min-width: 3rem;
+  }
+}
+
 .buttons-productManagement,
 .product-details-buttons {
   display: flex;
@@ -130,16 +162,32 @@
   gap: 20px;
 }
 
+@media (max-width: 1000px) {
+  .buttons-productManagement {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+  }
+
+  .buttons-productManagement p,
+  .buttons-productManagement button {
+    width: 55px;
+  }
+}
+
 .buttons-productManagement button {
   color: #fff;
   border: none;
   border-radius: 4px;
   padding: 5px 10px;
   font-family: "jost";
+  text-align: center;
   cursor: pointer;
   transition: width 0.3s ease;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
+
 .product-details-buttons button {
   color: #fff;
   border: none;
@@ -210,7 +258,14 @@
   background-color: rgba(255, 0, 0, 0) !important;
   border: none !important;
   box-shadow: none !important;
+  padding: 0 !important;
+  max-width: 50rem;
+  width: 95%;
+  inset: 0 !important;
+  margin-top: 3rem;
 }
+
+
 
 .pagination-productManagement {
   display: flex;
@@ -256,8 +311,8 @@
   align-items: center;
   justify-content: center;
   background-color: #f7f7f7;
-  padding: 10px;
   padding-bottom: 2rem;
+  width: 100%;
   height: auto;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
@@ -268,6 +323,7 @@
   flex-direction: column;
   gap: 1rem;
   padding: 1rem;
+  width: 100%;
 }
 
 .product-details-container span {

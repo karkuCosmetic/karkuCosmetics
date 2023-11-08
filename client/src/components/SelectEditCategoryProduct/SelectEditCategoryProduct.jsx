@@ -110,8 +110,9 @@ const SelectEditCategoryProduct = ({setProduct, product}) => {
   };
 
   return (
-    <div style={{display: 'flex', justifyContent: 'space-between'}}>
-      <div>
+    <div className='edit-categiories-modal-admin' >
+      <div className='categories-container'>
+      <div className='edit-primary-catergories'>
         <p>Primaria</p>
         <div
           className={`custom-select-status ${isOpenPrimary ? 'open' : ''}`}
@@ -176,13 +177,14 @@ const SelectEditCategoryProduct = ({setProduct, product}) => {
             </div>}
         </div>
       </div>
+      </div>
       <div>
         <div>
           <p>Agregar categoria</p>
-          <div style={{display: 'flex'}}>
-
+          <div className="inputs-newCategorie-adm">
             <input
               type="text"
+              placeholder="Nueva Categoría"
               value={AddCategory}
               onChange={handleInputChange}
             />

@@ -54,6 +54,11 @@ body {
 }
 
 @media (max-width: 768px) {
+  .features {
+    background-image: url(../../assets/bgDetailop5.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
   .welcome {
     background-image: url(../../assets/AssetsHome/Karku13.jpg);
   }
@@ -87,10 +92,9 @@ body {
   .textIntro-sections {
     box-shadow: none;
     padding: 2rem;
+    background-size: cover;
     background-image: none;
-    border-bottom: 2px solid #91be7f;
-    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px inset,
-      rgba(0, 0, 0, 0.23) 0px 6px 6px inset;
+    background-attachment: scroll;
   }
 }
 

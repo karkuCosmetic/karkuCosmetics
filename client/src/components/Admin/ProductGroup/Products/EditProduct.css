@@ -12,7 +12,22 @@
 }
 
 .form-edit-product-admin {
-  width: 80%;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .form-edit-product-admin {
+    width: 100%;
+  }
+}
+
+.container-categories-modal-admin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  margin-top: 1rem;
 }
 
 .textarea-form-edit-product-adm {
