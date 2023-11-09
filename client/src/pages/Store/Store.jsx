@@ -271,8 +271,6 @@ const Store = () => {
                         Filtrar
                       </button>
                     </div>
-                    {/* <div className="button-filter-store">
-                </div> */}
                   </div>
                 </div>
                 <div className="cards-container">

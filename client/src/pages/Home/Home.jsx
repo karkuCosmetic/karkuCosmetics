@@ -8,6 +8,7 @@ import KarkuImg6 from "../../assets/AssetsHome/Karku6.jpg";
 import KarkuImg2 from "../../assets/AssetsHome/Karku2.jpg";
 import KarkuImg3 from "../../assets/AssetsHome/Karku3.jpg";
 import KarkuImg7 from "../../assets/AssetsHome/Karku7.jpg";
+import KarkuLogoName from "../../assets/karkuLogoName.png"
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretUp } from "@fortawesome/free-solid-svg-icons";
@@ -46,8 +47,8 @@ const Home = () => {
     <div className="home">
       <Navbar />
       <section className="welcome">
-        <div className="welcome-home ">
-          <h1>Karku - Cosmética Natural</h1>
+        <div className="welcome-home" data-aos="zoom-in">
+        <img className="karku-logo-name" src={KarkuLogoName} alt="" />
           <p>
             ¡Tenemos las mejores opciones para el cuidado de piel, cabello y
             más!

@@ -49,11 +49,6 @@
   gap: 3rem;
 }
 
-/* .item-image {
-  flex: 0 0 2rem;
-  height: 2rem;
-} */
-
 .item-title {
   flex: 1;
   font-size: 14px;

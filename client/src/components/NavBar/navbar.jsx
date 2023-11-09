@@ -63,10 +63,6 @@ const Navbar = () => {
           <NavLink to="/" exact className="active">
             Inicio
           </NavLink>
-          <a href="/#gallery" className="active">
-            Galería
-          </a>
-
           <NavLink to="/contact" className="active">
             Contacto
           </NavLink>

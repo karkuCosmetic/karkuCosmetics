@@ -28,6 +28,13 @@ body {
   background-repeat: no-repeat;
 }
 
+.karku-logo-name {
+  width: 10rem;
+  height: 10rem;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
 .features {
   display: flex;
   flex-direction: column;
@@ -41,16 +48,19 @@ body {
 .welcome-home {
   display: flex;
   flex-direction: column;
-  width: 100%;
   padding: 0.5rem;
-  gap: 0.5rem;
+  width: 100%;
+  color: #317d24;
   font-family: "Figtree";
-  font-size: 22px;
-  color: #ffffff;
   justify-content: center;
   align-items: center;
-  backdrop-filter: blur(1px);
-  background-color: #619d529c;
+  background-color: #ffffff6b;
+  backdrop-filter: blur(2px);
+}
+
+.welcome-home p {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 @media (max-width: 768px) {
@@ -60,8 +70,9 @@ body {
     background-repeat: no-repeat;
   }
   .welcome {
-    background-image: url(../../assets/AssetsHome/Karku13.jpg);
+    background-image: url(../../assets/AssetsHome/bgHome1.jpg);
   }
+
   .welcome-home {
     gap: 0;
     font-size: 18px;
