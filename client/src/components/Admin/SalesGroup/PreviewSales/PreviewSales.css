@@ -12,13 +12,14 @@
 }
 
 @media (max-width: 540px) {
-  .sales-preview-container{
-height: auto;
+  .sales-preview-container {
+    height: auto;
   }
 }
 
 .sales-preview-container h2 {
   font-family: "figtree";
+  margin-bottom: 1rem;
 }
 .sale-preview-container {
   display: flex;

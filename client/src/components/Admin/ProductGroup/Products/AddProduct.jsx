@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import {
   createProduct,
-  updateProduct,
 } from "../../../../functions/fetchingProducts";
 import "./AddProduct.css";
 
@@ -64,8 +63,6 @@ const AddProduct = ({ closeEditModal }) => {
   const closeModal = () => {
     closeEditModal();
   };
-
-  const selectCategory = () => {};
 
   return (
     <div className="form-updateProduct">
@@ -140,15 +137,16 @@ const AddProduct = ({ closeEditModal }) => {
           />
           <div style={{ display: "flex", gap: "15px" }}>
             {selectedImages.map((image, index) => (
-              <div>
-                <img
+              <div className="img-addProduct-admin-container">
+                <img 
+                className="img-addProduct-admin"
                   key={index}
                   src={URL.createObjectURL(image)}
                   alt={`Image ${index}`}
-                  style={{ width: "100px", height: "100px" }}
+                
                 />
                 <button type="button" onClick={() => handleImageRemove(index)}>
-                  X
+                <FontAwesomeIcon icon={faTimes} />
                 </button>
               </div>
             ))}

@@ -116,67 +116,68 @@ const SelectCategoryProduct = ({ setProduct }) => {
   };
 
   return (
-    <div className="select-categories-modal-admin">
-      <div>
-        <p>Primaria</p>
-        <div
-          className={`custom-select-status ${isOpenPrimary ? "open" : ""}`}
-          onClick={toggleSelect}
-        >
-          <div className="selected-option-preview">
-            <span>{selectedOptionPrimary}</span>
-            <FontAwesomeIcon
-              icon={isOpenPrimary ? faCaretUp : faCaretDown}
-              className="arrow"
-            />
-          </div>
-          {isOpenPrimary && (
-            <div className="options-preview">
-              {catPrimary.map((option, index) => (
-                <div
-                  key={index}
-                  className={`option-preview ${
-                    option === selectedOptionPrimary ? "selected" : ""
-                  }`}
-                  onClick={() => handleOptionSelect(option)}
-                >
-                  {option}
-                </div>
-              ))}
+    <>
+      <div className="select-categories-modal-admin">
+        <div className="category-primary-admin">
+          <p>Primaria</p>
+          <div
+            className={`custom-select-status ${isOpenPrimary ? "open" : ""}`}
+            onClick={toggleSelect}
+          >
+            <div className="selected-option-preview">
+              <span>{selectedOptionPrimary}</span>
+              <FontAwesomeIcon
+                icon={isOpenPrimary ? faCaretUp : faCaretDown}
+                className="arrow"
+              />
             </div>
-          )}
-        </div>
-      </div>
-
-      <div>
-        <p>Secundaria</p>
-        <div
-          className={`custom-select-status ${isOpenSecondary ? "open" : ""}`}
-          onClick={toggleSelectSecondary}
-        >
-          <div className="selected-option-preview">
-            <span>{selectedOptionSecondary}</span>
-            <FontAwesomeIcon
-              icon={isOpenSecondary ? faCaretUp : faCaretDown}
-              className="arrow"
-            />
+            {isOpenPrimary && (
+              <div className="options-preview">
+                {catPrimary.map((option, index) => (
+                  <div
+                    key={index}
+                    className={`option-preview ${
+                      option === selectedOptionPrimary ? "selected" : ""
+                    }`}
+                    onClick={() => handleOptionSelect(option)}
+                  >
+                    {option}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
-          {isOpenSecondary && (
-            <div className="options-preview">
-              {catSecondary.map((option, index) => (
-                <div
-                  key={index}
-                  className={`option-preview ${
-                    option === selectedOptionSecondary ? "selected" : ""
-                  }`}
-                  onClick={() => handleOptionSelectSecondary(option)}
-                >
-                  {option}
-                </div>
-              ))}
-            </div>
-          )}
         </div>
+        <div className="category-secondary-admin">
+          <p>Secundaria</p>
+          <div
+            className={`custom-select-status ${isOpenSecondary ? "open" : ""}`}
+            onClick={toggleSelectSecondary}
+          >
+            <div className="selected-option-preview">
+              <span>{selectedOptionSecondary}</span>
+              <FontAwesomeIcon
+                icon={isOpenSecondary ? faCaretUp : faCaretDown}
+                className="arrow"
+              />
+            </div>
+            {isOpenSecondary && (
+              <div className="options-preview">
+                {catSecondary.map((option, index) => (
+                  <div
+                    key={index}
+                    className={`option-preview ${
+                      option === selectedOptionSecondary ? "selected" : ""
+                    }`}
+                    onClick={() => handleOptionSelectSecondary(option)}
+                  >
+                    {option}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>{" "}
       </div>
       <div>
         <div className="add-categorie-product-adm">
@@ -223,9 +224,9 @@ const SelectCategoryProduct = ({ setProduct }) => {
             </div>
           </div>
         </div>
-        <p onClick={handleAddCategory}>Agregar</p>
+        <button onClick={handleAddCategory}>Agregar</button>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -12,16 +12,23 @@
 }
 .add-categorie-product-adm{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   color: black;
   font-family: "jost";
   font-size: 18px;
 
 }
 
-.select-categories-modal-admin{
+
+.category-primary-admin , .category-secondary-admin{
   display: flex;
   flex-direction: column;
+}
+
+.select-categories-modal-admin{
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
 }
 
 .selected-option-preview {
