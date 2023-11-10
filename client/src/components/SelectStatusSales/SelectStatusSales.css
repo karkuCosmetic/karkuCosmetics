@@ -1,5 +1,4 @@
 .custom-select-status {
-  position: relative;
   width: 9rem;
   border: 1px solid #7d3c93 !important;
   border-radius: 5px;
@@ -7,7 +6,6 @@
   user-select: none;
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  z-index: 1;
   font-size: 16px;
 }
 
@@ -28,6 +26,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  
 }
 
 .selected-option-preview svg {

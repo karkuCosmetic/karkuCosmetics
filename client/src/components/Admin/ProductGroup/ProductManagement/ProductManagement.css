@@ -213,6 +213,7 @@
 
 .show-product-btn {
   background-color: #d99692;
+  width: 6rem;
 }
 
 .edit-product-btn {
@@ -264,8 +265,6 @@
   inset: 0 !important;
   margin-top: 3rem;
 }
-
-
 
 .pagination-productManagement {
   display: flex;

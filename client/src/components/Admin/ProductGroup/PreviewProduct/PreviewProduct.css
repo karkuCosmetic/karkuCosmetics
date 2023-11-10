@@ -145,6 +145,11 @@
   }
 }
 
+.show-product-btn-preview {
+  background-color: #b4507d;
+  width: 6rem;
+}
+
 .button-showAll {
   color: #fff;
   background-color: #d99692;

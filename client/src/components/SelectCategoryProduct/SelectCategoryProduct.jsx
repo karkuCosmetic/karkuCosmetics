@@ -195,7 +195,7 @@ const SelectCategoryProduct = ({ setProduct }) => {
               }`}
               onClick={toggleSelectCategories}
             >
-              <div className="selected-option-preview">
+              <div className="selected-option-preview-addCat">
                 <span>
                   {selectedOptionCategories === "primary"
                     ? "Primaria"
