@@ -32,7 +32,7 @@ app.use(
     credentials: true,
   })
 );
-// app.use(cors())
+app.use(cors())
 app.use(morgan("dev"));
 app.use(express.json());
 

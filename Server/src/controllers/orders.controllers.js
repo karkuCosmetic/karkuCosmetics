@@ -1,4 +1,7 @@
-import { sendEmailUpdateStatusSales } from "../helpers/sendConfirmationEmail.js";
+import {
+  sendEmailUpdateSalesShippingPrice,
+  sendEmailUpdateStatusSales,
+} from "../helpers/sendConfirmationEmail.js";
 import { Admin } from "../models/admin.js";
 import { User } from "../models/user.js";
 import { formatError } from "../utils/formatError.js";
@@ -44,15 +47,15 @@ export const updateOrders = async (req, res) => {
 export const updateDeliveryOrders = async (req, res) => {
   try {
     const { id } = req.params;
-    const {shippingNumber } = req.body;
+    const { shippingNumber, priceNumberSend } = req.body;
 
     // Actualiza el campo "entrega" en Admin
     await Admin.updateMany(
       { "orders.id": id },
       {
         $set: {
-    
           "orders.$.detailPay.TrackNumber": shippingNumber,
+          "orders.$.detailPay.shipPrice": priceNumberSend,
         },
       }
     );
@@ -62,12 +65,19 @@ export const updateDeliveryOrders = async (req, res) => {
       { "buys.id": id },
       {
         $set: {
-
           "buys.$.detailPay.TrackNumber": shippingNumber,
+          "buys.$.detailPay.shipPrice": priceNumberSend,
         },
       }
     );
 
+    if (priceNumberSend) {
+      const admin = await Admin.findOne();
+      let order = admin.orders.filter((el) => el.id === id);
+      let email = order[0].payer.email;
+
+      sendEmailUpdateSalesShippingPrice(email, priceNumberSend);
+    }
     res.status(200).json("elementos actualizados");
   } catch (error) {
     res.status(500).json(formatError(error.message));

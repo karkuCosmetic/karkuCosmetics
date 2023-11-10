@@ -144,11 +144,11 @@ export const reciveWebhook = async (req, res) => {
 
         detailPay: {
           items: data.response.additional_info.items,
-          status: "pendiente",
-          optionSend: data.response.metadata.method,
-          TrackNumber: "",
-          shipPrice:null,
-          shipStatus:false
+          status: "pendiente",                         //en preparacion, entregada
+          optionSend: data.response.metadata.method,  //metodo acuerdo con vendedor o correo
+          TrackNumber: "",                           //numero de seguimiento 
+          shipPrice:null,                           //precio de envio
+          shipStatus:false                         //si pago o no
         },
       };
 
