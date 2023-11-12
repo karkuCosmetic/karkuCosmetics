@@ -17,6 +17,8 @@ const whiteList = [
   "https://www.karku.com.ar",
   "http://localhost:3000",
   "https://www.mercadopago.com.ar",
+  "https://www.mercadolibre.com",
+  
   // Agrega aquí otros orígenes permitidos si es necesario
 ];
 
