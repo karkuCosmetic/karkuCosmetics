@@ -28,7 +28,10 @@ router.get("/email", [verifyToken, isAdmin], getEmails);
 
 router.get("/orders",[verifyToken, isAdmin], getOrders);
 router.put("/orders/:id",[verifyToken, isAdmin], updateOrders); 
-router.put("/orders/delivery/:id",[verifyToken, isAdmin], updateDeliveryOrders); 
+// router.put("/orders/delivery/:id",[verifyToken, isAdmin], updateDeliveryOrders); 
+router.put("/orders/delivery/:id", updateDeliveryOrders); 
+
+
 
 //AGREGAR MIDDLEWARE ↓
 router.post("/", createAdmin);
