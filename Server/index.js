@@ -18,7 +18,8 @@ const whiteList = [
   "http://localhost:3000",
   "https://www.mercadopago.com.ar",
   "https://www.mercadolibre.com",
-  
+  "karku-cosmetics-4dsy-km4jtkwdx-karkucosmetic.vercel.app",
+
   // Agrega aquí otros orígenes permitidos si es necesario
 ];
 
@@ -34,7 +35,7 @@ app.use(
     credentials: true,
   })
 );
-app.use(cors())
+app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 
