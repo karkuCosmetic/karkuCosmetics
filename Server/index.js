@@ -17,6 +17,7 @@ const whiteList = [
   "https://www.karku.com.ar",
   "http://localhost:3000",
   "https://www.mercadopago.com.ar",
+  "https://api.mercadopago.com",
 ];
 
 app.use(
