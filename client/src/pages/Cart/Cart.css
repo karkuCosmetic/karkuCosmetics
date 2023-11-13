@@ -27,13 +27,15 @@
   gap: 1rem;
   margin: 1rem;
   width: 100%;
+  padding-inline: 5rem;
 }
 
 .cart-item {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 80%;
+  width: 100%;
+  max-width: 900px;
   gap: 1.5rem;
   align-items: center;
   background-color: #f3f3f3;
@@ -47,7 +49,6 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-
   gap: 3rem;
   max-width: 20rem;
 }
@@ -271,7 +272,7 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-        max-width: 600px;
+    max-width: 600px;
     align-items: center;
     background-color: #f3f3f3;
     border: 1px solid #317d24;
@@ -289,6 +290,7 @@
     width: 100%;
     gap: 1rem;
     margin: 0.8rem;
+    padding: 0;
   }
 
   .cart-item-body {

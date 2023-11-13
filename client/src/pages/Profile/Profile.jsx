@@ -253,7 +253,11 @@ const Profile = () => {
                 )}
               </div>
             )}
-            {editing && <button className="save-btn-profile" onClick={handleSave}>Guardar</button>}
+            {editing && (
+              <button className="save-btn-profile" onClick={handleSave}>
+                Guardar
+              </button>
+            )}
             <button onClick={() => setEditing(!editing)}>
               {editing ? "Cancelar" : "Editar"}
             </button>
@@ -374,6 +378,10 @@ const Profile = () => {
                         <p>
                           <strong>Estado:</strong>{" "}
                           {selectedPurchase.detailPay.status}
+                        </p>
+                        <p>
+                          <strong>Costo envío: </strong>
+                          ${selectedPurchase.detailPay.shipPrice}
                         </p>
                         <p>
                           <strong>Envío: </strong>
