@@ -16,6 +16,7 @@ const whiteList = [
   process.env.DEPLOY_CLIENT_URL,
   "https://www.karku.com.ar",
   "http://localhost:3000",
+  "https://www.mercadopago.com.ar",
 ];
 
 app.use(
