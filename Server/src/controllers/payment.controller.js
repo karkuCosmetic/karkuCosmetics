@@ -105,7 +105,7 @@ export const reciveWebhook = async (req, res) => {
     console.log("entro al webhook");
     const payment = req.query;
 
-    if (payment.type === "payment") {
+    if (req.method === "POST" && req.body.type) {
       const data = await mercadopago.payment.findById(payment["data.id"]);
 
       //ajustar fecha
@@ -177,7 +177,7 @@ export const reciveWebhook = async (req, res) => {
 
         await Admin.updateMany({}, { $push: { orders: informationPayment } }); // A todos los admins se le agrega la compra
       }
-      res.status(200);
+      res.status(200).end();
     }
     // res.status(200);
   } catch (error) {
