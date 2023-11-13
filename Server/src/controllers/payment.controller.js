@@ -61,8 +61,8 @@ export const createOrder = async (req, res) => {
           pending: `${process.env.DEPLOY_CLIENT_URL}/store`,
         },
 
-        // notification_url: `${process.env.DEPLOY_API_URL}/payment/webhook`,
-        notification_url: `https://karku-cosmetics-4dsy.vercel.app/payment/webhook`,
+        notification_url: `${process.env.DEPLOY_API_URL}/payment/webhook`,
+        // notification_url: `https://karku-cosmetics-4dsy.vercel.app/payment/webhook`,
       };
 
       const result = await mercadopago.preferences.create(preference);
@@ -144,11 +144,11 @@ export const reciveWebhook = async (req, res) => {
 
         detailPay: {
           items: data.response.additional_info.items,
-          status: "pendiente",                         //en preparacion, entregada
-          optionSend: data.response.metadata.method,  //metodo acuerdo con vendedor o correo
-          TrackNumber: "",                           //numero de seguimiento 
-          shipPrice:null,                           //precio de envio
-          shipStatus:false                         //si pago o no
+          status: "pendiente", //en preparacion, entregada
+          optionSend: data.response.metadata.method, //metodo acuerdo con vendedor o correo
+          TrackNumber: "", //numero de seguimiento
+          shipPrice: null, //precio de envio
+          shipStatus: false, //si pago o no
         },
       };
 
