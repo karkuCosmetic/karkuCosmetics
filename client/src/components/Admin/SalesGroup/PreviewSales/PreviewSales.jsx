@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { getSales, updateSalesById, updateSalesTranckingNumber } from "../../../../functions/fetchingSales";
+import {
+  getSales,
+  updateSalesById,
+  updateSalesTranckingNumber,
+} from "../../../../functions/fetchingSales";
 import "./PreviewSales.css";
 import { GetDecodedCookie } from "../../../../utils/DecodedCookie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,10 +16,11 @@ const PreviewSales = ({ setSection }) => {
   const [selectedSale, setSelectedSale] = useState(null);
   const [selectedStatus, setSelectedStatus] = useState("");
   const [shippingNumber, setShippingNumber] = useState("");
-  const [isEditing, setIsEditing] = useState(false);
-  const [showEditField, setShowEditField] = useState(false);
+  const [priceNumberSend, setpriceNumberSend] = useState("");
+  const [isEditingNumber, setIsEditingNumber] = useState(false);
+  const [isEditingCost, setIsEditingCost] = useState(false);
 
-  const orderSales = sales.slice(0, 6);
+  const orderSales = sales.slice(0, 5);
   const token = GetDecodedCookie("cookieToken");
   useEffect(() => {
     getSales(token)
@@ -63,18 +68,54 @@ const PreviewSales = ({ setSection }) => {
     setSelectedSale(null);
   };
 
-  const handleEditClick = () => {
-    setIsEditing(true);
-    setShowEditField(true);
-  };
-
   const handleShippingNumberChange = (e) => {
     setShippingNumber(e.target.value);
   };
 
+  const handlepriceNumberSendChange = (e) => {
+    setpriceNumberSend(e.target.value);
+  };
+
   const handleSaveShippingNumber = () => {
     console.log("Número de envío:", shippingNumber);
-    updateSalesTranckingNumber(selectedSale.id,token,shippingNumber)
+    updateSalesTranckingNumber(selectedSale.id, token, shippingNumber)
+      .then(() => {
+        Swal.fire("Guardado correctamente", "", "success");
+        setIsEditingNumber(false);
+      })
+      .catch((error) => {
+        console.error("Error al guardar:", error);
+        Swal.fire("Error al guardar", "", "error");
+      });
+  };
+
+  const handleEditNumberClick = () => {
+    setIsEditingNumber(true);
+  };
+
+  const handleEditCostClick = () => {
+    setIsEditingCost(true);
+  };
+
+  const handleSavepriceNumberSend = () => {
+    console.log("Costo de envío:", priceNumberSend);
+    updateSalesTranckingNumber(selectedSale.id, token, priceNumberSend)
+      .then(() => {
+        Swal.fire("Guardado correctamente", "", "success");
+        setIsEditingCost(false);
+      })
+      .catch((error) => {
+        console.error("Error al guardar:", error);
+        Swal.fire("Error al guardar", "", "error");
+      });
+  };
+
+  const handleCancelEditNumber = () => {
+    setIsEditingNumber(false);
+  };
+
+  const handleCancelEditCost = () => {
+    setIsEditingCost(false);
   };
 
   return (
@@ -172,28 +213,68 @@ const PreviewSales = ({ setSection }) => {
                         <strong>TN: </strong>
                         {selectedSale.detailPay?.TrackNumber}
                       </p>
-                      {isEditing ? (
-                        <input
-                          type="text"
-                          placeholder="Número de envío"
-                          value={shippingNumber}
-                          onChange={handleShippingNumberChange}
-                        />
+                      {isEditingNumber ? (
+                        <>
+                          <input
+                            type="text"
+                            placeholder="Número de envío"
+                            value={shippingNumber}
+                            onChange={handleShippingNumberChange}
+                          />
+                          <button
+                            className="btn-save-shipping"
+                            onClick={handleSaveShippingNumber}
+                          >
+                            Guardar Envío
+                          </button>
+                          <button
+                            className="btn-cancel-edit"
+                            onClick={handleCancelEditNumber}
+                          >
+                            Cancelar
+                          </button>
+                        </>
                       ) : (
                         <FontAwesomeIcon
-                        className="icon-edit-shipping"
+                          className="icon-edit-shipping"
                           icon={faPen}
-                          onClick={handleEditClick}
+                          onClick={handleEditNumberClick}
                         />
                       )}
-
-                      {isEditing && (
-                        <button
-                          className="btn-save-shipping"
-                          onClick={handleSaveShippingNumber}
-                        >
-                          Guardar Envío
-                        </button>
+                      <p>
+                        <strong>Envío: </strong>
+                        {selectedSale.detailPay?.shipStatus
+                          ? "Pagado"
+                          : "Pendiente de pago"}{" "}
+                        - {selectedSale.detailPay?.shipPrice}
+                      </p>
+                      {isEditingCost ? (
+                        <>
+                          <input
+                            type="text"
+                            placeholder="Costo de envío"
+                            value={priceNumberSend}
+                            onChange={handlepriceNumberSendChange}
+                          />
+                          <button
+                            className="btn-save-shipping"
+                            onClick={handleSavepriceNumberSend}
+                          >
+                            Guardar Costo
+                          </button>
+                          <button
+                            className="btn-cancel-edit"
+                            onClick={handleCancelEditCost}
+                          >
+                            Cancelar
+                          </button>
+                        </>
+                      ) : (
+                        <FontAwesomeIcon
+                          className="icon-edit-shipping"
+                          icon={faPen}
+                          onClick={handleEditCostClick}
+                        />
                       )}
                     </div>
                   </div>

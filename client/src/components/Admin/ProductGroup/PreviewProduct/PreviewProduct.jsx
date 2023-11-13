@@ -44,20 +44,6 @@ const PreviewProduct = ({ setSection }) => {
     setIsAddProductModalOpen(false);
   };
 
-  const handleEditClick = async (product) => {
-    try {
-      console.log("Product ID:", product._id);
-      await getProductDetail(product._id).then((data) => {
-        console.log("Product Details:", data);
-        setEditedProduct(data.product);
-      });
-      setIsEditing(true);
-      setIsEditModalOpen(true);
-    } catch (error) {
-      console.error("Error al obtener detalles del producto:", error);
-    }
-  };
-  
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);

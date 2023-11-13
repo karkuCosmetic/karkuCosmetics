@@ -38,7 +38,7 @@ export const updateSalesTranckingNumber = async (
   try {
     const res = await axios.put(
       `${process.env.REACT_APP_URL_API}/admin/orders/delivery/${id}`,
-      { shippingNumber,priceNumberSend},
+      { shippingNumber, priceNumberSend },
       {
         headers: { "user-token": token },
       }
@@ -46,5 +46,6 @@ export const updateSalesTranckingNumber = async (
     return res.data;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
