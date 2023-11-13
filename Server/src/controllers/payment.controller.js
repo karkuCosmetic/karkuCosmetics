@@ -103,7 +103,6 @@ export const pendingOrder = async (req, res) => {
 
 export const reciveWebhook = async (req, res) => {
   try {
-    console.log("entro al webhook");
     const payment = req.query;
 
     if (req.method === "POST" && payment.type === "payment") {
