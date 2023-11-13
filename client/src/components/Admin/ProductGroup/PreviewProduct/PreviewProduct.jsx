@@ -53,15 +53,18 @@ const PreviewProduct = ({ setSection }) => {
 
   const handleEditClick = async (product) => {
     try {
-      await getProductDetail(product._id).then((data) =>
-        setEditedProduct(data.product)
-      );
+      console.log("Product ID:", product._id);
+      await getProductDetail(product._id).then((data) => {
+        console.log("Product Details:", data);
+        setEditedProduct(data.product);
+      });
       setIsEditing(true);
-      setEditModalOpen(true);
+      setIsEditModalOpen(true);
     } catch (error) {
       console.error("Error al obtener detalles del producto:", error);
     }
   };
+  
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -194,7 +197,7 @@ const PreviewProduct = ({ setSection }) => {
                         <div className="product-details-buttons">
                           <button
                             className="edit-product-btn"
-                            onClick={() => handleEditClick(selectedProduct)}
+                            onClick={() => handleEditClick(selectedProduct._id)}
                           >
                             Editar
                           </button>
@@ -240,7 +243,7 @@ const PreviewProduct = ({ setSection }) => {
       )}
       <Modal isOpen={isEditModalOpen} onRequestClose={closeEditModal}>
         <EditProduct
-          match={{ params: { id: selectedProduct } }}
+          productId={selectedProduct?._id}
           productDetails={selectedProductDetails}
           closeEditModal={closeEditModal}
         />

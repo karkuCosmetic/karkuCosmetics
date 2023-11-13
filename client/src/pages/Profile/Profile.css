@@ -331,9 +331,10 @@ input:focus {
   position: relative;
 }
 
-@media (max-width: 525px) {
+@media (max-width: 1130px) {
   .modal-content {
     width: 95%;
+    max-width: 800px;
   }
 }
 
@@ -355,7 +356,7 @@ input:focus {
   border-bottom: 1px solid #619d52;
 }
 
-@media (max-width: 525px) {
+@media (max-width: 1130px) {
   .status-id-purchase {
     display: flex;
     flex-direction: column;
@@ -378,6 +379,27 @@ input:focus {
   border: 0;
   font-family: "jost";
   font-size: 12px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.pay-shipping {
+  background-color: #317d24;
+  border-radius: 10px;
+  width: 4rem;
+  padding: 0.2rem 0.8rem;
+  margin-left: 0.5rem;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-family: "jost";
+  font-size: 16px;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -416,7 +438,7 @@ input:focus {
   gap: 1rem;
 }
 
-@media (max-width: 525px) {
+@media (max-width: 1130px) {
   .item-detail {
     width: 100%;
   }
@@ -462,7 +484,7 @@ input:focus {
   width: 50%;
 }
 
-@media (max-width: 525px) {
+@media (max-width: 1130px) {
   .purchase-history-item {
     width: 100%;
   }
@@ -480,7 +502,7 @@ input:focus {
   padding-bottom: 5rem;
 }
 
-@media (max-width: 525px) {
+@media (max-width: 1130px) {
   .pagination-history {
     padding-bottom: 1rem;
   }
@@ -491,6 +513,7 @@ input:focus {
   color: #333;
   margin: 0 5px;
   font-family: "jost";
+  font-size: 18px;
   cursor: pointer;
   transition: background-color 0.3s;
   border-radius: 50%;
@@ -502,16 +525,18 @@ input:focus {
 .pagination-history button:hover {
   background-color: #f38f82;
   color: white;
+  font-size: 18px;
 }
 
 .pagination-history button.active {
   background-color: #f38f82;
   color: #fff;
+  font-size: 18px;
 }
 
 .pagination-history .arrow-button {
   color: #f38f82;
-  font-size: 14px;
+  font-size: 18px;
   font-family: "jost";
   font-weight: bold;
   width: 1.5rem;
@@ -551,7 +576,7 @@ input:focus {
   gap: 5rem;
 }
 
-@media (max-width: 525px) {
+@media (max-width: 1130px) {
   .payment-detail-purchase {
     display: flex;
     flex-direction: column;

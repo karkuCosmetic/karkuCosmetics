@@ -86,6 +86,12 @@ const Profile = () => {
     setDataUpdate({ ...dataUpdate, image: el });
   };
 
+  //ACÁ METER LA FUNCION PARA PAGAR EL ENVIO POR MP //////////////////
+
+  const handlePayShip = () => {};
+
+  /////////////////////////////////////////////////////////////////
+
   const openPurchaseDetail = (purchase) => {
     setSelectedPurchase(purchase);
   };
@@ -380,13 +386,22 @@ const Profile = () => {
                           {selectedPurchase.detailPay.status}
                         </p>
                         <p>
-                          <strong>Costo envío: </strong>
-                          ${selectedPurchase.detailPay.shipPrice}
-                        </p>
-                        <p>
                           <strong>Envío: </strong>
-                          {selectedPurchase.detailPay.TrackNumber}{" "}
+                          {selectedPurchase.detailPay.shipStatus === false ? (
+                            <>
+                              Pendiente de pago
+                              <button
+                                className="pay-shipping"
+                                onClick={handlePayShip}
+                              >
+                                Pagar
+                              </button>
+                            </>
+                          ) : (
+                            selectedPurchase.detailPay.TrackNumber
+                          )}
                         </p>
+
                         <a
                           href="https://www.correoargentino.com.ar/formularios/ondnc"
                           target="_blank"
