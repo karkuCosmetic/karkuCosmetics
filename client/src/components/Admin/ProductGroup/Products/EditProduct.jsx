@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate, useParams } from "react-router-dom";
 import {
   getProductDetail,
   updateProduct,
@@ -10,11 +9,10 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { GetDecodedCookie } from "../../../../utils/DecodedCookie";
 import SelectEditCategoryProduct from "../../../SelectEditCategoryProduct/SelectEditCategoryProduct";
 
-const EditProduct = ({ closeEditModal }) => {
+const EditProduct = ({ match, closeEditModal }) => {
   const [product, setProduct] = useState({});
   const token = GetDecodedCookie("cookieToken");
-  const { id } = useParams();  // Para React Router v6
-  const navigate = useNavigate();
+  const id = match.params.id;
 
   //----------------------- actualizar images---------------
   const [selectedImages, setSelectedImages] = useState([]); //preview images
@@ -40,18 +38,13 @@ const EditProduct = ({ closeEditModal }) => {
   };
   //----------------------- actualizar images---------------
   useEffect(() => {
-    if (!id) {
-      // Si id es undefined, podría redirigir a otra página o manejarlo de alguna manera
-      navigate("/admin/home");  // Ejemplo de redirección a la página de inicio
-      return;
-    }
     fetchingdetail()
       .then((data) => {
         setProduct(data.product);
         setSelectedImages(data.product.image);
       })
       .catch("error");
-    }, [id, navigate])
+  }, []);
 
   const fetchingdetail = async () => {
     const data = await getProductDetail(id);
@@ -82,7 +75,7 @@ const EditProduct = ({ closeEditModal }) => {
   const closeModal = () => {
     closeEditModal();
   };
-
+  console.log(product);
   return (
     <div className="form-updateProduct">
       <div className="container-close-btn">

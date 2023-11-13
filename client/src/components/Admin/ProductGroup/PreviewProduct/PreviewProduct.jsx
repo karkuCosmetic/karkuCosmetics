@@ -11,23 +11,16 @@ import "./PreviewProduct.css";
 import EditProduct from "../Products/EditProduct";
 import AddProduct from "../Products/AddProduct";
 import { GetDecodedCookie } from "../../../../utils/DecodedCookie";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const PreviewProduct = ({ setSection }) => {
   const [products, setProducts] = useState([]);
   const [showAllProducts, setShowAllProducts] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [deletingProductId, setDeletingProductId] = useState(null);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
   const [selectedProductDetails, setSelectedProductDetails] = useState(null);
-  const [editedProduct, setEditedProduct] = useState({});
-  const [isEditing, setIsEditing] = useState(false);
-  const [editModalOpen, setEditModalOpen] = useState(false);
-
-  const [isProductModalOpen, setIsProductModalOpen] = useState(false);
-
   const MySwal = withReactContent(Swal);
 
   const token = GetDecodedCookie("cookieToken");
@@ -50,21 +43,6 @@ const PreviewProduct = ({ setSection }) => {
   const closeAddProductModal = () => {
     setIsAddProductModalOpen(false);
   };
-
-  const handleEditClick = async (product) => {
-    try {
-      console.log("Product ID:", product._id);
-      await getProductDetail(product._id).then((data) => {
-        console.log("Product Details:", data);
-        setEditedProduct(data.product);
-      });
-      setIsEditing(true);
-      setIsEditModalOpen(true);
-    } catch (error) {
-      console.error("Error al obtener detalles del producto:", error);
-    }
-  };
-  
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -90,6 +68,17 @@ const PreviewProduct = ({ setSection }) => {
     });
   };
 
+  const handleEditProduct = async (productId) => {
+    setSelectedProduct(productId);
+    setIsEditModalOpen(true);
+    try {
+      const productData = await getProductDetail(productId);
+      setSelectedProductDetails(productData);
+    } catch (error) {
+      console.error("Error al obtener detalles del producto:", error);
+    }
+  };
+
   const handleDeleteConfirmation = async (id) => {
     try {
       await DeleteProductById(id, token);
@@ -103,16 +92,6 @@ const PreviewProduct = ({ setSection }) => {
     } catch (error) {
       console.error("Error al eliminar producto:", error);
     }
-  };
-
-  const openProductModal = (product) => {
-    setSelectedProduct(product);
-    setIsProductModalOpen(true);
-  };
-
-  const closeProductModal = () => {
-    setSelectedProduct(null);
-    setIsProductModalOpen(false);
   };
 
   return (
@@ -151,73 +130,20 @@ const PreviewProduct = ({ setSection }) => {
                 </div>
                 <div className="previewProduct-container-buttons">
                   <div className="previewProduct-price">${product.price}</div>
-                  <Modal
-                    isOpen={isProductModalOpen}
-                    onRequestClose={closeProductModal}
-                    contentLabel="Detalles del Producto"
-                  >
-                    {selectedProduct && (
-                      <div className="product-details-container">
-                        <div className="details-product-text">
-                          <div className="close-modal-detail">
-                            <button
-                              className="product-details-close-button"
-                              onClick={closeProductModal}
-                            >
-                              <FontAwesomeIcon icon={faTimes} />
-                            </button>
-                          </div>
-                          <h2 className="product-details-title">
-                            Detalles del Producto
-                          </h2>
-                          <p className="product-details-p">
-                            <span>Nombre: </span>
-                            {selectedProduct?.title}
-                          </p>
-                          <p className="product-details-p">
-                            <span>Precio: </span>${selectedProduct?.price}
-                          </p>
-                          <p className="product-details-p">
-                            <span>Descripción: </span>
-                            {selectedProduct?.description}
-                          </p>
-                        </div>
-                        <div className="product-details-image-container">
-                          {selectedProduct.image.map((imageUrl, index) => (
-                            <img
-                              key={index}
-                              src={imageUrl}
-                              alt={`${selectedProduct.title} - Imagen ${
-                                index + 1
-                              }`}
-                              className="product-details-image"
-                            />
-                          ))}
-                        </div>
-                        <div className="product-details-buttons">
-                          <button
-                            className="edit-product-btn"
-                            onClick={() => handleEditClick(selectedProduct._id)}
-                          >
-                            Editar
-                          </button>
-                          <button
-                            className="delete-product-btn"
-                            onClick={() =>
-                              handleDeleteProduct(selectedProduct._id)
-                            }
-                          >
-                            Eliminar
-                          </button>
-                        </div>
-                      </div>
-                    )}
-                  </Modal>
+                  <button >
+                    Ver
+                  </button>
                   <button
-                    className="show-product-btn-preview"
-                    onClick={() => openProductModal(product)}
+                    className="previewProduct-container-buttons-edit"
+                    onClick={() => handleEditProduct(product._id)}
                   >
-                    Ver producto
+                    Editar
+                  </button>
+                  <button
+                    className="previewProduct-container-buttons-delete"
+                    onClick={() => handleDeleteProduct(product._id)}
+                  >
+                    Eliminar
                   </button>
                 </div>
               </li>
@@ -243,7 +169,7 @@ const PreviewProduct = ({ setSection }) => {
       )}
       <Modal isOpen={isEditModalOpen} onRequestClose={closeEditModal}>
         <EditProduct
-          productId={selectedProduct?._id}
+          match={{ params: { id: selectedProduct } }}
           productDetails={selectedProductDetails}
           closeEditModal={closeEditModal}
         />

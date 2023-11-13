@@ -168,6 +168,8 @@
     flex-direction: row;
     align-items: center;
     text-align: center;
+    justify-content: space-between;
+    gap: 18px;
   }
 
   .buttons-productManagement p,
@@ -179,6 +181,7 @@
 .buttons-productManagement button {
   color: #fff;
   border: none;
+  width: 4rem;
   border-radius: 4px;
   padding: 5px 10px;
   font-family: "jost";
@@ -213,7 +216,6 @@
 
 .show-product-btn {
   background-color: #d99692;
-  width: 6rem;
 }
 
 .edit-product-btn {
