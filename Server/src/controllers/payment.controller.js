@@ -62,7 +62,6 @@ export const createOrder = async (req, res) => {
         },
         auto_return: "approved",
         notification_url: `${process.env.DEPLOY_API_URL}/payment/webhook?source_news=webhooks`,
-        // notification_url: `https://karku-cosmetics-4dsy.vercel.app/payment/webhook`,
       };
 
       const result = await mercadopago.preferences.create(preference);
