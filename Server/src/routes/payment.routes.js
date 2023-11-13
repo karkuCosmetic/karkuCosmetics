@@ -6,10 +6,10 @@ const router = express.Router();
 
 
 router.post("/create-order", [verifyToken], createOrder);
+router.post("/webhook", reciveWebhook);
 router.get("/success", succesOrder);
 router.get("/failure", failureOrder);
 router.get("/pending", pendingOrder);
-router.post("/webhook", reciveWebhook);
 
 
 export default router;
