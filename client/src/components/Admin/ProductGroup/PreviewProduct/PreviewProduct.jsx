@@ -53,9 +53,7 @@ const PreviewProduct = ({ setSection }) => {
 
   const handleEditClick = async (product) => {
     try {
-      console.log("Product ID:", product._id);
-      await getProductDetail(product._id).then((data) => {
-        console.log("Product Details:", data);
+      await getProductDetail(product).then((data) => {
         setEditedProduct(data.product);
       });
       setIsEditing(true);

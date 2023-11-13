@@ -61,7 +61,8 @@ export const createOrder = async (req, res) => {
           pending: `${process.env.DEPLOY_CLIENT_URL}/store`,
         },
 
-        notification_url: `${process.env.DEPLOY_API_URL}/payment/webhook`,
+        // notification_url: `${process.env.DEPLOY_API_URL}/payment/webhook`,
+        notification_url: `https://7011ths9-3001.brs.devtunnels.ms/payment/webhook`,
       };
 
       const result = await mercadopago.preferences.create(preference);
@@ -105,7 +106,7 @@ export const reciveWebhook = async (req, res) => {
     console.log("entro al webhook");
     const payment = req.query;
 
-    if (req.method === "POST" && req.body.type) {
+    if (req.method === "POST" && payment.type === "payment") {
       const data = await mercadopago.payment.findById(payment["data.id"]);
 
       //ajustar fecha
