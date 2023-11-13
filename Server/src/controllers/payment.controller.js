@@ -60,7 +60,6 @@ export const createOrder = async (req, res) => {
           failure: `${process.env.DEPLOY_CLIENT_URL}/cart`,
           pending: `${process.env.DEPLOY_CLIENT_URL}/store`,
         },
-        auto_return: "approved",
 
         notification_url: `${process.env.DEPLOY_API_URL}/payment/webhook`,
       };
