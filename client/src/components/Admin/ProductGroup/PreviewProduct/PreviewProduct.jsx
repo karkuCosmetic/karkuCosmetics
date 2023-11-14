@@ -16,7 +16,6 @@ const PreviewProduct = ({ setSection }) => {
   const [products, setProducts] = useState([]);
   const [showAllProducts, setShowAllProducts] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [deletingProductId, setDeletingProductId] = useState(null);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
@@ -131,9 +130,6 @@ const PreviewProduct = ({ setSection }) => {
                 </div>
                 <div className="previewProduct-container-buttons">
                   <div className="previewProduct-price">${product.price}</div>
-                  <button >
-                    Ver
-                  </button>
                   <button
                     className="previewProduct-container-buttons-edit"
                     onClick={() => handleEditProduct(product._id)}

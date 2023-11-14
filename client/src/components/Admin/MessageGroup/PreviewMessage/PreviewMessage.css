@@ -144,6 +144,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  text-align: center;
   justify-content: space-evenly;
   width: 100%;
   gap: 1rem;
@@ -151,12 +152,29 @@
   margin-bottom: 2rem;
 }
 
+@media (max-width: 925px) {
+  .info-message-modal {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
 .name-email {
-  width: 30%;
+  width: 40%;
 }
 
 .phone-date {
-  width: 30%;
+  width: 40%;
+}
+
+@media (max-width: 925px) {
+  .name-email {
+    width: 100%;
+  }
+  
+  .phone-date {
+    width: 100%;
+  }
 }
 
 .text-message-modal {
@@ -190,7 +208,8 @@
   display: flex;
   flex-direction: column;
   background-color: white;
-  width: 80%;
+  width: 90%;
+  max-width: 900px;
   padding: 20px;
   border-radius: 5px;
   z-index: 1000;
@@ -235,6 +254,15 @@
   padding: 0.5rem;
   font-size: 16px;
   width: 80%;
+}
+
+@media (max-width: 925px) {
+  .textarea-response-message{
+    width: 100%;
+  }
+  .text-message-modal {
+width: 100%;
+  }
 }
 
 .btn-response-message {
@@ -294,6 +322,10 @@
   .btn-container-previewMessage {
     display: flex;
     justify-content: space-between;
+  }
+
+  .btn-response-message{
+width: 8rem;
   }
 }
 

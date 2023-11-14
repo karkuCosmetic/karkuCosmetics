@@ -147,19 +147,17 @@ const MessageManagement = ({ setSection }) => {
                 <div className="info-messages-container">
                   <strong>Nombre:</strong> {el.user_name}
                   <br />
-                  {/* <strong>Correo:</strong> {el.user_email}
-                  <br /> */}
                   <strong>Teléfono:</strong> {el.user_phone}
                   <br />
                   <strong>Fecha: </strong> {formatDateModal(el.date)}
                   <br />
                 </div>
                 <div className="text-messages-container">
-                  {el.user_message.slice(0, 200)}...
+                  {el.user_message.slice(0, 100)}...
                 </div>
-                <div className="btn-show-message-container">
+                <div className="btn-show-message-container-management">
                   <button
-                    className="btn-show-message"
+                    className="btn-show-message-management"
                     onClick={() => openModal(el)}
                   >
                     Ver mensaje

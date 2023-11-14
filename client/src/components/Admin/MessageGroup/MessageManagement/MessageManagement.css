@@ -13,6 +13,12 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
+@media (max-width: 925px) {
+  .MessagesManagement-container {
+    width: 95%;
+  }
+}
+
 .MessagesManagement-container h2 {
   font-family: "figtree";
 }
@@ -27,6 +33,13 @@
   padding: 1rem;
   font-family: "figtree";
   border-bottom: 1px solid #7d3c935b;
+}
+
+@media (max-width: 925px) {
+  .message-container {
+    width: 100%;
+    padding: 0.2rem;
+  }
 }
 
 .email-list ul {
@@ -49,22 +62,30 @@
 }
 
 .info-messages-container {
-  width: 25%;
-  flex-wrap: wrap;
+  width: 60%;
 }
 
 .text-messages-container {
   width: 50%;
 }
 
-.btn-show-message-container {
+@media (max-width: 925px) {
+  .info-messages-container {
+    width: 80%;
+  }
+  .text-messages-container {
+    display: none;
+  }
+}
+
+.btn-show-message-container-management {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 10%;
+  width: 50%;
 }
 
-.btn-show-message {
+.btn-show-message-management {
   display: flex;
   align-items: center;
   color: #fff;
@@ -78,7 +99,7 @@
   transition: width 0.3s ease;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
-.btn-show-message:hover {
+.btn-show-message-management:hover {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
