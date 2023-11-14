@@ -47,14 +47,14 @@ export const updateOrders = async (req, res) => {
 export const updateDeliveryOrders = async (req, res) => {
   try {
     const { id } = req.params;
-    const { shippingNumber, priceNumberSend } = req.body;
-
+    const { trackNumber, priceNumberSend } = req.body;
+    console.log(trackNumber, priceNumberSend );
     // Actualiza el campo "entrega" en Admin
     await Admin.updateMany(
       { "orders.id": id },
       {
         $set: {
-          "orders.$.detailPay.TrackNumber": shippingNumber,
+          "orders.$.detailPay.TrackNumber":trackNumber,
           "orders.$.detailPay.shipPrice": priceNumberSend,
         },
       }
@@ -65,7 +65,7 @@ export const updateDeliveryOrders = async (req, res) => {
       { "buys.id": id },
       {
         $set: {
-          "buys.$.detailPay.TrackNumber": shippingNumber,
+          "buys.$.detailPay.TrackNumber": trackNumber,
           "buys.$.detailPay.shipPrice": priceNumberSend,
         },
       }

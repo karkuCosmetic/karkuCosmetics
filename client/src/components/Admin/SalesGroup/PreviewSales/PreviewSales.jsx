@@ -15,7 +15,7 @@ const PreviewSales = ({ setSection }) => {
   const [sales, setSales] = useState([]);
   const [selectedSale, setSelectedSale] = useState(null);
   const [selectedStatus, setSelectedStatus] = useState("");
-  const [shippingNumber, setShippingNumber] = useState("");
+  const [trackNumber, setTrackNumber] = useState("");
   const [priceNumberSend, setpriceNumberSend] = useState("");
   const [isEditingNumber, setIsEditingNumber] = useState(false);
   const [isEditingCost, setIsEditingCost] = useState(false);
@@ -69,7 +69,7 @@ const PreviewSales = ({ setSection }) => {
   };
 
   const handleShippingNumberChange = (e) => {
-    setShippingNumber(e.target.value);
+    setTrackNumber(e.target.value);
   };
 
   const handlepriceNumberSendChange = (e) => {
@@ -77,8 +77,8 @@ const PreviewSales = ({ setSection }) => {
   };
 
   const handleSaveShippingNumber = () => {
-    console.log("Número de envío:", shippingNumber);
-    updateSalesTranckingNumber(selectedSale.id, token, shippingNumber)
+    console.log("Número de envío:", trackNumber);
+    updateSalesTranckingNumber(selectedSale.id, token,trackNumber,priceNumberSend)
       .then(() => {
         Swal.fire("Guardado correctamente", "", "success");
         setIsEditingNumber(false);
@@ -99,7 +99,7 @@ const PreviewSales = ({ setSection }) => {
 
   const handleSavepriceNumberSend = () => {
     console.log("Costo de envío:", priceNumberSend);
-    updateSalesTranckingNumber(selectedSale.id, token, priceNumberSend)
+    updateSalesTranckingNumber(selectedSale.id, token,trackNumber,priceNumberSend)
       .then(() => {
         Swal.fire("Guardado correctamente", "", "success");
         setIsEditingCost(false);
@@ -218,7 +218,7 @@ const PreviewSales = ({ setSection }) => {
                           <input
                             type="text"
                             placeholder="Número de envío"
-                            value={shippingNumber}
+                            value={trackNumber}
                             onChange={handleShippingNumberChange}
                           />
                           <button
