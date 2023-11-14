@@ -16,12 +16,13 @@
   gap: 1rem;
 }
 
-.inputs-newCategorie-adm{
+/* .inputs-newCategorie-adm{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
+  text-align: center;
+} */
 
 .inputs-newCategorie-adm input{
   color: black;
@@ -36,8 +37,8 @@
   gap: 1rem;
   justify-content: center;
   text-align: center;
-  font-weight: bold;
-  color: black;
+  font-weight: 500;
+  color:  #7d3c93;
   font-family: "jost";
   font-size: 18px;
 }

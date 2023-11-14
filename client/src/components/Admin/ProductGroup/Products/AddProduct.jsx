@@ -92,6 +92,7 @@ const AddProduct = ({ closeEditModal }) => {
             placeholder="ML/CC/CM/UNIDAD"
           />
         </div>
+        div
         <div>
           <label>Descripción:</label>
           <textarea
@@ -135,7 +136,7 @@ const AddProduct = ({ closeEditModal }) => {
             ref={inputRef}
             accept="image/*"
           />
-          <div style={{ display: "flex", gap: "15px" }}>
+          <div className="img-new-product">
             {selectedImages.map((image, index) => (
               <div className="img-addProduct-admin-container">
                 <img 
@@ -145,7 +146,7 @@ const AddProduct = ({ closeEditModal }) => {
                   alt={`Image ${index}`}
                 
                 />
-                <button type="button" onClick={() => handleImageRemove(index)}>
+                <button className="btn-delet-img-new-producto" type="button" onClick={() => handleImageRemove(index)}>
                 <FontAwesomeIcon icon={faTimes} />
                 </button>
               </div>

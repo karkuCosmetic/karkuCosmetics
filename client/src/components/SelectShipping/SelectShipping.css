@@ -1,7 +1,6 @@
 .custom-select-status {
-
   width: 9rem;
-  border: 1px solid #f38f82 !important;
+  border: 1px solid #b4507d !important;
   border-radius: 5px;
   cursor: pointer;
   user-select: none;
@@ -38,7 +37,7 @@
   width: 9rem;
   margin-top: 0.1rem;
   font-family: "figtree";
-  color: #f38f82;
+  color: #d99692;
   background-color: #fff;
   border: 1px solid #7d3c93 !important;
   border-radius: 5px;
@@ -48,7 +47,7 @@
 
 .options-preview.open {
   display: block;
-  color: #f38f82;
+  color:#d99692;
 }
 
 .option-preview {
@@ -59,12 +58,12 @@
 }
 
 .option-preview:hover {
-  background-color: #f38f82 !important;
+  background-color: #b4507d !important;
   color: #ffffff;
 }
 
 .option-preview.selected {
-  background-color: #f38f82 !important;
+  background-color:#b4507d!important;
   color: #ffffff;
   font-family: "figtree";
 }

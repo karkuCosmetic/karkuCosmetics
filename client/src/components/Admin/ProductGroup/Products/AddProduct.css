@@ -110,12 +110,13 @@
 }
 
 .save-product-btn {
-  width: 8rem;
+  width: 10rem;
   color: #fff;
   border: none;
   border-radius: 4px;
   padding: 5px 10px;
   font-family: "jost";
+  font-size: 16px;
   cursor: pointer;
   transition: width 0.3s ease;
   background-color: #7d3c93;
@@ -126,6 +127,25 @@
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
     rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
   width: calc(8rem + 15px);
+}
+
+.img-new-product{
+display: flex;
+flex-direction: row;
+gap: 0.5rem;
+}
+
+.btn-delet-img-new-producto{
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-family: "jost";
+  font-size: 14px;
+  cursor: pointer;
+  transition: width 0.3s ease;
+  background-color: #d99692;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .img-addProduct-admin-container {
@@ -172,8 +192,3 @@
 .upload-button:hover {
   background-color: #0056b3;
 }
-
-/* .upload-input {
-    display: none;
-  }
-   */

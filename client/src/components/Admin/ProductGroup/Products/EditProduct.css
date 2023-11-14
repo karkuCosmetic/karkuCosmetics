@@ -4,6 +4,8 @@
   justify-content: center;
   align-items: center;
   padding: 1rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
   width: 100%;
   color: black;
   background-color: #fefeff;
@@ -64,6 +66,39 @@
   align-items: center;
   padding: 1rem;
 }
+
+.img-edit-product{
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.img-addProduct-admin-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 90%;
+}
+.img-addProduct-admin-container button {
+  width: 2rem;
+}
+
+.img-addProduct-admin {
+  margin-top: 1rem;
+  width: 4rem;
+  height: 4rem;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.image-upload-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
 .container-close-btn {
   display: flex;
   justify-content: flex-end;
@@ -77,12 +112,13 @@
 }
 
 .save-product-btn {
-  width: 8rem;
+  width: 10rem;
   color: #fff;
   border: none;
   border-radius: 4px;
   padding: 5px 10px;
   font-family: "jost";
+  font-size: 16px;
   cursor: pointer;
   transition: width 0.3s ease;
   background-color: #7d3c93;

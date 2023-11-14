@@ -52,10 +52,13 @@ const SelectCategoryProduct = ({ setProduct }) => {
         ...catSecondary,
         ...data.categories.secondary,
       ]);
-      setCatPrimary(Array.from(uniqueCatPrimary));
-      setCatSecondary(Array.from(uniqueCatSecondary));
+      setCatPrimary(Array.from(uniqueCatPrimary).sort());
+      setCatSecondary(Array.from(uniqueCatSecondary).sort());
     });
   }, []);
+
+  const getSlicedAndSortedOptions = (options) =>
+    options.sort((a, b) => a.localeCompare(b));
 
   const handleOptionSelect = (option) => {
     setSelectedOptionPrimary(option);
@@ -103,15 +106,19 @@ const SelectCategoryProduct = ({ setProduct }) => {
 
   const handleAddCategory = () => {
     if (selectedOptionCategories === "primary") {
-      setCatPrimary([
-        ...catPrimary,
-        AddCategory[0].toUpperCase() + AddCategory.slice(1),
-      ]);
+      setCatPrimary(
+        [
+          ...catPrimary,
+          AddCategory[0].toUpperCase() + AddCategory.slice(1),
+        ].sort()
+      );
     } else {
-      setCatSecondary([
-        ...catSecondary,
-        AddCategory[0].toUpperCase() + AddCategory.slice(1),
-      ]);
+      setCatSecondary(
+        [
+          ...catSecondary,
+          AddCategory[0].toUpperCase() + AddCategory.slice(1),
+        ].sort()
+      );
     }
   };
 
@@ -133,17 +140,21 @@ const SelectCategoryProduct = ({ setProduct }) => {
             </div>
             {isOpenPrimary && (
               <div className="options-preview">
-                {catPrimary.map((option, index) => (
-                  <div
-                    key={index}
-                    className={`option-preview ${
-                      option === selectedOptionPrimary ? "selected" : ""
-                    }`}
-                    onClick={() => handleOptionSelect(option)}
-                  >
-                    {option}
-                  </div>
-                ))}
+                <div className="scrollable-options">
+                  {getSlicedAndSortedOptions(catPrimary).map(
+                    (option, index) => (
+                      <div
+                        key={index}
+                        className={`option-preview ${
+                          option === selectedOptionPrimary ? "selected" : ""
+                        }`}
+                        onClick={() => handleOptionSelect(option)}
+                      >
+                        {option}
+                      </div>
+                    )
+                  )}
+                </div>
               </div>
             )}
           </div>
@@ -163,17 +174,21 @@ const SelectCategoryProduct = ({ setProduct }) => {
             </div>
             {isOpenSecondary && (
               <div className="options-preview">
-                {catSecondary.map((option, index) => (
-                  <div
-                    key={index}
-                    className={`option-preview ${
-                      option === selectedOptionSecondary ? "selected" : ""
-                    }`}
-                    onClick={() => handleOptionSelectSecondary(option)}
-                  >
-                    {option}
-                  </div>
-                ))}
+                <div className="scrollable-options">
+                  {getSlicedAndSortedOptions(catSecondary).map(
+                    (option, index) => (
+                      <div
+                        key={index}
+                        className={`option-preview ${
+                          option === selectedOptionSecondary ? "selected" : ""
+                        }`}
+                        onClick={() => handleOptionSelectSecondary(option)}
+                      >
+                        {option}
+                      </div>
+                    )
+                  )}
+                </div>
               </div>
             )}
           </div>
@@ -216,7 +231,7 @@ const SelectCategoryProduct = ({ setProduct }) => {
                       }`}
                       onClick={() => handleOptionSelectCategorie(option)}
                     >
-                      {option === "primary" ? "primaria" : "secundaria"}
+                      {option === "primary" ? "Primaria" : "Secundaria"}
                     </div>
                   ))}
                 </div>
@@ -224,7 +239,9 @@ const SelectCategoryProduct = ({ setProduct }) => {
             </div>
           </div>
         </div>
-        <button onClick={handleAddCategory}>Agregar</button>
+        <button className="add-category" onClick={handleAddCategory}>
+          Agregar
+        </button>
       </div>
     </>
   );

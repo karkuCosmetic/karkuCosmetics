@@ -249,6 +249,19 @@
   background-color: #7d3c93;
   padding: 0.3rem 1rem;
   border-radius: 5px;
+  font-family: "jost";
+  font-size: 16px;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.btn-cancel-edit{
+  color: white;
+  background-color:#b4507d;
+  padding: 0.3rem 1rem;
+  border-radius: 5px;
+  font-family: "jost";
+  font-size: 16px;
   border: none;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }

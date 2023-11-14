@@ -4,10 +4,12 @@ import {
   updateProduct,
 } from "../../../../functions/fetchingProducts";
 import "./EditProduct.css";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { GetDecodedCookie } from "../../../../utils/DecodedCookie";
-import SelectEditCategoryProduct from "../../../SelectEditCategoryProduct/SelectEditCategoryProduct";
+import SelectCategoryProduct from "../../../SelectCategoryProduct/SelectCategoryProduct";
 
 const EditProduct = ({ match, closeEditModal }) => {
   const [product, setProduct] = useState({});
@@ -66,6 +68,14 @@ const EditProduct = ({ match, closeEditModal }) => {
       let images = [...product.image, ...selectedImages];
 
       await updateProduct(product, selectedImages, product._id, token);
+
+      Swal.fire({
+        icon: "success",
+        title: "¡Producto editado correctamente!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
       closeEditModal();
     } catch (error) {
       console.error("Error al actualizar el producto:", error);
@@ -133,11 +143,11 @@ const EditProduct = ({ match, closeEditModal }) => {
             />
           </div>
         </div>
-   <div className="container-categories-modal-admin">
+        <div className="container-categories-modal-admin">
           <label>Categoría:</label>
 
           {product && (
-            <SelectEditCategoryProduct
+            <SelectCategoryProduct
               product={product.category}
               setProduct={setProduct}
             />
@@ -157,24 +167,25 @@ const EditProduct = ({ match, closeEditModal }) => {
             accept="image/*"
           />
 
-          <div style={{ display: "flex", width: "100%", gap: "15px" }}>
+          <div className="img-edit-product">
             {selectedImages &&
               selectedImages.map((image, index) => (
-                <div>
+                <div className="img-addProduct-admin-container ">
                   <img
+                    className="img-addProduct-admin"
                     src={
                       typeof image === "string"
                         ? image
                         : URL.createObjectURL(image)
                     }
                     alt={`Image ${index}`}
-                    style={{ width: "100px", height: "100px" }}
                   />
                   <button
+                    className="btn-delet-img-new-producto"
                     type="button"
                     onClick={() => handleImageRemove(index)}
                   >
-                    X
+                    <FontAwesomeIcon icon={faTimes} />
                   </button>
                 </div>
               ))}
