@@ -41,8 +41,8 @@ export const createOrder = async (req, res) => {
         pending: `${process.env.DEPLOY_CLIENT_URL}/store`,
       },
       auto_return: "approved",
-      // notification_url: `${process.env.DEPLOY_API_URL}/shippingpayment/webhook?source_news=webhooks`,
-      notification_url: `https://7011ths9-3001.brs.devtunnels.ms/shippingpayment/webhook?source_news=webhooks`,
+      notification_url: `${process.env.DEPLOY_API_URL}/shippingpayment/webhook?source_news=webhooks`,
+      // notification_url: `https://7011ths9-3001.brs.devtunnels.ms/shippingpayment/webhook?source_news=webhooks`,
     };
 
     const result = await mercadopago.preferences.create(preference);
