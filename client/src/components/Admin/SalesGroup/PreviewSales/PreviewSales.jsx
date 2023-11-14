@@ -77,7 +77,6 @@ const PreviewSales = ({ setSection }) => {
   };
 
   const handleSaveShippingNumber = () => {
-    console.log("Número de envío:", trackNumber);
     updateSalesTranckingNumber(selectedSale.id, token,trackNumber,priceNumberSend)
       .then(() => {
         Swal.fire("Guardado correctamente", "", "success");
@@ -98,7 +97,6 @@ const PreviewSales = ({ setSection }) => {
   };
 
   const handleSavepriceNumberSend = () => {
-    console.log("Costo de envío:", priceNumberSend);
     updateSalesTranckingNumber(selectedSale.id, token,trackNumber,priceNumberSend)
       .then(() => {
         Swal.fire("Guardado correctamente", "", "success");
