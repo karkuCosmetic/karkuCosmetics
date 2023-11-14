@@ -13,6 +13,7 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import PurchaseHistoryItem from "../../components/PurchaseHistoryItem/purchaseHistoryItem";
+import { PaymentShipping } from "../../functions/payment";
 
 const Profile = () => {
   const [profile, setProfile] = useState({});
@@ -88,7 +89,9 @@ const Profile = () => {
 
   //ACÁ METER LA FUNCION PARA PAGAR EL ENVIO POR MP //////////////////
 
-  const handlePayShip = () => {};
+  const handlePayShip = () => {
+    PaymentShipping(token,selectedPurchase.detailPay.shipPrice,selectedPurchase.id)
+  };
 
   /////////////////////////////////////////////////////////////////
 

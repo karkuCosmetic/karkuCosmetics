@@ -55,7 +55,7 @@ export const updateDeliveryOrders = async (req, res) => {
       {
         $set: {
           "orders.$.detailPay.TrackNumber":trackNumber,
-          "orders.$.detailPay.shipPrice": priceNumberSend,
+          "orders.$.detailPay.shipPrice": Number(priceNumberSend),
         },
       }
     );
@@ -66,7 +66,7 @@ export const updateDeliveryOrders = async (req, res) => {
       {
         $set: {
           "buys.$.detailPay.TrackNumber": trackNumber,
-          "buys.$.detailPay.shipPrice": priceNumberSend,
+          "buys.$.detailPay.shipPrice": Number(priceNumberSend),
         },
       }
     );

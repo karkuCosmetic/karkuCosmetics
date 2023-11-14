@@ -7,6 +7,7 @@ import authRouter from "./src/routes/auth.routes.js";
 import AdminRouter from "./src/routes/admin.routes.js";
 import emailRouter from "./src/routes/mail.routes.js";
 import paymentRoute from "./src/routes/payment.routes.js";
+import shippingpaymentRoute from "./src/routes/shippingPayment.routes.js";
 import cors from "cors";
 
 import "./src/dataBase/connectDB.js";
@@ -47,6 +48,8 @@ app.use("/admin", AdminRouter);
 app.use("/products", productRoute);
 
 app.use("/payment", paymentRoute);
+
+app.use("/shippingpayment",shippingpaymentRoute)
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
