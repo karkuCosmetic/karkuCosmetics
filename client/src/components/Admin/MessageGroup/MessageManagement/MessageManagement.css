@@ -16,6 +16,7 @@
 @media (max-width: 925px) {
   .MessagesManagement-container {
     width: 95%;
+    margin-top: 0.5rem;
   }
 }
 

@@ -77,7 +77,12 @@ const PreviewSales = ({ setSection }) => {
   };
 
   const handleSaveShippingNumber = () => {
-    updateSalesTranckingNumber(selectedSale.id, token,trackNumber,priceNumberSend)
+    updateSalesTranckingNumber(
+      selectedSale.id,
+      token,
+      trackNumber,
+      priceNumberSend
+    )
       .then(() => {
         Swal.fire("Guardado correctamente", "", "success");
         setIsEditingNumber(false);
@@ -97,7 +102,12 @@ const PreviewSales = ({ setSection }) => {
   };
 
   const handleSavepriceNumberSend = () => {
-    updateSalesTranckingNumber(selectedSale.id, token,trackNumber,priceNumberSend)
+    updateSalesTranckingNumber(
+      selectedSale.id,
+      token,
+      trackNumber,
+      priceNumberSend
+    )
       .then(() => {
         Swal.fire("Guardado correctamente", "", "success");
         setIsEditingCost(false);
@@ -124,27 +134,26 @@ const PreviewSales = ({ setSection }) => {
           <div className="sale-container" key={index}>
             <div className="info-sale-preview">
               <p>
-                <strong>Nombre: </strong> {sale.payer.name}{" "}
-                {sale.payer.lastName}
+                {sale.payer.name} {sale.payer.lastName}
               </p>
-              <p>
+              <p className="total-buy-preview">
                 <strong>Total: </strong>${sale.methodPay.total}
               </p>
               <p>
                 <strong>Estado: </strong> {sale.detailPay.status}
               </p>
-            </div>
-            <div className="btn-showSale-container">
-              <button
-                className="btn-showSale"
-                onClick={() => openSaleDetailsModal(sale)}
-              >
-                Ver detalle
-              </button>
               <p>
                 <strong>Fecha: </strong>{" "}
                 {formatDateModal(sale.methodPay.datePay)}
               </p>
+            </div>
+            <div className="btn-showSale-container">
+              <button
+                className="btn-showSale-preview"
+                onClick={() => openSaleDetailsModal(sale)}
+              >
+                Ver venta
+              </button>
             </div>
           </div>
         ))}
@@ -206,74 +215,78 @@ const PreviewSales = ({ setSection }) => {
                         {selectedSale.payer.adress?.provincia}.
                       </p>
                     </div>
-                    <div className="tn-shipping">
-                      <p>
-                        <strong>TN: </strong>
-                        {selectedSale.detailPay?.TrackNumber}
-                      </p>
-                      {isEditingNumber ? (
-                        <>
-                          <input
-                            type="text"
-                            placeholder="Número de envío"
-                            value={trackNumber}
-                            onChange={handleShippingNumberChange}
+                    <div className="tn-cost-shipping">
+                      <div className="tn-shipping">
+                        <p>
+                          <strong>TN: </strong>
+                          {selectedSale.detailPay?.TrackNumber}
+                        </p>
+                        {isEditingNumber ? (
+                          <>
+                            <input
+                              type="text"
+                              placeholder="Número de envío"
+                              value={trackNumber}
+                              onChange={handleShippingNumberChange}
+                            />
+                            <button
+                              className="btn-save-shipping"
+                              onClick={handleSaveShippingNumber}
+                            >
+                              Guardar Envío
+                            </button>
+                            <button
+                              className="btn-cancel-edit"
+                              onClick={handleCancelEditNumber}
+                            >
+                              Cancelar
+                            </button>
+                          </>
+                        ) : (
+                          <FontAwesomeIcon
+                            className="icon-edit-shipping"
+                            icon={faPen}
+                            onClick={handleEditNumberClick}
                           />
-                          <button
-                            className="btn-save-shipping"
-                            onClick={handleSaveShippingNumber}
-                          >
-                            Guardar Envío
-                          </button>
-                          <button
-                            className="btn-cancel-edit"
-                            onClick={handleCancelEditNumber}
-                          >
-                            Cancelar
-                          </button>
-                        </>
-                      ) : (
-                        <FontAwesomeIcon
-                          className="icon-edit-shipping"
-                          icon={faPen}
-                          onClick={handleEditNumberClick}
-                        />
-                      )}
-                      <p>
-                        <strong>Envío: </strong>
-                        {selectedSale.detailPay?.shipStatus
-                          ? "Pagado"
-                          : "Pendiente de pago"}{" "}
-                        - {selectedSale.detailPay?.shipPrice}
-                      </p>
-                      {isEditingCost ? (
-                        <>
-                          <input
-                            type="text"
-                            placeholder="Costo de envío"
-                            value={priceNumberSend}
-                            onChange={handlepriceNumberSendChange}
+                        )}
+                      </div>
+                      <div className="cost-shipping">
+                        <p>
+                          <strong>Envío: </strong>
+                          {selectedSale.detailPay?.shipStatus
+                            ? "Pagado"
+                            : "Pendiente de pago"}{" "}
+                          - {selectedSale.detailPay?.shipPrice}
+                        </p>
+                        {isEditingCost ? (
+                          <>
+                            <input
+                              type="text"
+                              placeholder="Costo de envío"
+                              value={priceNumberSend}
+                              onChange={handlepriceNumberSendChange}
+                            />
+                            <button
+                              className="btn-save-shipping"
+                              onClick={handleSavepriceNumberSend}
+                            >
+                              Guardar Costo
+                            </button>
+                            <button
+                              className="btn-cancel-edit"
+                              onClick={handleCancelEditCost}
+                            >
+                              Cancelar
+                            </button>
+                          </>
+                        ) : (
+                          <FontAwesomeIcon
+                            className="icon-edit-shipping"
+                            icon={faPen}
+                            onClick={handleEditCostClick}
                           />
-                          <button
-                            className="btn-save-shipping"
-                            onClick={handleSavepriceNumberSend}
-                          >
-                            Guardar Costo
-                          </button>
-                          <button
-                            className="btn-cancel-edit"
-                            onClick={handleCancelEditCost}
-                          >
-                            Cancelar
-                          </button>
-                        </>
-                      ) : (
-                        <FontAwesomeIcon
-                          className="icon-edit-shipping"
-                          icon={faPen}
-                          onClick={handleEditCostClick}
-                        />
-                      )}
+                        )}
+                      </div>
                     </div>
                   </div>
                   <div className="date-total-container">
@@ -282,7 +295,7 @@ const PreviewSales = ({ setSection }) => {
                       {formatDateModal(selectedSale.methodPay.datePay)}
                     </p>
                     <p>
-                      <strong>Total: </strong>$ {selectedSale.methodPay.total}
+                      <strong>Total: </strong>${selectedSale.methodPay.total}
                     </p>
 
                     <p>

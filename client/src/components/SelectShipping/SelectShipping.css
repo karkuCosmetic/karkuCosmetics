@@ -34,8 +34,8 @@
 }
 
 .options-preview {
-  position: absolute;
-  width: 100%;
+  display: block;
+  width: 9rem;
   margin-top: 0.1rem;
   font-family: "figtree";
   color: #f38f82;

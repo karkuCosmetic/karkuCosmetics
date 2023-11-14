@@ -20,7 +20,10 @@ const SalesManagement = ({ setSection }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [showEditField, setShowEditField] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [shippingNumber, setShippingNumber] = useState("");
+  const [isEditingNumber, setIsEditingNumber] = useState(false);
+  const [trackNumber, setTrackNumber] = useState("");
+  const [priceNumberSend, setpriceNumberSend] = useState("");
+  const [isEditingCost, setIsEditingCost] = useState(false);
 
   const token = GetDecodedCookie("cookieToken");
 
@@ -111,16 +114,61 @@ const SalesManagement = ({ setSection }) => {
   };
 
   const handleShippingNumberChange = (e) => {
-    setShippingNumber(e.target.value);
+    setTrackNumber(e.target.value);
+  };
+
+  const handlepriceNumberSendChange = (e) => {
+    setpriceNumberSend(e.target.value);
   };
 
   const handleSaveShippingNumber = () => {
-    console.log("Número de envío:", shippingNumber);
     updateSalesTranckingNumber(
       selectedSale.id,
       token,
-      shippingNumber
-    );
+      trackNumber,
+      priceNumberSend
+    )
+      .then(() => {
+        Swal.fire("Guardado correctamente", "", "success");
+        setIsEditingNumber(false);
+      })
+      .catch((error) => {
+        console.error("Error al guardar:", error);
+        Swal.fire("Error al guardar", "", "error");
+      });
+  };
+
+  const handleEditNumberClick = () => {
+    setIsEditingNumber(true);
+  };
+
+  const handleEditCostClick = () => {
+    setIsEditingCost(true);
+  };
+
+  const handleSavepriceNumberSend = () => {
+    updateSalesTranckingNumber(
+      selectedSale.id,
+      token,
+      trackNumber,
+      priceNumberSend
+    )
+      .then(() => {
+        Swal.fire("Guardado correctamente", "", "success");
+        setIsEditingCost(false);
+      })
+      .catch((error) => {
+        console.error("Error al guardar:", error);
+        Swal.fire("Error al guardar", "", "error");
+      });
+  };
+
+  const handleCancelEditNumber = () => {
+    setIsEditingNumber(false);
+  };
+
+  const handleCancelEditCost = () => {
+    setIsEditingCost(false);
   };
 
   return (
@@ -150,16 +198,16 @@ const SalesManagement = ({ setSection }) => {
       <div className="sales-list">
         {currentSales.map((sale, index) => (
           <div className="sale-container" key={index}>
-            <p>
-              <strong>Nombre: </strong>
+            <p >
+              <strong className="name-payer">Nombre: </strong>
               {sale.payer.name}
               <br />
-              <strong>Apellido: </strong>
+              <strong className="name-payer">Apellido: </strong>
               {sale.payer.lastName}
             </p>
 
-            <p>
-              <strong>Total: </strong>$ {sale.methodPay?.total}
+            <p className="total-buy-management">
+              <strong >Total: </strong>$ {sale.methodPay?.total}
             </p>
 
             <p>
@@ -231,34 +279,78 @@ const SalesManagement = ({ setSection }) => {
                         {selectedSale.payer?.adress?.provincia}.
                       </p>
                     </div>
-                    <div className="tn-shipping">
-                      <p>
-                        <strong>TN: </strong>
-                        {selectedSale.detailPay?.TrackNumber}
-                      </p>
-                      {isEditing ? (
-                        <input
-                          type="text"
-                          placeholder="Número de envío"
-                          value={shippingNumber}
-                          onChange={handleShippingNumberChange}
-                        />
-                      ) : (
-                        <FontAwesomeIcon
-                          className="icon-edit-shipping"
-                          icon={faPen}
-                          onClick={handleEditClick}
-                        />
-                      )}
-
-                      {isEditing && (
-                        <button
-                          className="btn-save-shipping"
-                          onClick={handleSaveShippingNumber}
-                        >
-                          Guardar Envío
-                        </button>
-                      )}
+                    <div className="tn-cost-shipping">
+                      <div className="tn-shipping">
+                        <p>
+                          <strong>TN: </strong>
+                          {selectedSale.detailPay?.TrackNumber}
+                        </p>
+                        {isEditingNumber ? (
+                          <>
+                            <input
+                              type="text"
+                              placeholder="Número de envío"
+                              value={trackNumber}
+                              onChange={handleShippingNumberChange}
+                            />
+                            <button
+                              className="btn-save-shipping"
+                              onClick={handleSaveShippingNumber}
+                            >
+                              Guardar Envío
+                            </button>
+                            <button
+                              className="btn-cancel-edit"
+                              onClick={handleCancelEditNumber}
+                            >
+                              Cancelar
+                            </button>
+                          </>
+                        ) : (
+                          <FontAwesomeIcon
+                            className="icon-edit-shipping"
+                            icon={faPen}
+                            onClick={handleEditNumberClick}
+                          />
+                        )}
+                      </div>
+                      <div className="cost-shipping">
+                        <p>
+                          <strong>Envío: </strong>
+                          {selectedSale.detailPay?.shipStatus
+                            ? "Pagado"
+                            : "Pendiente de pago"}{" "}
+                          - {selectedSale.detailPay?.shipPrice}
+                        </p>
+                        {isEditingCost ? (
+                          <>
+                            <input
+                              type="text"
+                              placeholder="Costo de envío"
+                              value={priceNumberSend}
+                              onChange={handlepriceNumberSendChange}
+                            />
+                            <button
+                              className="btn-save-shipping"
+                              onClick={handleSavepriceNumberSend}
+                            >
+                              Guardar Costo
+                            </button>
+                            <button
+                              className="btn-cancel-edit"
+                              onClick={handleCancelEditCost}
+                            >
+                              Cancelar
+                            </button>
+                          </>
+                        ) : (
+                          <FontAwesomeIcon
+                            className="icon-edit-shipping"
+                            icon={faPen}
+                            onClick={handleEditCostClick}
+                          />
+                        )}
+                      </div>
                     </div>
                   </div>
                   <div className="date-total-container">
