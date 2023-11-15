@@ -118,7 +118,7 @@ const Profile = () => {
   const indexOfLastPurchase = currentPage * purchasesPerPage;
   const indexOfFirstPurchase = indexOfLastPurchase - purchasesPerPage;
   const currentPurchases = profile.buys
-    ? profile.buys.slice(indexOfFirstPurchase, indexOfLastPurchase)
+    ? profile.buys.reverse().slice(indexOfFirstPurchase, indexOfLastPurchase)
     : [];
 
   const paginate = (pageNumber) => {
@@ -275,7 +275,7 @@ const Profile = () => {
           </div>
           <div className="buys-history">
             {currentPurchases.length > 0 ? (
-              currentPurchases.reverse().map((purchase, index) => (
+              currentPurchases.map((purchase, index) => (
                 <div
                   key={index}
                   className="purchase-history-item"
