@@ -118,7 +118,7 @@ const Profile = () => {
   const indexOfLastPurchase = currentPage * purchasesPerPage;
   const indexOfFirstPurchase = indexOfLastPurchase - purchasesPerPage;
   const currentPurchases = profile.buys
-    ? profile.buys.reverse().slice(indexOfFirstPurchase, indexOfLastPurchase)
+    ? profile.buys.slice(indexOfFirstPurchase, indexOfLastPurchase)
     : [];
 
   const paginate = (pageNumber) => {
