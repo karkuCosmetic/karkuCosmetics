@@ -87,13 +87,11 @@ const Profile = () => {
     setDataUpdate({ ...dataUpdate, image: el });
   };
 
-  //ACÁ METER LA FUNCION PARA PAGAR EL ENVIO POR MP //////////////////
 
   const handlePayShip = () => {
     PaymentShipping(token,selectedPurchase.detailPay.shipPrice,selectedPurchase.id)
   };
 
-  /////////////////////////////////////////////////////////////////
 
   const openPurchaseDetail = (purchase) => {
     setSelectedPurchase(purchase);
@@ -239,6 +237,16 @@ const Profile = () => {
                   name="provincia"
                   onChange={handleChangeAdress}
                 />
+                <label className="label-edit-profile" htmlFor="CodigoPostal">
+                  Codigo postal:
+                </label>
+                <input
+                  type="text"
+                  placeholder="Codigo postal"
+                  value={dataUpdateAdress.codigoPostal}
+                  name="codigoPostal"
+                  onChange={handleChangeAdress}
+                />
               </div>
             ) : (
               <div className="info-user">
@@ -277,7 +285,7 @@ const Profile = () => {
           </div>
           <div className="buys-history">
             {currentPurchases.length > 0 ? (
-              currentPurchases.reverse().map((purchase, index) => (
+              currentPurchases.map((purchase, index) => (
                 <div
                   key={index}
                   className="purchase-history-item"

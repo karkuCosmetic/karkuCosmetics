@@ -112,6 +112,7 @@ const Cart = () => {
                     </button>
                     <span className="quantity-cart">{item.quantity}</span>
                     <button
+                          disabled={item.quantity >= 10}
                       className="quantity-button"
                       onClick={() => handleQuantityChange(index, 1)}
                     >
