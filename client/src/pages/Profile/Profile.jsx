@@ -87,13 +87,11 @@ const Profile = () => {
     setDataUpdate({ ...dataUpdate, image: el });
   };
 
-  //ACÁ METER LA FUNCION PARA PAGAR EL ENVIO POR MP //////////////////
 
   const handlePayShip = () => {
     PaymentShipping(token,selectedPurchase.detailPay.shipPrice,selectedPurchase.id)
   };
 
-  /////////////////////////////////////////////////////////////////
 
   const openPurchaseDetail = (purchase) => {
     setSelectedPurchase(purchase);

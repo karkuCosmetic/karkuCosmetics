@@ -2,15 +2,12 @@ import mercadopago from "mercadopago";
 import { formatError } from "../utils/formatError.js";
 import "dotenv/config";
 import { User } from "../models/user.js";
-import { Product } from "../models/product.js";
 import { Admin } from "../models/admin.js";
-import { generateUniqueID } from "../utils/GenerateId.js";
 import { DecodedToken } from "../utils/DecodedToken.js";
 
 export const createOrder = async (req, res) => {
   try {
     const { shipPrice, token, idOrder } = req.body;
-    console.log(req.body);
 
     const id = DecodedToken(token).value;
 

@@ -30,7 +30,6 @@ export const Payment = async (carrito, token, adressData, method) => {
 
 export const PaymentShipping = async (token, shipPrice,idOrder) => {
   try {
-    console.log("payment", shipPrice);
     const response = await axios.post(
       `${process.env.REACT_APP_URL_API}/shippingpayment/create-order`,
       { token, shipPrice,idOrder },
