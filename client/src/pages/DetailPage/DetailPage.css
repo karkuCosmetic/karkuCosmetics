@@ -5,10 +5,9 @@
   background-image: url(../../assets/bgDetailop5.png);
   background-size: cover;
   background-repeat: no-repeat;
-  padding-bottom: 5%;
   padding-top: 2.5%;
-  height: 100vh;
   align-items: center;
+  height: 100vh;
 }
 
 .detailProduct-container {
@@ -47,10 +46,14 @@
 }
 
 @media (max-width: 651px) {
+  .detailProduct {
+    min-height: 800px;
+  }
+
   .detail-container {
     padding: 0.5rem;
-    margin: 0;
     margin-top: 1rem;
+    margin-bottom: 5rem;
     width: 95%;
   }
 }
