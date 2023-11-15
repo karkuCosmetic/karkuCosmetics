@@ -50,7 +50,7 @@ body {
   flex-direction: column;
   padding: 0.5rem;
   width: 100%;
-  color: #317d24;
+  color: #27631d;
   font-family: "Figtree";
   justify-content: center;
   align-items: center;
@@ -59,8 +59,8 @@ body {
 }
 
 .welcome-home p {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 @media (max-width: 768px) {
@@ -70,7 +70,7 @@ body {
     background-repeat: no-repeat;
   }
   .welcome {
-    background-image: url(../../assets/AssetsHome/bgHome1.jpg);
+    background-image: url(../../assets/AssetsHome/KarkuWelcomeMobile.png);
   }
 
   .welcome-home {

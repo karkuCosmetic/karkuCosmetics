@@ -219,6 +219,8 @@ const Store = () => {
                           })
                         }
                       >
+
+       
                         {category}
                       </li>
                     ))}

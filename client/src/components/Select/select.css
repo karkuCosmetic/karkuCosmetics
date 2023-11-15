@@ -33,8 +33,10 @@
 }
 
 .options {
-  position: absolute;
+  position: static;
+  overflow-y: auto;
   width: 100%;
+  max-height: 150px;
   background-color: #fff;
   border: 1px solid#317d24;
   border-radius: 0 0 5px 5px;
