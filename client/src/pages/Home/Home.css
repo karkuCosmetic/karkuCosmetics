@@ -18,7 +18,6 @@ body {
   background-image: url(../../assets/AssetsHome/bgHome1.jpg);
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   text-align: center;
   width: 100%;
@@ -48,6 +47,7 @@ body {
 .welcome-home {
   display: flex;
   flex-direction: column;
+  margin-top: 5rem;
   padding: 0.5rem;
   width: 100%;
   color: #27631d;
@@ -55,7 +55,7 @@ body {
   justify-content: center;
   align-items: center;
   background-color: #ffffff6b;
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(5px);
 }
 
 .welcome-home p {

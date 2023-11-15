@@ -11,6 +11,7 @@ import {
   faArrowLeft,
   faChevronLeft,
   faChevronRight,
+  faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
@@ -124,29 +125,35 @@ export const DetailPage = () => {
               {selectedImage && (
                 <div className="image-modal-overlay">
                   <div className="image-modal">
-                    <div className="image-modal-nav">
+                    <div className="btn-close-container">
                       <button
-                        className="prev-image-button"
-                        onClick={handlePrevImage}
-                        disabled={imageIndex === 0}
+                        className="close-modal-button"
+                        onClick={closeImageModal}
                       >
-                        <FontAwesomeIcon icon={faChevronLeft} />
-                      </button>
-                      <img src={selectedImage} alt="Expanded" />
-                      <button
-                        className="next-image-button"
-                        onClick={handleNextImage}
-                        disabled={imageIndex === detailProduct.image.length - 1}
-                      >
-                        <FontAwesomeIcon icon={faChevronRight} />
+                        <FontAwesomeIcon icon={faTimes} />
                       </button>
                     </div>
-                    <button
-                      className="close-modal-button"
-                      onClick={closeImageModal}
-                    >
-                      Cerrar
-                    </button>
+                    <div className="image-modal-nav">
+                      <img src={selectedImage} alt="Expanded" />
+                      <div className="btn-detail-carousel">
+                        <button
+                          className="prev-image-button"
+                          onClick={handlePrevImage}
+                          disabled={imageIndex === 0}
+                        >
+                          <FontAwesomeIcon icon={faChevronLeft} />
+                        </button>
+                        <button
+                          className="next-image-button"
+                          onClick={handleNextImage}
+                          disabled={
+                            imageIndex === detailProduct.image.length - 1
+                          }
+                        >
+                          <FontAwesomeIcon icon={faChevronRight} />
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               )}
@@ -196,7 +203,7 @@ export const DetailPage = () => {
           </div>
         </div>
       </div>
-        <Footer />
+      <Footer />
     </>
   );
 };
