@@ -237,6 +237,16 @@ const Profile = () => {
                   name="provincia"
                   onChange={handleChangeAdress}
                 />
+                <label className="label-edit-profile" htmlFor="CodigoPostal">
+                  Codigo postal:
+                </label>
+                <input
+                  type="text"
+                  placeholder="Codigo postal"
+                  value={dataUpdateAdress.codigoPostal}
+                  name="codigoPostal"
+                  onChange={handleChangeAdress}
+                />
               </div>
             ) : (
               <div className="info-user">
