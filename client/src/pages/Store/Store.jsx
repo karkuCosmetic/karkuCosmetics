@@ -18,7 +18,6 @@ const Store = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(9);
-  const [detailProduct, setDetailProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
   const { id } = useParams();
   const [isSelectOpen, setIsSelectOpen] = useState(false);
@@ -78,7 +77,7 @@ const Store = () => {
         primary: [...categories.primary, ...data.categories.primary],
         secondary: [...categories.secondary, ...data.categories.secondary],
       });
-      setIsLoading(false); // Ocultar loader
+      setIsLoading(false); 
     });
   };
 
