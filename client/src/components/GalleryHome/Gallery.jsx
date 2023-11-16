@@ -1,4 +1,4 @@
-import React  from "react";
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
@@ -10,15 +10,29 @@ import "./Gallery.css";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
 // IMAGENES
-import Karku1 from "../../assets/AssetsHome/Karku1.jpg";
-import Karku2 from "../../assets/AssetsHome/Karku2.jpg";
-import Karku3 from "../../assets/AssetsHome/Karku3.jpg";
-import Karku4 from "../../assets/AssetsHome/Karku4.jpg";
-import Karku5 from "../../assets/AssetsHome/Karku5.jpg";
-import Karku6 from "../../assets/AssetsHome/Karku6.jpg";
-import Karku7 from "../../assets/AssetsHome/Karku7.jpg";
-import Karku8 from "../../assets/AssetsHome/Karku8.jpg";
-import Karku9 from "../../assets/AssetsHome/Karku9.jpg";
+import Karku1 from "../../assets/AssetsHome/Gallery/Karku1.jpg";
+import Karku2 from "../../assets/AssetsHome/Gallery/Karku2.jpg";
+import Karku3 from "../../assets/AssetsHome/Gallery/Karku3.jpg";
+import Karku4 from "../../assets/AssetsHome/Gallery/Karku4.jpg";
+import Karku5 from "../../assets/AssetsHome/Gallery/Karku5.jpg";
+import Karku6 from "../../assets/AssetsHome/Gallery/Karku6.jpg";
+import Karku7 from "../../assets/AssetsHome/Gallery/Karku7.jpg";
+import Karku8 from "../../assets/AssetsHome/Gallery/Karku8.jpg";
+import Karku9 from "../../assets/AssetsHome/Gallery/Karku9.jpg";
+import Karku10 from "../../assets/AssetsHome/Gallery/Karku10.jpg";
+import Karku11 from "../../assets/AssetsHome/Gallery/Karku11.jpg";
+import Karku12 from "../../assets/AssetsHome/Gallery/Karku12.jpg";
+import Karku13 from "../../assets/AssetsHome/Gallery/Karku13.jpg";
+import Karku14 from "../../assets/AssetsHome/Gallery/Karku14.jpg";
+import Karku15 from "../../assets/AssetsHome/Gallery/Karku15.jpg";
+import Karku16 from "../../assets/AssetsHome/Gallery/Karku16.jpg";
+import Karku17 from "../../assets/AssetsHome/Gallery/Karku17.jpg";
+import Karku18 from "../../assets/AssetsHome/Gallery/Karku18.jpg";
+import Karku19 from "../../assets/AssetsHome/Gallery/Karku19.jpg";
+import Karku20 from "../../assets/AssetsHome/Gallery/Karku20.jpg";
+import Karku21 from "../../assets/AssetsHome/Gallery/Karku21.jpg";
+import Karku22 from "../../assets/AssetsHome/Gallery/Karku22.jpg";
+import Karku23 from "../../assets/AssetsHome/Gallery/Karku23.jpg";
 
 const Gallery = () => {
   return (
@@ -63,6 +77,48 @@ const Gallery = () => {
         </SwiperSlide>
         <SwiperSlide>
           <img src={Karku9} alt="Karku 9" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src={Karku10} alt="Karku 10" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src={Karku11} alt="Karku 11" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src={Karku12} alt="Karku 12" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src={Karku13} alt="Karku 13" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src={Karku14} alt="Karku 14" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src={Karku15} alt="Karku 15" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src={Karku16} alt="Karku 16" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src={Karku17} alt="Karku 17" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src={Karku18} alt="Karku 18" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src={Karku19} alt="Karku 19" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src={Karku20} alt="Karku 20" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src={Karku21} alt="Karku 21" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src={Karku22} alt="Karku 22" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src={Karku23} alt="Karku 23" />
         </SwiperSlide>
       </Swiper>
     </>

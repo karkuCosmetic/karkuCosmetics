@@ -4,15 +4,36 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import Navbar from "../../components/NavBar/navbar";
 import Footer from "../../components/Footer/footer";
-import KarkuImg6 from "../../assets/AssetsHome/Karku6.jpg";
-import KarkuImg2 from "../../assets/AssetsHome/Karku2.jpg";
-import KarkuImg3 from "../../assets/AssetsHome/Karku3.jpg";
-import KarkuImg7 from "../../assets/AssetsHome/Karku7.jpg";
-import KarkuLogoName from "../../assets/karkuLogoName.png"
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import Gallery from "../../components/GalleryHome/Gallery";
+
+import KarkuLogoName from "../../assets/karkuLogoName.png"
+
+// CAPILAR
+import Capilar1 from "../../assets/AssetsHome/Capilar/Capilar1.png";
+import Capilar2 from "../../assets/AssetsHome/Capilar/Capilar2.png";
+import Capilar3 from "../../assets/AssetsHome/Capilar/Capilar3.png";
+import Capilar4 from "../../assets/AssetsHome/Capilar/Capilar4.png";
+
+//CORPORAL
+import Corporal1 from "../../assets/AssetsHome/Corporal/Corporal1.png";
+import Corporal2 from "../../assets/AssetsHome/Corporal/Corporal2.png";
+import Corporal3 from "../../assets/AssetsHome/Corporal/Corporal3.png";
+import Corporal4 from "../../assets/AssetsHome/Corporal/Corporal4.png";
+
+//FACIAL
+import Facial1 from "../../assets/AssetsHome/Facial/Facial1.png";
+import Facial2 from "../../assets/AssetsHome/Facial/Facial2.png";
+import Facial3 from "../../assets/AssetsHome/Facial/Facial3.png";
+import Facial4 from "../../assets/AssetsHome/Facial/Facial4.png";
+
+//SERUMS
+import Serum1 from "../../assets/AssetsHome/Serum/Serum1.png";
+import Serum2 from "../../assets/AssetsHome/Serum/Serum2.png";
+import Serum3 from "../../assets/AssetsHome/Serum/Serum3.png";
+import Serum4 from "../../assets/AssetsHome/Serum/Serum4.png";
 
 const Home = () => {
   const [showScrollButton, setShowScrollButton] = useState(false);
@@ -82,10 +103,10 @@ const Home = () => {
             </p>
             <div className="img1-home" data-aos="flip-right">
               <div class="gallery">
-                <img src={KarkuImg6} alt="" />
-                <img src={KarkuImg7} alt="" />
-                <img src={KarkuImg3} alt="" />
-                <img src={KarkuImg2} alt="" />
+                <img src={Capilar1} alt="" />
+                <img src={Capilar2} alt="" />
+                <img src={Capilar3} alt="" />
+                <img src={Capilar4} alt="" />
               </div>
             </div>
           </div>
@@ -101,10 +122,10 @@ const Home = () => {
             </p>
             <div className="img1-home" data-aos="flip-left">
               <div class="gallery">
-                <img src={KarkuImg6} alt="" />
-                <img src={KarkuImg7} alt="" />
-                <img src={KarkuImg3} alt="" />
-                <img src={KarkuImg2} alt="" />
+                <img src={Corporal1} alt="" />
+                <img src={Corporal2} alt="" />
+                <img src={Corporal3} alt="" />
+                <img src={Corporal4} alt="" />
               </div>
             </div>
           </div>
@@ -121,10 +142,10 @@ const Home = () => {
             </p>
             <div className="img1-home" data-aos="flip-left">
               <div class="gallery">
-                <img src={KarkuImg6} alt="" />
-                <img src={KarkuImg7} alt="" />
-                <img src={KarkuImg3} alt="" />
-                <img src={KarkuImg2} alt="" />
+                <img src={Facial1} alt="" />
+                <img src={Facial2} alt="" />
+                <img src={Facial3} alt="" />
+                <img src={Facial4} alt="" />
               </div>
             </div>
           </div>
@@ -141,10 +162,10 @@ const Home = () => {
             </p>
             <div className="img1-home" data-aos="flip-left">
               <div class="gallery">
-                <img src={KarkuImg6} alt="" />
-                <img src={KarkuImg7} alt="" />
-                <img src={KarkuImg3} alt="" />
-                <img src={KarkuImg2} alt="" />
+                <img src={Serum1} alt="" />
+                <img src={Serum2} alt="" />
+                <img src={Serum3} alt="" />
+                <img src={Serum4} alt="" />
               </div>
             </div>
           </div>

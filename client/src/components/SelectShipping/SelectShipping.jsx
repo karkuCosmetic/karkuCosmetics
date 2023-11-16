@@ -18,7 +18,7 @@ const SelectShipping = ({ options, selectedOption, setSelectedOption }) => {
   return (
     <div className={`custom-select ${isOpen ? "open" : ""}`}>
       <div className="selected-option-preview" onClick={toggleSelect}>
-        <span className="selected-option">Seleciona envio</span>
+        <span className="selected-option">{selectedOption}</span>
         <FontAwesomeIcon
           icon={isOpen ? faCaretUp : faCaretDown}
           className="arrow"
