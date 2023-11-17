@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/NavBar/navbar";
 import "./ShippingPage.css";
 import { Payment } from "../../functions/payment";
@@ -58,27 +58,30 @@ const ShippingPage = ({ location }) => {
   const handlePayment = () => {
     if (!token) {
       console.log("Debes iniciar sesión");
-
       return;
     }
-
-    if (shippingInfo.method === "Envío por correo" && newAddressFormVisible) {
-      if (
-        shippingInfo.adress.calle !== "" &&
-        shippingInfo.adress.numero !== "" &&
-        shippingInfo.adress.piso !== "" &&
-        shippingInfo.adress.entreCalles !== "" &&
-        shippingInfo.adress.localidad !== "" &&
-        shippingInfo.adress.codigoPostal !== "" &&
-        shippingInfo.adress.provincia !== ""
-      ) {
-        Payment(cart, token, shippingInfo.adress, shippingInfo.method);
-      } else alert("debes completar todos los campos");
-    } else if (
-      shippingInfo.method === "Envío por correo" &&
-      !newAddressFormVisible
-    ) {
-      Payment(cart, token, AdressCurrent, shippingInfo.method);
+  
+    if (shippingInfo.method === "Envío por correo") {
+      if (newAddressFormVisible) {
+        const { adress } = shippingInfo;
+  
+        if (
+          adress.calle &&
+          adress.numero &&
+          adress.piso &&
+          adress.entreCalles &&
+          adress.localidad &&
+          adress.codigoPostal &&
+          adress.provincia
+        ) {
+          Payment(cart, token, adress, shippingInfo.method);
+        } else {
+          console.log("Debes completar todos los campos");
+          alert("Debes completar todos los campos");
+        }
+      } else {
+        Payment(cart, token, AdressCurrent, shippingInfo.method);
+      }
     } else if (shippingInfo.method === "Acordar con vendedor") {
       Payment(cart, token, AdressCurrent, shippingInfo.method);
     }
