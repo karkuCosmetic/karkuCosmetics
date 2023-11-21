@@ -62,8 +62,10 @@ export const createOrder = async (req, res) => {
         },
         auto_return: "approved",
         notification_url: `${process.env.DEPLOY_API_URL}/payment/webhook?source_news=webhooks`,
+        
       };
-
+      // notification_url: `https://7011ths9-3001.brs.devtunnels.ms/payment/webhook?source_news=webhooks`,
+      
       const result = await mercadopago.preferences.create(preference);
 
       res.status(200).json(result.response.init_point);
@@ -104,7 +106,7 @@ export const reciveWebhook = async (req, res) => {
   try {
     const payment = req.query;
 
-    if (req.method === "POST" && payment.type === "payment") {
+    if (payment.type === "payment") {
       const data = await mercadopago.payment.findById(payment["data.id"]);
 
       //ajustar fecha
