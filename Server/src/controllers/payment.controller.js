@@ -64,10 +64,10 @@ export const createOrder = async (req, res) => {
         notification_url: `${process.env.DEPLOY_API_URL}/payment/webhook?source_news=webhooks`,
         
       };
-      // notification_url: `https://7011ths9-3001.brs.devtunnels.ms/payment/webhook?source_news=webhooks`,
       
       const result = await mercadopago.preferences.create(preference);
-
+      
+      // notification_url: `https://7011ths9-3001.brs.devtunnels.ms/payment/webhook?source_news=webhooks`,
       res.status(200).json(result.response.init_point);
     } else {
       throw new Error("faltan datos");
@@ -106,7 +106,7 @@ export const reciveWebhook = async (req, res) => {
   try {
     const payment = req.query;
 
-    if (payment.type === "payment") {
+    if (req.method === "POST" && payment.type === "payment") {
       const data = await mercadopago.payment.findById(payment["data.id"]);
 
       //ajustar fecha
@@ -178,10 +178,11 @@ export const reciveWebhook = async (req, res) => {
 
         await Admin.updateMany({}, { $push: { orders: informationPayment } }); // A todos los admins se le agrega la compra
       }
-      res.status(200).end();
+      console.log("exito");
+      res.status(200).send('Webhook recibido exitosamente');
     }
-    // res.status(200);
   } catch (error) {
+    console.log("error");
     res.status(400).json(formatError(error.message));
   }
 };
