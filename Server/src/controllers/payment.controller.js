@@ -182,7 +182,7 @@ export const reciveWebhook = async (req, res) => {
       res.status(200).send('Webhook recibido exitosamente');
     }
   } catch (error) {
-    console.log("error");
+    console.error(error);
     res.status(400).json(formatError(error.message));
   }
 };
