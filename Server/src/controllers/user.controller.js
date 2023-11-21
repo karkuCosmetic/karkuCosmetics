@@ -77,7 +77,6 @@ export const deleteUser = async (req, res) => {
 export const confirmEmail = async (req, res) => {
   const { id } = req.params;
   const { value } = req.body;
-  console.log(req.body);
   try {
     let user = await User.findByIdAndUpdate(
       id,

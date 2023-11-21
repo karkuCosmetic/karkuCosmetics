@@ -48,7 +48,6 @@ export const updateDeliveryOrders = async (req, res) => {
   try {
     const { id } = req.params;
     const { trackNumber, priceNumberSend } = req.body;
-    console.log(trackNumber, priceNumberSend );
     // Actualiza el campo "entrega" en Admin
     await Admin.updateMany(
       { "orders.id": id },
