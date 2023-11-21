@@ -39,7 +39,7 @@ export const sendNewPassword = async (email) => {
       } else {
         try {
           await transport.sendMail({
-            from: '"Karku cosmetica" karku.cosmeticanatural@gmail.com',
+            from: '"Karku cosmetica" karkucosmetica@gmail.com',
             to: email,
             subject: "Recuperar contraseña",
             html: data,

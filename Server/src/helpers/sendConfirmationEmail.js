@@ -6,7 +6,6 @@ import { fileURLToPath } from "url";
 import "dotenv/config";
 import { User } from "../models/user.js";
 import pkg from "jsonwebtoken";
-const { verify } = pkg;
 import { generateToken } from "../utils/tokenManager.js";
 
 export const transport = nodemailer.createTransport({
@@ -36,7 +35,7 @@ export const sendConfirmationEmail = async (token, email) => {
       } else {
         try {
           await transport.sendMail({
-            from: '"Karku cosmetica" karku.cosmeticanatural@gmail.com',
+            from: '"Karku cosmetica" karkucosmetica@gmail.com',
             to: email,
             subject: "Confirmacion de cuenta",
             html: data,
@@ -69,7 +68,7 @@ export const ResendConfirmationEmail = async (emailUser) => {
       } else {
         try {
           await transport.sendMail({
-            from: '"Karku cosmetica" karku.cosmeticanatural@gmail.com',
+            from: '"Karku cosmetica" karkucosmetica@gmail.com',
             to: email,
             subject: "Confirmacion de cuenta",
             html: data,
@@ -99,7 +98,7 @@ export const SendEmailAdmin = async (to, subject, body) => {
       } else {
         try {
           await transport.sendMail({
-            from: '"Karku cosmetica" karku.cosmeticanatural@gmail.com',
+            from: '"Karku cosmetica" karkucosmetica@gmail.com',
             to: email,
             subject: "Respuesta solicitada de Karku",
             html: data,
@@ -125,7 +124,7 @@ export const sendEmailUpdateStatusSales = (email, status) => {
       } else {
         try {
           await transport.sendMail({
-            from: '"Karku cosmetica" karku.cosmeticanatural@gmail.com',
+            from: '"Karku cosmetica" karkucosmetica@gmail.com',
             to: email,
             subject: "Respuesta solicitada de Karku",
             html: data,
@@ -152,7 +151,7 @@ let url=`${process.env.DEPLOY_CLIENT_URL}/login`
       } else {
         try {
           await transport.sendMail({
-            from: '"Karku cosmetica" karku.cosmeticanatural@gmail.com',
+            from: '"Karku cosmetica" karkucosmetica@gmail.com',
             to: email,
             subject: "Respuesta solicitada de Karku",
             html: data,
