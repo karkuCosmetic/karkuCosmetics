@@ -108,6 +108,7 @@ export const reciveWebhook = async (req, res) => {
       const data = await mercadopago.payment.findById(payment["data.id"]);
 
       console.log(data);
+      console.log(data.response.payer.identification);
     
 
       //ajustar fecha
