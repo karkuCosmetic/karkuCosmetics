@@ -172,7 +172,7 @@ export const sendEmailPostPayment = (email, priceNumberSend)=> {
 let url=`${process.env.DEPLOY_CLIENT_URL}/login`
 
   ejs.renderFile(
-    _path + "/advicePayment.ejs",
+    _path + "/notifcationbuy.ejs",
     { email, priceNumberSend,url },
     async (error, data) => {
       if (error) {
