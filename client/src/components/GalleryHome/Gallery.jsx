@@ -10,7 +10,7 @@ import "./Gallery.css";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
 // IMAGENES
-import Karku1 from "../../assets/AssetsHome/Gallery/Karku1.jpg";
+
 import Karku2 from "../../assets/AssetsHome/Gallery/Karku2.jpg";
 import Karku3 from "../../assets/AssetsHome/Gallery/Karku3.jpg";
 import Karku4 from "../../assets/AssetsHome/Gallery/Karku4.jpg";
@@ -30,9 +30,6 @@ import Karku17 from "../../assets/AssetsHome/Gallery/Karku17.jpg";
 import Karku18 from "../../assets/AssetsHome/Gallery/Karku18.jpg";
 import Karku19 from "../../assets/AssetsHome/Gallery/Karku19.jpg";
 import Karku20 from "../../assets/AssetsHome/Gallery/Karku20.jpg";
-import Karku21 from "../../assets/AssetsHome/Gallery/Karku21.jpg";
-import Karku22 from "../../assets/AssetsHome/Gallery/Karku22.jpg";
-import Karku23 from "../../assets/AssetsHome/Gallery/Karku23.jpg";
 
 const Gallery = () => {
   return (
@@ -51,9 +48,6 @@ const Gallery = () => {
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"
       >
-        <SwiperSlide>
-          <img src={Karku1} alt="Karku 1" />
-        </SwiperSlide>
         <SwiperSlide>
           <img src={Karku2} alt="Karku 2" />
         </SwiperSlide>
@@ -110,15 +104,6 @@ const Gallery = () => {
         </SwiperSlide>
         <SwiperSlide>
           <img src={Karku20} alt="Karku 20" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src={Karku21} alt="Karku 21" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src={Karku22} alt="Karku 22" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src={Karku23} alt="Karku 23" />
         </SwiperSlide>
       </Swiper>
     </>
