@@ -139,11 +139,40 @@ export const sendEmailUpdateStatusSales = (email, status) => {
     }
   );
 };
+
 export const sendEmailUpdateSalesShippingPrice = (email, priceNumberSend)=> {
 let url=`${process.env.DEPLOY_CLIENT_URL}/login`
 
   ejs.renderFile(
     _path + "/adviceShippingPrice.ejs",
+    { email, priceNumberSend,url },
+    async (error, data) => {
+      if (error) {
+        console.log(error);
+      } else {
+        try {
+          await transport.sendMail({
+            from: '"Karku cosmetica" karkucosmetica@gmail.com',
+            to: email,
+            subject: "Respuesta solicitada de Karku",
+            html: data,
+          });
+          console.log("Email Send");
+          return "Email Send";
+        } catch (error) {
+          console.log(error);
+          return "Email fail to sent";
+        }
+      }
+    }
+  );
+};
+
+export const sendEmailPostPayment = (email, priceNumberSend)=> {
+let url=`${process.env.DEPLOY_CLIENT_URL}/login`
+
+  ejs.renderFile(
+    _path + "/advicePayment.ejs",
     { email, priceNumberSend,url },
     async (error, data) => {
       if (error) {

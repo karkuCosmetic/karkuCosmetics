@@ -6,6 +6,7 @@ import { Product } from "../models/product.js";
 import { Admin } from "../models/admin.js";
 import { generateUniqueID } from "../utils/GenerateId.js";
 import { DecodedToken } from "../utils/DecodedToken.js";
+import {sendEmailPostPayment} from "../helpers/sendConfirmationEmail.js"
 
 export const createOrder = async (req, res) => {
   try {
@@ -25,8 +26,7 @@ export const createOrder = async (req, res) => {
       user.adress.provincia !== "" &&
       user.adress.localidad !== "" &&
       user.adress.codigoPostal !== "" &&
-      user.adress.numero !== "" 
-  
+      user.adress.numero !== ""
     ) {
       mercadopago.configure({
         access_token: process.env.ACCESS_TOKEN,
@@ -54,10 +54,10 @@ export const createOrder = async (req, res) => {
             street_name: JSON.stringify(adressData),
           },
         },
-        metadata: { method },
+        metadata: { method, email: user.email },
         back_urls: {
           success: `${process.env.DEPLOY_CLIENT_URL}/store`,
-          failure: `${process.env.DEPLOY_CLIENT_URL}/cart`,
+          failure: `${process.env.DEPLOY_CLIENT_URL}/store`,
           pending: `${process.env.DEPLOY_CLIENT_URL}/store`,
         },
         auto_return: "approved",
@@ -68,6 +68,7 @@ export const createOrder = async (req, res) => {
       // notification_url: `${process.env.DEPLOY_API_URL}/payment/webhook?source_news=webhooks`,
       const result = await mercadopago.preferences.create(preference);
 
+      // notification_url: `https://7011ths9-3001.brs.devtunnels.ms/payment/webhook?source_news=webhooks`,
       res.status(200).json(result.response.init_point);
     } else {
       throw new Error("faltan datos");
@@ -116,22 +117,21 @@ export const reciveWebhook = async (req, res) => {
       //ajustar fecha
 
       //obtener el id de quien compro
-      let emailUser = data.response.payer.email;
+      let emailUser = data.response.metadata.email;
       const user = await User.findOne({ email: emailUser });
       //obtener el id de quien compro
-
+      
       //store in base
       const id = generateUniqueID();
 
       var informationPayment = {
         id: id,
-        userId: user._id,
         payer: {
           name: user.name,
           lastName: user.lastName,
-          DNI: data.response.card.cardholder.identification.number,
           phonePerson: user.phone,
-          email: data.response.payer.email,
+          emailPayer: data.response.payer.email,
+          email: data.response.metadata.email,
           address: JSON.parse(
             data.body.additional_info.payer.address.street_name
           ),
@@ -178,10 +178,13 @@ export const reciveWebhook = async (req, res) => {
 
         await Admin.updateMany({}, { $push: { orders: informationPayment } }); // A todos los admins se le agrega la compra
       }
-      res.status(200).end();
+
+      sendEmailPostPayment( data.response.metadata.email,data.response.transaction_amount)
+      console.log("exito");
+      res.status(200).send("Webhook recibido exitosamente");
     }
-    // res.status(200);
   } catch (error) {
+    console.error(error);
     res.status(400).json(formatError(error.message));
   }
 };

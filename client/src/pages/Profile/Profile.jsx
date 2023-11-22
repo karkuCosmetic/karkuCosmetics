@@ -403,12 +403,14 @@ const Profile = () => {
                           {selectedPurchase.detailPay.shipStatus === false ? (
                             <>
                               Pendiente de pago
+                              {selectedPurchase.detailPay.shipPrice!==null?
                               <button
-                                className="pay-shipping"
-                                onClick={handlePayShip}
+                              className="pay-shipping"
+                              onClick={handlePayShip}
                               >
                                 Pagar
                               </button>
+                              :""}
                             </>
                           ) : (
                             selectedPurchase.detailPay.TrackNumber
@@ -443,7 +445,7 @@ const Profile = () => {
                             <div className="item-info-detail">
                               <p>
                                 <strong>Forma de pago: </strong>
-                                {selectedPurchase.methodPay.cardType}
+                                {selectedPurchase.methodPay.cardType==="account_money"?"Dinero Mercado Pago":selectedPurchase.methodPay.cardType}
                               </p>
                             </div>
                             <div className="item-info-detail">
