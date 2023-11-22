@@ -80,8 +80,9 @@ const PreviewSales = ({ setSection }) => {
     updateSalesTranckingNumber(
       selectedSale.id,
       token,
-      trackNumber,
-      priceNumberSend
+      selectedSale.detailPay?.TrackNumber,
+      selectedSale.detailPay?.priceNumberSend
+  
     )
       .then(() => {
         Swal.fire("Guardado correctamente", "", "success");
@@ -105,8 +106,8 @@ const PreviewSales = ({ setSection }) => {
     updateSalesTranckingNumber(
       selectedSale.id,
       token,
-      trackNumber,
-      priceNumberSend
+      selectedSale.detailPay?.TrackNumber,
+      selectedSale.detailPay?.priceNumberSend
     )
       .then(() => {
         Swal.fire("Guardado correctamente", "", "success");
