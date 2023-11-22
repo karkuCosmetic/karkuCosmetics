@@ -64,8 +64,7 @@ export const updateDeliveryOrders = async (req, res) => {
       { "orders.id": id },
       {
         $set: {
-          "orders.$.detailPay.TrackNumber":
-            trackNumber !== "" ? trackNumber : adminTrackNumber,
+          "orders.$.detailPay.TrackNumber": trackNumber,
           "orders.$.detailPay.shipPrice": Number(priceNumberSend),
         },
       }
@@ -76,8 +75,7 @@ export const updateDeliveryOrders = async (req, res) => {
       { "buys.id": id },
       {
         $set: {
-          "buys.$.detailPay.TrackNumber":
-            trackNumber !== "" ? trackNumber : userTrackNumber,
+          "buys.$.detailPay.TrackNumber": trackNumber,
           "buys.$.detailPay.shipPrice": Number(priceNumberSend),
         },
       }
@@ -88,7 +86,7 @@ export const updateDeliveryOrders = async (req, res) => {
       let order = admin.orders.filter((el) => el.id === id);
       let email = order[0].payer.email;
 
-      sendEmailUpdateSalesShippingPrice(email, priceNumberSend);
+      // sendEmailUpdateSalesShippingPrice(email, priceNumberSend);
     }
     res.status(200).json("elementos actualizados");
   } catch (error) {
