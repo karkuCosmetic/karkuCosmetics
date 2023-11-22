@@ -140,12 +140,12 @@ export const sendEmailUpdateStatusSales = (email, status) => {
   );
 };
 
-export const sendEmailUpdateSalesShippingPrice = (email, priceNumberSend)=> {
-let url=`${process.env.DEPLOY_CLIENT_URL}/login`
+export const sendEmailUpdateSalesShippingPrice = (email, priceNumberSend) => {
+  let url = `${process.env.DEPLOY_CLIENT_URL}/login`;
 
   ejs.renderFile(
     _path + "/adviceShippingPrice.ejs",
-    { email, priceNumberSend,url },
+    { email, priceNumberSend, url },
     async (error, data) => {
       if (error) {
         console.log(error);
@@ -168,12 +168,12 @@ let url=`${process.env.DEPLOY_CLIENT_URL}/login`
   );
 };
 
-export const sendEmailPostPayment = (email, priceNumberSend)=> {
-let url=`${process.env.DEPLOY_CLIENT_URL}/login`
+export const sendEmailPostPayment = (email) => {
+  let url = `${process.env.DEPLOY_CLIENT_URL}/profile`;
 
   ejs.renderFile(
     _path + "/notifcationbuy.ejs",
-    { email, priceNumberSend,url },
+    { email, url },
     async (error, data) => {
       if (error) {
         console.log(error);
@@ -195,12 +195,12 @@ let url=`${process.env.DEPLOY_CLIENT_URL}/login`
     }
   );
 };
-export const sendEmailPostPayShipping = (email, priceNumberSend)=> {
-let url=`${process.env.DEPLOY_CLIENT_URL}/login`
+export const sendEmailPostPayShipping = (email) => {
+  let url = `${process.env.DEPLOY_CLIENT_URL}/login`;
 
   ejs.renderFile(
     _path + "/notificationPayShipping.ejs",
-    { email, priceNumberSend,url },
+    { email, url },
     async (error, data) => {
       if (error) {
         console.log(error);
