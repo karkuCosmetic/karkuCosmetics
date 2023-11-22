@@ -320,7 +320,7 @@ const SalesManagement = ({ setSection }) => {
                           {selectedSale.detailPay?.shipStatus
                             ? "Pagado"
                             : "Pendiente de pago"}{" "}
-                          - {selectedSale.detailPay?.shipPrice}
+                          - $ {selectedSale.detailPay?.shipPrice}
                         </p>
                         {isEditingCost ? (
                           <>

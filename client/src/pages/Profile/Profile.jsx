@@ -398,7 +398,7 @@ const Profile = () => {
                         </p>
                         <p>
                           <strong>
-                            Envío: {selectedPurchase.detailPay.shipPrice}{" "}
+                            Envío: ${selectedPurchase.detailPay.shipPrice}{" "}
                           </strong>
                           {selectedPurchase.detailPay.shipStatus === false ? (
                             <>

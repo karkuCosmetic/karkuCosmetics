@@ -89,6 +89,7 @@ textarea:focus {
 input[type="text"],
 input[type="email"],
 input[type="password"],
+input[type="number"],
 .input-contact-phone,
 textarea {
   width: 100%;
@@ -128,9 +129,7 @@ input[type="submit"]:hover {
     margin-bottom: 5rem;
   }
   input[type="submit"] {
-    
   }
-
 }
 @media screen and (min-width: 482px) {
   form {
