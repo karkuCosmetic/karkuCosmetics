@@ -261,7 +261,7 @@ const PreviewSales = ({ setSection }) => {
                         {isEditingCost ? (
                           <>
                             <input
-                              type="text"
+                              type="number"
                               placeholder="Costo de envío"
                               value={priceNumberSend}
                               onChange={handlepriceNumberSendChange}

@@ -48,12 +48,24 @@ export const updateDeliveryOrders = async (req, res) => {
   try {
     const { id } = req.params;
     const { trackNumber, priceNumberSend } = req.body;
+    console.log(req.body);
     // Actualiza el campo "entrega" en Admin
+
+    // Obtén el valor actual de TrackNumber antes de la actualización
+    const adminOrder = await Admin.findOne({ "orders.id": id });
+    const userBuy = await User.findOne({ "buys.id": id });
+
+    const adminTrackNumber = adminOrder.orders.find((order) => order.id === id)
+      ?.detailPay.TrackNumber;
+    const userTrackNumber = userBuy.buys.find((buy) => buy.id === id)?.detailPay
+      .TrackNumber;
+
     await Admin.updateMany(
       { "orders.id": id },
       {
         $set: {
-          "orders.$.detailPay.TrackNumber":trackNumber,
+          "orders.$.detailPay.TrackNumber":
+            trackNumber !== "" ? trackNumber : adminTrackNumber,
           "orders.$.detailPay.shipPrice": Number(priceNumberSend),
         },
       }
@@ -64,7 +76,8 @@ export const updateDeliveryOrders = async (req, res) => {
       { "buys.id": id },
       {
         $set: {
-          "buys.$.detailPay.TrackNumber": trackNumber,
+          "buys.$.detailPay.TrackNumber":
+            trackNumber !== "" ? trackNumber : userTrackNumber,
           "buys.$.detailPay.shipPrice": Number(priceNumberSend),
         },
       }
