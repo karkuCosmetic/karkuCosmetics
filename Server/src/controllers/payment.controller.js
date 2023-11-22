@@ -6,7 +6,7 @@ import { Product } from "../models/product.js";
 import { Admin } from "../models/admin.js";
 import { generateUniqueID } from "../utils/GenerateId.js";
 import { DecodedToken } from "../utils/DecodedToken.js";
-import {sendEmailPostPayment} from "../helpers/sendConfirmationEmail.js"
+import { sendEmailPostPayment } from "../helpers/sendConfirmationEmail.js";
 
 export const createOrder = async (req, res) => {
   try {
@@ -120,7 +120,7 @@ export const reciveWebhook = async (req, res) => {
       let emailUser = data.response.metadata.email;
       const user = await User.findOne({ email: emailUser });
       //obtener el id de quien compro
-      
+
       //store in base
       const id = generateUniqueID();
 
@@ -179,7 +179,10 @@ export const reciveWebhook = async (req, res) => {
         await Admin.updateMany({}, { $push: { orders: informationPayment } }); // A todos los admins se le agrega la compra
       }
 
-      sendEmailPostPayment( data.response.metadata.email,data.response.transaction_amount)
+      sendEmailPostPayment(
+        data.response.metadata.email,
+        data.response.transaction_amount
+      );
       console.log("exito");
       res.status(200).send("Webhook recibido exitosamente");
     }
