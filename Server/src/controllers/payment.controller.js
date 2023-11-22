@@ -123,7 +123,7 @@ console.log(data.response.payer);
       let emailUser = data.response.payer.email;
       const user = await User.findOne({ email: emailUser });
       //obtener el id de quien compro
-
+console.log(user);
       //store in base
       const id = generateUniqueID();
 
