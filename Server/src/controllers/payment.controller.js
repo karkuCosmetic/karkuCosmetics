@@ -107,10 +107,6 @@ export const reciveWebhook = async (req, res) => {
     if (req.method === "POST" && payment.type === "payment") {
       const data = await mercadopago.payment.findById(payment["data.id"]);
 
-      console.log(data);
-      console.log(data.response.payer.identification);
-    
-
       //ajustar fecha
       let currentDate = new Date();
       const timeZoneOffset = -3; // La diferencia de la zona horaria en horas
