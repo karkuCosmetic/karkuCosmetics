@@ -57,7 +57,7 @@ export const createOrder = async (req, res) => {
         metadata: { method },
         back_urls: {
           success: `${process.env.DEPLOY_CLIENT_URL}/store`,
-          failure: `${process.env.DEPLOY_CLIENT_URL}/cart`,
+          failure: `${process.env.DEPLOY_CLIENT_URL}/store`,
           pending: `${process.env.DEPLOY_CLIENT_URL}/store`,
         },
         auto_return: "approved",
@@ -109,6 +109,10 @@ export const reciveWebhook = async (req, res) => {
     if (req.method === "POST" && payment.type === "payment") {
       const data = await mercadopago.payment.findById(payment["data.id"]);
 
+console.log(data);
+console.log(data.response);
+console.log(data.response.payer);
+
       //ajustar fecha
       let currentDate = new Date();
       const timeZoneOffset = -3; // La diferencia de la zona horaria en horas
@@ -125,7 +129,6 @@ export const reciveWebhook = async (req, res) => {
 
       var informationPayment = {
         id: id,
-        userId: user._id,
         payer: {
           name: user.name,
           lastName: user.lastName,
