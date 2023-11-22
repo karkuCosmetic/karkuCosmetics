@@ -32,8 +32,8 @@ export const updateSalesById = async (id, value, token) => {
 export const updateSalesTranckingNumber = async (
   id,
   token,
-  trackNumber = "",
-  priceNumberSend = ""
+  trackNumber,
+  priceNumberSend 
 ) => {
   try {
     const res = await axios.put(
