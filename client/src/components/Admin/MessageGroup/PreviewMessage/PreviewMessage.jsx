@@ -104,7 +104,11 @@ const PreviewMessage = ({ setSection }) => {
 
   return (
     <div className="preview-message">
-      <h2>Mensajes</h2>
+      <div className="title-previewMessages">
+        {" "}
+        <h2>Mensajes</h2>
+      </div>
+
       <div className="email-list">
         <ul>
           {slicedNotifications && slicedNotifications.length > 0 ? (

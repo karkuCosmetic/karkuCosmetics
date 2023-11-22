@@ -1,12 +1,18 @@
 .preview-message {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
   padding: 20px;
   border-radius: 10px;
   background-color: #fefeff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.title-previewMessages {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
 }
 
 .message-preview-container {
@@ -22,6 +28,7 @@
   align-items: center;
   justify-content: space-between;
   font-family: "figtree";
+  width: 100%;
 }
 
 .info-message-preview-container {
@@ -171,7 +178,7 @@
   .name-email {
     width: 100%;
   }
-  
+
   .phone-date {
     width: 100%;
   }
@@ -257,11 +264,11 @@
 }
 
 @media (max-width: 925px) {
-  .textarea-response-message{
+  .textarea-response-message {
     width: 100%;
   }
   .text-message-modal {
-width: 100%;
+    width: 100%;
   }
 }
 
@@ -324,8 +331,8 @@ width: 100%;
     justify-content: space-between;
   }
 
-  .btn-response-message{
-width: 8rem;
+  .btn-response-message {
+    width: 8rem;
   }
 }
 
