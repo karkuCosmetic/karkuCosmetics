@@ -25,8 +25,7 @@ export const createOrder = async (req, res) => {
       user.adress.provincia !== "" &&
       user.adress.localidad !== "" &&
       user.adress.codigoPostal !== "" &&
-      user.adress.numero !== "" 
-  
+      user.adress.numero !== ""
     ) {
       mercadopago.configure({
         access_token: process.env.ACCESS_TOKEN,
@@ -54,7 +53,7 @@ export const createOrder = async (req, res) => {
             street_name: JSON.stringify(adressData),
           },
         },
-        metadata: { method },
+        metadata: { method, email: user.email },
         back_urls: {
           success: `${process.env.DEPLOY_CLIENT_URL}/store`,
           failure: `${process.env.DEPLOY_CLIENT_URL}/store`,
@@ -62,11 +61,10 @@ export const createOrder = async (req, res) => {
         },
         auto_return: "approved",
         notification_url: `${process.env.DEPLOY_API_URL}/payment/webhook?source_news=webhooks`,
-        
       };
-      
+
       const result = await mercadopago.preferences.create(preference);
-      
+
       // notification_url: `https://7011ths9-3001.brs.devtunnels.ms/payment/webhook?source_news=webhooks`,
       res.status(200).json(result.response.init_point);
     } else {
@@ -109,9 +107,8 @@ export const reciveWebhook = async (req, res) => {
     if (req.method === "POST" && payment.type === "payment") {
       const data = await mercadopago.payment.findById(payment["data.id"]);
 
-console.log(data);
-console.log(data.response);
-console.log(data.response.payer);
+      console.log(data);
+    
 
       //ajustar fecha
       let currentDate = new Date();
@@ -120,10 +117,10 @@ console.log(data.response.payer);
       //ajustar fecha
 
       //obtener el id de quien compro
-      let emailUser = data.response.payer.email;
+      let emailUser = data.response.metadata.email;
       const user = await User.findOne({ email: emailUser });
       //obtener el id de quien compro
-console.log(user);
+      
       //store in base
       const id = generateUniqueID();
 
@@ -134,7 +131,8 @@ console.log(user);
           lastName: user.lastName,
           DNI: data.response.card.cardholder.identification.number,
           phonePerson: user.phone,
-          email: data.response.payer.email,
+          emailPayer: data.response.payer.email,
+          email: data.response.metadata.email,
           address: JSON.parse(
             data.body.additional_info.payer.address.street_name
           ),
@@ -182,7 +180,7 @@ console.log(user);
         await Admin.updateMany({}, { $push: { orders: informationPayment } }); // A todos los admins se le agrega la compra
       }
       console.log("exito");
-      res.status(200).send('Webhook recibido exitosamente');
+      res.status(200).send("Webhook recibido exitosamente");
     }
   } catch (error) {
     console.error(error);
