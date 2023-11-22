@@ -60,12 +60,20 @@ export const updateDeliveryOrders = async (req, res) => {
     const userTrackNumber = userBuy.buys.find((buy) => buy.id === id)?.detailPay
       .TrackNumber;
 
+    const adminShipPrice = adminOrder.orders.find((order) => order.id === id)
+      ?.detailPay.shipPrice;
+    const userShipPrice = userBuy.buys.find((buy) => buy.id === id)?.detailPay
+      .shipPrice;
+
     await Admin.updateMany(
       { "orders.id": id },
       {
         $set: {
-          "orders.$.detailPay.TrackNumber": trackNumber,
-          "orders.$.detailPay.shipPrice": Number(priceNumberSend),
+          "orders.$.detailPay.TrackNumber":
+            trackNumber !== "" ? trackNumber : adminTrackNumber,
+
+          "orders.$.detailPay.shipPrice":
+            priceNumberSend !== "" ? Number(priceNumberSend) : adminShipPrice,
         },
       }
     );
@@ -75,8 +83,10 @@ export const updateDeliveryOrders = async (req, res) => {
       { "buys.id": id },
       {
         $set: {
-          "buys.$.detailPay.TrackNumber": trackNumber,
-          "buys.$.detailPay.shipPrice": Number(priceNumberSend),
+          "buys.$.detailPay.TrackNumber":
+            trackNumber !== "" ? trackNumber : userTrackNumber,
+          "buys.$.detailPay.shipPrice":
+            priceNumberSend !== "" ? Number(priceNumberSend) : userShipPrice,
         },
       }
     );
