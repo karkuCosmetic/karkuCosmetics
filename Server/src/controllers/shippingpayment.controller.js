@@ -4,6 +4,7 @@ import "dotenv/config";
 import { User } from "../models/user.js";
 import { Admin } from "../models/admin.js";
 import { DecodedToken } from "../utils/DecodedToken.js";
+import { sendEmailPostPayShipping } from "../helpers/sendConfirmationEmail.js";
 
 export const createOrder = async (req, res) => {
   try {
@@ -29,9 +30,9 @@ export const createOrder = async (req, res) => {
       payer: {
         name: user.name,
         surname: user.lastName,
-        email: user.email,
       },
-      metadata: { idOrder },
+      metadata: { idOrder, email: user.email },
+ 
       back_urls: {
         success: `${process.env.DEPLOY_CLIENT_URL}/store`,
         failure: `${process.env.DEPLOY_CLIENT_URL}/cart`,
@@ -121,6 +122,7 @@ export const reciveWebhook = async (req, res) => {
           }
         ); // A todos los admins se le agrega la compra
       }
+      sendEmailPostPayShipping(data.response.metadata.email)
       res.status(200).end();
     }
     // res.status(200);

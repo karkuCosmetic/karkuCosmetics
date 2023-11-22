@@ -181,7 +181,6 @@ export const reciveWebhook = async (req, res) => {
 
       sendEmailPostPayment(
         data.response.metadata.email,
-        data.response.transaction_amount
       );
       console.log("exito");
       res.status(200).send("Webhook recibido exitosamente");
