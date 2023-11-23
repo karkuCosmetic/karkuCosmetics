@@ -141,7 +141,7 @@ export const sendEmailUpdateStatusSales = (email, status) => {
 };
 
 export const sendEmailUpdateSalesShippingPrice = (email, priceNumberSend) => {
-  let url = `${process.env.DEPLOY_CLIENT_URL}/login`;
+  let url = `${process.env.DEPLOY_CLIENT_URL}/`;
 
   ejs.renderFile(
     _path + "/adviceShippingPrice.ejs",
@@ -196,7 +196,7 @@ export const sendEmailPostPayment = (email) => {
   );
 };
 export const sendEmailPostPayShipping = (email) => {
-  let url = `${process.env.DEPLOY_CLIENT_URL}/login`;
+  let url = `${process.env.DEPLOY_CLIENT_URL}/`;
 
   ejs.renderFile(
     _path + "/notificationPayShipping.ejs",
