@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pago de envío</title>
+    <title>email= 1 Compra en Karku</title>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Figtree:wght@300&family=Jost:wght@300&family=figtree:wght@300;500&family=Raleway:ital,wght@0,300;1,300&display=swap");
 
@@ -26,6 +26,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        
       }
 
       .header {
@@ -51,6 +52,7 @@
         margin-top: 20px;
         font-family: "figtree";
         padding-inline: 2rem;
+        max-width: 800px;
       }
 
       .name {
@@ -84,11 +86,12 @@
 
       .footer {
         background-color: #91be7f;
-        width: 100%;
+        width: 800px;
         text-align: center;
         font-family: "figtree";
         color: #ffffff;
         margin-top: 3rem;
+        padding: 0.5rem;
       }
 
       .footer-text {
@@ -109,15 +112,24 @@
       <div class="content">
         <p>Hola,</p>
         <p>
-            Hemos recibido tu compra en Karku con el correo
-            <b><%= email %></b>. Para dar curso a la entrega, es necesario realizar el pago
-            correspondiente al costo de envío. Por favor, sigue el enlace a continuación para completar tu compra:
+          Hemos recibido tu compra en Karku con el correo
+          <b><%= email %></b>. Para dar curso a la entrega, es necesario
+          realizar el pago correspondiente al costo de envío.</p>
+        <div class="ShipOptions">
+          <p>
+            <strong>Envío por Correo:</strong> Si seleccionaste el método de
+            envio por correo, en breve recibirás la notificacion para abonar el
+            costo de envío y el número de seguimiento del mismo.
           </p>
-        <div class="btn-confirm">
-          <p>Costo de envio: $<%= priceNumberSend %></p>
-          <a href="<%= url %>" class="cta-button" target="_blank" id="button"
-            >Pagar Envío</a
-          >
+          <p>
+            <strong>Acordar con el vendedor:</strong> Si seleccionaste acordar
+            con el vendedor para recibir tu compra, podes contactarte con Karku
+            a través de este mismo mail.
+          </p>
+
+          <p>
+            <strong>¡Muchas Gracias!
+          </p>
         </div>
       </div>
 
