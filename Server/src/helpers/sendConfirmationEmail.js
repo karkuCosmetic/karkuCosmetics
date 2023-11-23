@@ -68,7 +68,7 @@ export const ResendConfirmationEmail = async (emailUser) => {
       } else {
         try {
           await transport.sendMail({
-            from: '"Karku cosmetica" karkucosmetica@gmail.com',
+            from: '"Karku" karkucosmetica@gmail.com',
             to: email,
             subject: "Confirmacion de cuenta",
             html: data,
@@ -98,9 +98,9 @@ export const SendEmailAdmin = async (to, subject, body) => {
       } else {
         try {
           await transport.sendMail({
-            from: '"Karku cosmetica" karkucosmetica@gmail.com',
+            from: '"Karku" karkucosmetica@gmail.com',
             to: email,
-            subject: "Respuesta solicitada de Karku",
+            subject: "Consulta Karku",
             html: data,
           });
           console.log("Email Send");
@@ -124,9 +124,9 @@ export const sendEmailUpdateStatusSales = (email, status) => {
       } else {
         try {
           await transport.sendMail({
-            from: '"Karku cosmetica" karkucosmetica@gmail.com',
+            from: '"Karku" karkucosmetica@gmail.com',
             to: email,
-            subject: "Respuesta solicitada de Karku",
+            subject: "Karku",
             html: data,
           });
           console.log("Email Send");
@@ -152,9 +152,9 @@ export const sendEmailUpdateSalesShippingPrice = (email, priceNumberSend) => {
       } else {
         try {
           await transport.sendMail({
-            from: '"Karku cosmetica" karkucosmetica@gmail.com',
+            from: '"Karku" karkucosmetica@gmail.com',
             to: email,
-            subject: "Respuesta solicitada de Karku",
+            subject: "Karku",
             html: data,
           });
           console.log("Email Send");
@@ -180,9 +180,9 @@ export const sendEmailPostPayment = (email) => {
       } else {
         try {
           await transport.sendMail({
-            from: '"Karku cosmetica" karkucosmetica@gmail.com',
+            from: '"Karku" karkucosmetica@gmail.com',
             to: email,
-            subject: "Respuesta solicitada de Karku",
+            subject: "Karku",
             html: data,
           });
           console.log("Email Send");

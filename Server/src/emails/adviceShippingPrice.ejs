@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>email 2 - Pago de envío</title>
+    <title>Envío Pendiente</title>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Figtree:wght@300&family=Jost:wght@300&family=figtree:wght@300;500&family=Raleway:ital,wght@0,300;1,300&display=swap");
 
@@ -35,7 +35,7 @@
       }
 
       .header img {
-        width: 50%;
+        width: 30%;
       }
 
       .title {
@@ -101,13 +101,13 @@
     <div class="container">
       <div class="header">
         <img
-          src="https://res.cloudinary.com/dqai9sgfs/image/upload/v1695842114/logoKarkuCircular_2_g6ypmw.png"
+        src="https://res.cloudinary.com/dqai9sgfs/image/upload/v1700755080/logo_kiorw9.png"
           alt="Email"
         />
         <div class="title">Karku - Cosmética Natural</div>
       </div>
       <div class="content">
-        <p>Hola,</p>
+        <p>¡Hola!</p>
         <p>
           Tu compra tiene el pago de envío pendiente, para dar curso a la
           entrega, es necesario abonarlo. Luego de hacerlo podrás ver el número
@@ -115,7 +115,7 @@
         </p>
         <p>Por favor, ingresa a Karku para realizar el pago desde tu perfil.</p>
         <div class="btn-confirm">
-          <p>Costo de envio: $<%= priceNumberSend %></p>
+          <p>Costo de envio: <strong>$<%= priceNumberSend %></strong></p>
           <a href="<%= url %>" class="cta-button" target="_blank" id="button"
             >ir a Karku</a
           >
