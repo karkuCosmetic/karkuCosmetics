@@ -96,7 +96,7 @@ export const updateDeliveryOrders = async (req, res) => {
       let order = admin.orders.filter((el) => el.id === id);
       let email = order[0].payer.email;
 
-      // sendEmailUpdateSalesShippingPrice(email, priceNumberSend);
+      sendEmailUpdateSalesShippingPrice(email, priceNumberSend);
     }
     res.status(200).json("elementos actualizados");
   } catch (error) {
