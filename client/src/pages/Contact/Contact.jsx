@@ -26,7 +26,9 @@ export const Contact = () => {
         process.env.REACT_APP_SERVICE_ID,
         process.env.REACT_APP_TEMPLATE_ID,
         form.current,
-        process.env.REACT_APP_PUBLIC_KEY
+        process.env.REACT_APP_PUBLIC_KEY,
+        { 'X-Api-Key': 'YOUR_API_KEY', 'X-Api-User': 'YOUR_USER_ID' }
+        
       )
       .then((result) => {
         MySwal.fire({
