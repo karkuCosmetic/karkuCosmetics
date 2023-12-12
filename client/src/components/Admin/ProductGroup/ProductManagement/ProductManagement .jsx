@@ -212,7 +212,7 @@ const ProductManagement = ({ setSection }) => {
         isOpen={isProductModalOpen}
         onRequestClose={closeProductModal}
         contentLabel="Detalles del Producto"
-      >
+       >
         {selectedProduct && (
           <div className="product-details-container">
             <div className="details-product-text">

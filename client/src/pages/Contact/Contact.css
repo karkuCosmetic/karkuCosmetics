@@ -72,7 +72,6 @@
 
 label {
   display: block;
-  margin-bottom: 5px;
   font-weight: bold;
   font-family: "figtree";
 }
@@ -89,7 +88,7 @@ input[type="number"],
 textarea {
   width: 100%;
   padding: 0.8rem;
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 14px;

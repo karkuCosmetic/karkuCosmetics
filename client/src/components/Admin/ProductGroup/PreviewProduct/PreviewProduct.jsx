@@ -11,6 +11,8 @@ import "./PreviewProduct.css";
 import EditProduct from "../Products/EditProduct";
 import AddProduct from "../Products/AddProduct";
 import { GetDecodedCookie } from "../../../../utils/DecodedCookie";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const PreviewProduct = ({ setSection }) => {
   const [products, setProducts] = useState([]);
@@ -18,6 +20,7 @@ const PreviewProduct = ({ setSection }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isProductModalOpen, setIsProductModalOpen] = useState(false);
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
   const [selectedProductDetails, setSelectedProductDetails] = useState(null);
   const MySwal = withReactContent(Swal);
@@ -29,6 +32,16 @@ const PreviewProduct = ({ setSection }) => {
       .catch((error) => console.error(error));
     window.scrollTo(0, 0);
   }, []);
+
+  const openProductModal = (product) => {
+    setSelectedProduct(product);
+    setIsProductModalOpen(true);
+  };
+
+  const closeProductModal = () => {
+    setSelectedProduct(null);
+    setIsProductModalOpen(false);
+  };
 
   const closeEditModal = () => {
     setIsEditModalOpen(false);
@@ -42,7 +55,6 @@ const PreviewProduct = ({ setSection }) => {
   const closeAddProductModal = () => {
     setIsAddProductModalOpen(false);
   };
-
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -89,7 +101,7 @@ const PreviewProduct = ({ setSection }) => {
       setProducts(updatedProducts);
 
       setSelectedProduct(null);
-      window.location.reload()
+      window.location.reload();
     } catch (error) {
       console.error("Error al eliminar producto:", error);
     }
@@ -132,6 +144,12 @@ const PreviewProduct = ({ setSection }) => {
                 <div className="previewProduct-container-buttons">
                   <div className="previewProduct-price">${product.price}</div>
                   <button
+                    className="show-product-btn"
+                    onClick={() => openProductModal(product)}
+                  >
+                    Ver
+                  </button>
+                  <button
                     className="previewProduct-container-buttons-edit"
                     onClick={() => handleEditProduct(product._id)}
                   >
@@ -147,7 +165,53 @@ const PreviewProduct = ({ setSection }) => {
               </li>
             ))}
       </ul>
-
+      <Modal
+        isOpen={isProductModalOpen}
+        onRequestClose={closeProductModal}
+        contentLabel="Detalles del Producto"
+      >
+        {selectedProduct && (
+          <div className="product-details-container">
+            <div className="details-product-text">
+              <div className="close-modal-detail">
+                <button
+                  className="product-details-close-button"
+                  onClick={closeProductModal}
+                >
+                  <FontAwesomeIcon icon={faTimes} />
+                </button>
+              </div>
+              <h2 className="product-details-title">Detalles del Producto</h2>
+              <p className="product-details-p">
+                <span>Nombre: </span>
+                {selectedProduct?.title}
+              </p>
+              <p className="product-details-p">
+                <span>Precio: </span>${selectedProduct?.price}
+              </p>
+              <p className="product-details-p">
+                <span>Descripción: </span>
+                {selectedProduct?.description}
+              </p>
+              <p className="product-details-p">
+                <span>Ingredientes: </span>
+                {selectedProduct?.ingredients}
+              </p>
+            </div>
+            <div className="product-details-image-container">
+              {selectedProduct.image &&
+                selectedProduct.image.map((imageUrl, index) => (
+                  <img
+                    key={index}
+                    src={imageUrl}
+                    alt={`${selectedProduct.title} - Imagen ${index + 1}`}
+                    className="product-details-image"
+                  />
+                ))}
+            </div>
+          </div>
+        )}
+      </Modal>
       {!showAllProducts && (
         <button
           className="button-showAll"

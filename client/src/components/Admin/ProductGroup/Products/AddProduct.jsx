@@ -23,6 +23,12 @@ const AddProduct = ({closeEditModal}) => {
   const maxImages = 5; // limite de images
   const inputRef = useRef ();
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+    }
+  };
+
   const handleImageUpload = event => {
     const files = event.target.files;
     const selected = Array.from (files);
@@ -82,28 +88,27 @@ const AddProduct = ({closeEditModal}) => {
       </div>
       <h2 className="h2-form-updateProduct">Nuevo Producto</h2>
       <form className="form-edit-product-admin" onSubmit={handleSubmit}>
-        <div>
+        <div className="label-input-container">
           <label>Titulo:</label>
-          <textarea
-            className="textarea-form-edit-product-adm"
+          <input
             type="text"
             name="title"
             value={product.title}
             onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
           />
         </div>
-        <div>
-          <label>Dimensiones:</label>
-          <textarea
-            className="textarea-form-edit-product-adm"
+        <div className="label-input-container">
+          <label>Dimensiones: (cc, ml, grs)</label>
+          <input
             type="text"
             name="dimensions"
             value={product.dimensions}
             onChange={handleInputChange}
-            placeholder="ML/CC/CM/UNIDAD"
+            onKeyDown={handleKeyDown}
           />
         </div>
-        <div>
+        <div className="label-input-container">
           <label>Descripción:</label>
           <textarea
             className="textarea-form-edit-product-adm"
@@ -112,7 +117,7 @@ const AddProduct = ({closeEditModal}) => {
             onChange={handleInputChange}
           />
         </div>
-        <div>
+        <div className="label-input-container">
           <label>Ingredientes:</label>
           <textarea
             className="textarea-form-edit-product-adm"
@@ -127,46 +132,59 @@ const AddProduct = ({closeEditModal}) => {
             <input
               type="number"
               name="price"
+              placeholder="$"
               value={product.price}
               onChange={handleInputChange}
+              onKeyDown={handleKeyDown}
             />
           </div>
-
         </div>
         <div className="container-categories-modal-admin">
-          <label>Categoría:</label>
-          <SelectCategoryProduct setProduct={setProduct} product={product} />
+          <label>Categorías:</label>
+
+          {product && (
+            <SelectCategoryProduct product={product} setProduct={setProduct} />
+          )}
         </div>
 
-        <div className="image-upload-container">
+        <div
+          className="image-upload-container"
+          style={{ display: "flex", gap: "15px" }}
+        >
           <input
             type="file"
-            onChange={e => handleImageUpload (e)}
+            onChange={(e) => handleImageUpload(e)}
             multiple
             className="upload-input"
             ref={inputRef}
             accept="image/*"
           />
-          <div className="img-new-product">
-            {selectedImages.map ((image, index) => (
-              <div className="img-addProduct-admin-container">
-                <img
-                  className="img-addProduct-admin"
-                  key={index}
-                  src={URL.createObjectURL (image)}
-                  alt={`Image ${index}`}
-                />
-                <button
-                  className="btn-delet-img-new-producto"
-                  type="button"
-                  onClick={() => handleImageRemove (index)}
-                >
-                  <FontAwesomeIcon icon={faTimes} />
-                </button>
-              </div>
-            ))}
+
+          <div className="img-edit-product">
+            {selectedImages &&
+              selectedImages.map((image, index) => (
+                <div className="img-addProduct-admin-container ">
+                  <img
+                    className="img-addProduct-admin"
+                    src={
+                      typeof image === "string"
+                        ? image
+                        : URL.createObjectURL(image)
+                    }
+                    alt={`Image ${index}`}
+                  />
+                  <button
+                    className="btn-delet-img-new-producto"
+                    type="button"
+                    onClick={() => handleImageRemove(index)}
+                  >
+                    <FontAwesomeIcon icon={faTimes} />
+                  </button>
+                </div>
+              ))}
           </div>
         </div>
+
         <div className="container-save-product-btn">
           <button className="save-product-btn" type="submit">
             Guardar Cambios

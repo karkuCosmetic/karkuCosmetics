@@ -9,12 +9,13 @@
   height: auto;
   color: black;
   background-color: #fefeff;
-  border-radius: 20px;
+  border-radius: 15px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .form-edit-product-admin {
   width: 80%;
+  gap: 0.5rem;
 }
 
 @media (max-width: 768px) {
@@ -66,19 +67,18 @@
   color: rgb(0, 0, 0);
 }
 
-.price-formEdit,
-.stock-formEdit {
-  display: flex;
-  flex-direction: column;
-}
-
-.form-edit-precio-sock {
+.price-formEdit {
   display: flex;
   flex-direction: row;
+}
+
+.form-edit-precio-sock label {
+  display: flex;
   justify-content: center;
-  gap: 1rem;
   align-items: center;
-  padding: 1rem;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
 }
 
 @media (max-width: 768px) {
@@ -124,18 +124,17 @@
 }
 
 .save-product-btn:hover {
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
-    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-  width: calc(8rem + 15px);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  width: calc(10rem + 15px);
 }
 
-.img-new-product{
-display: flex;
-flex-direction: row;
-gap: 0.5rem;
+.img-new-product {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
 }
 
-.btn-delet-img-new-producto{
+.btn-delet-img-new-producto {
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -172,23 +171,4 @@ gap: 0.5rem;
   flex-direction: column;
   align-items: center;
   padding: 20px;
-}
-
-.upload-button {
-  background-color: #007bff;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.upload-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-.upload-button:hover {
-  background-color: #0056b3;
 }

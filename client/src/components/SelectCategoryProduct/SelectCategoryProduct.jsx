@@ -4,7 +4,7 @@ import "./SelectCategoryProduct.css";
 import { getAllCategories } from "../../functions/fetchingProducts";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 
-const SelectCategoryProduct = ({ setProduct }) => {
+const SelectCategoryProduct = ({ setProduct, product }) => {
   const [isOpenPrimary, setIsOpenPrimary] = useState(false);
   const [selectedOptionPrimary, setSelectedOptionPrimary] = useState("");
   const [catPrimary, setCatPrimary] = useState([
@@ -43,19 +43,21 @@ const SelectCategoryProduct = ({ setProduct }) => {
   const option = ["primary", "secondary"];
 
   useEffect(() => {
-    getAllCategories().then((data) => {
-      const uniqueCatPrimary = new Set([
-        ...catPrimary,
-        ...data.categories.primary,
-      ]);
-      const uniqueCatSecondary = new Set([
-        ...catSecondary,
-        ...data.categories.secondary,
-      ]);
-      setCatPrimary(Array.from(uniqueCatPrimary).sort());
-      setCatSecondary(Array.from(uniqueCatSecondary).sort());
-    });
-  }, []);
+    if (product?.category) {
+      getAllCategories().then((data) => {
+        const uniqueCatPrimary = new Set([
+          ...catPrimary,
+          ...(product.category.primary || []),
+        ]);
+        const uniqueCatSecondary = new Set([
+          ...catSecondary,
+          ...(product.category.secondary || []),
+        ]);
+        setCatPrimary(Array.from(uniqueCatPrimary).sort());
+        setCatSecondary(Array.from(uniqueCatSecondary).sort());
+      });
+    }
+  }, [product]);
 
   const getSlicedAndSortedOptions = (options) =>
     options.sort((a, b) => a.localeCompare(b));
@@ -132,7 +134,7 @@ const SelectCategoryProduct = ({ setProduct }) => {
             onClick={toggleSelect}
           >
             <div className="selected-option-preview">
-              <span>{selectedOptionPrimary}</span>
+              <span>{product.category?.primary || ""}</span>
               <FontAwesomeIcon
                 icon={isOpenPrimary ? faCaretUp : faCaretDown}
                 className="arrow"
@@ -166,7 +168,7 @@ const SelectCategoryProduct = ({ setProduct }) => {
             onClick={toggleSelectSecondary}
           >
             <div className="selected-option-preview">
-              <span>{selectedOptionSecondary}</span>
+              <span>{product.category?.secondary || ""}</span>
               <FontAwesomeIcon
                 icon={isOpenSecondary ? faCaretUp : faCaretDown}
                 className="arrow"
@@ -194,49 +196,44 @@ const SelectCategoryProduct = ({ setProduct }) => {
           </div>
         </div>{" "}
       </div>
-      <div>
+      <div className="newCategory-container">
         <div className="add-categorie-product-adm">
-          <p>Agregar categoría</p>
-          <div className="inputs-newCategorie-adm">
-            <input
-              type="text"
-              placeholder="Nueva Categoría"
-              value={AddCategory}
-              onChange={handleInputChange}
-            />
-            <div
-              className={`custom-select-status ${
-                isOpenCategories ? "open" : ""
-              }`}
-              onClick={toggleSelectCategories}
-            >
-              <div className="selected-option-preview-addCat">
-                <span>
-                  {selectedOptionCategories === "primary"
-                    ? "Primaria"
-                    : "Secundaria"}
-                </span>
-                <FontAwesomeIcon
-                  icon={isOpenCategories ? faCaretUp : faCaretDown}
-                  className="arrow"
-                />
-              </div>
-              {isOpenCategories && (
-                <div className="options-preview">
-                  {option.map((option, index) => (
-                    <div
-                      key={index}
-                      className={`option-preview ${
-                        option === selectedOptionCategories ? "selected" : ""
-                      }`}
-                      onClick={() => handleOptionSelectCategorie(option)}
-                    >
-                      {option === "primary" ? "Primaria" : "Secundaria"}
-                    </div>
-                  ))}
-                </div>
-              )}
+          <input
+            type="text"
+            placeholder="Nueva Categoría"
+            value={AddCategory}
+            onChange={handleInputChange}
+          />
+          <div
+            className={`custom-select-status ${isOpenCategories ? "open" : ""}`}
+            onClick={toggleSelectCategories}
+          >
+            <div className="selected-option-preview-addCat">
+              <span>
+                {selectedOptionCategories === "primary"
+                  ? "Primaria"
+                  : "Secundaria"}
+              </span>
+              <FontAwesomeIcon
+                icon={isOpenCategories ? faCaretUp : faCaretDown}
+                className="arrow"
+              />
             </div>
+            {isOpenCategories && (
+              <div className="options-preview">
+                {option.map((option, index) => (
+                  <div
+                    key={index}
+                    className={`option-preview ${
+                      option === selectedOptionCategories ? "selected" : ""
+                    }`}
+                    onClick={() => handleOptionSelectCategorie(option)}
+                  >
+                    {option === "primary" ? "Primaria" : "Secundaria"}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
         <button className="add-category" onClick={handleAddCategory}>
