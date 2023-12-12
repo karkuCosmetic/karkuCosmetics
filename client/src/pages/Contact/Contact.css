@@ -21,6 +21,7 @@
   flex-wrap: wrap;
   font-family: "figtree";
   font-size: 21px;
+  color: #ff734f;
   background-color: #ffffff;
   max-width: 50rem;
   margin-top: 1rem;
@@ -80,6 +81,13 @@ textarea:focus {
   outline: none;
 }
 
+.formContact-lable-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
 input[type="text"],
 input[type="email"],
 input[type="password"],
@@ -94,11 +102,11 @@ textarea {
   font-size: 14px;
   font-family: "figtree";
   resize: none;
-  border: 1px solid #619d52;
+  border: 1px solid #ff734f;
 }
 
 input[type="submit"] {
-  background-color: #619d52;
+  background-color: #ff734f;
   border: none;
   color: #fff;
   padding: 10px 20px;

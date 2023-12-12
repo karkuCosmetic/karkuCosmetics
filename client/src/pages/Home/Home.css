@@ -15,7 +15,7 @@ body {
 }
 
 .welcome {
-  background-image: url(../../assets/AssetsHome/bgHome1.jpg);
+  background-image: url(../../assets/AssetsHome/welcomeBgHome.png);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,11 +27,15 @@ body {
   background-repeat: no-repeat;
 }
 
+.name-home-intro{
+  font-size: 50px;
+  font-family: "Dancing script";
+}
+
 .karku-logo-name {
-  width: 10rem;
+  width:20rem;
   height: 10rem;
   object-fit: contain;
-  border-radius: 50%;
 }
 
 .features {
@@ -53,12 +57,13 @@ body {
   margin-top: 5rem;
   padding: 0.5rem;
   width: 100%;
-  color: #27631d;
-  font-family: "Figtree";
+  color: #317d24;
+  font-size: 25px;
+  font-family: "figtree";
   justify-content: center;
   align-items: center;
   background-color: #ffffff6b;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(3px);
 }
 
 .welcome-home p {
@@ -92,12 +97,12 @@ body {
   font-family: "figtree";
   font-size: 18px;
   border-radius: 10px;
-  color: white;
+  color:#ff734f;
   max-width: 800px;
   text-align: center;
   align-items: center;
   justify-content: center;
-  background-color: #619d52c2;
+  background-color: #ffffff6b;
   padding: 20px 40px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
@@ -246,11 +251,11 @@ body {
   font-family: "figtree";
   font-size: 16px;
   border-radius: 10px;
-  color: white;
+  color:#ff734f;
   text-align: center;
   align-items: center;
   justify-content: center;
-  background-color: #619d52c2;
+  background-color: #ffffff6b;
   padding: 20px 40px;
   margin-bottom: 1rem;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
@@ -316,14 +321,14 @@ body {
   font-family: "figtree";
   font-size: 16px;
   border-radius: 10px;
-  color: white;
+  color:  #ff734f;
   width: 50%;
   display: flex;
   flex-direction: column;
   text-align: center;
   align-items: center;
   justify-content: center;
-  background-color: #619d52c2;
+  background-color:#ffffff6b;
   padding: 20px 40px;
   margin-bottom: 1rem;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
@@ -377,9 +382,9 @@ body {
   margin-top: 1rem;
   margin-bottom: 1rem;
   font-family: "figtree";
-  color: #317d24;
+  color: #ff734f;
   background-color: #ffffff;
-  border: none;
+  border:none;
   border-radius: 15px;
   text-align: center;
   text-decoration: none;
@@ -502,4 +507,22 @@ body {
 }
 .color5 {
   color: #f2ffd9;
+}
+
+/* NARANJAS */
+
+.color1 {
+  color: #ff734f;
+}
+.color2 {
+  color: #ffb63c;
+}
+.color3 {
+  color: #fff16a;
+}
+.color4 {
+  color: #fffbb4;
+}
+.color5 {
+  color: #fffbf1;
 }

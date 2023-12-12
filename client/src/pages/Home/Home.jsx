@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import Gallery from "../../components/GalleryHome/Gallery";
 
-import KarkuLogoName from "../../assets/karkuLogoName.png"
+import KarkuLogoName from "../../assets/karkuLogoName.png";
 
 // CAPILAR
 import Capilar1 from "../../assets/AssetsHome/Capilar/Capilar1.png";
@@ -69,7 +69,7 @@ const Home = () => {
       <Navbar />
       <section className="welcome">
         <div className="welcome-home" data-aos="zoom-in">
-        <img className="karku-logo-name" src={KarkuLogoName} alt="" />
+          <img className="karku-logo-name" src={KarkuLogoName} alt="" />
           <p>
             ¡Tenemos las mejores opciones para el cuidado de piel, cabello y
             más!

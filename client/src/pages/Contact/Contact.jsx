@@ -20,19 +20,18 @@ export const Contact = () => {
   const sendEmail = (e) => {
     e.preventDefault();
 
-        MySwal.fire({
-          icon: "success",
-          title: "Mensaje enviado. Te responderemos a la brevedad.",
-          iconColor: "#7b60c8",
-          confirmButtonColor: "#7b60c8",
-          customClass: {
-            title: "swal-title-contact",
-          },
-        });
+    MySwal.fire({
+      icon: "success",
+      title: "Mensaje enviado. Te responderemos a la brevedad.",
+      iconColor: "#7b60c8",
+      confirmButtonColor: "#7b60c8",
+      customClass: {
+        title: "swal-title-contact",
+      },
+    });
 
     UpdateAdmin(dataMensaje);
   };
-
 
   const handlerChange = (event) => {
     const property = event.target.name;
@@ -64,41 +63,49 @@ export const Contact = () => {
         </p>
 
         <form className="contact-form" ref={form} onSubmit={sendEmail}>
-          <label>Nombre</label>
-          <input
-            className="input-contact"
-            type="text"
-            name="user_name"
-            onChange={handlerChange}
-            placeholder="Nombre"
-            required
-          />
-          <label>Email</label>
-          <input
-            className="input-contact"
-            type="email"
-            name="user_email"
-            onChange={handlerChange}
-            placeholder="Email"
-            required
-          />
-          <label>Número</label>
-          <input
-            className="input-contact-phone"
-            type="number"
-            name="user_phone"
-            onChange={handlerChange}
-            placeholder="Numero telefonico"
-            required
-          />
-          <label>Mensaje</label>
-          <textarea
-            name="user_message"
-            onChange={handlerChange}
-            placeholder="Máximo 500 carácteres."
-            maxLength={MAX_MESSAGE_LENGTH}
-            required
-          />
+          <div className="formContact-lable-input-container">
+            <label>Nombre</label>
+            <input
+              className="input-contact"
+              type="text"
+              name="user_name"
+              onChange={handlerChange}
+              placeholder="Nombre"
+              required
+            />
+          </div>
+          <div className="formContact-lable-input-container">
+            <label>Email</label>
+            <input
+              className="input-contact"
+              type="email"
+              name="user_email"
+              onChange={handlerChange}
+              placeholder="Email"
+              required
+            />
+          </div>
+          <div className="formContact-lable-input-container">
+            <label>Número</label>
+            <input
+              className="input-contact-phone"
+              type="number"
+              name="user_phone"
+              onChange={handlerChange}
+              placeholder="Numero telefonico"
+              required
+            />
+          </div>
+          <div className="formContact-lable-input-container">
+            <label>Mensaje</label>
+            <textarea
+              name="user_message"
+              onChange={handlerChange}
+              placeholder="Máximo 500 caracteres."
+              maxLength={MAX_MESSAGE_LENGTH}
+              required
+            />
+          </div>
           <input type="submit" value="Enviar" />
         </form>
       </div>
