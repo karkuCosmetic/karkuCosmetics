@@ -49,7 +49,6 @@ const Store = () => {
   const addToCart = (product) => {
     AddCart(product.quantity, product);
     setQuantity(1);
-
     Swal.fire({
       position: "top",
       title: "Producto agregado al carrito",
@@ -77,7 +76,7 @@ const Store = () => {
         primary: [...categories.primary, ...data.categories.primary],
         secondary: [...categories.secondary, ...data.categories.secondary],
       });
-      setIsLoading(false); 
+      setIsLoading(false);
     });
   };
 
@@ -218,8 +217,6 @@ const Store = () => {
                           })
                         }
                       >
-
-       
                         {category}
                       </li>
                     ))}

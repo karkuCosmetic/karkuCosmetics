@@ -44,13 +44,9 @@ export const DetailPage = () => {
   };
 
   const addToCart = () => {
-    if (token) {
-      AddCart(quantity, detailProduct);
-      setQuantity(1);
-      showAddToCartAlert();
-    } else {
-      console.log("Necesitas loguearte");
-    }
+    AddCart(quantity, detailProduct);
+    setQuantity(1);
+    showAddToCartAlert();
   };
 
   const openImageModal = (image, index) => {
@@ -168,10 +164,6 @@ export const DetailPage = () => {
                     detailProduct.dimensions.slice(1)}
               </p>
               <p className="detail-price">${detailProduct.price}</p>
-
-              <div className="price-buy-detail">
-                <button className="detail-buy-button">Comprar</button>
-              </div>
               <div className="detail-quantity">
                 <div className="quantity-buttons-container-detail">
                   <button
@@ -199,6 +191,11 @@ export const DetailPage = () => {
               {detailProduct.description &&
                 detailProduct.description.charAt(0).toUpperCase() +
                   detailProduct.description.slice(1)}
+            </p>
+            <p className="detail-description">
+              {detailProduct.ingredients &&
+                detailProduct.ingredients.charAt(0).toUpperCase() +
+                  detailProduct.ingredients.slice(1)}
             </p>
           </div>
         </div>

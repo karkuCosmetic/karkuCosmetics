@@ -26,7 +26,6 @@ import Karku13 from "../../assets/AssetsHome/Gallery/Karku13.jpg";
 import Karku14 from "../../assets/AssetsHome/Gallery/Karku14.jpg";
 import Karku15 from "../../assets/AssetsHome/Gallery/Karku15.jpg";
 import Karku16 from "../../assets/AssetsHome/Gallery/Karku16.jpg";
-import Karku17 from "../../assets/AssetsHome/Gallery/Karku17.jpg";
 import Karku18 from "../../assets/AssetsHome/Gallery/Karku18.jpg";
 import Karku19 from "../../assets/AssetsHome/Gallery/Karku19.jpg";
 import Karku20 from "../../assets/AssetsHome/Gallery/Karku20.jpg";
@@ -92,9 +91,6 @@ const Gallery = () => {
         </SwiperSlide>
         <SwiperSlide>
           <img src={Karku16} alt="Karku 16" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src={Karku17} alt="Karku 17" />
         </SwiperSlide>
         <SwiperSlide>
           <img src={Karku18} alt="Karku 18" />

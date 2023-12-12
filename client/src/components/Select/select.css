@@ -8,7 +8,7 @@
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 1;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .selected-option {
@@ -59,7 +59,7 @@
 }
 
 .option.selected {
-  background-color:#91be7f;
+  background-color: #91be7f;
   color: #fff;
 }
 
@@ -80,4 +80,3 @@
 .color5 {
   color: #f2ffd9;
 }
-

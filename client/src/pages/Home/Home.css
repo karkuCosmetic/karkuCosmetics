@@ -41,7 +41,10 @@ body {
   align-items: center;
   font-family: "figtree";
   background-color: #f2ffd9;
-  background-image: url(../../assets/bgDetailop2.jpg);
+  background-image: url(../../assets/AssetsHome/bgFeaturesHome.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 .welcome-home {
@@ -80,45 +83,20 @@ body {
 }
 
 .textIntro-sections {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding-top: 5rem;
-  padding-bottom: 5rem;
-  padding-inline: 2rem;
-  width: 100%;
-  height: auto;
-  background-image: url(../../assets/bgDetailop4.png);
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: center;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
-    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
-}
-
-@media (max-width: 768px) {
-  .textIntro-sections {
-    box-shadow: none;
-    padding: 2rem;
-    background-size: cover;
-    background-image: none;
-    background-attachment: scroll;
-  }
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  margin-inline: 0.5rem;
 }
 
 .textIntro-sections p {
   font-family: "figtree";
-  font-size: 16px;
+  font-size: 18px;
   border-radius: 10px;
   color: white;
   max-width: 800px;
   text-align: center;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(2px);
   background-color: #619d52c2;
   padding: 20px 40px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
@@ -525,6 +503,3 @@ body {
 .color5 {
   color: #f2ffd9;
 }
-
-
-

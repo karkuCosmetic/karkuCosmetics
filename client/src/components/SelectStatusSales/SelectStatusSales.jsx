@@ -21,7 +21,7 @@ const CustomSelect = ({ options, selectedOption, setSelectedOption }) => {
       onClick={toggleSelect}
     >
       <div className="selected-option-preview">
-        <span>{selectedOption}</span>
+        <span>Seleccionar</span>
         <FontAwesomeIcon
           icon={isOpen ? faCaretUp : faCaretDown}
           className="arrow"

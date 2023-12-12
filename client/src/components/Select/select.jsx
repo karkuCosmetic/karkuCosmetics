@@ -13,11 +13,7 @@ const RenderSelect = ({
   const [subCategories, setSubCategories] = useState([]);
 
   useEffect(() => {
-    if (isPrimary && categories.primary) {
-      setSubCategories(categories.primary);
-    } else if (!isPrimary && categories.secondary) {
-      setSubCategories(categories.secondary);
-    }
+    setSubCategories(isPrimary ? categories.primary : categories.secondary);
   }, [isPrimary, categories]);
 
   const handleOptionSelect = (category) => {
@@ -40,7 +36,7 @@ const RenderSelect = ({
     >
       <div className="selected-option">
         <span>
-          {selectedCategory.primary} / {selectedCategory.secondary}
+          {isPrimary ? selectedCategory.primary : selectedCategory.secondary}
         </span>
         <FontAwesomeIcon
           icon={isOpen ? faCaretUp : faCaretDown}
@@ -53,17 +49,14 @@ const RenderSelect = ({
             {subCategories.map((category, index) => (
               <div
                 key={index}
-                className={
-                  isPrimary
-                    ? `option ${
-                        category === selectedCategory.primary ? "selected" : ""
-                      }`
-                    : `option ${
-                        category === selectedCategory.secondary
-                          ? "selected"
-                          : ""
-                      }`
-                }
+                className={`option ${
+                  category ===
+                  (isPrimary
+                    ? selectedCategory.primary
+                    : selectedCategory.secondary)
+                    ? "selected"
+                    : ""
+                }`}
                 onClick={() => handleOptionSelect(category)}
               >
                 {category}
