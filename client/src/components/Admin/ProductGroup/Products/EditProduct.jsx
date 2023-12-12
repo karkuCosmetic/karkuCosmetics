@@ -86,7 +86,7 @@ const EditProduct = ({match, closeEditModal}) => {
   const closeModal = () => {
     closeEditModal ();
   };
-  console.log (product);
+
   return (
     <div className="form-updateProduct">
       <div className="container-close-btn">
