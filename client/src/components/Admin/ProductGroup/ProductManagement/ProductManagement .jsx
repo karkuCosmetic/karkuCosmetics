@@ -51,6 +51,7 @@ const ProductManagement = ({ setSection }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         handleDeleteConfirmation(productId);
+        window.location.reload()
       }
     });
   };
@@ -99,6 +100,7 @@ const ProductManagement = ({ setSection }) => {
         (product) => product._id !== productId
       );
       setProducts(updatedProducts);
+      window.location.reload()
     } catch (error) {
       console.error("Error al eliminar producto:", error);
     }
