@@ -130,33 +130,37 @@ const PreviewSales = ({ setSection }) => {
     <div className="sales-preview-container">
       <h2>Ventas</h2>
       <div className="sales-list">
-        {orderSales.map((sale, index) => (
-          <div className="sale-container" key={index}>
-            <div className="info-sale-preview">
-              <p>
-                {sale.payer.name} {sale.payer.lastName}
-              </p>
-              <p className="total-buy-preview">
-                <strong>Total: </strong>${sale.methodPay.total}
-              </p>
-              <p>
-                <strong>Estado: </strong> {sale.detailPay.status}
-              </p>
-              <p>
-                <strong>Fecha: </strong>{" "}
-                {formatDateModal(sale.methodPay.datePay)}
-              </p>
+        {sales.length === 0 ? (
+          <p className="no-sales-alert">Aún no hay ventas</p>
+        ) : (
+          orderSales.map((sale, index) => (
+            <div className="sale-container" key={index}>
+              <div className="info-sale-preview">
+                <p>
+                  {sale.payer.name} {sale.payer.lastName}
+                </p>
+                <p className="total-buy-preview">
+                  <strong>Total: </strong>${sale.methodPay.total}
+                </p>
+                <p>
+                  <strong>Estado: </strong> {sale.detailPay.status}
+                </p>
+                <p>
+                  <strong>Fecha: </strong>
+                  {formatDateModal(sale.methodPay.datePay)}
+                </p>
+              </div>
+              <div className="btn-showSale-container">
+                <button
+                  className="btn-showSale-preview"
+                  onClick={() => openSaleDetailsModal(sale)}
+                >
+                  Ver venta
+                </button>
+              </div>
             </div>
-            <div className="btn-showSale-container">
-              <button
-                className="btn-showSale-preview"
-                onClick={() => openSaleDetailsModal(sale)}
-              >
-                Ver venta
-              </button>
-            </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
 
       <div className="btn-showAllSales">

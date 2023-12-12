@@ -1,27 +1,31 @@
-import React, {useRef, useState} from 'react';
-import {createProduct} from '../../../../functions/fetchingProducts';
-import './AddProduct.css';
+import React, { useRef, useState } from "react";
+import { createProduct } from "../../../../functions/fetchingProducts";
+import "./AddProduct.css";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { GetDecodedCookie } from "../../../../utils/DecodedCookie";
+import SelectCategoryProduct from "../../../SelectCategoryProduct/SelectCategoryProduct";
 
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faTimes} from '@fortawesome/free-solid-svg-icons';
-import {GetDecodedCookie} from '../../../../utils/DecodedCookie';
-import SelectCategoryProduct
-  from '../../../SelectCategoryProduct/SelectCategoryProduct';
-
-const AddProduct = ({closeEditModal}) => {
-  const token = GetDecodedCookie ('cookieToken');
-  const [product, setProduct] = useState ({
-    title: '',
-    dimensions: '',
-    description: '',
+const AddProduct = ({ closeEditModal }) => {
+  const token = GetDecodedCookie("cookieToken");
+  const [product, setProduct] = useState({
+    title: "",
+    dimensions: "",
+    description: "",
     price: 0,
-    ingredients: '',
-    category: {primary: '', secondary: ''},
+    ingredients: "",
+    category: { primary: "", secondary: "" },
   });
 
-  const [selectedImages, setSelectedImages] = useState ([]); //preview images
+  const closeModal = () => {
+    closeEditModal();
+  };
+
+  const [selectedImages, setSelectedImages] = useState([]); //preview images
   const maxImages = 5; // limite de images
-  const inputRef = useRef ();
+  const inputRef = useRef();
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
@@ -29,54 +33,60 @@ const AddProduct = ({closeEditModal}) => {
     }
   };
 
-  const handleImageUpload = event => {
+  const handleImageUpload = (event) => {
     const files = event.target.files;
-    const selected = Array.from (files);
+    const selected = Array.from(files);
 
     if (selectedImages.length + selected.length > maxImages) {
-      alert (`Máximo ${maxImages} imágenes permitidas.`); //reemplazar este alert por sweetAlert
+      alert(`Máximo ${maxImages} imágenes permitidas.`); //reemplazar este alert por sweetAlert
     } else {
-      setSelectedImages (prevSelected => [...prevSelected, ...selected]); //hace el prev de las imagenes y las agrega si no hay mas de 5
+      setSelectedImages((prevSelected) => [...prevSelected, ...selected]); //hace el prev de las imagenes y las agrega si no hay mas de 5
     }
-    inputRef.current.value = '';
+    inputRef.current.value = "";
   };
 
-  const handleImageRemove = index => {
+  const handleImageRemove = (index) => {
     const updatedImages = [...selectedImages];
-    updatedImages.splice (index, 1);
-    setSelectedImages (updatedImages);
+    updatedImages.splice(index, 1);
+    setSelectedImages(updatedImages);
   };
 
-  const handleInputChange = e => {
-    const {name, value} = e.target;
-    setProduct ({
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setProduct({
       ...product,
       [name]: value,
     });
   };
 
-  const handleSubmit = async e => {
-    e.preventDefault ();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
       if (
-        product.title !== '' &&
-        product.dimensions !== '' &&
-        product.description !== '' &&
+        product.title !== "" &&
+        product.dimensions !== "" &&
+        product.description !== "" &&
         product.price !== 0 &&
-        product.category.primary !== '' &&
-        product.category.secondary !== ''
+        product.category.primary !== "" &&
+        product.category.secondary !== ""
       ) {
-        await createProduct (product, selectedImages, token);
-        window.location.reload ();
+        await createProduct(product, selectedImages, token);
+        Swal.fire({
+          title: "¡Guardado!",
+          text: "El producto se ha guardado correctamente.",
+          icon: "success",
+        });
+        window.location.reload();
       }
-      closeEditModal ();
+      closeEditModal();
     } catch (error) {
-      console.error ('Error creating product:', error);
+      console.error("Error creating product:", error);
+      Swal.fire({
+        title: "Error",
+        text: "Hubo un error al guardar el producto. Por favor, inténtalo de nuevo.",
+        icon: "error",
+      });
     }
-  };
-
-  const closeModal = () => {
-    closeEditModal ();
   };
 
   return (
@@ -99,7 +109,7 @@ const AddProduct = ({closeEditModal}) => {
           />
         </div>
         <div className="label-input-container">
-          <label>Dimensiones: (cc, ml, grs)</label>
+          <label>Dimensiones: (cc, ml, grs, unidad.)</label>
           <input
             type="text"
             name="dimensions"
@@ -187,7 +197,7 @@ const AddProduct = ({closeEditModal}) => {
 
         <div className="container-save-product-btn">
           <button className="save-product-btn" type="submit">
-            Guardar Cambios
+            Guardar
           </button>
         </div>
       </form>

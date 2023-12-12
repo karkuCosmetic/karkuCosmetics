@@ -17,6 +17,11 @@
   }
 }
 
+.no-sales-alert {
+  font-family: "figtree";
+  font-size: 18px;
+}
+
 .sales-preview-container h2 {
   font-family: "figtree";
   margin-bottom: 1rem;
