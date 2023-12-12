@@ -225,16 +225,32 @@ const ProductManagement = ({ setSection }) => {
                 </button>
               </div>
               <h2 className="product-details-title">Detalles del Producto</h2>
+              <div className="product-details-p-container">
               <p className="product-details-p">
                 <span>Nombre: </span>
                 {selectedProduct?.title}
               </p>
+              </div>
+              <div className="price-categories-container">
               <p className="product-details-p">
                 <span>Precio: </span>${selectedProduct?.price}
               </p>
               <p className="product-details-p">
+                <span>Categoría: </span>
+                {selectedProduct?.category.primary}
+              </p>
+              <p className="product-details-p">
+                <span>Sub-Categoría: </span>
+                {selectedProduct?.category.secondary}
+              </p>
+              </div>
+              <p className="product-details-p">
                 <span>Descripción: </span>
                 {selectedProduct?.description}
+              </p>
+              <p className="product-details-p">
+                <span>Ingredientes: </span>
+                {selectedProduct?.ingredients}
               </p>
             </div>
             <div className="product-details-image-container">
