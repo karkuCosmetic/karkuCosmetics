@@ -11,7 +11,7 @@ export const createProduct = async (data, images, token) => {
       dimensions: data.dimensions,
       description: data.description,
       price: data.price,
-      stock: data.stock,
+      ingredients: data.ingredients,
       category: data.category,
       image,
     },
@@ -66,7 +66,7 @@ export const updateProduct = async (res, images, id, token) => {
         category: res.category,
         dimensions: res.dimensions,
         price: res.price,
-        stock: res.stock,
+        ingredients: res.ingredients,
       },
       {
         headers: { "user-token": token },

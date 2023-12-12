@@ -21,46 +21,47 @@ export const Contact = () => {
   const sendEmail = (e) => {
     e.preventDefault();
 
-    emailjs
-      .sendForm(
-        process.env.REACT_APP_SERVICE_ID,
-        process.env.REACT_APP_TEMPLATE_ID,
-        form.current,
-        process.env.REACT_APP_PUBLIC_KEY
-      )
-      .then(
-        (result) => {
-          MySwal.fire({
-            icon: "success",
-            title: "Mensaje enviado. Te responderemos a la brevedad.",
-            iconColor: "#7b60c8",
-            confirmButtonColor: "#7b60c8",
-            customClass: {
-              title: "swal-title-contact",
-            },
-          });
+    // emailjs
+    //   .sendForm(
+    //     process.env.REACT_APP_SERVICE_ID,
+    //     process.env.REACT_APP_TEMPLATE_ID,
+    //     form.current,
+    //     process.env.REACT_APP_PUBLIC_KEY,
+    //     { 'X-Api-Key': 'YOUR_API_KEY', 'X-Api-User': 'YOUR_USER_ID' }
+        
+    //   )
+    //   .then((result) => {
+        MySwal.fire({
+          icon: "success",
+          title: "Mensaje enviado. Te responderemos a la brevedad.",
+          iconColor: "#7b60c8",
+          confirmButtonColor: "#7b60c8",
+          customClass: {
+            title: "swal-title-contact",
+          },
+        });
 
-          setDataMensaje({
-            user_name: "",
-            user_email: "",
-            user_phone: "",
-            user_message: "",
-          });
-          window.location.reload();
-        },
-        (error) => {
-          console.log(error.text);
-          MySwal.fire({
-            title: "Error al enviar el mensaje",
-            icon: "error",
-            text: error.text,
-            confirmButtonColor: "#FF0000",
-          });
-        }
-      );
+    //     setDataMensaje({
+    //       user_name: "",
+    //       user_email: "",
+    //       user_phone: "",
+    //       user_message: "",
+    //     });
+    //     window.location.reload();
+    //   })
+    //   .catch((error) => {
+    //     console.log(error.text);
+    //     MySwal.fire({
+    //       title: "Error al enviar el mensaje",
+    //       icon: "error",
+    //       text: error.text,
+    //       confirmButtonColor: "#FF0000",
+    //     });
+    //   });
 
     UpdateAdmin(dataMensaje);
   };
+
 
   const handlerChange = (event) => {
     const property = event.target.name;

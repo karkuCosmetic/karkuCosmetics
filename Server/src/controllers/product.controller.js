@@ -2,7 +2,7 @@ import { Product } from "../models/product.js";
 import { formatError } from "../utils/formatError.js";
 
 export const createProduct = async (req, res) => {
-  const { title, dimensions, description, price, stock, category, image } =
+  const { title, dimensions, description, price, ingredients, category, image } =
     req.body;
   try {
     let product = new Product({
@@ -11,7 +11,7 @@ export const createProduct = async (req, res) => {
       description: description[0].toUpperCase() + description.slice(1),
       price,
       dimensions,
-      stock,
+      ingredients,
       image,
     });
     await product.save();
@@ -42,7 +42,7 @@ export const GetProductById = async (req, res) => {
 
 export const UpdateProductById = async (req, res) => {
   const { id } = req.params;
-  const { title, dimensions, description, price, stock, category, image } =
+  const { title, dimensions, description, price, ingredients, category, image } =
     req.body;
 
   try {
@@ -54,7 +54,7 @@ export const UpdateProductById = async (req, res) => {
         description: description[0].toUpperCase() + description.slice(1),
         price,
         dimensions,
-        stock,
+        ingredients,
         image: image,
       },
       { new: true }

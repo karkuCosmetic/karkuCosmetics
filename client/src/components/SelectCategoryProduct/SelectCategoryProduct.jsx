@@ -109,14 +109,14 @@ const SelectCategoryProduct = ({ setProduct }) => {
       setCatPrimary(
         [
           ...catPrimary,
-          AddCategory[0].toUpperCase() + AddCategory.slice(1),
+          AddCategory[0]?.toUpperCase() + AddCategory.slice(1),
         ].sort()
       );
     } else {
       setCatSecondary(
         [
           ...catSecondary,
-          AddCategory[0].toUpperCase() + AddCategory.slice(1),
+          AddCategory[0]?.toUpperCase() + AddCategory.slice(1),
         ].sort()
       );
     }

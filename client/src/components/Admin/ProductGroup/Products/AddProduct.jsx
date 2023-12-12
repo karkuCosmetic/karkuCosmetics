@@ -1,67 +1,76 @@
-import React, { useRef, useState } from "react";
-import {
-  createProduct,
-} from "../../../../functions/fetchingProducts";
-import "./AddProduct.css";
+import React, {useRef, useState} from 'react';
+import {createProduct} from '../../../../functions/fetchingProducts';
+import './AddProduct.css';
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { GetDecodedCookie } from "../../../../utils/DecodedCookie";
-import SelectCategoryProduct from "../../../SelectCategoryProduct/SelectCategoryProduct";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faTimes} from '@fortawesome/free-solid-svg-icons';
+import {GetDecodedCookie} from '../../../../utils/DecodedCookie';
+import SelectCategoryProduct
+  from '../../../SelectCategoryProduct/SelectCategoryProduct';
 
-const AddProduct = ({ closeEditModal }) => {
-  const token = GetDecodedCookie("cookieToken");
-  const [product, setProduct] = useState({
-    title: "",
-    dimensions: "",
-    description: "",
+const AddProduct = ({closeEditModal}) => {
+  const token = GetDecodedCookie ('cookieToken');
+  const [product, setProduct] = useState ({
+    title: '',
+    dimensions: '',
+    description: '',
     price: 0,
-    stock: 0,
-    category: { primary: "", secondary: "" },
+    ingredients: '',
+    category: {primary: '', secondary: ''},
   });
 
-  const [selectedImages, setSelectedImages] = useState([]); //preview images
+  const [selectedImages, setSelectedImages] = useState ([]); //preview images
   const maxImages = 5; // limite de images
-  const inputRef = useRef();
+  const inputRef = useRef ();
 
-  const handleImageUpload = (event) => {
+  const handleImageUpload = event => {
     const files = event.target.files;
-    const selected = Array.from(files);
+    const selected = Array.from (files);
 
     if (selectedImages.length + selected.length > maxImages) {
-      alert(`Máximo ${maxImages} imágenes permitidas.`); //reemplazar este alert por sweetAlert
+      alert (`Máximo ${maxImages} imágenes permitidas.`); //reemplazar este alert por sweetAlert
     } else {
-      setSelectedImages((prevSelected) => [...prevSelected, ...selected]); //hace el prev de las imagenes y las agrega si no hay mas de 5
+      setSelectedImages (prevSelected => [...prevSelected, ...selected]); //hace el prev de las imagenes y las agrega si no hay mas de 5
     }
-    inputRef.current.value = "";
+    inputRef.current.value = '';
   };
 
-  const handleImageRemove = (index) => {
+  const handleImageRemove = index => {
     const updatedImages = [...selectedImages];
-    updatedImages.splice(index, 1);
-    setSelectedImages(updatedImages);
+    updatedImages.splice (index, 1);
+    setSelectedImages (updatedImages);
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setProduct({
+  const handleInputChange = e => {
+    const {name, value} = e.target;
+    setProduct ({
       ...product,
       [name]: value,
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async e => {
+    e.preventDefault ();
     try {
-      await createProduct(product, selectedImages, token);
-      closeEditModal();
+      if (
+        product.title !== '' &&
+        product.dimensions !== '' &&
+        product.description !== '' &&
+        product.price !== 0 &&
+        product.category.primary !== '' &&
+        product.category.secondary !== ''
+      ) {
+        await createProduct (product, selectedImages, token);
+        window.location.reload ();
+      }
+      closeEditModal ();
     } catch (error) {
-      console.error("Error creating product:", error);
+      console.error ('Error creating product:', error);
     }
   };
 
   const closeModal = () => {
-    closeEditModal();
+    closeEditModal ();
   };
 
   return (
@@ -75,7 +84,8 @@ const AddProduct = ({ closeEditModal }) => {
       <form className="form-edit-product-admin" onSubmit={handleSubmit}>
         <div>
           <label>Titulo:</label>
-          <input
+          <textarea
+            className="textarea-form-edit-product-adm"
             type="text"
             name="title"
             value={product.title}
@@ -84,7 +94,8 @@ const AddProduct = ({ closeEditModal }) => {
         </div>
         <div>
           <label>Dimensiones:</label>
-          <input
+          <textarea
+            className="textarea-form-edit-product-adm"
             type="text"
             name="dimensions"
             value={product.dimensions}
@@ -92,13 +103,21 @@ const AddProduct = ({ closeEditModal }) => {
             placeholder="ML/CC/CM/UNIDAD"
           />
         </div>
-        div
         <div>
           <label>Descripción:</label>
           <textarea
             className="textarea-form-edit-product-adm"
             name="description"
             value={product.description}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label>Ingredientes:</label>
+          <textarea
+            className="textarea-form-edit-product-adm"
+            name="ingredients"
+            value={product.ingredients}
             onChange={handleInputChange}
           />
         </div>
@@ -112,15 +131,7 @@ const AddProduct = ({ closeEditModal }) => {
               onChange={handleInputChange}
             />
           </div>
-          <div className="stock-formEdit">
-            <label>Stock:</label>
-            <input
-              type="number"
-              name="stock"
-              value={product.stock}
-              onChange={handleInputChange}
-            />
-          </div>
+
         </div>
         <div className="container-categories-modal-admin">
           <label>Categoría:</label>
@@ -130,24 +141,27 @@ const AddProduct = ({ closeEditModal }) => {
         <div className="image-upload-container">
           <input
             type="file"
-            onChange={(e) => handleImageUpload(e)}
+            onChange={e => handleImageUpload (e)}
             multiple
             className="upload-input"
             ref={inputRef}
             accept="image/*"
           />
           <div className="img-new-product">
-            {selectedImages.map((image, index) => (
+            {selectedImages.map ((image, index) => (
               <div className="img-addProduct-admin-container">
-                <img 
-                className="img-addProduct-admin"
+                <img
+                  className="img-addProduct-admin"
                   key={index}
-                  src={URL.createObjectURL(image)}
+                  src={URL.createObjectURL (image)}
                   alt={`Image ${index}`}
-                
                 />
-                <button className="btn-delet-img-new-producto" type="button" onClick={() => handleImageRemove(index)}>
-                <FontAwesomeIcon icon={faTimes} />
+                <button
+                  className="btn-delet-img-new-producto"
+                  type="button"
+                  onClick={() => handleImageRemove (index)}
+                >
+                  <FontAwesomeIcon icon={faTimes} />
                 </button>
               </div>
             ))}
