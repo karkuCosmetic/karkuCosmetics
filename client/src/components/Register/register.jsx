@@ -1,48 +1,70 @@
-import React, {useState} from 'react';
-import {postRegister} from '../../functions/Auth';
-import './register.css';
-import Swal from 'sweetalert2';
+import React, { useState } from "react";
+import { postRegister } from "../../functions/Auth";
+import "./register.css";
+import Swal from "sweetalert2";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 export const Register = () => {
   const initialFormInput = {
-    email: '',
-    password: '',
+    email: "",
+    password: "",
+    confirmPassword: "",
   };
 
-  const [formInput, setFormInput] = useState (initialFormInput);
+  const [formInput, setFormInput] = useState(initialFormInput);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const handlerChange = event => {
-    const property = event.target.name;
-    let value = event.target.value;
+  const handlerChange = (event) => {
+    const { name, value } = event.target;
 
-    if (property === 'email' || property === 'password') {
-      setFormInput ({...formInput, [property]: value});
+    if (name === "email" || name === "password" || name === "confirmPassword") {
+      setFormInput({ ...formInput, [name]: value });
     }
   };
 
-  const handleSubmit = async e => {
-    e.preventDefault ();
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
-    postRegister (formInput).then (data => {
-      data === 'Usuario ya existente'
-        ? Swal.fire ({
-            title: 'Error',
-            text: 'El correo electrónico ingresado ya está registrado. Para ingresar, debes iniciar sesión.',
-            icon: 'warning',
-            confirmButtonColor: '#7b60c8',
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (formInput.password !== formInput.confirmPassword) {
+      Swal.fire({
+        title: "Error",
+        text: "Las contraseñas no coinciden. Por favor, verifica.",
+        icon: "error",
+        confirmButtonColor: "#7b60c8",
+      });
+      return;
+    }
+
+    postRegister(formInput).then((data) => {
+      data === "Usuario ya existente"
+        ? Swal.fire({
+            title: "Error",
+            text: "El correo electrónico ingresado ya está registrado. Para ingresar, debes iniciar sesión.",
+            icon: "warning",
+            confirmButtonColor: "#7b60c8",
           })
-        : Swal.fire ({
-            title: 'Genial',
-            text: 'Ahora verifica tu cuenta a través del correo electrónico que hemos enviado al email que ingresaste.',
-            icon: 'success',
-            iconColor: '#7b60c8',
-            background: 'white',
-            confirmButtonColor: '#7b60c8',
+        : Swal.fire({
+            title: "Genial",
+            text: "Ahora verifica tu cuenta a través del correo electrónico que hemos enviado al email que ingresaste.",
+            icon: "success",
+            iconColor: "#7b60c8",
+            background: "white",
+            confirmButtonColor: "#7b60c8",
             customClass: {
-              title: 'custom-title',
+              title: "custom-title",
             },
           });
-      setFormInput (initialFormInput);
+      setFormInput(initialFormInput);
     });
   };
 
@@ -57,14 +79,36 @@ export const Register = () => {
           value={formInput.email}
           required
         />
-        <input
-          type="password"
-          name="password"
-          placeholder="Escribe una contraseña"
-          onChange={handlerChange}
-          value={formInput.password}
-          required
-        />
+        <div className="password-input-container">
+          <input
+            type={showPassword ? "text" : "password"}
+            name="password"
+            placeholder="Escribe una contraseña"
+            onChange={handlerChange}
+            value={formInput.password}
+            required
+          />
+          <FontAwesomeIcon
+            icon={showPassword ? faEyeSlash : faEye}
+            className="password-toggle-icon"
+            onClick={togglePasswordVisibility}
+          />
+        </div>
+        <div className="password-input-container">
+          <input
+            type={showConfirmPassword ? "text" : "password"}
+            name="confirmPassword"
+            placeholder="Confirma tu contraseña"
+            onChange={handlerChange}
+            value={formInput.confirmPassword}
+            required
+          />
+          <FontAwesomeIcon
+            icon={showConfirmPassword ? faEyeSlash : faEye}
+            className="password-toggle-icon"
+            onClick={toggleConfirmPasswordVisibility}
+          />
+        </div>
         <button type="submit">Registrarse</button>
       </form>
     </div>

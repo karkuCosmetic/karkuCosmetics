@@ -1,7 +1,7 @@
 .custom-select {
   position: relative;
   width: 12rem;
-  border: 1px solid#317d24;
+  border: 1px solid #ff734f;
   border-radius: 5px;
   cursor: pointer;
   user-select: none;
@@ -28,7 +28,7 @@
 }
 
 .selected-option svg {
-  color: #317d24;
+  color: #ff734f;
   transition: transform 0.2s;
 }
 

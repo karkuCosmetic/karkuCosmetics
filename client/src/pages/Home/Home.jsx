@@ -74,10 +74,10 @@ const Home = () => {
             ¡Tenemos las mejores opciones para el cuidado de piel, cabello y
             más!
           </p>
+        </div>
           <Link to="/store" className="store-btn-home ">
             Ver Tienda
           </Link>
-        </div>
       </section>
       <section id="features" className="features">
         <div className="textIntro-sections">

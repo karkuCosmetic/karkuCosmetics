@@ -16,7 +16,7 @@
   border-radius: 10px;
   box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
     rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
-  background-color: #91be7f;
+  background-color: #ffffff;
 }
 
 @media (min-width: 600px) {
@@ -52,7 +52,7 @@ input:focus {
 }
 
 .register-form button {
-  background-color: #317d24;
+  background-color: #ffd087;
   border-radius: 5px;
   padding: 0.5rem;
   width: 100%;
@@ -73,6 +73,23 @@ input:focus {
 .register-form button:hover {
   background-color: #f38f82;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.password-input-container {
+  position: relative;
+}
+
+.password-input-container input {
+  padding-right: 30px;
+}
+
+.password-toggle-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #ffb63c;
 }
 
 .error-message {

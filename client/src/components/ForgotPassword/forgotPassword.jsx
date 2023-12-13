@@ -28,10 +28,10 @@ UpdatePassword(formInput);
     <div>
       <div className="forgot-container">
         <div className="forgot-text">
-          <h3>
+          <p>
             Ingresa el mail con el que te registraste para establecer tu nueva
             contraseña
-          </h3>
+          </p>
         </div>
         <form className="register-form" action="" onSubmit={handleSubmit}>
           <input

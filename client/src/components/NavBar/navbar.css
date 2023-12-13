@@ -1,5 +1,5 @@
 .navbar {
-  background-color: #91be7f;
+  background-color: #ffd087;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   position: sticky;
   top: 0;
@@ -46,9 +46,8 @@
 
 .nav-links a {
   font-family: "quicksand";
-
   text-decoration: none;
-  color: #ffffff;
+  color: #000000;
   transition: color 0.3s ease;
 }
 
@@ -201,6 +200,40 @@
 
 .overlay.active {
   display: block;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-right a {
+  color: #000000; /* Cambia el color según tus preferencias */
+  text-decoration: none;
+}
+
+.navbar-right .cart-icon {
+  font-size: 24px; /* Ajusta el tamaño del icono según tus preferencias */
+}
+
+.navbar-right .cart-item-count {
+  background-color: #ff0000;
+  color: #fff;
+  border-radius: 50%;
+  padding: 4px 8px;
+  font-size: 12px;
+}
+
+.cart-icon {
+  color: red; /* Cambia esto según tus preferencias */
+}
+
+.cart-item-count {
+  background-color: blue; /* Cambia esto según tus preferencias */
+  color: white;
+  border-radius: 50%;
+  padding: 4px 8px;
+  font-size: 12px;
 }
 
 /* COLORES USER */

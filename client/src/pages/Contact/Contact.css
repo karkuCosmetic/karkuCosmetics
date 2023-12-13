@@ -21,7 +21,7 @@
   flex-wrap: wrap;
   font-family: "figtree";
   font-size: 21px;
-  color: #ff734f;
+  color: #000000;
   background-color: #ffffff;
   max-width: 50rem;
   margin-top: 1rem;
@@ -96,7 +96,7 @@ input[type="number"],
 textarea {
   width: 100%;
   padding: 0.8rem;
-  /* margin-bottom: 1rem; */
+
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 14px;
@@ -106,15 +106,14 @@ textarea {
 }
 
 input[type="submit"] {
-  background-color: #ff734f;
+  background-color: #ffd087;
   border: none;
   color: #fff;
   padding: 10px 20px;
   border-radius: 5px;
-  font-size: 18px;
+  font-size: 21px;
   cursor: pointer;
   transition: background-color 0.3s;
-  font-weight: bold;
   font-family: "figtree";
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
