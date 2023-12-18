@@ -194,11 +194,11 @@ const PreviewProduct = ({ setSection }) => {
               </p>
               <p className="product-details-p">
                 <span>Categoría: </span>
-                {selectedProduct?.category.primary}
+                {selectedProduct?.category?.primary}
               </p>
               <p className="product-details-p">
                 <span>Sub-Categoría: </span>
-                {selectedProduct?.category.secondary}
+                {selectedProduct?.category?.secondary}
               </p>
               </div>
               <p className="product-details-p">
