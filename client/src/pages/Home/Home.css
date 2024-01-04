@@ -73,7 +73,7 @@ body {
 
 @media (max-width: 768px) {
   .features {
-    background-image: url(../../assets/bgDetailop5.png);
+    background-image: url(../../assets/AssetsHome/bgFeaturesHome.png);
     background-size: cover;
     background-repeat: no-repeat;
   }
@@ -179,10 +179,6 @@ body {
 }
 
 @media (max-width: 768px) {
-  .features {
-    background-color: white;
-    background-image: none;
-  }
 
   .section1-home {
     display: flex;

@@ -47,7 +47,7 @@
 
 @media (max-width: 651px) {
   .detailProduct {
-    min-height: 800px;
+    height: 100%;
   }
 
   .detail-container {

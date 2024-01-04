@@ -147,10 +147,9 @@ const Store = () => {
     setCategories({ ...categories, secondary: ["Todos", ...secundaria] });
   }, [filteredProducts, selectedCategory]);
 
-  const navigate = useNavigate();
-
   const redirectToProductDetail = (productId) => {
-    navigate(`/product/${productId}`);
+    const productDetailUrl = `/product/${productId}`;
+    window.open(productDetailUrl, "_blank");
   };
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
