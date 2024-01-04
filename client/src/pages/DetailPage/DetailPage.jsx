@@ -182,13 +182,13 @@ export const DetailPage = () => {
           </div>
           <div>
             <p className="detail-description">
-            <p><strong>Descripción:</strong></p>
+            <p><strong>Descripción: </strong></p>
               {detailProduct.description &&
                 detailProduct.description.charAt(0).toUpperCase() +
                   detailProduct.description.slice(1)}
             </p>
             <p className="detail-description">
-            <p><strong>Ingredientes:</strong></p>
+            <p><strong>Ingredientes: </strong></p>
               {detailProduct.ingredients &&
                 detailProduct.ingredients.charAt(0).toUpperCase() +
                   detailProduct.ingredients.slice(1)}
