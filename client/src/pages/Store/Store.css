@@ -581,7 +581,7 @@ a {
 
 @media (max-width: 870px) {
   .button-filtrar {
-    height: 2rem;
+    height: 2.5rem;
     font-size: 14px;
     padding: 0.5rem 1rem;
     display: flex;
@@ -726,7 +726,7 @@ a {
   font-family: "figtree";
   resize: none;
   width: 6.5rem;
-  height: 2rem;
+  height: 2.5rem;
 }
 
 @media (min-width: 870px) {

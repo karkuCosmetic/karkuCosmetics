@@ -91,12 +91,6 @@ export const DetailPage = () => {
     <>
       <Navbar />
       <div className="detailProduct">
-        <div className="btn-back-container">
-          <button className="go-back-btn-detail" onClick={goBackToStore}>
-            {" "}
-            <FontAwesomeIcon icon={faArrowLeft} /> Atrás
-          </button>
-        </div>
         <div className="detail-container">
           <div className="detail-img-buttons">
             <div className="detail-image">
