@@ -40,6 +40,7 @@ const ProductManagement = ({ setSection }) => {
   }, []);
 
   const handleDeleteProduct = (productId) => {
+  
     MySwal.fire({
       title: "Confirmar Borrado",
       text: "¿Quieres eliminar este producto?",
@@ -51,7 +52,6 @@ const ProductManagement = ({ setSection }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         handleDeleteConfirmation(productId);
-        window.location.reload()
       }
     });
   };
