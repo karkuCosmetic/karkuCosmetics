@@ -1,13 +1,13 @@
 .detailProduct {
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: auto;
   background-image: url(../../assets/bgDetailop5.png);
   background-size: cover;
   background-repeat: no-repeat;
   padding-top: 2.5%;
   align-items: center;
-  height: 100vh;
+  height: 110vh;
 }
 
 .detailProduct-container {

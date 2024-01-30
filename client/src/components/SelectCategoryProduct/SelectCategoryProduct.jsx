@@ -57,7 +57,7 @@ const SelectCategoryProduct = ({ setProduct, product }) => {
         setCatSecondary(Array.from(uniqueCatSecondary).sort());
       });
     }
-  }, [product]);
+  }, []);
 
   const getSlicedAndSortedOptions = (options) =>
     options.sort((a, b) => a.localeCompare(b));
