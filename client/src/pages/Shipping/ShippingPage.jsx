@@ -30,7 +30,7 @@ const ShippingPage = ({ location }) => {
   const [cart, SetCart] = useState(
     JSON.parse(localStorage.getItem("cart")) || []
   );
-  
+
   const token = GetDecodedCookie("cookieToken");
 
   useEffect(() => {
@@ -50,15 +50,15 @@ const ShippingPage = ({ location }) => {
     });
   };
 
-useEffect(()=>{
-  SetCart( JSON.parse(localStorage.getItem("cart")) || [])
-},[shippingInfo.method])
+  useEffect(() => {
+    SetCart(JSON.parse(localStorage.getItem("cart")) || []);
+  }, [shippingInfo.method]);
 
   const handleBackToCart = () => {
     navigate("/cart");
   };
 
-console.log(cart);
+  console.log(cart);
   const handlePayment = () => {
     try {
       if (!token) {
@@ -67,10 +67,10 @@ console.log(cart);
       if (!shippingInfo.method) {
         throw new Error("Debes seleccionar un método de envío");
       }
-      if(cart.length===0){
+      if (cart.length === 0) {
         throw new Error("Debes agregar productos al carrito");
       }
-   
+
       if (shippingInfo.method === "Envío por correo") {
         if (newAddressFormVisible) {
           const { adress } = shippingInfo;
@@ -96,13 +96,11 @@ console.log(cart);
 
   const isProfileDataComplete = () => {
     if (Object.keys(AdressCurrent).length === 0) {
-  
       return true;
     }
     const { calle, numero, localidad, codigoPostal, provincia } = AdressCurrent;
     return calle && numero && localidad && codigoPostal && provincia;
   };
-
 
   return (
     <div>
@@ -135,34 +133,28 @@ console.log(cart);
           <h2 className="shipping-title">Seleccionar Envío</h2>
           <label className="shipping-form-label">
             <h4>Método de envío:</h4>
-            {AdressCurrent.localidad ?
-           
-                <SelectShipping
-                  options={
-                    AdressCurrent.localidad === "Zarate" ||
-                    AdressCurrent.localidad === "Campana"
-                      ? ["Acordar con vendedor", "Envío por correo"]
-                      : ["Envío por correo"]
-                  }
-                  selectedOption={shippingInfo.method}
-                  setSelectedOption={(option) =>
-                    setShippingInfo({ ...shippingInfo, method: option })
-                  }
-                />
-           
-            : 
-            <SelectShipping
-              options={
-              
-                   ["Acordar con vendedor"]
-              }
-              selectedOption={shippingInfo.method}
-              setSelectedOption={(option) =>
-                setShippingInfo({ ...shippingInfo, method: option })
-              }
+            {AdressCurrent.localidad ? (
+              <SelectShipping
+                options={
+                  AdressCurrent.localidad === "Zarate" ||
+                  AdressCurrent.localidad === "Campana"
+                    ? ["Acordar con vendedor", "Envío por correo"]
+                    : ["Envío por correo"]
+                }
+                selectedOption={shippingInfo.method}
+                setSelectedOption={(option) =>
+                  setShippingInfo({ ...shippingInfo, method: option })
+                }
               />
-         
-        }
+            ) : (
+              <SelectShipping
+                options={["Acordar con vendedor"]}
+                selectedOption={shippingInfo.method}
+                setSelectedOption={(option) =>
+                  setShippingInfo({ ...shippingInfo, method: option })
+                }
+              />
+            )}
           </label>
           {shippingInfo.method === "Envío por correo" && (
             <div>

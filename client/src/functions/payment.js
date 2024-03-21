@@ -16,8 +16,11 @@ export const Payment = async (carrito, token, adressData, method) => {
     // Redirigir al usuario al enlace de pago
     window.location.href = paymentUrl;
 
-    // Limpiar el carrito después de la redirección
-    window.localStorage.clear();
+    setTimeout(() => {
+      // Limpiar el carrito después de la redirección
+      window.localStorage.clear();
+      window.location.href = "/profile";
+    }, 5000); 
   } catch (error) {
     // Por ejemplo, puedes mostrar un mensaje de error al usuario:
     Swal.fire({
@@ -28,6 +31,7 @@ export const Payment = async (carrito, token, adressData, method) => {
     window.location.href = "/profile";
   }
 };
+
 
 export const PaymentShipping = async (token, shipPrice, idOrder) => {
   try {
