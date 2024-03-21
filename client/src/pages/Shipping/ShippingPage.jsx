@@ -63,11 +63,12 @@ const ShippingPage = ({ location }) => {
       if (!shippingInfo.method) {
         throw new Error("Debes seleccionar un método de envío");
       }
-      if (!isProfileDataComplete()) {
-        throw new Error(
-          "Debes completar los datos de tu perfil para continuar con la compra"
-        );
-      }
+      // if (!isProfileDataComplete()) {
+      //   throw new Error(
+      //     "Debes completar los datos de tu perfil para continuar con la compra"
+      //   );
+      // }
+      console.log(AdressCurrent);
       if (shippingInfo.method === "Envío por correo") {
         if (newAddressFormVisible) {
           const { adress } = shippingInfo;
@@ -93,7 +94,8 @@ const ShippingPage = ({ location }) => {
 
   const isProfileDataComplete = () => {
     if (Object.keys(AdressCurrent).length === 0) {
-      return false;
+  
+      return true;
     }
 
     const { calle, numero, localidad, codigoPostal, provincia } = AdressCurrent;
