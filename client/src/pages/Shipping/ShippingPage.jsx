@@ -8,6 +8,7 @@ import { GetDecodedCookie } from "../../utils/DecodedCookie";
 import { getUserDetail } from "../../functions/fetchingUsers";
 import { DecodedToken } from "../../utils/DecodedToken";
 import SelectShipping from "../../components/SelectShipping/SelectShipping";
+import Swal from "sweetalert2";
 
 const ShippingPage = ({ location }) => {
   const navigate = useNavigate();
@@ -18,7 +19,6 @@ const ShippingPage = ({ location }) => {
       calle: "",
       numero: "",
       piso: "",
-      entreCalles: "",
       localidad: "",
       codigoPostal: "",
       provincia: "",
@@ -56,35 +56,48 @@ const ShippingPage = ({ location }) => {
   };
 
   const handlePayment = () => {
-    if (!token) {
-      console.log("Debes iniciar sesión");
-      return;
-    }
-  
-    if (shippingInfo.method === "Envío por correo") {
-      if (newAddressFormVisible) {
-        const { adress } = shippingInfo;
-  
-        if (
-          adress.calle &&
-          adress.numero &&
-          adress.piso &&
-          adress.entreCalles &&
-          adress.localidad &&
-          adress.codigoPostal &&
-          adress.provincia
-        ) {
-          Payment(cart, token, adress, shippingInfo.method);
+    try {
+      if (!token) {
+        throw new Error("Debes iniciar sesión");
+      }
+      if (!shippingInfo.method) {
+        throw new Error("Debes seleccionar un método de envío");
+      }
+      if (!isProfileDataComplete()) {
+        throw new Error(
+          "Debes completar los datos de tu perfil para continuar con la compra"
+        );
+      }
+      if (shippingInfo.method === "Envío por correo") {
+        if (newAddressFormVisible) {
+          const { adress } = shippingInfo;
+          if (Object.values(adress).some((value) => value === "")) {
+            throw new Error("Debes completar todos los campos de la dirección");
+          } else {
+            Payment(cart, token, adress, shippingInfo.method);
+          }
         } else {
-          console.log("Debes completar todos los campos");
-          alert("Debes completar todos los campos");
+          Payment(cart, token, AdressCurrent, shippingInfo.method);
         }
-      } else {
+      } else if (shippingInfo.method === "Acordar con vendedor") {
         Payment(cart, token, AdressCurrent, shippingInfo.method);
       }
-    } else if (shippingInfo.method === "Acordar con vendedor") {
-      Payment(cart, token, AdressCurrent, shippingInfo.method);
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: error.message,
+      });
     }
+  };
+
+  const isProfileDataComplete = () => {
+    if (Object.keys(AdressCurrent).length === 0) {
+      return false;
+    }
+
+    const { calle, numero, localidad, codigoPostal, provincia } = AdressCurrent;
+    return calle && numero && localidad && codigoPostal && provincia;
   };
 
   return (
@@ -132,7 +145,6 @@ const ShippingPage = ({ location }) => {
                     setShippingInfo({ ...shippingInfo, method: option })
                   }
                 />
-
               </>
             )}
           </label>
