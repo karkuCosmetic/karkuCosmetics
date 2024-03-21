@@ -55,6 +55,7 @@ const ShippingPage = ({ location }) => {
     navigate("/cart");
   };
 
+
   const handlePayment = () => {
     try {
       if (!token) {
@@ -95,10 +96,10 @@ const ShippingPage = ({ location }) => {
     if (Object.keys(AdressCurrent).length === 0) {
       return false;
     }
-
     const { calle, numero, localidad, codigoPostal, provincia } = AdressCurrent;
     return calle && numero && localidad && codigoPostal && provincia;
   };
+
 
   return (
     <div>
