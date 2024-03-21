@@ -34,7 +34,7 @@
 
 .options-preview {
   display: block;
-  width: 9rem;
+  width: 100%;
   margin-top: 0.1rem;
   font-family: "figtree";
   color: #d99692;
@@ -47,7 +47,7 @@
 
 .options-preview.open {
   display: block;
-  color:#d99692;
+  color: #d99692;
 }
 
 .option-preview {
@@ -63,7 +63,7 @@
 }
 
 .option-preview.selected {
-  background-color:#b4507d!important;
+  background-color: #b4507d !important;
   color: #ffffff;
   font-family: "figtree";
 }

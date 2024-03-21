@@ -11,7 +11,8 @@
 }
 
 .shipping-container {
-  width: 50%;
+  width: 95%;
+  max-width: 35rem;
   margin-top: 2rem;
   gap: 2rem;
   display: flex;
@@ -49,13 +50,14 @@
 }
 
 .newAdress-form {
-  width: 90%;
+  width: 100%;
   margin: 0 !important;
 }
 
 .shipping-form-label {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
@@ -113,7 +115,8 @@
 }
 
 .cart-preview {
-  width: 50%;
+  width: 95%;
+  max-width: 35rem;
   gap: 1rem;
   margin-top: 2rem;
   display: flex;
@@ -129,10 +132,12 @@
 
 .cart-item-shippingPage {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
   width: 100%;
+  gap: 1rem;
   font-size: 18px;
   font-family: "figtree";
 }
@@ -158,4 +163,58 @@
 }
 .color5 {
   color: #f2ffd9;
+}
+
+
+@media (max-width: 950px) {
+  .shipping-container {
+    width: 95%;
+    margin-top: 2rem;
+    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    font-family: "figtree";
+    padding: 20px;
+    border: 1px solid #317d24;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  }
+
+  .cart-preview {
+    width: 95%;
+    gap: 1rem;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #317d24;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  }
+
+  .shipping-address-card {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 1rem;
+  }
+  
+  .shipping-form-label {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
 }
