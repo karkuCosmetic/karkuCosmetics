@@ -47,7 +47,7 @@ export const createOrder = async (req, res) => {
           surname: user.lastName,
           email: user.email,
           address: {
-            street_name: JSON.stringify(adressData),
+            street_name: adressData?JSON.stringify(adressData):"",
           },
         },
         metadata: { method, email: user.email },
