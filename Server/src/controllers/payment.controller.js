@@ -21,12 +21,8 @@ export const createOrder = async (req, res) => {
       user &&
       user.name !== "" &&
       user.lastName !== "" &&
-      user.phone !== "" &&
-      user.adress.callePrincipal !== "" &&
-      user.adress.provincia !== "" &&
-      user.adress.localidad !== "" &&
-      user.adress.codigoPostal !== "" &&
-      user.adress.numero !== ""
+      user.phone !== "" 
+      
     ) {
       mercadopago.configure({
         access_token: process.env.ACCESS_TOKEN,

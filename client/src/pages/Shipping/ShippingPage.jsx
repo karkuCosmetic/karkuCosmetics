@@ -27,7 +27,10 @@ const ShippingPage = ({ location }) => {
 
   const [AdressCurrent, setAdressCurrent] = useState({});
   const [newAddressFormVisible, setNewAddressFormVisible] = useState(false);
-
+  const [cart, SetCart] = useState(
+    JSON.parse(localStorage.getItem("cart")) || []
+  );
+  
   const token = GetDecodedCookie("cookieToken");
 
   useEffect(() => {
@@ -47,15 +50,15 @@ const ShippingPage = ({ location }) => {
     });
   };
 
-  const [cart, SetCart] = useState(
-    JSON.parse(localStorage.getItem("cart")) || []
-  );
+useEffect(()=>{
+  SetCart( JSON.parse(localStorage.getItem("cart")) || [])
+},[shippingInfo.method])
 
   const handleBackToCart = () => {
     navigate("/cart");
   };
 
-
+console.log(cart);
   const handlePayment = () => {
     try {
       if (!token) {
@@ -64,12 +67,10 @@ const ShippingPage = ({ location }) => {
       if (!shippingInfo.method) {
         throw new Error("Debes seleccionar un método de envío");
       }
-      // if (!isProfileDataComplete()) {
-      //   throw new Error(
-      //     "Debes completar los datos de tu perfil para continuar con la compra"
-      //   );
-      // }
-      console.log(AdressCurrent);
+      if(cart.length===0){
+        throw new Error("Debes agregar productos al carrito");
+      }
+   
       if (shippingInfo.method === "Envío por correo") {
         if (newAddressFormVisible) {
           const { adress } = shippingInfo;
@@ -134,8 +135,8 @@ const ShippingPage = ({ location }) => {
           <h2 className="shipping-title">Seleccionar Envío</h2>
           <label className="shipping-form-label">
             <h4>Método de envío:</h4>
-            {AdressCurrent.localidad && (
-              <>
+            {AdressCurrent.localidad ?
+           
                 <SelectShipping
                   options={
                     AdressCurrent.localidad === "Zarate" ||
@@ -148,8 +149,20 @@ const ShippingPage = ({ location }) => {
                     setShippingInfo({ ...shippingInfo, method: option })
                   }
                 />
-              </>
-            )}
+           
+            : 
+            <SelectShipping
+              options={
+              
+                   ["Acordar con vendedor"]
+              }
+              selectedOption={shippingInfo.method}
+              setSelectedOption={(option) =>
+                setShippingInfo({ ...shippingInfo, method: option })
+              }
+              />
+         
+        }
           </label>
           {shippingInfo.method === "Envío por correo" && (
             <div>
