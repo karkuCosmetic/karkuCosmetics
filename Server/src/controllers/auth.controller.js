@@ -2,7 +2,6 @@ import { formatError } from "../utils/formatError.js";
 import { User } from "../models/user.js";
 import { generateRefreshToken, generateToken } from "../utils/tokenManager.js";
 import { Admin } from "../models/admin.js";
-import { sendConfirmationEmail } from "../helpers/sendConfirmationEmail.js";
 
 export const register = async (req, res) => {
   const { email, password } = req.body.values;
@@ -23,10 +22,7 @@ export const register = async (req, res) => {
       admission: currentDate,
     });
 
-    const { token, expiresIn } = generateToken(user._id);
-
     await user.save();
-    sendConfirmationEmail(token, email);
 
     return res.status(200).json("usuario creado");
   } catch (error) {

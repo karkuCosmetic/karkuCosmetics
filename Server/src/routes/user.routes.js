@@ -1,7 +1,6 @@
 import express from "express";
 import {
   UpdatePassword,
-  confirmEmail,
   deleteUser,
   getAllUser,
   getUserById,
@@ -16,7 +15,6 @@ router.post("/updatepassword", UpdatePassword);
 router.get("/", getAllUser);
 router.get("/:id",[verifyToken], getUserById);
 
-router.put("/confirmemail/:id", confirmEmail);
 router.put("/:id",[verifyToken], updateUser);
 
 

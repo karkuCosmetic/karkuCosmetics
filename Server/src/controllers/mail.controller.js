@@ -10,21 +10,6 @@ import { Admin } from "../models/admin.js";
 import "dotenv/config";
 
 
-export const confirmEmail = async (req, res) => {
-  try {
-    const { token } = req.params;
-    // const { email, rol } = verifyJwt(token);
-    const decoded = verify(token, process.env.TOKEN_SECRET); //extrae del token
-    let id = decoded.uid;
-    let user = await User.findByIdAndUpdate(id, { verify: true });
-    user.save();
-    res.status(200).json("verificacion exitosa");
-    //   .redirect(`${process.env.URL_FRONT || "http://localhost:3000"}/login`);
-  } catch (error) {
-    res.status(500).json(formatError(error.message));
-  }
-};
-
 export const reconfirmEmail = async (req, res) => {
   try {
     const { emailUser } = req.body;
