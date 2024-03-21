@@ -55,7 +55,7 @@ export const Register = () => {
           })
         : Swal.fire({
             title: "Genial",
-            text: "Ahora verifica tu cuenta a través del correo electrónico que hemos enviado al email que ingresaste.",
+            text: "Ahora puede iniciar sesión con tu cuenta.",
             icon: "success",
             iconColor: "#7b60c8",
             background: "white",
