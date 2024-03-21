@@ -39,9 +39,9 @@ function App() {
         <Route
           path="/admin/home"
           element={
-            // <ProtectedRoute>
+            <ProtectedRoute>
             <HomeAdmin />
-            // </ProtectedRoute>
+            </ProtectedRoute>
           }
         />
       </Routes>
