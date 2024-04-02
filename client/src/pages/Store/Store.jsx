@@ -85,13 +85,29 @@ const Store = () => {
   };
 
   const handleSearch = () => {
-    console.log("Search query: ", searchQuery);
     const query = searchQuery.toLowerCase();
-    const filteredProducts = dataProducts.filter((product) =>
+    const filteredBySearch = dataProducts.filter((product) =>
       product.title.toLowerCase().includes(query)
     );
-    setSearchResults(filteredProducts);
+    // Aplicar filtro por categoría
+    const filteredByCategory = filteredBySearch.filter((product) => {
+      const primaryMatch =
+        selectedCategory.primary === "Todos" ||
+        product.category.primary === selectedCategory.primary;
+      const secondaryMatch =
+        selectedCategory.secondary === "Todos" ||
+        product.category.secondary === selectedCategory.secondary;
+      return primaryMatch && secondaryMatch;
+    });
+    setFilteredProducts(filteredByCategory);
     setCurrentPage(1);
+  };
+
+  const handleCategoryChange = (category) => {
+    // Limpiar resultados de búsqueda al cambiar la categoría
+    setSearchQuery("");
+    setSearchResults([]);
+    setSelectedCategory(category);
   };
 
   const handlePriceFilter = () => {
@@ -188,13 +204,13 @@ const Store = () => {
                     <RenderSelect
                       categories={categories}
                       selectedCategory={selectedCategory}
-                      setSelectedCategory={setSelectedCategory}
+                      setSelectedCategory={handleCategoryChange}
                       isPrimary={true}
                     />
                     <RenderSelect
                       categories={categories}
                       selectedCategory={selectedCategory}
-                      setSelectedCategory={setSelectedCategory}
+                      setSelectedCategory={handleCategoryChange}
                       isPrimary={false}
                     />
                   </div>
