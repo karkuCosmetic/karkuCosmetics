@@ -11,12 +11,8 @@
 
 .scrollable-options {
   max-height: 150px;
+  max-width: 8rem;
   overflow-y: auto;
-}
-
-.option-preview {
-  padding: 8px;
-  cursor: pointer;
 }
 
 .option-preview.selected {
@@ -100,9 +96,12 @@
   transition: transform 0.2s;
 }
 
+
 .options-preview {
   position: absolute;
-  width: 7rem;
+  padding: 8px;
+  cursor: pointer;
+  width: 9rem !important;
   margin-top: 0.1rem;
   font-family: "figtree";
   color: #7d3c93;
@@ -120,6 +119,7 @@
 
 .option-preview {
   padding: 0.3rem;
+  width: auto;
   cursor: pointer;
   transition: background-color 0.2s;
   font-family: "figtree";

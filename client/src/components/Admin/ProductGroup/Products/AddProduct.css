@@ -172,3 +172,7 @@
   align-items: center;
   padding: 20px;
 }
+
+.my-custom-popup-class {
+  z-index: 999999; /* o cualquier otro valor alto */
+}

@@ -9,6 +9,7 @@ import { GetDecodedCookie } from "../../../../utils/DecodedCookie";
 import SelectCategoryProduct from "../../../SelectCategoryProduct/SelectCategoryProduct";
 
 const AddProduct = ({ closeEditModal }) => {
+  const [categorySelected, setCategorySelected] = useState(false);
   const token = GetDecodedCookie("cookieToken");
   const [product, setProduct] = useState({
     title: "",
@@ -21,6 +22,14 @@ const AddProduct = ({ closeEditModal }) => {
 
   const closeModal = () => {
     closeEditModal();
+  };
+
+  const handleCategoryChange = (category) => {
+    if (category.primary !== "" && category.secondary !== "") {
+      setCategorySelected(true);
+    } else {
+      setCategorySelected(false);
+    }
   };
 
   const [selectedImages, setSelectedImages] = useState([]); //preview images
@@ -77,6 +86,8 @@ const AddProduct = ({ closeEditModal }) => {
           icon: "success",
         });
         window.location.reload();
+      } else {
+        alert("Falta Seleccionar las categorías");
       }
       closeEditModal();
     } catch (error) {
@@ -153,7 +164,11 @@ const AddProduct = ({ closeEditModal }) => {
           <label>Categorías:</label>
 
           {product && (
-            <SelectCategoryProduct product={product} setProduct={setProduct} />
+            <SelectCategoryProduct
+              product={product}
+              setProduct={setProduct}
+              handleCategoryChange={handleCategoryChange}
+            />
           )}
         </div>
 
