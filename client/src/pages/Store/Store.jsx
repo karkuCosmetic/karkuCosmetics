@@ -9,7 +9,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
-import RenderSelect from "../../components/Select/select";
+
+import { Select, MenuItem, InputLabel, FormControl } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import InputBase from "@mui/material/InputBase";
 
 const Store = () => {
   const [dataProducts, SetDataProducts] = useState([]);
@@ -53,7 +56,7 @@ const Store = () => {
       position: "top",
       title: "Producto agregado al carrito",
       showConfirmButton: false,
-      timer: 150000000,
+      timer: 1500,
       customClass: {
         content: "content-add-to-cart",
         title: "title-add-to-cart",
@@ -104,7 +107,6 @@ const Store = () => {
   };
 
   const handleCategoryChange = (category) => {
-    // Limpiar resultados de búsqueda al cambiar la categoría
     setSearchQuery("");
     setSearchResults([]);
     setSelectedCategory(category);
@@ -170,6 +172,24 @@ const Store = () => {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  const BootstrapInput = styled(InputBase)(({ theme }) => ({
+    "label + &": {
+      marginTop: theme.spacing(1),
+      fontFamily: ["figtree"].join(","),
+    },
+    "& .MuiInputBase-input": {
+      borderRadius: 4,
+      backgroundColor: theme.palette.background.paper,
+      border: "1px solid #ff734f",
+      transition: theme.transitions.create(["border-color", "box-shadow"]),
+      fontFamily: ["figtree"].join(","),
+      "&:focus": {
+        borderRadius: 4,
+        fontFamily: ["figtree"].join(","),
+      },
+    },
+  }));
+
   return (
     <div>
       <div className="page-container">
@@ -201,24 +221,122 @@ const Store = () => {
                     <button onClick={handleSearch}>Buscar</button>
                   </div>
                   <div className="render-select">
-                    <RenderSelect
-                      categories={categories}
-                      selectedCategory={selectedCategory}
-                      setSelectedCategory={handleCategoryChange}
-                      isPrimary={true}
-                    />
-                    <RenderSelect
-                      categories={categories}
-                      selectedCategory={selectedCategory}
-                      setSelectedCategory={handleCategoryChange}
-                      isPrimary={false}
-                    />
+                    <div className="select-container">
+                      <FormControl sx={{ minWidth: 200 }}>
+                        <InputLabel
+                          id="primary-category-label"
+                          sx={{ color: "#317d24" }}
+                        >
+                          Categorías
+                        </InputLabel>
+                        <Select
+                          labelId="primary-category-label"
+                          id="primary-category-select"
+                          value={selectedCategory.primary}
+                          input={<BootstrapInput />}
+                          onChange={(event) =>
+                            handleCategoryChange({
+                              ...selectedCategory,
+                              primary: event.target.value,
+                            })
+                          }
+                          label="Categoría Primaria"
+                          sx={{
+                            width: 200,
+                            height: 40,
+                            borderColor: "#317d24",
+                            "&:focus": {
+                              borderColor: "#317d24",
+                            },
+                            "& .MuiOutlinedInput-root": {
+                              "&.Mui-focused fieldset": {
+                                borderColor: "#317d24",
+                              },
+                            },
+                            "& .MuiInputLabel-root": {
+                              color: "#317d24",
+                            },
+                            "& .MuiSelect-icon": {
+                              color: "#317d24",
+                            },
+                            "& .MuiListItem-button:hover": {
+                              backgroundColor: "#317d24",
+                              color: "#fff",
+                            },
+                          }}
+                          MenuProps={{
+                            sx: { "& fieldset": { borderColor: "#317d24" } },
+                          }}
+                        >
+                          {categories.primary.map((category, index) => (
+                            <MenuItem key={index} value={category}>
+                              {category}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    </div>
+                    <div className="select-container">
+                      <FormControl>
+                        <InputLabel
+                          id="secondary-category-label"
+                          sx={{ color: "#317d24" }}
+                        >
+                          Productos
+                        </InputLabel>
+                        <Select
+                          labelId="secondary-category-label"
+                          id="secondary-category-select"
+                          value={selectedCategory.secondary}
+                          input={<BootstrapInput />}
+                          onChange={(event) =>
+                            handleCategoryChange({
+                              ...selectedCategory,
+                              secondary: event.target.value,
+                            })
+                          }
+                          label="Categoría Secundaria"
+                          sx={{
+                            width: 200,
+                            height: 40,
+                            borderColor: "#317d24",
+                            "&:focus": {
+                              borderColor: "#317d24",
+                            },
+                            "& .MuiOutlinedInput-root": {
+                              "&.Mui-focused fieldset": {
+                                borderColor: "#317d24",
+                              },
+                            },
+                            "& .MuiInputLabel-root": {
+                              color: "#317d24",
+                            },
+                            "& .MuiSelect-icon": {
+                              color: "#317d24",
+                            },
+                            "& .MuiListItem-button:hover": {
+                              backgroundColor: "#317d24",
+                              color: "#fff",
+                            },
+                          }}
+                          MenuProps={{
+                            sx: {
+                              "& .MuiOutlinedInput-root": {
+                                backgroundColor: "#317d24",
+                              },
+                            },
+                          }}
+                        >
+                          {categories.secondary.map((category, index) => (
+                            <MenuItem key={index} value={category}>
+                              {category}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    </div>
                   </div>
                   <ul className="ul-categories">
-                    <div className="title-categories-sidebar">
-                      <p>Categorías</p>
-                    </div>
-
                     {categories.primary.map((category, index) => (
                       <li
                         key={index}
@@ -237,9 +355,6 @@ const Store = () => {
                     ))}
                   </ul>
                   <ul>
-                    <div className="title-subcategories-sidebar">
-                      <p>Productos</p>
-                    </div>
                     {categories.secondary.map((category, index) => (
                       <li
                         key={index}
@@ -260,7 +375,6 @@ const Store = () => {
                     ))}
                   </ul>
                   <div className="price-filter">
-                    <p className="h3-store">Precio</p>
                     <div className="inputs-filter">
                       <input
                         className="input-price-store"
