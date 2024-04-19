@@ -132,6 +132,7 @@ const Store = () => {
     });
     setFilteredProducts(filteredByCategory);
     setCurrentPage(1);
+    window.scrollTo(0, 0);
   };
 
   const handleCategoryChange = (category) => {
@@ -158,6 +159,7 @@ const Store = () => {
 
     setFilteredProducts(filteredByPrice);
     setCurrentPage(1);
+    window.scrollTo(0, 0);
   };
 
   const handleClearFilters = () => {
@@ -169,6 +171,7 @@ const Store = () => {
       secondary: "Productos",
     });
     setCurrentPage(1);
+    window.scrollTo(0, 0);
   };
 
   const indexOfLastProduct = currentPage * productsPerPage;
@@ -183,7 +186,10 @@ const Store = () => {
     window.open(productDetailUrl, "_blank");
   };
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo(0, 0);
+  };
 
   const BootstrapInput = styled(InputBase)(({ theme }) => ({
     "label + &": {
