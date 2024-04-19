@@ -342,16 +342,10 @@ const Store = () => {
                       value={searchQuery}
                       onChange={handleSearchInputChange}
                     />
-                    {searchQuery && (
-                      <button onClick={handleCancelSearch}>
-                        <CloseIcon />
-                      </button>
-                    )}
-                    {!searchQuery && (
-                      <button onClick={handleSearch}>
-                        <SearchIcon />
-                      </button>
-                    )}
+
+                    <button className="search-button" onClick={handleSearch}>
+                      <SearchIcon />
+                    </button>
                   </div>
                   <div className="price-filter">
                     <div className="inputs-filter">
@@ -378,9 +372,9 @@ const Store = () => {
                       </button>
                     </div>
                   </div>
-                  <div >
+                  <div>
                     <button
-                     className="clear-filters"
+                      className="clear-filters"
                       onClick={handleClearFilters}
                     >
                       Borrar filtros

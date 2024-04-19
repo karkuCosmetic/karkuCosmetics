@@ -70,6 +70,7 @@
   position: absolute;
   top: 50%;
   right: 25px;
+  padding-right: 30px;
   cursor: pointer;
 }
 
