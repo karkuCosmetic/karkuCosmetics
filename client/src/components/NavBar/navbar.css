@@ -45,7 +45,7 @@
 }
 
 .nav-links a {
-  font-family: "quicksand";
+  font-family: "figtree";
   text-decoration: none;
   color: #000000;
   transition: color 0.3s ease;
@@ -116,7 +116,7 @@
     display: none;
     justify-content: center;
     align-items: center;
-    font-family: "quicksand";
+    font-family: "figtree";
     font-size: 20px;
     gap: 20px;
     list-style: none;
@@ -157,7 +157,7 @@
   }
 
   .nav-links a {
-    font-family: "quicksand";
+    font-family: "figtree";
     font-weight: 500;
     text-decoration: none;
     color: #000000;
@@ -208,12 +208,12 @@
 }
 
 .navbar-right a {
-  color: #000000; /* Cambia el color según tus preferencias */
+  color: #000000;
   text-decoration: none;
 }
 
 .navbar-right .cart-icon {
-  font-size: 24px; /* Ajusta el tamaño del icono según tus preferencias */
+  font-size: 24px;
 }
 
 .navbar-right .cart-item-count {
@@ -225,11 +225,11 @@
 }
 
 .cart-icon {
-  color: red; /* Cambia esto según tus preferencias */
+  color: red;
 }
 
 .cart-item-count {
-  background-color: blue; /* Cambia esto según tus preferencias */
+  background-color: blue;
   color: white;
   border-radius: 50%;
   padding: 4px 8px;

@@ -15,7 +15,6 @@ import { styled } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 
 import SearchIcon from "@mui/icons-material/Search";
-import CloseIcon from "@mui/icons-material/Close";
 
 const Store = () => {
   const [dataProducts, SetDataProducts] = useState([]);
@@ -23,7 +22,7 @@ const Store = () => {
   const [maxPrice, setMaxPrice] = useState("");
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage] = useState(10);
+  const [productsPerPage] = useState(15);
   const [quantity, setQuantity] = useState(1);
   const { id } = useParams();
   const [isSelectOpen, setIsSelectOpen] = useState(false);
@@ -116,10 +115,6 @@ const Store = () => {
     setSearchQuery(e.target.value.toLowerCase());
   };
 
-  const handleCancelSearch = () => {
-    setSearchQuery("");
-  };
-
   const handleSearch = () => {
     const query = searchQuery.toLowerCase();
     const filteredBySearch = dataProducts.filter((product) =>
@@ -194,18 +189,18 @@ const Store = () => {
   const BootstrapInput = styled(InputBase)(({ theme }) => ({
     "label + &": {
       marginTop: theme.spacing(1),
-      fontFamily: ["figtree"].join(","),
+      fontFamily: "figtree",
     },
     "& .MuiInputBase-input": {
       borderRadius: 4,
       backgroundColor: theme.palette.background.paper,
       border: "1px solid #ff734f",
       transition: theme.transitions.create(["border-color", "box-shadow"]),
-      fontFamily: ["figtree"].join(","),
+      fontFamily: "figtree",
       fontSize: "14px",
       "&:focus": {
         borderRadius: 4,
-        fontFamily: ["figtree"].join(","),
+        fontFamily: "figtree",
       },
     },
   }));
@@ -269,11 +264,21 @@ const Store = () => {
                             },
                           }}
                           MenuProps={{
-                            sx: { "& fieldset": { borderColor: "#317d24" } },
+                            sx: {
+                              "& fieldset": {
+                                borderColor: "#317d24",
+                              },
+                            },
                           }}
                         >
                           {categories.primary.map((category, index) => (
-                            <MenuItem key={index} value={category}>
+                            <MenuItem
+                              key={index}
+                              value={category}
+                              style={{
+                                fontFamily: "Figtree",
+                              }}
+                            >
                               {category}
                             </MenuItem>
                           ))}
@@ -298,24 +303,6 @@ const Store = () => {
                             width: 150,
                             height: 40,
                             borderColor: "#317d24",
-                            "&:focus": {
-                              borderColor: "#317d24",
-                            },
-                            "& .MuiOutlinedInput-root": {
-                              "&.Mui-focused fieldset": {
-                                borderColor: "#317d24",
-                              },
-                            },
-                            "& .MuiInputLabel-root": {
-                              color: "#317d24",
-                            },
-                            "& .MuiSelect-icon": {
-                              color: "#317d24",
-                            },
-                            "& .MuiListItem-button:hover": {
-                              backgroundColor: "#317d24",
-                              color: "#fff",
-                            },
                           }}
                           MenuProps={{
                             sx: {
@@ -326,7 +313,13 @@ const Store = () => {
                           }}
                         >
                           {categories.secondary.map((category, index) => (
-                            <MenuItem key={index} value={category}>
+                            <MenuItem
+                              key={index}
+                              value={category}
+                              style={{
+                                fontFamily: "Figtree",
+                              }}
+                            >
                               {category}
                             </MenuItem>
                           ))}
