@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import FadeLoader from "react-spinners/FadeLoader";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "./Store.css";
 import Navbar from "../../components/NavBar/navbar";
 import { getAllCategories, getProduct } from "../../functions/fetchingProducts";
@@ -10,9 +10,12 @@ import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 
-import { Select, MenuItem, InputLabel, FormControl } from "@mui/material";
+import { Select, MenuItem, FormControl } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
+
+import SearchIcon from "@mui/icons-material/Search";
+import CloseIcon from "@mui/icons-material/Close";
 
 const Store = () => {
   const [dataProducts, SetDataProducts] = useState([]);
@@ -20,7 +23,7 @@ const Store = () => {
   const [maxPrice, setMaxPrice] = useState("");
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage] = useState(9);
+  const [productsPerPage] = useState(10);
   const [quantity, setQuantity] = useState(1);
   const { id } = useParams();
   const [isSelectOpen, setIsSelectOpen] = useState(false);
@@ -29,14 +32,40 @@ const Store = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const [categories, setCategories] = useState({
-    primary: ["Todos"],
-    secondary: ["Todos"],
+    primary: ["Categorías"],
+    secondary: ["Productos"],
+  });
+
+  const [selectedCategory, setSelectedCategory] = useState({
+    primary: "Categorías",
+    secondary: "Productos",
   });
 
   useEffect(() => {
     CallProducts();
     window.scrollTo(0, 0);
   }, [id]);
+
+  useEffect(() => {
+    const filteredProductsByCategory = dataProducts.filter((product) => {
+      const primaryMatch =
+        selectedCategory.primary === "Categorías" ||
+        product.category.primary === selectedCategory.primary;
+      const secondaryMatch =
+        selectedCategory.secondary === "Productos" ||
+        product.category.secondary === selectedCategory.secondary;
+      return primaryMatch && secondaryMatch;
+    });
+    setFilteredProducts(filteredProductsByCategory);
+    setCurrentPage(1);
+  }, [dataProducts, selectedCategory]);
+
+  useEffect(() => {
+    let secundaria = new Set(
+      filteredProducts.map((el) => el.category.secondary)
+    );
+    setCategories({ ...categories, secondary: ["Productos", ...secundaria] });
+  }, [filteredProducts, selectedCategory]);
 
   const handleQuantityChange = (product, amount) => {
     const updatedProducts = dataProducts.map((p) => {
@@ -87,18 +116,22 @@ const Store = () => {
     setSearchQuery(e.target.value.toLowerCase());
   };
 
+  const handleCancelSearch = () => {
+    setSearchQuery("");
+  };
+
   const handleSearch = () => {
     const query = searchQuery.toLowerCase();
     const filteredBySearch = dataProducts.filter((product) =>
       product.title.toLowerCase().includes(query)
     );
-    // Aplicar filtro por categoría
+
     const filteredByCategory = filteredBySearch.filter((product) => {
       const primaryMatch =
-        selectedCategory.primary === "Todos" ||
+        selectedCategory.primary === "Categorías" ||
         product.category.primary === selectedCategory.primary;
       const secondaryMatch =
-        selectedCategory.secondary === "Todos" ||
+        selectedCategory.secondary === "Productos" ||
         product.category.secondary === selectedCategory.secondary;
       return primaryMatch && secondaryMatch;
     });
@@ -132,23 +165,16 @@ const Store = () => {
     setCurrentPage(1);
   };
 
-  const [selectedCategory, setSelectedCategory] = useState({
-    primary: "Todos",
-    secondary: "Todos",
-  });
-  useEffect(() => {
-    const filteredProductsByCategory = dataProducts.filter((product) => {
-      const primaryMatch =
-        selectedCategory.primary === "Todos" ||
-        product.category.primary === selectedCategory.primary;
-      const secondaryMatch =
-        selectedCategory.secondary === "Todos" ||
-        product.category.secondary === selectedCategory.secondary;
-      return primaryMatch && secondaryMatch;
+  const handleClearFilters = () => {
+    setSearchQuery("");
+    setMinPrice("");
+    setMaxPrice("");
+    setSelectedCategory({
+      primary: "Categorías",
+      secondary: "Productos",
     });
-    setFilteredProducts(filteredProductsByCategory);
     setCurrentPage(1);
-  }, [dataProducts, selectedCategory]);
+  };
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -157,13 +183,6 @@ const Store = () => {
     indexOfFirstProduct,
     indexOfLastProduct
   );
-
-  useEffect(() => {
-    let secundaria = new Set(
-      filteredProducts.map((el) => el.category.secondary)
-    );
-    setCategories({ ...categories, secondary: ["Todos", ...secundaria] });
-  }, [filteredProducts, selectedCategory]);
 
   const redirectToProductDetail = (productId) => {
     const productDetailUrl = `/product/${productId}`;
@@ -183,6 +202,7 @@ const Store = () => {
       border: "1px solid #ff734f",
       transition: theme.transitions.create(["border-color", "box-shadow"]),
       fontFamily: ["figtree"].join(","),
+      fontSize: "14px",
       "&:focus": {
         borderRadius: 4,
         fontFamily: ["figtree"].join(","),
@@ -210,25 +230,9 @@ const Store = () => {
             <>
               <div className="product-container">
                 <div className="sidebar">
-                  <div className="searchBar-filter">
-                    <input
-                      className="input-searchBar-store"
-                      type="text"
-                      placeholder="Buscar por nombre..."
-                      value={searchQuery}
-                      onChange={handleSearchInputChange}
-                    />
-                    <button onClick={handleSearch}>Buscar</button>
-                  </div>
                   <div className="render-select">
                     <div className="select-container">
-                      <FormControl sx={{ minWidth: 200 }}>
-                        <InputLabel
-                          id="primary-category-label"
-                          sx={{ color: "#317d24" }}
-                        >
-                          Categorías
-                        </InputLabel>
+                      <FormControl>
                         <Select
                           labelId="primary-category-label"
                           id="primary-category-select"
@@ -240,9 +244,9 @@ const Store = () => {
                               primary: event.target.value,
                             })
                           }
-                          label="Categoría Primaria"
+                          label="Categorías"
                           sx={{
-                            width: 200,
+                            width: 150,
                             height: 40,
                             borderColor: "#317d24",
                             "&:focus": {
@@ -278,12 +282,6 @@ const Store = () => {
                     </div>
                     <div className="select-container">
                       <FormControl>
-                        <InputLabel
-                          id="secondary-category-label"
-                          sx={{ color: "#317d24" }}
-                        >
-                          Productos
-                        </InputLabel>
                         <Select
                           labelId="secondary-category-label"
                           id="secondary-category-select"
@@ -295,9 +293,9 @@ const Store = () => {
                               secondary: event.target.value,
                             })
                           }
-                          label="Categoría Secundaria"
+                          label="Productos"
                           sx={{
-                            width: 200,
+                            width: 150,
                             height: 40,
                             borderColor: "#317d24",
                             "&:focus": {
@@ -336,44 +334,25 @@ const Store = () => {
                       </FormControl>
                     </div>
                   </div>
-                  <ul className="ul-categories">
-                    {categories.primary.map((category, index) => (
-                      <li
-                        key={index}
-                        className={
-                          selectedCategory.primary === category ? "active" : ""
-                        }
-                        onClick={() =>
-                          setSelectedCategory({
-                            ...selectedCategory,
-                            primary: category,
-                          })
-                        }
-                      >
-                        {category}
-                      </li>
-                    ))}
-                  </ul>
-                  <ul>
-                    {categories.secondary.map((category, index) => (
-                      <li
-                        key={index}
-                        className={
-                          selectedCategory.secondary === category
-                            ? "active"
-                            : ""
-                        }
-                        onClick={() =>
-                          setSelectedCategory({
-                            ...selectedCategory,
-                            secondary: category,
-                          })
-                        }
-                      >
-                        {category}
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="searchBar-input-container">
+                    <input
+                      className="input-searchBar-store"
+                      type="text"
+                      placeholder="Buscar por nombre..."
+                      value={searchQuery}
+                      onChange={handleSearchInputChange}
+                    />
+                    {searchQuery && (
+                      <button onClick={handleCancelSearch}>
+                        <CloseIcon />
+                      </button>
+                    )}
+                    {!searchQuery && (
+                      <button onClick={handleSearch}>
+                        <SearchIcon />
+                      </button>
+                    )}
+                  </div>
                   <div className="price-filter">
                     <div className="inputs-filter">
                       <input
@@ -395,11 +374,20 @@ const Store = () => {
                         className="button-filtrar"
                         onClick={handlePriceFilter}
                       >
-                        Filtrar
+                        <SearchIcon />
                       </button>
                     </div>
                   </div>
+                  <div >
+                    <button
+                     className="clear-filters"
+                      onClick={handleClearFilters}
+                    >
+                      Borrar filtros
+                    </button>
+                  </div>
                 </div>
+
                 <div className="cards-container">
                   {searchResults.length > 0
                     ? searchResults.map((product, index) => (
