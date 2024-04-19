@@ -183,7 +183,7 @@
 @media (max-width: 600px) {
   .product-card {
     width: 95%;
-    height: 10rem;
+    height: 11rem;
     display: flex;
     flex-direction: column;
     border-radius: 5px;
