@@ -183,7 +183,7 @@
 @media (max-width: 600px) {
   .product-card {
     width: 95%;
-    height: 9rem;
+    height: 10rem;
     display: flex;
     flex-direction: column;
     border-radius: 5px;
@@ -248,6 +248,12 @@ a {
   width: 90%;
   height: 100%;
   gap: 1rem;
+}
+
+.dimensions-store {
+  text-align: center;
+  font-size: 0.8rem;
+  font-family: "figtree";
 }
 
 .title-store {

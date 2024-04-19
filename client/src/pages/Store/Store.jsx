@@ -174,10 +174,9 @@ const Store = () => {
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
 
-  const currentProducts = filteredProducts.slice(
-    indexOfFirstProduct,
-    indexOfLastProduct
-  );
+  const currentProducts = filteredProducts
+    .sort((a, b) => a.title.localeCompare(b.title))
+    .slice(indexOfFirstProduct, indexOfLastProduct);
 
   const redirectToProductDetail = (productId) => {
     const productDetailUrl = `/product/${productId}`;
@@ -243,32 +242,6 @@ const Store = () => {
                           sx={{
                             width: 150,
                             height: 40,
-                            borderColor: "#317d24",
-                            "&:focus": {
-                              borderColor: "#317d24",
-                            },
-                            "& .MuiOutlinedInput-root": {
-                              "&.Mui-focused fieldset": {
-                                borderColor: "#317d24",
-                              },
-                            },
-                            "& .MuiInputLabel-root": {
-                              color: "#317d24",
-                            },
-                            "& .MuiSelect-icon": {
-                              color: "#317d24",
-                            },
-                            "& .MuiListItem-button:hover": {
-                              backgroundColor: "#317d24",
-                              color: "#fff",
-                            },
-                          }}
-                          MenuProps={{
-                            sx: {
-                              "& fieldset": {
-                                borderColor: "#317d24",
-                              },
-                            },
                           }}
                         >
                           {categories.primary.map((category, index) => (
@@ -438,6 +411,9 @@ const Store = () => {
                             <img src={product.image[0]} alt={product.title} />
                             <div className="detail-info-store">
                               <p className="title-store">{product.title}</p>
+                              <p className="dimensions-store">
+                                {product.dimensions}
+                              </p>
                               <p className="price">${product.price}</p>
                             </div>
                           </div>
